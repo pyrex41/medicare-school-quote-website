@@ -1,0 +1,9 @@
+pages:
+  script:
+  - elm make src/Main.elm
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
+
