@@ -1,14 +1,16 @@
-image: node:4.2.2
+image: node:9.11.1
 
-app:
+pages:
   cache:
     paths:
-    - node_modules/
-    
-  stage: deploy
+    - elm-stuff//
+
   script:
-  - npm install -g elm --unsafe-perm=true
-  - elm make src/Main.elm
+  - npm install -g elm uglify-js --unsafe-perm=true
+  - elm make src/Main.elm --optimize --output=public/script.js
+  - uglifyjs public/script.js --compress 'pure_funcs="F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9",pure_getters,keep_fargs=false,unsafe_comps,unsafe' | uglifyjs --mangle --output=public/script.min.js
+  - rm public/script.js
+
   artifacts:
     paths:
     - public

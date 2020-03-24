@@ -145,7 +145,7 @@ type Fail
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  case Debug.log "msg" msg of
+  case msg of
     ReceiveDate td ->
       ( validateModel
       { model | today = Just td
