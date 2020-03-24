@@ -690,12 +690,12 @@ getZip model =
     case zip of
       Just z ->
         Http.get
-          { url = "http://enlightnu-quote-api.herokuapp.com/api/counties?zip=" ++ String.fromInt(z)
+          { url = "https://enlightnu-quote-api.herokuapp.com/api/counties?zip=" ++ String.fromInt(z)
           , expect = Http.expectJson ZipResponse countyDecoder
           }
       Nothing ->
         Http.get
-          { url = "http://enlightnu-quote-api.herokuapp.com/api/counties?zip=" ++ ""
+          { url = "https://enlightnu-quote-api.herokuapp.com/api/counties?zip=" ++ ""
           , expect = Http.expectJson ZipResponse countyDecoder
           }
 
@@ -714,7 +714,7 @@ getPlans : Model -> Cmd Msg
 getPlans model =
   if model.state == Valid then
     let
-      url1 =  "http://enlightnu-quote-api.herokuapp.com/api/plans?"
+      url1 =  "https://enlightnu-quote-api.herokuapp.com/api/plans?"
       url2 = url1
           ++ "zip=" ++ ( stringMaybeInt model.zip.value )
           ++ "&age=" ++ ( stringMaybeInt model.age.value )
@@ -762,7 +762,7 @@ planXDecoder =
 getPDP : Model -> Cmd Msg
 getPDP model =
   Http.get
-    { url = "http://enlightnu-quote-api.herokuapp.com/api/pdp?zip=" ++ ( stringMaybeInt model.zip.value )
+    { url = "https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=" ++ ( stringMaybeInt model.zip.value )
     , expect = Http.expectJson PDPResponse pdpDecoder
     }
 

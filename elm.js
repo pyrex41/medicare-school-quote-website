@@ -6682,7 +6682,7 @@ var $author$project$Main$getPDP = function (model) {
 	return $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
-			url: 'http://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.zip.value)
+			url: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.zip.value)
 		});
 };
 var $author$project$Main$PlanResponse = function (a) {
@@ -7867,7 +7867,7 @@ var $author$project$Main$strCounty = function (c) {
 };
 var $author$project$Main$getPlans = function (model) {
 	if (_Utils_eq(model.state, $author$project$Main$Valid)) {
-		var url1 = 'http://enlightnu-quote-api.herokuapp.com/api/plans?';
+		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
 		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + (model.gender + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + ($author$project$Main$formatDate(model.date) + ('&preset=' + model.preset)))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.planN, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.planF, 'F', url3);
@@ -7903,13 +7903,13 @@ var $author$project$Main$getZip = function (model) {
 		return $elm$http$Http$get(
 			{
 				expect: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
-				url: 'http://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
+				url: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
 			});
 	} else {
 		return $elm$http$Http$get(
 			{
 				expect: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
-				url: 'http://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + ''
+				url: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + ''
 			});
 	}
 };
