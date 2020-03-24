@@ -1,9 +1,16 @@
-pages:
+image: node:4.2.2
+
+app:
+  cache:
+    paths:
+    - node_modules/
+    
+  stage: deploy
   script:
+  - npm install -g elm --unsafe-perm=true
   - elm make src/Main.elm
   artifacts:
     paths:
     - public
   only:
   - master
-
