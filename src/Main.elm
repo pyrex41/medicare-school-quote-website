@@ -6,7 +6,7 @@ import Task exposing (Task)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
-import Json.Decode exposing (Decoder, field, string, at, map2, map3, maybe)
+import Json.Decode exposing (Decoder, field, string, at, map2, map3, maybe, null, oneOf)
 import Json.Decode.Pipeline exposing (required, optional)
 import Date exposing (Date, day, month, weekday, year)
 import DatePicker exposing (DateEvent(..), defaultSettings)
@@ -45,7 +45,7 @@ type alias Model =
   , date  : Maybe Date
   , datePicker : DatePicker.DatePicker
   , valid : Bool
-  , response : Maybe String
+  , response : Maybe PlanData
   , pdpList : Maybe (List PdpRecord)
   , pdpRate : Maybe String
   , recentError : String
@@ -76,7 +76,7 @@ type ViewState
   | Loading String
   | Ready
   | Valid
-  | Success String
+  | Success PlanData
 
 
 init : () -> (Model, Cmd Msg)
@@ -132,7 +132,7 @@ type Msg
   | ToggleF
   | ToggleG
   | ZipResponse (Result Http.Error (List String))
-  | PlanResponse (Result Http.Error String)
+  | PlanResponse (Result Http.Error PlanData)
   | PDPResponse (Result Http.Error (List PdpRecord))
   | ToDatePicker DatePicker.Msg
   | Reset -- is this going to return a string?
@@ -288,7 +288,7 @@ update msg model =
         Ok response  ->
           ( { model | state = Success response
                     , response = Just response
-            }
+          }
           , Cmd.none
           )
         Err error ->
@@ -391,7 +391,7 @@ variousViews model =
     Loading str ->
       text <| "Loading " ++ str ++ "...."
 
-    Success str ->
+    Success pd ->
       div [ class "container" ]
         ( List.map
           (\a -> ( div [ class "row" ] [a] ) )
@@ -399,7 +399,9 @@ variousViews model =
           , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
           , pdpSelectBox model.pdpList (\a -> SelectPDP a)
           , p [ class "six columns"] [ text " We seem to have data :" ]
-          , p [ class "twelve columns" ] [ text str ]
+          , renderPlans pd.planF "Plan F"
+          , renderPlans pd.planG "Plan G"
+          , renderPlans pd.planN "Plan N"
           ]
         )
 
@@ -513,22 +515,36 @@ renderForm model func buttonLabel =
         ]
     )
 
---renderXData : Maybe (List PlanQuote) ->
---renderXData mpq =
-  --case mpq of
-    --Just pq ->
+renderPlans : Maybe (List PlanQuote) -> String -> Html Msg
+renderPlans ppd lab =
+  case ppd of
+    Just pd ->
+      div []
+        [ h3 [] [ text lab ]
+        , table
+          []
+          ([ thead []
+              [ th [] [ text "Company" ]
+              , th [] [ text "Rate" ]
+              ]
+          ]
+            ++ List.map toTableRow pd
+          )
+        ]
+    Nothing ->
+      text ""
 
 
---renderPlanData : PlanData -> Html Msg
---renderPlanData pd =
-  --let
-    --ls = [ pd.planN, pd.planF, pd.planG ]
-  --in
-    --List.map
-      --( case pr of
+
+toTableRow : PlanQuote -> Html Msg
+toTableRow pq =
+  tr []
+    [ td [] [ text pq.company ]
+    , td [] [ text pq.rate ]
+    ]
 
 
-  --    )
+
 
 
 renderList : List String -> Html Msg
@@ -732,7 +748,7 @@ getPlans model =
     in
       Http.get
         { url = url5
-        , expect = Http.expectString PlanResponse
+        , expect = Http.expectJson PlanResponse planXDecoder
         }
   else
     Cmd.none
@@ -745,18 +761,22 @@ planRateDecoder =
     ( field "rate" string )
 
 type alias PlanData =
-  { planN : Maybe (List PlanQuote)
-  , planF : Maybe (List PlanQuote)
+  { planF : Maybe (List PlanQuote)
   , planG : Maybe (List PlanQuote)
+  , planN : Maybe (List PlanQuote)
   }
+
+planListDecoder : Decoder (List PlanQuote)
+planListDecoder =
+  Json.Decode.list planRateDecoder
+
 
 planXDecoder : Decoder PlanData
 planXDecoder =
   map3 PlanData
-  ( Json.Decode.at ["N", "body"]  ( maybe (Json.Decode.list planRateDecoder) ) )
-  ( Json.Decode.at ["F", "body"]  ( maybe (Json.Decode.list planRateDecoder) ) )
-  ( Json.Decode.at ["G", "body"]  ( maybe (Json.Decode.list planRateDecoder) ) )
-
+    ( maybe ( field "F" planListDecoder ) )
+    ( maybe ( field "G" planListDecoder ) )
+    ( maybe ( field "N" planListDecoder ) )
 
 
 getPDP : Model -> Cmd Msg
