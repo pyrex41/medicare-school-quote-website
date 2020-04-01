@@ -234,8 +234,11 @@ update msg model =
           )
 
     SelectGender str ->
-      ( validateModel { model | gender = str}
-      , Cmd.none )
+      let
+        g = String.slice 0 1 str
+      in
+        ( validateModel { model | gender = g }
+        , Cmd.none )
 
     SelectCounty str ->
       ( validateModel { model | county = Just str }
@@ -542,10 +545,6 @@ toTableRow pq =
     [ td [] [ text pq.company ]
     , td [] [ text pq.rate ]
     ]
-
-
-
-
 
 renderList : List String -> Html Msg
 renderList lst =

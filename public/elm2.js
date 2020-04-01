@@ -8683,11 +8683,12 @@ var $author$project$Main$update = F2(
 				}
 			case 'SelectGender':
 				var str = msg.a;
+				var g = A3($elm$core$String$slice, 0, 1, str);
 				return _Utils_Tuple2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{gender: str})),
+							{gender: g})),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectCounty':
 				var str = msg.a;
