@@ -11,7 +11,7 @@ import Json.Decode.Pipeline exposing (required, optional)
 import Date exposing (Date, day, month, weekday, year)
 import DatePicker exposing (DateEvent(..), defaultSettings)
 import Time exposing (Weekday(..), Month(..))
-
+import Element
 
 -- MAIN
 
@@ -352,7 +352,11 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
   div []
-    [ h3 [] [ text "EnlightnU Quotes" ]
+    [ img [ src "images/logo.png"
+          , height 100
+          , width 360
+          ]
+          [  ]
     , variousViews model
     ]
 
@@ -383,30 +387,32 @@ variousViews model =
             ]
 
     Ready ->
-      div []
-        [ renderForm model SubmitForm "Submit" ]
-
+      div [ class "container" ]
+        [ div []
+          [ renderForm model SubmitForm "Submit" ]
+        , renderResults model
+        ]
 
     Valid ->
-      div []
-        [ renderForm model SubmitForm "Submit" ]
+      div [ class "container" ]
+        [ div []
+          [ renderForm model SubmitForm "Submit" ]
+        , renderResults model
+        ]
 
     Loading str ->
-      text <| "Loading " ++ str ++ "...."
+      div [ class "container" ]
+          [ div []
+            [ renderForm model SubmitForm "Submit" ]
+          , text <| "Loading " ++ str ++ "...."
+          ]
 
     Success pd ->
       div [ class "container" ]
-        ( List.map
-          (\a -> ( div [ class "row" ] [a] ) )
-          [ button [ onClick Reset, style "display" "block" ] [ text "Reset" ]
-          , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
-          , pdpSelectBox model.pdpList (\a -> SelectPDP a)
-          , p [ class "six columns"] [ text " We seem to have data :" ]
-          , renderPlans pd.planF "Plan F"
-          , renderPlans pd.planG "Plan G"
-          , renderPlans pd.planN "Plan N"
+        [ div []
+          [ renderForm model SubmitForm "Submit" ]
+        , renderResults model
           ]
-        )
 
 
 
@@ -517,6 +523,26 @@ renderForm model func buttonLabel =
         , button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
         ]
     )
+
+renderResults : Model -> Html Msg
+renderResults model =
+  case model.response of
+    Just pd ->
+      div []
+          ( List.map
+            (\a -> ( div [ class "row" ] [a] ) )
+            [ button [ onClick Reset, style "display" "block" ] [ text "Reset" ]
+            , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
+            , pdpSelectBox model.pdpList (\a -> SelectPDP a)
+            , p [ class "six columns"] [ text " We seem to have data :" ]
+            , renderPlans pd.planF "Plan F"
+            , renderPlans pd.planG "Plan G"
+            , renderPlans pd.planN "Plan N"
+            ]
+          )
+    Nothing ->
+      div []
+          [ text "" ]
 
 renderPlans : Maybe (List PlanQuote) -> String -> Html Msg
 renderPlans ppd lab =

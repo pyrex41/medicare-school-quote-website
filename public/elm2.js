@@ -8845,14 +8845,13 @@ var $author$project$Main$update = F2(
 		}
 	});
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
-var $author$project$Main$Reset = {$: 'Reset'};
-var $author$project$Main$SelectPDP = function (a) {
-	return {$: 'SelectPDP', a: a};
+var $elm$html$Html$Attributes$height = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'height',
+		$elm$core$String$fromInt(n));
 };
-var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
-var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -8861,6 +8860,16 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
+var $author$project$Main$Reset = {$: 'Reset'};
+var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -8879,117 +8888,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$html$Html$p = _VirtualDom_node('p');
-var $elm$html$Html$label = _VirtualDom_node('label');
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
-var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
-var $author$project$Main$pdpOption = function (pr) {
-	return A2(
-		$elm$html$Html$option,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$value(pr.rate)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text(pr.plan)
-			]));
-};
-var $elm$html$Html$select = _VirtualDom_node('select');
-var $elm$html$Html$span = _VirtualDom_node('span');
-var $author$project$Main$pdpSelectBox = F2(
-	function (mplist, handle) {
-		if (mplist.$ === 'Just') {
-			var plist = mplist.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('six columns')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$label,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$span,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('label-body')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Select PDP:')
-									])),
-								A2(
-								$elm$html$Html$select,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onInput(handle),
-										$elm$html$Html$Attributes$class('u-full-width')
-									]),
-								A2($elm$core$List$map, $author$project$Main$pdpOption, plist))
-							]))
-					]));
-		} else {
-			return A2(
-				$elm$html$Html$p,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$label,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$select,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onInput(handle)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('')
-									]))
-							]))
-					]));
-		}
-	});
 var $author$project$Main$SelectCounty = function (a) {
 	return {$: 'SelectCounty', a: a};
 };
@@ -9015,6 +8913,8 @@ var $author$project$Main$ToggleN = {$: 'ToggleN'};
 var $author$project$Main$ToggleTobacco = {$: 'ToggleTobacco'};
 var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$checkbox = F4(
 	function (title_, fvalue, handle, class_) {
@@ -9078,6 +8978,40 @@ var $elm$html$Html$Events$onSubmit = function (msg) {
 			$elm$html$Html$Events$alwaysPreventDefault,
 			$elm$json$Json$Decode$succeed(msg)));
 };
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$select = _VirtualDom_node('select');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$selectbox = F4(
 	function (title_, choices, handle, class_) {
 		return A2(
@@ -10396,6 +10330,85 @@ var $author$project$Main$renderForm = F3(
 							]))
 					])));
 	});
+var $author$project$Main$SelectPDP = function (a) {
+	return {$: 'SelectPDP', a: a};
+};
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $author$project$Main$pdpOption = function (pr) {
+	return A2(
+		$elm$html$Html$option,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$value(pr.rate)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(pr.plan)
+			]));
+};
+var $author$project$Main$pdpSelectBox = F2(
+	function (mplist, handle) {
+		if (mplist.$ === 'Just') {
+			var plist = mplist.a;
+			return A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('six columns')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('label-body')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Select PDP:')
+									])),
+								A2(
+								$elm$html$Html$select,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onInput(handle),
+										$elm$html$Html$Attributes$class('u-full-width')
+									]),
+								A2($elm$core$List$map, $author$project$Main$pdpOption, plist))
+							]))
+					]));
+		} else {
+			return A2(
+				$elm$html$Html$p,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$select,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onInput(handle)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('')
+									]))
+							]))
+					]));
+		}
+	});
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $author$project$Main$toTableRow = function (pq) {
 	return A2(
@@ -10468,6 +10481,79 @@ var $author$project$Main$renderPlans = F2(
 			return $elm$html$Html$text('');
 		}
 	});
+var $author$project$Main$renderResults = function (model) {
+	var _v0 = model.response;
+	if (_v0.$ === 'Just') {
+		var pd = _v0.a;
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('row')
+							]),
+						_List_fromArray(
+							[a]));
+				},
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$Reset),
+								A2($elm$html$Html$Attributes$style, 'display', 'block')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Reset')
+							])),
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
+								A2($elm$html$Html$Attributes$style, 'display', 'block')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Resubmit')
+							])),
+						A2(
+						$author$project$Main$pdpSelectBox,
+						model.pdpList,
+						function (a) {
+							return $author$project$Main$SelectPDP(a);
+						}),
+						A2(
+						$elm$html$Html$p,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('six columns')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(' We seem to have data :')
+							])),
+						A2($author$project$Main$renderPlans, pd.planF, 'Plan F'),
+						A2($author$project$Main$renderPlans, pd.planG, 'Plan G'),
+						A2($author$project$Main$renderPlans, pd.planN, 'Plan N')
+					])));
+	} else {
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('')
+				]));
+	}
+};
 var $author$project$Main$variousViews = function (model) {
 	var _v0 = model.state;
 	switch (_v0.$) {
@@ -10578,22 +10664,58 @@ var $author$project$Main$variousViews = function (model) {
 		case 'Ready':
 			return A2(
 				$elm$html$Html$div,
-				_List_Nil,
 				_List_fromArray(
 					[
-						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+						$elm$html$Html$Attributes$class('container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+							])),
+						$author$project$Main$renderResults(model)
 					]));
 		case 'Valid':
 			return A2(
 				$elm$html$Html$div,
-				_List_Nil,
 				_List_fromArray(
 					[
-						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+						$elm$html$Html$Attributes$class('container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+							])),
+						$author$project$Main$renderResults(model)
 					]));
 		case 'Loading':
 			var str = _v0.a;
-			return $elm$html$Html$text('Loading ' + (str + '....'));
+			return A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+							])),
+						$elm$html$Html$text('Loading ' + (str + '....'))
+					]));
 		default:
 			var pd = _v0.a;
 			return A2(
@@ -10602,63 +10724,24 @@ var $author$project$Main$variousViews = function (model) {
 					[
 						$elm$html$Html$Attributes$class('container')
 					]),
-				A2(
-					$elm$core$List$map,
-					function (a) {
-						return A2(
-							$elm$html$Html$div,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('row')
-								]),
-							_List_fromArray(
-								[a]));
-					},
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$button,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onClick($author$project$Main$Reset),
-									A2($elm$html$Html$Attributes$style, 'display', 'block')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Reset')
-								])),
-							A2(
-							$elm$html$Html$button,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
-									A2($elm$html$Html$Attributes$style, 'display', 'block')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Resubmit')
-								])),
-							A2(
-							$author$project$Main$pdpSelectBox,
-							model.pdpList,
-							function (a) {
-								return $author$project$Main$SelectPDP(a);
-							}),
-							A2(
-							$elm$html$Html$p,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('six columns')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text(' We seem to have data :')
-								])),
-							A2($author$project$Main$renderPlans, pd.planF, 'Plan F'),
-							A2($author$project$Main$renderPlans, pd.planG, 'Plan G'),
-							A2($author$project$Main$renderPlans, pd.planN, 'Plan N')
-						])));
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+							])),
+						$author$project$Main$renderResults(model)
+					]));
 	}
+};
+var $elm$html$Html$Attributes$width = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'width',
+		$elm$core$String$fromInt(n));
 };
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -10667,12 +10750,14 @@ var $author$project$Main$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$h3,
-				_List_Nil,
+				$elm$html$Html$img,
 				_List_fromArray(
 					[
-						$elm$html$Html$text('EnlightnU Quotes')
-					])),
+						$elm$html$Html$Attributes$src('images/logo.png'),
+						$elm$html$Html$Attributes$height(100),
+						$elm$html$Html$Attributes$width(360)
+					]),
+				_List_Nil),
 				$author$project$Main$variousViews(model)
 			]));
 };
