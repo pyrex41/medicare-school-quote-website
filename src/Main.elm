@@ -351,7 +351,7 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  div []
+  div [ class "container"]
     [ img [ src "images/logo.png"
           , height 100
           , width 360
@@ -387,28 +387,28 @@ variousViews model =
             ]
 
     Ready ->
-      div [ class "container" ]
+      div [ ]
         [ div []
           [ renderForm model SubmitForm "Submit" ]
         , renderResults model
         ]
 
     Valid ->
-      div [ class "container" ]
+      div [ ]
         [ div []
           [ renderForm model SubmitForm "Submit" ]
         , renderResults model
         ]
 
     Loading str ->
-      div [ class "container" ]
+      div [ ]
           [ div []
             [ renderForm model SubmitForm "Submit" ]
           , text <| "Loading " ++ str ++ "...."
           ]
 
     Success pd ->
-      div [ class "container" ]
+      div [ ]
         [ div []
           [ renderForm model SubmitForm "Submit" ]
         , renderResults model

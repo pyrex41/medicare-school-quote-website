@@ -8844,14 +8844,6 @@ var $author$project$Main$update = F2(
 				return $author$project$Main$init(_Utils_Tuple0);
 		}
 	});
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$Attributes$height = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'height',
-		$elm$core$String$fromInt(n));
-};
-var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -8860,6 +8852,15 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$Attributes$height = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'height',
+		$elm$core$String$fromInt(n));
+};
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -8870,7 +8871,6 @@ var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
 var $author$project$Main$Reset = {$: 'Reset'};
 var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -10664,10 +10664,7 @@ var $author$project$Main$variousViews = function (model) {
 		case 'Ready':
 			return A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('container')
-					]),
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
@@ -10682,10 +10679,7 @@ var $author$project$Main$variousViews = function (model) {
 		case 'Valid':
 			return A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('container')
-					]),
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
@@ -10701,10 +10695,7 @@ var $author$project$Main$variousViews = function (model) {
 			var str = _v0.a;
 			return A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('container')
-					]),
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
@@ -10720,10 +10711,7 @@ var $author$project$Main$variousViews = function (model) {
 			var pd = _v0.a;
 			return A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('container')
-					]),
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
@@ -10746,7 +10734,10 @@ var $elm$html$Html$Attributes$width = function (n) {
 var $author$project$Main$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('container')
+			]),
 		_List_fromArray(
 			[
 				A2(
