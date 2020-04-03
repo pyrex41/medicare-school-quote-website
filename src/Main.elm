@@ -12,6 +12,7 @@ import Date exposing (Date, day, month, weekday, year)
 import DatePicker exposing (DateEvent(..), defaultSettings)
 import Time exposing (Weekday(..), Month(..))
 import Element
+import Table
 
 -- MAIN
 
@@ -50,6 +51,8 @@ type alias Model =
   , pdpRate : Maybe String
   , recentError : String
   , today : Maybe Date
+  , tableState : Table.State
+  , tableRows : Maybe (List TableRow)
   }
 
 type alias ValidInt =
@@ -68,6 +71,13 @@ type alias PlanQuote =
   , fRate : Maybe String
   , gRate : Maybe String
   , nRate : Maybe String
+  }
+
+type alias TableRow =
+  { company : String
+  , fRate : String
+  , gRate : String
+  , nRate : String
   }
 
 settings : DatePicker.Settings
@@ -108,6 +118,8 @@ init _ =
       , pdpRate = Nothing
       , recentError = ""
       , today = Nothing
+      , tableState = Table.initialSort "F"
+      , tableRows = Nothing
       }
     , Cmd.map ToDatePicker datePickerFx
     )
@@ -139,6 +151,7 @@ type Msg
   | ToDatePicker DatePicker.Msg
   | Reset -- is this going to return a string?
   | ReceiveDate Date
+  | SetTableState Table.State
 
 type Fail
   = Counties
@@ -148,6 +161,11 @@ type Fail
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
+    SetTableState newState ->
+      ( { model | tableState = newState }
+      , Cmd.none
+      )
+
     ReceiveDate td ->
       ( validateModel
       { model | today = Just td
@@ -293,6 +311,7 @@ update msg model =
         Ok response  ->
           ( { model | state = Success response
                     , response = Just response
+                    , tableRows = Just (List.map planToRow response)
           }
           , Cmd.none
           )
@@ -528,8 +547,8 @@ renderForm model func buttonLabel =
 
 renderResults : Model -> Html Msg
 renderResults model =
-  case model.response of
-    Just pd ->
+  case model.tableRows of
+    Just tr ->
       div []
           ( List.map
             (\a -> ( div [ class "row" ] [a] ) )
@@ -537,12 +556,25 @@ renderResults model =
             , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
             , pdpSelectBox model.pdpList (\a -> SelectPDP a)
             , p [ class "six columns"] [ text " We seem to have data :" ]
-            , renderPlans pd "Select Plans"
+            , Table.view config model.tableState tr
             ]
           )
     Nothing ->
       div []
           [ text "" ]
+
+config : Table.Config TableRow Msg
+config =
+  Table.config
+      { toId = .company
+        , toMsg = SetTableState
+        , columns =
+            [ Table.stringColumn "Company" .company
+            , Table.stringColumn "F Rate" .fRate
+            , Table.stringColumn "G Rate" .gRate
+            , Table.stringColumn "N Rate" .nRate
+            ]
+        }
 
 renderPlans : List PlanQuote -> String -> Html Msg
 renderPlans pd lab =
@@ -689,6 +721,22 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
 
 
 -- MISC type conversions
+
+safeString : Maybe String -> String
+safeString ms =
+  case ms of
+    Just s ->
+      s
+    Nothing ->
+      ""
+
+planToRow : PlanQuote -> TableRow
+planToRow pq =
+  TableRow
+    pq.company
+    ( safeString pq.fRate )
+    ( safeString pq.gRate )
+    ( safeString pq.nRate )
 
 boolString : Bool -> String
 boolString b =

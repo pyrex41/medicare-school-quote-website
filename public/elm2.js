@@ -5788,6 +5788,13 @@ var $CurrySoftware$elm_datepicker$DatePicker$init = _Utils_Tuple2(
 			today: $CurrySoftware$elm_datepicker$DatePicker$Date$initDate
 		}),
 	A2($elm$core$Task$perform, $CurrySoftware$elm_datepicker$DatePicker$CurrentDate, $justinmimbs$date$Date$today));
+var $billstclair$elm_sortable_table$Table$State = F2(
+	function (a, b) {
+		return {$: 'State', a: a, b: b};
+	});
+var $billstclair$elm_sortable_table$Table$initialSort = function (header) {
+	return A2($billstclair$elm_sortable_table$Table$State, header, false);
+};
 var $elm$core$Platform$Cmd$map = _Platform_map;
 var $author$project$Main$init = function (_v0) {
 	var _v1 = $CurrySoftware$elm_datepicker$DatePicker$init;
@@ -5813,6 +5820,8 @@ var $author$project$Main$init = function (_v0) {
 			recentError: '',
 			response: $elm$core$Maybe$Nothing,
 			state: $author$project$Main$Ready,
+			tableRows: $elm$core$Maybe$Nothing,
+			tableState: $billstclair$elm_sortable_table$Table$initialSort('F'),
 			tobacco: false,
 			today: $elm$core$Maybe$Nothing,
 			valid: false,
@@ -7947,6 +7956,26 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
+var $author$project$Main$TableRow = F4(
+	function (company, fRate, gRate, nRate) {
+		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate};
+	});
+var $author$project$Main$safeString = function (ms) {
+	if (ms.$ === 'Just') {
+		var s = ms.a;
+		return s;
+	} else {
+		return '';
+	}
+};
+var $author$project$Main$planToRow = function (pq) {
+	return A4(
+		$author$project$Main$TableRow,
+		pq.company,
+		$author$project$Main$safeString(pq.fRate),
+		$author$project$Main$safeString(pq.gRate),
+		$author$project$Main$safeString(pq.nRate));
+};
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $CurrySoftware$elm_datepicker$DatePicker$formatCell = function (day) {
@@ -8551,6 +8580,13 @@ var $author$project$Main$validateModel = function (model) {
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
+			case 'SetTableState':
+				var newState = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{tableState: newState}),
+					$elm$core$Platform$Cmd$none);
 			case 'ReceiveDate':
 				var td = msg.a;
 				return _Utils_Tuple2(
@@ -8780,7 +8816,9 @@ var $author$project$Main$update = F2(
 							model,
 							{
 								response: $elm$core$Maybe$Just(response),
-								state: $author$project$Main$Success(response)
+								state: $author$project$Main$Success(response),
+								tableRows: $elm$core$Maybe$Just(
+									A2($elm$core$List$map, $author$project$Main$planToRow, response))
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
@@ -10331,6 +10369,189 @@ var $author$project$Main$renderForm = F3(
 var $author$project$Main$SelectPDP = function (a) {
 	return {$: 'SelectPDP', a: a};
 };
+var $author$project$Main$SetTableState = function (a) {
+	return {$: 'SetTableState', a: a};
+};
+var $billstclair$elm_sortable_table$Table$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $billstclair$elm_sortable_table$Table$simpleRowAttrs = function (_v0) {
+	return _List_Nil;
+};
+var $billstclair$elm_sortable_table$Table$HtmlDetails = F2(
+	function (attributes, children) {
+		return {attributes: attributes, children: children};
+	});
+var $elm$core$Char$fromCode = _Char_fromCode;
+var $elm$core$String$fromList = _String_fromList;
+var $billstclair$elm_sortable_table$Table$nbsp = $elm$core$String$fromList(
+	_List_fromArray(
+		[
+			$elm$core$Char$fromCode(160)
+		]));
+var $billstclair$elm_sortable_table$Table$darkGrey = function (symbol) {
+	return A2(
+		$elm$html$Html$span,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'color', '#555')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(
+				_Utils_ap($billstclair$elm_sortable_table$Table$nbsp, symbol))
+			]));
+};
+var $billstclair$elm_sortable_table$Table$lightGrey = function (symbol) {
+	return A2(
+		$elm$html$Html$span,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'color', '#ccc')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(
+				_Utils_ap($billstclair$elm_sortable_table$Table$nbsp, symbol))
+			]));
+};
+var $elm$html$Html$th = _VirtualDom_node('th');
+var $billstclair$elm_sortable_table$Table$simpleTheadHelp = function (_v0) {
+	var name = _v0.a;
+	var status = _v0.b;
+	var click = _v0.c;
+	var content = function () {
+		switch (status.$) {
+			case 'Unsortable':
+				return _List_fromArray(
+					[
+						$elm$html$Html$text(name)
+					]);
+			case 'Sortable':
+				var selected = status.a;
+				return _List_fromArray(
+					[
+						$elm$html$Html$text(name),
+						selected ? $billstclair$elm_sortable_table$Table$darkGrey('↓') : $billstclair$elm_sortable_table$Table$lightGrey('↓')
+					]);
+			default:
+				if (status.a.$ === 'Nothing') {
+					var _v2 = status.a;
+					return _List_fromArray(
+						[
+							$elm$html$Html$text(name),
+							$billstclair$elm_sortable_table$Table$lightGrey('↕')
+						]);
+				} else {
+					var isReversed = status.a.a;
+					return _List_fromArray(
+						[
+							$elm$html$Html$text(name),
+							$billstclair$elm_sortable_table$Table$darkGrey(
+							isReversed ? '↑' : '↓')
+						]);
+				}
+		}
+	}();
+	return A2(
+		$elm$html$Html$th,
+		_List_fromArray(
+			[click]),
+		content);
+};
+var $billstclair$elm_sortable_table$Table$simpleThead = function (headers) {
+	return A2(
+		$billstclair$elm_sortable_table$Table$HtmlDetails,
+		_List_Nil,
+		A2($elm$core$List$map, $billstclair$elm_sortable_table$Table$simpleTheadHelp, headers));
+};
+var $billstclair$elm_sortable_table$Table$defaultCustomizations = {caption: $elm$core$Maybe$Nothing, rowAttrs: $billstclair$elm_sortable_table$Table$simpleRowAttrs, tableAttrs: _List_Nil, tbodyAttrs: _List_Nil, tfoot: $elm$core$Maybe$Nothing, thead: $billstclair$elm_sortable_table$Table$simpleThead};
+var $billstclair$elm_sortable_table$Table$config = function (_v0) {
+	var toId = _v0.toId;
+	var toMsg = _v0.toMsg;
+	var columns = _v0.columns;
+	return $billstclair$elm_sortable_table$Table$Config(
+		{
+			columns: A2(
+				$elm$core$List$map,
+				function (_v1) {
+					var cData = _v1.a;
+					return cData;
+				},
+				columns),
+			customizations: $billstclair$elm_sortable_table$Table$defaultCustomizations,
+			toId: toId,
+			toMsg: toMsg
+		});
+};
+var $billstclair$elm_sortable_table$Table$Column = function (a) {
+	return {$: 'Column', a: a};
+};
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $billstclair$elm_sortable_table$Table$IncOrDec = function (a) {
+	return {$: 'IncOrDec', a: a};
+};
+var $elm$core$List$sortBy = _List_sortBy;
+var $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy = function (toComparable) {
+	return $billstclair$elm_sortable_table$Table$IncOrDec(
+		$elm$core$List$sortBy(toComparable));
+};
+var $billstclair$elm_sortable_table$Table$textDetails = function (str) {
+	return A2(
+		$billstclair$elm_sortable_table$Table$HtmlDetails,
+		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$text(str)
+			]));
+};
+var $billstclair$elm_sortable_table$Table$stringColumn = F2(
+	function (name, toStr) {
+		return $billstclair$elm_sortable_table$Table$Column(
+			{
+				name: name,
+				sorter: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(toStr),
+				viewData: A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, toStr)
+			});
+	});
+var $author$project$Main$config = $billstclair$elm_sortable_table$Table$config(
+	{
+		columns: _List_fromArray(
+			[
+				A2(
+				$billstclair$elm_sortable_table$Table$stringColumn,
+				'Company',
+				function ($) {
+					return $.company;
+				}),
+				A2(
+				$billstclair$elm_sortable_table$Table$stringColumn,
+				'F Rate',
+				function ($) {
+					return $.fRate;
+				}),
+				A2(
+				$billstclair$elm_sortable_table$Table$stringColumn,
+				'G Rate',
+				function ($) {
+					return $.gRate;
+				}),
+				A2(
+				$billstclair$elm_sortable_table$Table$stringColumn,
+				'N Rate',
+				function ($) {
+					return $.nRate;
+				})
+			]),
+		toId: function ($) {
+			return $.company;
+		},
+		toMsg: $author$project$Main$SetTableState
+	});
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = function (pr) {
 	return A2(
@@ -10406,128 +10627,222 @@ var $author$project$Main$pdpSelectBox = F2(
 					]));
 		}
 	});
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$html$Html$th = _VirtualDom_node('th');
-var $author$project$Main$safeText = function (str) {
-	if (str.$ === 'Just') {
-		var s = str.a;
-		return $elm$html$Html$text(s);
-	} else {
-		return $elm$html$Html$text('');
-	}
+var $elm$html$Html$caption = _VirtualDom_node('caption');
+var $billstclair$elm_sortable_table$Table$applySorter = F3(
+	function (isReversed, sorter, data) {
+		switch (sorter.$) {
+			case 'None':
+				return data;
+			case 'Increasing':
+				var srt = sorter.a;
+				return srt(data);
+			case 'Decreasing':
+				var srt = sorter.a;
+				return $elm$core$List$reverse(
+					srt(data));
+			case 'IncOrDec':
+				var srt = sorter.a;
+				return isReversed ? $elm$core$List$reverse(
+					srt(data)) : srt(data);
+			default:
+				var srt = sorter.a;
+				return isReversed ? srt(data) : $elm$core$List$reverse(
+					srt(data));
+		}
+	});
+var $billstclair$elm_sortable_table$Table$findSorter = F2(
+	function (selectedColumn, columnData) {
+		findSorter:
+		while (true) {
+			if (!columnData.b) {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var name = columnData.a.name;
+				var sorter = columnData.a.sorter;
+				var remainingColumnData = columnData.b;
+				if (_Utils_eq(name, selectedColumn)) {
+					return $elm$core$Maybe$Just(sorter);
+				} else {
+					var $temp$selectedColumn = selectedColumn,
+						$temp$columnData = remainingColumnData;
+					selectedColumn = $temp$selectedColumn;
+					columnData = $temp$columnData;
+					continue findSorter;
+				}
+			}
+		}
+	});
+var $billstclair$elm_sortable_table$Table$sort = F3(
+	function (_v0, columnData, data) {
+		var selectedColumn = _v0.a;
+		var isReversed = _v0.b;
+		var _v1 = A2($billstclair$elm_sortable_table$Table$findSorter, selectedColumn, columnData);
+		if (_v1.$ === 'Nothing') {
+			return data;
+		} else {
+			var sorter = _v1.a;
+			return A3($billstclair$elm_sortable_table$Table$applySorter, isReversed, sorter, data);
+		}
+	});
+var $billstclair$elm_sortable_table$Table$getSortedData = F3(
+	function (_v0, state, data) {
+		var toId = _v0.a.toId;
+		var toMsg = _v0.a.toMsg;
+		var columns = _v0.a.columns;
+		var customizations = _v0.a.customizations;
+		return A3($billstclair$elm_sortable_table$Table$sort, state, columns, data);
+	});
+var $elm$html$Html$tfoot = _VirtualDom_node('tfoot');
+var $billstclair$elm_sortable_table$Table$Reversible = function (a) {
+	return {$: 'Reversible', a: a};
 };
-var $author$project$Main$toTableRow = function (pq) {
-	return A2(
-		$elm$html$Html$tr,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(pq.company)
-					])),
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text('')
-					])),
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$Main$safeText(pq.fRate)
-					])),
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$Main$safeText(pq.gRate)
-					])),
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$Main$safeText(pq.nRate)
-					]))
-			]));
+var $billstclair$elm_sortable_table$Table$Sortable = function (a) {
+	return {$: 'Sortable', a: a};
 };
-var $author$project$Main$renderPlans = F2(
-	function (pd, lab) {
+var $billstclair$elm_sortable_table$Table$Unsortable = {$: 'Unsortable'};
+var $billstclair$elm_sortable_table$Table$onClick = F3(
+	function (name, isReversed, toMsg) {
 		return A2(
-			$elm$html$Html$div,
-			_List_Nil,
+			$elm$html$Html$Events$on,
+			'click',
+			A2(
+				$elm$json$Json$Decode$map,
+				toMsg,
+				A3(
+					$elm$json$Json$Decode$map2,
+					$billstclair$elm_sortable_table$Table$State,
+					$elm$json$Json$Decode$succeed(name),
+					$elm$json$Json$Decode$succeed(isReversed))));
+	});
+var $billstclair$elm_sortable_table$Table$toHeaderInfo = F3(
+	function (_v0, toMsg, _v1) {
+		var sortName = _v0.a;
+		var isReversed = _v0.b;
+		var name = _v1.name;
+		var sorter = _v1.sorter;
+		switch (sorter.$) {
+			case 'None':
+				return _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Unsortable,
+					A3($billstclair$elm_sortable_table$Table$onClick, sortName, isReversed, toMsg));
+			case 'Increasing':
+				return _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Sortable(
+						!_Utils_eq(name, sortName)),
+					A3($billstclair$elm_sortable_table$Table$onClick, name, false, toMsg));
+			case 'Decreasing':
+				return _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Sortable(
+						_Utils_eq(name, sortName)),
+					A3($billstclair$elm_sortable_table$Table$onClick, name, false, toMsg));
+			case 'IncOrDec':
+				return _Utils_eq(name, sortName) ? _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Reversible(
+						$elm$core$Maybe$Just(!isReversed)),
+					A3($billstclair$elm_sortable_table$Table$onClick, name, !isReversed, toMsg)) : _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Reversible($elm$core$Maybe$Nothing),
+					A3($billstclair$elm_sortable_table$Table$onClick, name, false, toMsg));
+			default:
+				return _Utils_eq(name, sortName) ? _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Reversible(
+						$elm$core$Maybe$Just(isReversed)),
+					A3($billstclair$elm_sortable_table$Table$onClick, name, !isReversed, toMsg)) : _Utils_Tuple3(
+					name,
+					$billstclair$elm_sortable_table$Table$Reversible($elm$core$Maybe$Nothing),
+					A3($billstclair$elm_sortable_table$Table$onClick, name, false, toMsg));
+		}
+	});
+var $elm$virtual_dom$VirtualDom$lazy3 = _VirtualDom_lazy3;
+var $elm$html$Html$Lazy$lazy3 = $elm$virtual_dom$VirtualDom$lazy3;
+var $billstclair$elm_sortable_table$Table$viewCell = F2(
+	function (data, _v0) {
+		var viewData = _v0.viewData;
+		var details = viewData(data);
+		return A2($elm$html$Html$td, details.attributes, details.children);
+	});
+var $billstclair$elm_sortable_table$Table$viewRowHelp = F3(
+	function (columns, toRowAttrs, data) {
+		return A2(
+			$elm$html$Html$tr,
+			toRowAttrs(data),
+			A2(
+				$elm$core$List$map,
+				$billstclair$elm_sortable_table$Table$viewCell(data),
+				columns));
+	});
+var $billstclair$elm_sortable_table$Table$viewRow = F4(
+	function (toId, columns, toRowAttrs, data) {
+		return _Utils_Tuple2(
+			toId(data),
+			A4($elm$html$Html$Lazy$lazy3, $billstclair$elm_sortable_table$Table$viewRowHelp, columns, toRowAttrs, data));
+	});
+var $billstclair$elm_sortable_table$Table$view = F3(
+	function (conf, state, data) {
+		var toId = conf.a.toId;
+		var toMsg = conf.a.toMsg;
+		var columns = conf.a.columns;
+		var customizations = conf.a.customizations;
+		var theadDetails = customizations.thead(
+			A2(
+				$elm$core$List$map,
+				A2($billstclair$elm_sortable_table$Table$toHeaderInfo, state, toMsg),
+				columns));
+		var thead = A2(
+			$elm$html$Html$thead,
+			theadDetails.attributes,
 			_List_fromArray(
 				[
-					A2(
-					$elm$html$Html$h3,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text(lab)
-						])),
-					A2(
-					$elm$html$Html$table,
-					_List_Nil,
-					_Utils_ap(
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$thead,
-								_List_Nil,
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$th,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Company')
-											])),
-										A2(
-										$elm$html$Html$th,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Select')
-											])),
-										A2(
-										$elm$html$Html$th,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text('F')
-											])),
-										A2(
-										$elm$html$Html$th,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text('G')
-											])),
-										A2(
-										$elm$html$Html$th,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text('N')
-											]))
-									]))
-							]),
-						A2($elm$core$List$map, $author$project$Main$toTableRow, pd)))
+					A2($elm$html$Html$tr, _List_Nil, theadDetails.children)
 				]));
+		var sortedData = A3($billstclair$elm_sortable_table$Table$getSortedData, conf, state, data);
+		var tbody = A3(
+			$elm$html$Html$Keyed$node,
+			'tbody',
+			customizations.tbodyAttrs,
+			A2(
+				$elm$core$List$map,
+				A3($billstclair$elm_sortable_table$Table$viewRow, toId, columns, customizations.rowAttrs),
+				sortedData));
+		var withFoot = function () {
+			var _v1 = customizations.tfoot;
+			if (_v1.$ === 'Nothing') {
+				return A2($elm$core$List$cons, tbody, _List_Nil);
+			} else {
+				var attributes = _v1.a.attributes;
+				var children = _v1.a.children;
+				return A2(
+					$elm$core$List$cons,
+					A2($elm$html$Html$tfoot, attributes, children),
+					A2($elm$core$List$cons, tbody, _List_Nil));
+			}
+		}();
+		return A2(
+			$elm$html$Html$table,
+			customizations.tableAttrs,
+			function () {
+				var _v0 = customizations.caption;
+				if (_v0.$ === 'Nothing') {
+					return A2($elm$core$List$cons, thead, withFoot);
+				} else {
+					var attributes = _v0.a.attributes;
+					var children = _v0.a.children;
+					return A2(
+						$elm$core$List$cons,
+						A2($elm$html$Html$caption, attributes, children),
+						A2($elm$core$List$cons, thead, withFoot));
+				}
+			}());
 	});
 var $author$project$Main$renderResults = function (model) {
-	var _v0 = model.response;
+	var _v0 = model.tableRows;
 	if (_v0.$ === 'Just') {
-		var pd = _v0.a;
+		var tr = _v0.a;
 		return A2(
 			$elm$html$Html$div,
 			_List_Nil,
@@ -10583,7 +10898,7 @@ var $author$project$Main$renderResults = function (model) {
 							[
 								$elm$html$Html$text(' We seem to have data :')
 							])),
-						A2($author$project$Main$renderPlans, pd, 'Select Plans')
+						A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, tr)
 					])));
 	} else {
 		return A2(
