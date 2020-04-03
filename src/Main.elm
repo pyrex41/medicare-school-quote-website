@@ -6,7 +6,7 @@ import Task exposing (Task)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
-import Json.Decode exposing (Decoder, field, string, at, map2, map3, maybe, null, oneOf)
+import Json.Decode exposing (Decoder, field, string, at, map2, map3, map4, maybe, null, oneOf)
 import Json.Decode.Pipeline exposing (required, optional)
 import Date exposing (Date, day, month, weekday, year)
 import DatePicker exposing (DateEvent(..), defaultSettings)
@@ -45,7 +45,7 @@ type alias Model =
   , date  : Maybe Date
   , datePicker : DatePicker.DatePicker
   , valid : Bool
-  , response : Maybe PlanData
+  , response : Maybe (List PlanQuote)
   , pdpList : Maybe (List PdpRecord)
   , pdpRate : Maybe String
   , recentError : String
@@ -65,7 +65,9 @@ type alias PdpRecord =
 
 type alias PlanQuote =
   { company : String
-  , rate : String
+  , fRate : Maybe String
+  , gRate : Maybe String
+  , nRate : Maybe String
   }
 
 settings : DatePicker.Settings
@@ -76,7 +78,7 @@ type ViewState
   | Loading String
   | Ready
   | Valid
-  | Success PlanData
+  | Success (List PlanQuote)
 
 
 init : () -> (Model, Cmd Msg)
@@ -132,7 +134,7 @@ type Msg
   | ToggleF
   | ToggleG
   | ZipResponse (Result Http.Error (List String))
-  | PlanResponse (Result Http.Error PlanData)
+  | PlanResponse (Result Http.Error (List PlanQuote))
   | PDPResponse (Result Http.Error (List PdpRecord))
   | ToDatePicker DatePicker.Msg
   | Reset -- is this going to return a string?
@@ -535,41 +537,47 @@ renderResults model =
             , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
             , pdpSelectBox model.pdpList (\a -> SelectPDP a)
             , p [ class "six columns"] [ text " We seem to have data :" ]
-            , renderPlans pd.planF "Plan F"
-            , renderPlans pd.planG "Plan G"
-            , renderPlans pd.planN "Plan N"
+            , renderPlans pd "Select Plans"
             ]
           )
     Nothing ->
       div []
           [ text "" ]
 
-renderPlans : Maybe (List PlanQuote) -> String -> Html Msg
-renderPlans ppd lab =
-  case ppd of
-    Just pd ->
-      div []
-        [ h3 [] [ text lab ]
-        , table
-          []
-          ([ thead []
-              [ th [] [ text "Company" ]
-              , th [] [ text "Rate" ]
-              ]
+renderPlans : List PlanQuote -> String -> Html Msg
+renderPlans pd lab =
+  div []
+    [ h3 [] [ text lab ]
+    , table
+      []
+      ([ thead []
+          [ th [] [ text "Company" ]
+          , th [] [ text "Select" ]
+          , th [] [ text "F" ]
+          , th [] [ text "G" ]
+          , th [] [ text "N" ]
           ]
-            ++ List.map toTableRow pd
-          )
-        ]
+      ]
+        ++ List.map toTableRow pd
+      )
+    ]
+
+safeText : Maybe String -> Html Msg
+safeText str =
+  case str of
+    Just s ->
+      text s
     Nothing ->
       text ""
-
-
 
 toTableRow : PlanQuote -> Html Msg
 toTableRow pq =
   tr []
     [ td [] [ text pq.company ]
-    , td [] [ text pq.rate ]
+    , td [] [ text "" ]
+    , td [] [ safeText pq.fRate ]
+    , td [] [ safeText pq.gRate ]
+    , td [] [ safeText pq.nRate ]
     ]
 
 renderList : List String -> Html Msg
@@ -780,28 +788,18 @@ getPlans model =
 
 planRateDecoder : Decoder PlanQuote
 planRateDecoder =
-  map2
+  map4
     PlanQuote
     ( field "company" string )
-    ( field "rate" string )
+    ( field "F Rate" ( maybe string ) )
+    ( field "G Rate" ( maybe string ) )
+    ( field "N Rate" ( maybe string ) )
 
-type alias PlanData =
-  { planF : Maybe (List PlanQuote)
-  , planG : Maybe (List PlanQuote)
-  , planN : Maybe (List PlanQuote)
-  }
 
-planListDecoder : Decoder (List PlanQuote)
-planListDecoder =
+planXDecoder : Decoder (List PlanQuote)
+planXDecoder =
   Json.Decode.list planRateDecoder
 
-
-planXDecoder : Decoder PlanData
-planXDecoder =
-  map3 PlanData
-    ( maybe ( field "F" planListDecoder ) )
-    ( maybe ( field "G" planListDecoder ) )
-    ( maybe ( field "N" planListDecoder ) )
 
 
 getPDP : Model -> Cmd Msg

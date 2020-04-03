@@ -7851,11 +7851,11 @@ var $author$project$Main$formatDate = function (dd) {
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$PlanData = F3(
-	function (planF, planG, planN) {
-		return {planF: planF, planG: planG, planN: planN};
+var $author$project$Main$PlanQuote = F4(
+	function (company, fRate, gRate, nRate) {
+		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate};
 	});
-var $elm$json$Json$Decode$map3 = _Json_map3;
+var $elm$json$Json$Decode$map4 = _Json_map4;
 var $elm$json$Json$Decode$oneOf = _Json_oneOf;
 var $elm$json$Json$Decode$maybe = function (decoder) {
 	return $elm$json$Json$Decode$oneOf(
@@ -7865,25 +7865,23 @@ var $elm$json$Json$Decode$maybe = function (decoder) {
 				$elm$json$Json$Decode$succeed($elm$core$Maybe$Nothing)
 			]));
 };
-var $author$project$Main$PlanQuote = F2(
-	function (company, rate) {
-		return {company: company, rate: rate};
-	});
-var $author$project$Main$planRateDecoder = A3(
-	$elm$json$Json$Decode$map2,
+var $author$project$Main$planRateDecoder = A5(
+	$elm$json$Json$Decode$map4,
 	$author$project$Main$PlanQuote,
 	A2($elm$json$Json$Decode$field, 'company', $elm$json$Json$Decode$string),
-	A2($elm$json$Json$Decode$field, 'rate', $elm$json$Json$Decode$string));
-var $author$project$Main$planListDecoder = $elm$json$Json$Decode$list($author$project$Main$planRateDecoder);
-var $author$project$Main$planXDecoder = A4(
-	$elm$json$Json$Decode$map3,
-	$author$project$Main$PlanData,
-	$elm$json$Json$Decode$maybe(
-		A2($elm$json$Json$Decode$field, 'F', $author$project$Main$planListDecoder)),
-	$elm$json$Json$Decode$maybe(
-		A2($elm$json$Json$Decode$field, 'G', $author$project$Main$planListDecoder)),
-	$elm$json$Json$Decode$maybe(
-		A2($elm$json$Json$Decode$field, 'N', $author$project$Main$planListDecoder)));
+	A2(
+		$elm$json$Json$Decode$field,
+		'F Rate',
+		$elm$json$Json$Decode$maybe($elm$json$Json$Decode$string)),
+	A2(
+		$elm$json$Json$Decode$field,
+		'G Rate',
+		$elm$json$Json$Decode$maybe($elm$json$Json$Decode$string)),
+	A2(
+		$elm$json$Json$Decode$field,
+		'N Rate',
+		$elm$json$Json$Decode$maybe($elm$json$Json$Decode$string)));
+var $author$project$Main$planXDecoder = $elm$json$Json$Decode$list($author$project$Main$planRateDecoder);
 var $author$project$Main$strCounty = function (c) {
 	if (c.$ === 'Just') {
 		var s = c.a;
@@ -10410,6 +10408,14 @@ var $author$project$Main$pdpSelectBox = F2(
 	});
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$th = _VirtualDom_node('th');
+var $author$project$Main$safeText = function (str) {
+	if (str.$ === 'Just') {
+		var s = str.a;
+		return $elm$html$Html$text(s);
+	} else {
+		return $elm$html$Html$text('');
+	}
+};
 var $author$project$Main$toTableRow = function (pq) {
 	return A2(
 		$elm$html$Html$tr,
@@ -10428,58 +10434,95 @@ var $author$project$Main$toTableRow = function (pq) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						$elm$html$Html$text(pq.rate)
+						$elm$html$Html$text('')
+					])),
+				A2(
+				$elm$html$Html$td,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$author$project$Main$safeText(pq.fRate)
+					])),
+				A2(
+				$elm$html$Html$td,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$author$project$Main$safeText(pq.gRate)
+					])),
+				A2(
+				$elm$html$Html$td,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$author$project$Main$safeText(pq.nRate)
 					]))
 			]));
 };
 var $author$project$Main$renderPlans = F2(
-	function (ppd, lab) {
-		if (ppd.$ === 'Just') {
-			var pd = ppd.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$h3,
-						_List_Nil,
+	function (pd, lab) {
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$h3,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(lab)
+						])),
+					A2(
+					$elm$html$Html$table,
+					_List_Nil,
+					_Utils_ap(
 						_List_fromArray(
 							[
-								$elm$html$Html$text(lab)
-							])),
-						A2(
-						$elm$html$Html$table,
-						_List_Nil,
-						_Utils_ap(
-							_List_fromArray(
-								[
-									A2(
-									$elm$html$Html$thead,
-									_List_Nil,
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$th,
-											_List_Nil,
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Company')
-												])),
-											A2(
-											$elm$html$Html$th,
-											_List_Nil,
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Rate')
-												]))
-										]))
-								]),
-							A2($elm$core$List$map, $author$project$Main$toTableRow, pd)))
-					]));
-		} else {
-			return $elm$html$Html$text('');
-		}
+								A2(
+								$elm$html$Html$thead,
+								_List_Nil,
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$th,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Company')
+											])),
+										A2(
+										$elm$html$Html$th,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Select')
+											])),
+										A2(
+										$elm$html$Html$th,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('F')
+											])),
+										A2(
+										$elm$html$Html$th,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('G')
+											])),
+										A2(
+										$elm$html$Html$th,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text('N')
+											]))
+									]))
+							]),
+						A2($elm$core$List$map, $author$project$Main$toTableRow, pd)))
+				]));
 	});
 var $author$project$Main$renderResults = function (model) {
 	var _v0 = model.response;
@@ -10540,9 +10583,7 @@ var $author$project$Main$renderResults = function (model) {
 							[
 								$elm$html$Html$text(' We seem to have data :')
 							])),
-						A2($author$project$Main$renderPlans, pd.planF, 'Plan F'),
-						A2($author$project$Main$renderPlans, pd.planG, 'Plan G'),
-						A2($author$project$Main$renderPlans, pd.planN, 'Plan N')
+						A2($author$project$Main$renderPlans, pd, 'Select Plans')
 					])));
 	} else {
 		return A2(
