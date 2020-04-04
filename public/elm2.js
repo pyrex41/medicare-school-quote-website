@@ -7860,11 +7860,12 @@ var $author$project$Main$formatDate = function (dd) {
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$PlanQuote = F4(
-	function (company, fRate, gRate, nRate) {
-		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate};
+var $author$project$Main$PlanQuote = F5(
+	function (company, fRate, gRate, nRate, naic) {
+		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic};
 	});
-var $elm$json$Json$Decode$map4 = _Json_map4;
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$oneOf = _Json_oneOf;
 var $elm$json$Json$Decode$maybe = function (decoder) {
 	return $elm$json$Json$Decode$oneOf(
@@ -7874,8 +7875,8 @@ var $elm$json$Json$Decode$maybe = function (decoder) {
 				$elm$json$Json$Decode$succeed($elm$core$Maybe$Nothing)
 			]));
 };
-var $author$project$Main$planRateDecoder = A5(
-	$elm$json$Json$Decode$map4,
+var $author$project$Main$planRateDecoder = A6(
+	$elm$json$Json$Decode$map5,
 	$author$project$Main$PlanQuote,
 	A2($elm$json$Json$Decode$field, 'company', $elm$json$Json$Decode$string),
 	A2(
@@ -7889,7 +7890,8 @@ var $author$project$Main$planRateDecoder = A5(
 	A2(
 		$elm$json$Json$Decode$field,
 		'N Rate',
-		$elm$json$Json$Decode$maybe($elm$json$Json$Decode$string)));
+		$elm$json$Json$Decode$maybe($elm$json$Json$Decode$string)),
+	A2($elm$json$Json$Decode$field, 'naic', $elm$json$Json$Decode$int));
 var $author$project$Main$planXDecoder = $elm$json$Json$Decode$list($author$project$Main$planRateDecoder);
 var $author$project$Main$strCounty = function (c) {
 	if (c.$ === 'Just') {
@@ -7956,9 +7958,9 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $author$project$Main$TableRow = F4(
-	function (company, fRate, gRate, nRate) {
-		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate};
+var $author$project$Main$TableRow = F7(
+	function (company, fRate, gRate, nRate, naic, selected, display) {
+		return {company: company, display: display, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic, selected: selected};
 	});
 var $author$project$Main$safeString = function (ms) {
 	if (ms.$ === 'Just') {
@@ -7969,12 +7971,15 @@ var $author$project$Main$safeString = function (ms) {
 	}
 };
 var $author$project$Main$planToRow = function (pq) {
-	return A4(
+	return A7(
 		$author$project$Main$TableRow,
 		pq.company,
 		$author$project$Main$safeString(pq.fRate),
 		$author$project$Main$safeString(pq.gRate),
-		$author$project$Main$safeString(pq.nRate));
+		$author$project$Main$safeString(pq.nRate),
+		pq.naic,
+		false,
+		true);
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
@@ -8404,6 +8409,12 @@ var $author$project$Main$settings = _Utils_update(
 	{
 		placeholder: $justinmimbs$date$Date$toIsoString(
 			A3($justinmimbs$date$Date$fromCalendarDate, 2020, $elm$time$Time$Jan, 1))
+	});
+var $author$project$Main$toggle = F2(
+	function (i, tablerow) {
+		return _Utils_eq(tablerow.naic, i) ? _Utils_update(
+			tablerow,
+			{selected: !tablerow.selected}) : tablerow;
 	});
 var $CurrySoftware$elm_datepicker$DatePicker$Disabled = function (a) {
 	return {$: 'Disabled', a: a};
@@ -8875,6 +8886,26 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{date: newDate, datePicker: newDatePicker})),
+					$elm$core$Platform$Cmd$none);
+			case 'ToggleSelected':
+				var naic = msg.a;
+				var newTableRows = function () {
+					var _v9 = model.tableRows;
+					if (_v9.$ === 'Just') {
+						var tr = _v9.a;
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$core$List$map,
+								$author$project$Main$toggle(naic),
+								tr));
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{tableRows: newTableRows}),
 					$elm$core$Platform$Cmd$none);
 			default:
 				return $author$project$Main$init(_Utils_Tuple0);
@@ -10372,16 +10403,60 @@ var $author$project$Main$SelectPDP = function (a) {
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 'SetTableState', a: a};
 };
-var $billstclair$elm_sortable_table$Table$Config = function (a) {
-	return {$: 'Config', a: a};
+var $billstclair$elm_sortable_table$Table$None = {$: 'None'};
+var $billstclair$elm_sortable_table$Table$unsortable = $billstclair$elm_sortable_table$Table$None;
+var $billstclair$elm_sortable_table$Table$Column = function (a) {
+	return {$: 'Column', a: a};
 };
-var $billstclair$elm_sortable_table$Table$simpleRowAttrs = function (_v0) {
-	return _List_Nil;
-};
+var $billstclair$elm_sortable_table$Table$veryCustomColumn = $billstclair$elm_sortable_table$Table$Column;
 var $billstclair$elm_sortable_table$Table$HtmlDetails = F2(
 	function (attributes, children) {
 		return {attributes: attributes, children: children};
 	});
+var $author$project$Main$viewCheckbox = function (_v0) {
+	var selected = _v0.selected;
+	return A2(
+		$billstclair$elm_sortable_table$Table$HtmlDetails,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$type_('checkbox'),
+						$elm$html$Html$Attributes$checked(selected)
+					]),
+				_List_Nil)
+			]));
+};
+var $author$project$Main$checkboxColumn = $billstclair$elm_sortable_table$Table$veryCustomColumn(
+	{name: '', sorter: $billstclair$elm_sortable_table$Table$unsortable, viewData: $author$project$Main$viewCheckbox});
+var $billstclair$elm_sortable_table$Table$Config = function (a) {
+	return {$: 'Config', a: a};
+};
+var $billstclair$elm_sortable_table$Table$customConfig = function (_v0) {
+	var toId = _v0.toId;
+	var toMsg = _v0.toMsg;
+	var columns = _v0.columns;
+	var customizations = _v0.customizations;
+	return $billstclair$elm_sortable_table$Table$Config(
+		{
+			columns: A2(
+				$elm$core$List$map,
+				function (_v1) {
+					var cData = _v1.a;
+					return cData;
+				},
+				columns),
+			customizations: customizations,
+			toId: toId,
+			toMsg: toMsg
+		});
+};
+var $billstclair$elm_sortable_table$Table$simpleRowAttrs = function (_v0) {
+	return _List_Nil;
+};
 var $elm$core$Char$fromCode = _Char_fromCode;
 var $elm$core$String$fromList = _String_fromList;
 var $billstclair$elm_sortable_table$Table$nbsp = $elm$core$String$fromList(
@@ -10466,27 +10541,6 @@ var $billstclair$elm_sortable_table$Table$simpleThead = function (headers) {
 		A2($elm$core$List$map, $billstclair$elm_sortable_table$Table$simpleTheadHelp, headers));
 };
 var $billstclair$elm_sortable_table$Table$defaultCustomizations = {caption: $elm$core$Maybe$Nothing, rowAttrs: $billstclair$elm_sortable_table$Table$simpleRowAttrs, tableAttrs: _List_Nil, tbodyAttrs: _List_Nil, tfoot: $elm$core$Maybe$Nothing, thead: $billstclair$elm_sortable_table$Table$simpleThead};
-var $billstclair$elm_sortable_table$Table$config = function (_v0) {
-	var toId = _v0.toId;
-	var toMsg = _v0.toMsg;
-	var columns = _v0.columns;
-	return $billstclair$elm_sortable_table$Table$Config(
-		{
-			columns: A2(
-				$elm$core$List$map,
-				function (_v1) {
-					var cData = _v1.a;
-					return cData;
-				},
-				columns),
-			customizations: $billstclair$elm_sortable_table$Table$defaultCustomizations,
-			toId: toId,
-			toMsg: toMsg
-		});
-};
-var $billstclair$elm_sortable_table$Table$Column = function (a) {
-	return {$: 'Column', a: a};
-};
 var $elm$core$Basics$composeL = F3(
 	function (g, f, x) {
 		return g(
@@ -10509,6 +10563,18 @@ var $billstclair$elm_sortable_table$Table$textDetails = function (str) {
 				$elm$html$Html$text(str)
 			]));
 };
+var $billstclair$elm_sortable_table$Table$intColumn = F2(
+	function (name, toInt) {
+		return $billstclair$elm_sortable_table$Table$Column(
+			{
+				name: name,
+				sorter: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(toInt),
+				viewData: A2(
+					$elm$core$Basics$composeL,
+					A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, $elm$core$String$fromInt),
+					toInt)
+			});
+	});
 var $billstclair$elm_sortable_table$Table$stringColumn = F2(
 	function (name, toStr) {
 		return $billstclair$elm_sortable_table$Table$Column(
@@ -10518,10 +10584,25 @@ var $billstclair$elm_sortable_table$Table$stringColumn = F2(
 				viewData: A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, toStr)
 			});
 	});
-var $author$project$Main$config = $billstclair$elm_sortable_table$Table$config(
+var $author$project$Main$ToggleSelected = function (a) {
+	return {$: 'ToggleSelected', a: a};
+};
+var $author$project$Main$toRowAttrs = function (tablerow) {
+	return _List_fromArray(
+		[
+			$elm$html$Html$Events$onClick(
+			$author$project$Main$ToggleSelected(tablerow.naic)),
+			A2(
+			$elm$html$Html$Attributes$style,
+			'background',
+			tablerow.selected ? '#CEFAF8' : 'white')
+		]);
+};
+var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customConfig(
 	{
 		columns: _List_fromArray(
 			[
+				$author$project$Main$checkboxColumn,
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'Company',
@@ -10545,8 +10626,17 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$config(
 				'N Rate',
 				function ($) {
 					return $.nRate;
+				}),
+				A2(
+				$billstclair$elm_sortable_table$Table$intColumn,
+				'naic',
+				function ($) {
+					return $.naic;
 				})
 			]),
+		customizations: _Utils_update(
+			$billstclair$elm_sortable_table$Table$defaultCustomizations,
+			{rowAttrs: $author$project$Main$toRowAttrs}),
 		toId: function ($) {
 			return $.company;
 		},

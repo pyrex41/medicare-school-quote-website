@@ -6,13 +6,14 @@ import Task exposing (Task)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
-import Json.Decode exposing (Decoder, field, string, at, map2, map3, map4, maybe, null, oneOf)
+import Json.Decode exposing (Decoder, field, string, at, map2, map3, map4,map5, maybe, null, oneOf, int)
 import Json.Decode.Pipeline exposing (required, optional)
 import Date exposing (Date, day, month, weekday, year)
 import DatePicker exposing (DateEvent(..), defaultSettings)
 import Time exposing (Weekday(..), Month(..))
 import Element
-import Table
+import Table exposing (defaultCustomizations)
+import Dict exposing (Dict)
 
 -- MAIN
 
@@ -71,6 +72,7 @@ type alias PlanQuote =
   , fRate : Maybe String
   , gRate : Maybe String
   , nRate : Maybe String
+  , naic : Int
   }
 
 type alias TableRow =
@@ -78,6 +80,9 @@ type alias TableRow =
   , fRate : String
   , gRate : String
   , nRate : String
+  , naic : Int
+  , selected : Bool
+  , display : Bool
   }
 
 settings : DatePicker.Settings
@@ -152,6 +157,7 @@ type Msg
   | Reset -- is this going to return a string?
   | ReceiveDate Date
   | SetTableState Table.State
+  | ToggleSelected Int
 
 type Fail
   = Counties
@@ -353,9 +359,29 @@ update msg model =
           }
         , Cmd.none )
 
+    ToggleSelected naic ->
+      let
+        newTableRows = case model.tableRows of
+          Just tr ->
+            Just <| List.map (toggle naic ) tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | tableRows = newTableRows }
+        , Cmd.none
+        )
+
     Reset ->
       init ()
 
+-- UPDATE FUNCS
+toggle : Int -> TableRow -> TableRow
+toggle i tablerow =
+  if tablerow.naic == i then
+    { tablerow | selected = not tablerow.selected }
+
+  else
+    tablerow
 
 
 -- SUBSCRIPTIONS
@@ -516,6 +542,12 @@ errorToString error =
 
 -- HTML Rendering
 
+viewCheckbox : TableRow -> Table.HtmlDetails Msg
+viewCheckbox { selected } =
+    Table.HtmlDetails []
+        [ input [ type_ "checkbox", checked selected ] []
+        ]
+
 
 renderForm : Model -> Msg -> String -> Html Msg
 renderForm model func buttonLabel =
@@ -563,54 +595,47 @@ renderResults model =
       div []
           [ text "" ]
 
+
+-- TABLE CONFIGURATION
+
 config : Table.Config TableRow Msg
 config =
-  Table.config
+  Table.customConfig
       { toId = .company
         , toMsg = SetTableState
         , columns =
-            [ Table.stringColumn "Company" .company
+            [ checkboxColumn
+            , Table.stringColumn "Company" .company
             , Table.stringColumn "F Rate" .fRate
             , Table.stringColumn "G Rate" .gRate
             , Table.stringColumn "N Rate" .nRate
+            , Table.intColumn "naic" .naic
             ]
+        , customizations =
+            { defaultCustomizations | rowAttrs = toRowAttrs }
         }
 
-renderPlans : List PlanQuote -> String -> Html Msg
-renderPlans pd lab =
-  div []
-    [ h3 [] [ text lab ]
-    , table
-      []
-      ([ thead []
-          [ th [] [ text "Company" ]
-          , th [] [ text "Select" ]
-          , th [] [ text "F" ]
-          , th [] [ text "G" ]
-          , th [] [ text "N" ]
-          ]
-      ]
-        ++ List.map toTableRow pd
-      )
+toRowAttrs : TableRow -> List (Attribute Msg)
+toRowAttrs tablerow =
+    [ onClick (ToggleSelected tablerow.naic)
+    , style "background"
+        (if tablerow.selected then
+            "#CEFAF8"
+
+         else
+            "white"
+        )
     ]
 
-safeText : Maybe String -> Html Msg
-safeText str =
-  case str of
-    Just s ->
-      text s
-    Nothing ->
-      text ""
 
-toTableRow : PlanQuote -> Html Msg
-toTableRow pq =
-  tr []
-    [ td [] [ text pq.company ]
-    , td [] [ text "" ]
-    , td [] [ safeText pq.fRate ]
-    , td [] [ safeText pq.gRate ]
-    , td [] [ safeText pq.nRate ]
-    ]
+checkboxColumn : Table.Column TableRow Msg
+checkboxColumn =
+    Table.veryCustomColumn
+        { name = ""
+        , viewData = viewCheckbox
+        , sorter = Table.unsortable
+        }
+
 
 renderList : List String -> Html Msg
 renderList lst =
@@ -737,6 +762,9 @@ planToRow pq =
     ( safeString pq.fRate )
     ( safeString pq.gRate )
     ( safeString pq.nRate )
+    pq.naic
+    False
+    True
 
 boolString : Bool -> String
 boolString b =
@@ -776,6 +804,14 @@ getRate pr =
       p.rate
     Nothing ->
       ""
+
+safeChecked : Maybe Bool -> Attribute msg
+safeChecked mb =
+  case mb of
+    Just b ->
+      checked b
+    Nothing ->
+      checked False
 
 -- HTTP Requests & JSON
 
@@ -836,12 +872,13 @@ getPlans model =
 
 planRateDecoder : Decoder PlanQuote
 planRateDecoder =
-  map4
+  map5
     PlanQuote
     ( field "company" string )
     ( field "F Rate" ( maybe string ) )
     ( field "G Rate" ( maybe string ) )
     ( field "N Rate" ( maybe string ) )
+    ( field "naic" int )
 
 
 planXDecoder : Decoder (List PlanQuote)
