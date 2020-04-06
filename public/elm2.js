@@ -5816,15 +5816,16 @@ var $author$project$Main$init = function (_v0) {
 			planF: false,
 			planG: false,
 			planN: false,
-			preset: 'kansas_city',
 			recentError: '',
 			response: $elm$core$Maybe$Nothing,
+			selectButton: true,
 			state: $author$project$Main$Ready,
 			tableRows: $elm$core$Maybe$Nothing,
 			tableState: $billstclair$elm_sortable_table$Table$initialSort('F'),
 			tobacco: false,
 			today: $elm$core$Maybe$Nothing,
 			valid: false,
+			visibleRows: $elm$core$Maybe$Nothing,
 			zip: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
 		},
 		A2($elm$core$Platform$Cmd$map, $author$project$Main$ToDatePicker, datePickerFx));
@@ -5873,6 +5874,49 @@ var $author$project$Main$errorToString = function (error) {
 			return errorMessage;
 	}
 };
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === 'RBEmpty_elm_builtin') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1.$) {
+					case 'LT':
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 'EQ':
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
 var $author$project$Main$PDPResponse = function (a) {
 	return {$: 'PDPResponse', a: a};
 };
@@ -5906,38 +5950,6 @@ var $elm$core$Maybe$isJust = function (maybe) {
 	}
 };
 var $elm$core$Platform$sendToSelf = _Platform_sendToSelf;
-var $elm$core$Basics$compare = _Utils_compare;
-var $elm$core$Dict$get = F2(
-	function (targetKey, dict) {
-		get:
-		while (true) {
-			if (dict.$ === 'RBEmpty_elm_builtin') {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var key = dict.b;
-				var value = dict.c;
-				var left = dict.d;
-				var right = dict.e;
-				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
-				switch (_v1.$) {
-					case 'LT':
-						var $temp$targetKey = targetKey,
-							$temp$dict = left;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-					case 'EQ':
-						return $elm$core$Maybe$Just(value);
-					default:
-						var $temp$targetKey = targetKey,
-							$temp$dict = right;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-				}
-			}
-		}
-	});
 var $elm$core$Dict$Black = {$: 'Black'};
 var $elm$core$Dict$RBNode_elm_builtin = F5(
 	function (a, b, c, d, e) {
@@ -7904,7 +7916,7 @@ var $author$project$Main$strCounty = function (c) {
 var $author$project$Main$getPlans = function (model) {
 	if (_Utils_eq(model.state, $author$project$Main$Valid)) {
 		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + (model.gender + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + ($author$project$Main$formatDate(model.date) + ('&preset=' + model.preset)))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + (model.gender + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + $author$project$Main$formatDate(model.date))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.planN, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.planF, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.planG, 'G', url4);
@@ -7958,9 +7970,39 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $author$project$Main$TableRow = F7(
-	function (company, fRate, gRate, nRate, naic, selected, display) {
-		return {company: company, display: display, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic, selected: selected};
+var $elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var $elm$core$List$member = F2(
+	function (x, xs) {
+		return A2(
+			$elm$core$List$any,
+			function (a) {
+				return _Utils_eq(a, x);
+			},
+			xs);
+	});
+var $author$project$Main$TableRow = F6(
+	function (company, fRate, gRate, nRate, naic, selected) {
+		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic, selected: selected};
 	});
 var $author$project$Main$safeString = function (ms) {
 	if (ms.$ === 'Just') {
@@ -7971,16 +8013,43 @@ var $author$project$Main$safeString = function (ms) {
 	}
 };
 var $author$project$Main$planToRow = function (pq) {
-	return A7(
+	return A6(
 		$author$project$Main$TableRow,
 		pq.company,
 		$author$project$Main$safeString(pq.fRate),
 		$author$project$Main$safeString(pq.gRate),
 		$author$project$Main$safeString(pq.nRate),
 		pq.naic,
-		false,
-		true);
+		false);
 };
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $author$project$Main$presets = $elm$core$Dict$fromList(
+	_List_fromArray(
+		[
+			_Utils_Tuple2(
+			'kansas_city',
+			_List_fromArray(
+				[66281, 60054, 67369, 47171, 79143, 71412, 75052])),
+			_Utils_Tuple2(
+			'st_louis_mo',
+			_List_fromArray(
+				[79413, 66281, 78700, 78972, 67369, 13100])),
+			_Utils_Tuple2(
+			'st_louis_il',
+			_List_fromArray(
+				[72052, 72850, 67369, 79413, 70580]))
+		]));
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $CurrySoftware$elm_datepicker$DatePicker$formatCell = function (day) {
@@ -8410,6 +8479,12 @@ var $author$project$Main$settings = _Utils_update(
 		placeholder: $justinmimbs$date$Date$toIsoString(
 			A3($justinmimbs$date$Date$fromCalendarDate, 2020, $elm$time$Time$Jan, 1))
 	});
+var $author$project$Main$tfselect = F2(
+	function (tf, tablerow) {
+		return _Utils_update(
+			tablerow,
+			{selected: tf});
+	});
 var $author$project$Main$toggle = F2(
 	function (i, tablerow) {
 		return _Utils_eq(tablerow.naic, i) ? _Utils_update(
@@ -8747,10 +8822,108 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPreset':
 				var str = msg.a;
+				var _v4 = model.tableRows;
+				if (_v4.$ === 'Just') {
+					var tr = _v4.a;
+					var newTableRows = function () {
+						var _v5 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
+						if (_v5.$ === 'Just') {
+							var ls = _v5.a;
+							return $elm$core$Maybe$Just(
+								A2(
+									$elm$core$List$map,
+									$author$project$Main$tfselect(true),
+									A2(
+										$elm$core$List$filter,
+										function (a) {
+											return A2($elm$core$List$member, a.naic, ls);
+										},
+										tr)));
+						} else {
+							return $elm$core$Maybe$Just(tr);
+						}
+					}();
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{visibleRows: newTableRows}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				}
+			case 'ResetTable':
+				var resetTableRows = function () {
+					var _v6 = model.tableRows;
+					if (_v6.$ === 'Just') {
+						var tr = _v6.a;
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$core$List$map,
+								$author$project$Main$tfselect(false),
+								tr));
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{preset: str}),
+						{selectButton: true, tableRows: resetTableRows, visibleRows: resetTableRows}),
+					$elm$core$Platform$Cmd$none);
+			case 'HideSelected':
+				var unselectRows = function () {
+					var _v8 = model.tableRows;
+					if (_v8.$ === 'Just') {
+						var tr = _v8.a;
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$core$List$map,
+								$author$project$Main$tfselect(false),
+								tr));
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
+				var rowsToKeep = function () {
+					var _v7 = model.visibleRows;
+					if (_v7.$ === 'Just') {
+						var vr = _v7.a;
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$core$List$filter,
+								function (a) {
+									return !a.selected;
+								},
+								vr));
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{tableRows: unselectRows, visibleRows: rowsToKeep}),
+					$elm$core$Platform$Cmd$none);
+			case 'SelectAllTF':
+				var bool = msg.a;
+				var newVisibleRows = function () {
+					var _v9 = model.visibleRows;
+					if (_v9.$ === 'Just') {
+						var tr = _v9.a;
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$core$List$map,
+								$author$project$Main$tfselect(bool),
+								tr));
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
+				var buttonValue = model.selectButton;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{selectButton: !buttonValue, visibleRows: newVisibleRows}),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPDP':
 				var pr = msg.a;
@@ -8822,14 +8995,15 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
+					var newRows = A2($elm$core$List$map, $author$project$Main$planToRow, response);
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{
 								response: $elm$core$Maybe$Just(response),
 								state: $author$project$Main$Success(response),
-								tableRows: $elm$core$Maybe$Just(
-									A2($elm$core$List$map, $author$project$Main$planToRow, response))
+								tableRows: $elm$core$Maybe$Just(newRows),
+								visibleRows: $elm$core$Maybe$Just(newRows)
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
@@ -8870,9 +9044,9 @@ var $author$project$Main$update = F2(
 				}
 			case 'ToDatePicker':
 				var subMsg = msg.a;
-				var _v7 = A3($CurrySoftware$elm_datepicker$DatePicker$update, $author$project$Main$settings, subMsg, model.datePicker);
-				var newDatePicker = _v7.a;
-				var dateEvent = _v7.b;
+				var _v13 = A3($CurrySoftware$elm_datepicker$DatePicker$update, $author$project$Main$settings, subMsg, model.datePicker);
+				var newDatePicker = _v13.a;
+				var dateEvent = _v13.b;
 				var newDate = function () {
 					if (dateEvent.$ === 'Picked') {
 						var changedDate = dateEvent.a;
@@ -8890,9 +9064,9 @@ var $author$project$Main$update = F2(
 			case 'ToggleSelected':
 				var naic = msg.a;
 				var newTableRows = function () {
-					var _v9 = model.tableRows;
-					if (_v9.$ === 'Just') {
-						var tr = _v9.a;
+					var _v15 = model.visibleRows;
+					if (_v15.$ === 'Just') {
+						var tr = _v15.a;
 						return $elm$core$Maybe$Just(
 							A2(
 								$elm$core$List$map,
@@ -8905,7 +9079,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{tableRows: newTableRows}),
+						{visibleRows: newTableRows}),
 					$elm$core$Platform$Cmd$none);
 			default:
 				return $author$project$Main$init(_Utils_Tuple0);
@@ -8960,9 +9134,6 @@ var $author$project$Main$SelectCounty = function (a) {
 };
 var $author$project$Main$SelectGender = function (a) {
 	return {$: 'SelectGender', a: a};
-};
-var $author$project$Main$SelectPreset = function (a) {
-	return {$: 'SelectPreset', a: a};
 };
 var $author$project$Main$SetAge = function (a) {
 	return {$: 'SetAge', a: a};
@@ -9128,17 +9299,6 @@ var $CurrySoftware$elm_datepicker$DatePicker$SubmitText = {$: 'SubmitText'};
 var $CurrySoftware$elm_datepicker$DatePicker$Text = function (a) {
 	return {$: 'Text', a: a};
 };
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
 var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
@@ -10376,13 +10536,6 @@ var $author$project$Main$renderForm = F3(
 						A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
 						A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
 						A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
-						A4(
-						$author$project$Main$selectbox,
-						'Preset',
-						_List_fromArray(
-							['kansas_city', 'st_louis_il', 'st_louis_mo', 'top_ten', 'all']),
-						$author$project$Main$SelectPreset,
-						'three columns'),
 						A2(
 						$elm$html$Html$button,
 						_List_fromArray(
@@ -10397,8 +10550,13 @@ var $author$project$Main$renderForm = F3(
 							]))
 					])));
 	});
+var $author$project$Main$HideSelected = {$: 'HideSelected'};
+var $author$project$Main$ResetTable = {$: 'ResetTable'};
 var $author$project$Main$SelectPDP = function (a) {
 	return {$: 'SelectPDP', a: a};
+};
+var $author$project$Main$SelectPreset = function (a) {
+	return {$: 'SelectPreset', a: a};
 };
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 'SetTableState', a: a};
@@ -10717,6 +10875,34 @@ var $author$project$Main$pdpSelectBox = F2(
 					]));
 		}
 	});
+var $author$project$Main$SelectAllTF = function (a) {
+	return {$: 'SelectAllTF', a: a};
+};
+var $author$project$Main$selectTFButton = function (bool) {
+	return bool ? A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Events$onClick(
+				$author$project$Main$SelectAllTF(true)),
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Select All')
+			])) : A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Events$onClick(
+				$author$project$Main$SelectAllTF(false)),
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('UnSelect All')
+			]));
+};
 var $elm$html$Html$caption = _VirtualDom_node('caption');
 var $billstclair$elm_sortable_table$Table$applySorter = F3(
 	function (isReversed, sorter, data) {
@@ -10930,7 +11116,7 @@ var $billstclair$elm_sortable_table$Table$view = F3(
 			}());
 	});
 var $author$project$Main$renderResults = function (model) {
-	var _v0 = model.tableRows;
+	var _v0 = model.visibleRows;
 	if (_v0.$ === 'Just') {
 		var tr = _v0.a;
 		return A2(
@@ -10988,6 +11174,36 @@ var $author$project$Main$renderResults = function (model) {
 							[
 								$elm$html$Html$text(' We seem to have data :')
 							])),
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$ResetTable),
+								A2($elm$html$Html$Attributes$style, 'display', 'block')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Reset Table View')
+							])),
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
+								A2($elm$html$Html$Attributes$style, 'display', 'block')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Remove Selected')
+							])),
+						$author$project$Main$selectTFButton(model.selectButton),
+						A4(
+						$author$project$Main$selectbox,
+						'Preset',
+						_List_fromArray(
+							['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
+						$author$project$Main$SelectPreset,
+						'three columns'),
 						A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, tr)
 					])));
 	} else {

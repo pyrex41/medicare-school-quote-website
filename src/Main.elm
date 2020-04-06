@@ -42,7 +42,6 @@ type alias Model =
   , planN : Bool
   , planF: Bool
   , planG: Bool
-  , preset : String
   , state : ViewState
   , date  : Maybe Date
   , datePicker : DatePicker.DatePicker
@@ -54,6 +53,8 @@ type alias Model =
   , today : Maybe Date
   , tableState : Table.State
   , tableRows : Maybe (List TableRow)
+  , visibleRows : Maybe (List TableRow)
+  , selectButton : Bool
   }
 
 type alias ValidInt =
@@ -82,7 +83,6 @@ type alias TableRow =
   , nRate : String
   , naic : Int
   , selected : Bool
-  , display : Bool
   }
 
 settings : DatePicker.Settings
@@ -113,7 +113,6 @@ init _ =
       , planN = False
       , planF = False
       , planG = False
-      , preset = "kansas_city"
       , state = Ready
       , date = Nothing
       , datePicker= datePicker
@@ -125,6 +124,8 @@ init _ =
       , today = Nothing
       , tableState = Table.initialSort "F"
       , tableRows = Nothing
+      , visibleRows = Nothing
+      , selectButton = True
       }
     , Cmd.map ToDatePicker datePickerFx
     )
@@ -158,6 +159,9 @@ type Msg
   | ReceiveDate Date
   | SetTableState Table.State
   | ToggleSelected Int
+  | ResetTable
+  | SelectAllTF Bool
+  | HideSelected
 
 type Fail
   = Counties
@@ -272,8 +276,78 @@ update msg model =
       )
 
     SelectPreset str ->
-      ( { model | preset = str }
-      , Cmd.none )
+      case model.tableRows of
+        Just tr ->
+          let
+            newTableRows = case Dict.get str presets of
+              Just ls ->
+                Just <|
+                  List.map
+                  (tfselect True)
+                  <| List.filter ( \a -> List.member a.naic ls ) tr
+              Nothing ->
+                Just tr
+          in
+            ( { model | visibleRows = newTableRows }
+            , Cmd.none
+            )
+        Nothing ->
+          ( model, Cmd.none )
+
+    ResetTable ->
+      let
+        resetTableRows = case model.tableRows of
+          Just tr ->
+            Just <| List.map ( tfselect False ) tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | tableRows = resetTableRows
+                  , visibleRows =  resetTableRows
+                  , selectButton = True
+          }
+        , Cmd.none
+        )
+
+    HideSelected ->
+      let
+        rowsToKeep =
+          case model.visibleRows of
+            Just vr ->
+              Just <| List.filter
+                        (\a -> a.selected == False)
+                        vr
+            Nothing ->
+              Nothing
+        unselectRows =
+          case model.tableRows of
+            Just tr ->
+              Just <| List.map (tfselect False) tr
+            Nothing ->
+              Nothing
+      in
+        ( { model | visibleRows = rowsToKeep
+                  , tableRows = unselectRows
+          }
+        , Cmd.none
+        )
+
+    SelectAllTF bool ->
+      let
+        newVisibleRows = case model.visibleRows of
+          Just tr ->
+            Just <| List.map
+                      ( tfselect bool )
+                      tr
+          Nothing ->
+            Nothing
+        buttonValue = model.selectButton
+      in
+        ( { model | visibleRows = newVisibleRows
+                  , selectButton = not buttonValue
+          }
+        , Cmd.none
+        )
 
     SelectPDP pr ->
       ( { model | pdpRate = Just pr }
@@ -315,12 +389,16 @@ update msg model =
     PlanResponse rmsg ->
       case rmsg of
         Ok response  ->
-          ( { model | state = Success response
-                    , response = Just response
-                    , tableRows = Just (List.map planToRow response)
-          }
-          , Cmd.none
-          )
+          let
+            newRows = List.map planToRow response
+          in
+            ( { model | state = Success response
+                      , response = Just response
+                      , tableRows = Just newRows
+                      , visibleRows = Just newRows
+              }
+            , Cmd.none
+            )
         Err error ->
           ( { model | state = Failure Plan
                     , recentError = errorToString error
@@ -361,13 +439,14 @@ update msg model =
 
     ToggleSelected naic ->
       let
-        newTableRows = case model.tableRows of
+        newTableRows = case model.visibleRows of
           Just tr ->
             Just <| List.map (toggle naic ) tr
           Nothing ->
             Nothing
       in
-        ( { model | tableRows = newTableRows }
+        ( { model | visibleRows = newTableRows
+          }
         , Cmd.none
         )
 
@@ -383,6 +462,16 @@ toggle i tablerow =
   else
     tablerow
 
+tfselect : Bool -> TableRow -> TableRow
+tfselect tf tablerow =
+  { tablerow | selected =  tf}
+
+
+removeRow : Int -> List TableRow -> List TableRow
+removeRow i ls =
+  List.filter
+    (\a -> a.naic /= i)
+    ls
 
 -- SUBSCRIPTIONS
 
@@ -568,18 +657,13 @@ renderForm model func buttonLabel =
         , checkbox "Plan N" model.planN ToggleN "u-full-width"
         , checkbox "Plan F" model.planF ToggleF "u-full-width"
         , checkbox "Plan G" model.planG ToggleG "u-full-width"
-        , selectbox
-              "Preset"
-              [ "kansas_city", "st_louis_il", "st_louis_mo", "top_ten", "all" ]
-              SelectPreset
-              "three columns"
         , button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
         ]
     )
 
 renderResults : Model -> Html Msg
 renderResults model =
-  case model.tableRows of
+  case model.visibleRows of
     Just tr ->
       div []
           ( List.map
@@ -588,6 +672,14 @@ renderResults model =
             , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
             , pdpSelectBox model.pdpList (\a -> SelectPDP a)
             , p [ class "six columns"] [ text " We seem to have data :" ]
+            , button [ onClick ResetTable, style "display" "block" ] [ text "Reset Table View" ]
+            , button [ onClick HideSelected, style "display" "block" ] [ text "Remove Selected"]
+            , selectTFButton model.selectButton
+            , selectbox
+                  "Preset"
+                  [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
+                  SelectPreset
+                  "three columns"
             , Table.view config model.tableState tr
             ]
           )
@@ -636,7 +728,6 @@ checkboxColumn =
         , sorter = Table.unsortable
         }
 
-
 renderList : List String -> Html Msg
 renderList lst =
     lst
@@ -653,6 +744,13 @@ selectdate model class_ =
         |> Html.map ToDatePicker
       ]
   ]
+
+selectTFButton : Bool -> Html Msg
+selectTFButton bool =
+  if bool then
+    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Select All"]
+  else
+    button [ onClick (SelectAllTF False), style "display" "block" ] [ text "UnSelect All"]
 
 selectbox : String -> List (String) -> (String -> Msg) -> String -> Html Msg
 selectbox title_ choices handle class_ =
@@ -764,7 +862,6 @@ planToRow pq =
     ( safeString pq.nRate )
     pq.naic
     False
-    True
 
 boolString : Bool -> String
 boolString b =
@@ -856,7 +953,6 @@ getPlans model =
           ++ "&tobacco=" ++ ( model.tobacco |> boolString )
           ++ "&discounts=" ++ ( model.discounts |> boolString )
           ++ "&date=" ++ ( formatDate model.date )
-          ++ "&preset=" ++ model.preset
 
       url3 =  checkAddPlan model.planN "N" url2
       url4 =  checkAddPlan model.planF "F" url3
@@ -904,3 +1000,34 @@ pdpPlanDecoder =
 pdpDecoder : Decoder (List PdpRecord)
 pdpDecoder =
   field "body" ( Json.Decode.list pdpPlanDecoder )
+
+
+-- PRESETS
+presets : Dict String (List Int)
+presets =
+  Dict.fromList
+    [ ( "kansas_city",  [ 66281 -- Transamerica
+                        , 60054
+                        , 67369 -- CIGNA
+                        , 47171 --Blue Cross Blue Shielf of Kansas City
+                        , 79143 --AARP Medicare Supplement Plans, insured by UnitedHealthcare
+                        , 71412 --Mutual of Omaha
+                        , 75052 --AETNA
+                        ]
+      )
+    , ( "st_louis_mo",  [ 79413  -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
+                        , 66281  -- Transamerica
+                        , 78700  -- AETNA HEALTH AND LIFE INSURANCE COMPANY
+                        , 78972  -- (Anthem) Healthy Alliance Life Insurance Company
+                        , 67369  -- Cigna
+                        , 13100   -- Omaha Ins Co
+                        ]
+      )
+    , ( "st_louis_il",  [ 72052  -- AETNA Health Insurance
+                        , 72850 -- united world life
+                        , 67369 -- Cigna
+                        , 79413 -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
+                        , 70580 -- Humana Insurance Company (Value)
+                        ]
+      )
+    ]
