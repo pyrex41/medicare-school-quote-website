@@ -7,13 +7,11 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
 import Json.Decode exposing (Decoder, field, string, at, map2, map3, map4,map5, maybe, null, oneOf, int)
-import Json.Decode.Pipeline exposing (required, optional)
-import Date exposing (Date, day, month, weekday, year)
-import DatePicker exposing (DateEvent(..), defaultSettings)
-import Time exposing (Weekday(..), Month(..))
 import Element
 import Table exposing (defaultCustomizations)
 import Dict exposing (Dict)
+import Time exposing (Month, utc)
+import MyDate exposing (CustomDate, addMonth)
 
 -- MAIN
 
@@ -43,19 +41,21 @@ type alias Model =
   , planF: Bool
   , planG: Bool
   , state : ViewState
-  , date  : Maybe Date
-  , datePicker : DatePicker.DatePicker
+  , date  : Maybe CustomDate
   , valid : Bool
   , response : Maybe (List PlanQuote)
   , pdpList : Maybe (List PdpRecord)
   , pdpRate : Maybe String
   , recentError : String
-  , today : Maybe Date
+  , today : Maybe CustomDate
   , tableState : Table.State
   , tableRows : Maybe (List TableRow)
   , visibleRows : Maybe (List TableRow)
   , selectButton : Bool
+  , timeNow : Maybe CustomDate
+  , dateSelectChoices : List (String, CustomDate)
   }
+
 
 type alias ValidInt =
   { value : Maybe Int
@@ -85,9 +85,6 @@ type alias TableRow =
   , selected : Bool
   }
 
-settings : DatePicker.Settings
-settings = { defaultSettings | placeholder = Date.toIsoString <| Date.fromCalendarDate 2020 Jan 1 }
-
 type ViewState
   = Failure Fail
   | Loading String
@@ -98,10 +95,6 @@ type ViewState
 
 init : () -> (Model, Cmd Msg)
 init _ =
-  let
-    ( datePicker, datePickerFx ) =
-      DatePicker.init
-  in
     ( { name = ""
       , age = ValidInt Nothing False "Please enter an age"
       , zip = ValidInt Nothing False "Please enter a 5-digit ZIP"
@@ -115,7 +108,6 @@ init _ =
       , planG = False
       , state = Ready
       , date = Nothing
-      , datePicker= datePicker
       , valid = False
       , response = Nothing
       , pdpList = Nothing
@@ -126,8 +118,10 @@ init _ =
       , tableRows = Nothing
       , visibleRows = Nothing
       , selectButton = True
+      , timeNow = Nothing
+      , dateSelectChoices = []
       }
-    , Cmd.map ToDatePicker datePickerFx
+    , Task.perform GotTime Time.now
     )
 
 
@@ -145,6 +139,7 @@ type Msg
   | SelectGender String
   | SelectCounty String
   | SelectPreset String
+  | SelectDate String
   | SelectPDP String
   | ToggleTobacco
   | ToggleDiscounts
@@ -154,19 +149,19 @@ type Msg
   | ZipResponse (Result Http.Error (List String))
   | PlanResponse (Result Http.Error (List PlanQuote))
   | PDPResponse (Result Http.Error (List PdpRecord))
-  | ToDatePicker DatePicker.Msg
   | Reset -- is this going to return a string?
-  | ReceiveDate Date
+  | ReceiveDate CustomDate
   | SetTableState Table.State
   | ToggleSelected Int
-  | ResetTable
   | SelectAllTF Bool
   | HideSelected
+  | GotTime Time.Posix
 
 type Fail
   = Counties
   | PDP
   | Plan
+
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -178,9 +173,7 @@ update msg model =
 
     ReceiveDate td ->
       ( validateModel
-      { model | today = Just td
-              , date = Just td
-        }
+        { model | today = Just td }
       , Cmd.none
       )
 
@@ -208,15 +201,9 @@ update msg model =
       ( { model | state = Loading "PDP" }, getPDP model )
 
     SetName str ->
-      case model.date of
-        Nothing ->
-          ( validateModel { model | name = str }
-          ,  Date.today |> Task.perform ReceiveDate
-          ) -- Would prefer to do this in init
-        Just _ ->
-          ( validateModel { model | name = str }
-          ,  Cmd.none
-          )
+        ( validateModel { model | name = str }
+        ,  Cmd.none
+        )
 
     SetAge str ->
       case String.toInt(str) of
@@ -275,6 +262,18 @@ update msg model =
       , Cmd.none
       )
 
+    SelectDate cds ->
+      let
+        choices_ = model.dateSelectChoices
+        choiceTuple = List.head <| List.filter
+                                    (\a -> Tuple.first a == cds)
+                                    choices_
+        choice = Maybe.map Tuple.second choiceTuple
+      in
+        ( validateModel { model | date = choice }
+        , Cmd.none
+        )
+
     SelectPreset str ->
       case model.tableRows of
         Just tr ->
@@ -288,43 +287,18 @@ update msg model =
               Nothing ->
                 Just tr
           in
-            ( { model | visibleRows = newTableRows }
+            ( { model | visibleRows = newTableRows
+                      , selectButton = False
+              }
             , Cmd.none
             )
         Nothing ->
           ( model, Cmd.none )
 
-    ResetTable ->
-      let
-        resetTableRows = case model.tableRows of
-          Just tr ->
-            Just <| List.map ( tfselect False ) tr
-          Nothing ->
-            Nothing
-      in
-        ( { model | tableRows = resetTableRows
-                  , visibleRows =  resetTableRows
-                  , selectButton = True
-          }
-        , Cmd.none
-        )
-
     HideSelected ->
       let
-        rowsToKeep =
-          case model.visibleRows of
-            Just vr ->
-              Just <| List.filter
-                        (\a -> a.selected == False)
-                        vr
-            Nothing ->
-              Nothing
-        unselectRows =
-          case model.tableRows of
-            Just tr ->
-              Just <| List.map (tfselect False) tr
-            Nothing ->
-              Nothing
+        rowsToKeep = Maybe.map ( List.filter (\a -> a.selected == False) ) model.visibleRows
+        unselectRows = Maybe.map ( List.map (tfselect False) ) model.tableRows
       in
         ( { model | visibleRows = rowsToKeep
                   , tableRows = unselectRows
@@ -334,13 +308,7 @@ update msg model =
 
     SelectAllTF bool ->
       let
-        newVisibleRows = case model.visibleRows of
-          Just tr ->
-            Just <| List.map
-                      ( tfselect bool )
-                      tr
-          Nothing ->
-            Nothing
+        newVisibleRows = Maybe.map ( List.map (tfselect bool) ) model.visibleRows
         buttonValue = model.selectButton
       in
         ( { model | visibleRows = newVisibleRows
@@ -419,31 +387,9 @@ update msg model =
             }
           , Cmd.none )
 
-    ToDatePicker subMsg ->
-      let
-        ( newDatePicker, dateEvent ) =
-          DatePicker.update settings subMsg model.datePicker
-
-        newDate =
-            case dateEvent of
-                Picked changedDate ->
-                    Just changedDate
-                _ ->
-                    model.date
-      in
-        ( validateModel { model
-            | date = newDate
-            , datePicker = newDatePicker
-          }
-        , Cmd.none )
-
     ToggleSelected naic ->
       let
-        newTableRows = case model.visibleRows of
-          Just tr ->
-            Just <| List.map (toggle naic ) tr
-          Nothing ->
-            Nothing
+        newTableRows = Maybe.map (List.map (toggle naic)) model.visibleRows
       in
         ( { model | visibleRows = newTableRows
           }
@@ -452,6 +398,26 @@ update msg model =
 
     Reset ->
       init ()
+
+    GotTime timenow ->
+      let
+        td = CustomDate
+                    (Time.toMonth utc timenow)
+                    (Time.toYear utc timenow)
+
+        choices_ = List.map
+                    (\a -> Tuple.pair (MyDate.toString (addMonth a td) ) (addMonth a td))
+                    [0,1,2,3]
+
+        choiceVals = List.map Tuple.second choices_
+        firstChoice = Maybe.andThen List.head (List.tail choiceVals)
+      in
+        ( { model | timeNow = Just td
+                  , date = firstChoice
+                  , dateSelectChoices = choices_
+          }
+        , Cmd.none
+        )
 
 -- UPDATE FUNCS
 toggle : Int -> TableRow -> TableRow
@@ -495,6 +461,31 @@ view model =
           [  ]
     , variousViews model
     ]
+
+-- v---v FOR TESTING
+
+viewCustomDate : Model -> Html Msg
+viewCustomDate model =
+  case model.timeNow of
+    Just tn ->
+      let
+        options = List.map Tuple.first model.dateSelectChoices
+        md = case model.date of
+          Just d ->
+            MyDate.toString d
+          Nothing ->
+            "none"
+      in
+        div []
+          (List.map
+            (\a -> text (a ++ " === ") )
+            options
+          ++
+          [ text <| "Default: " ++ md ]
+          )
+    Nothing ->
+      div []
+        [ text "no time info" ]
 
 variousViews : Model -> Html Msg
 variousViews model =
@@ -565,6 +556,7 @@ isValid model =
           , model.age.valid == True
           , model.zip.valid == True
           , model.planN || model.planF || model.planG
+          , model.county /= Nothing
           ]
         newModel = { model | valid = List.foldl (&&) True validList }
       in
@@ -600,14 +592,6 @@ validateString field func errorMessage=
     div [ style "color" "green" ] [ text ""]
   else
     div [ style "color" "red" ] [ text errorMessage ]
-
-validateDate : Maybe Date -> Html Msg
-validateDate field =
-  case field of
-    Just _ ->
-      text ""
-    Nothing ->
-      p [ style "color" "red" ] [ text "No date" ]
 
 
 errorToString : Http.Error -> String
@@ -648,12 +632,12 @@ renderForm model func buttonLabel =
         [ textbox  "Name" "John Smith" model.name SetName "four columns"
         , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) "two columns"
         , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) "two columns"
-        , selectbox "County" model.counties SelectCounty "three columns"
-        , selectbox  "Gender" ["Male", "Female"] SelectGender "three columns"
-        , selectdate model "six columns"
+        , selectbox "County" model.counties SelectCounty "three columns" 0
+        , selectbox  "Gender" ["Male", "Female"] SelectGender "three columns" 0
+        , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate "three columns" 1
         , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  "u-full-width"
         , checkbox  "Apply Discounts?" model.discounts ToggleDiscounts "u-full-width"
-        , h5 [ class "u-full-width" ] [ text "Which Plans?"]
+        , h5 [ class "u-full-width" ] [ text "Which Plans?" ]
         , checkbox "Plan N" model.planN ToggleN "u-full-width"
         , checkbox "Plan F" model.planF ToggleF "u-full-width"
         , checkbox "Plan G" model.planG ToggleG "u-full-width"
@@ -672,7 +656,6 @@ renderResults model =
             , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
             , pdpSelectBox model.pdpList (\a -> SelectPDP a)
             , p [ class "six columns"] [ text " We seem to have data :" ]
-            , button [ onClick ResetTable, style "display" "block" ] [ text "Reset Table View" ]
             , button [ onClick HideSelected, style "display" "block" ] [ text "Remove Selected"]
             , selectTFButton model.selectButton
             , selectbox
@@ -680,6 +663,7 @@ renderResults model =
                   [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
                   SelectPreset
                   "three columns"
+                  0
             , Table.view config model.tableState tr
             ]
           )
@@ -734,16 +718,6 @@ renderList lst =
        |> List.map (\l -> li [] [ text l ])
        |> ul []
 
-selectdate : Model -> String -> Html Msg
-selectdate model class_ =
-  div [ class class_ ] [
-    label
-      [ ]
-      [ text "Pick a date:"
-      , DatePicker.view model.date settings model.datePicker
-        |> Html.map ToDatePicker
-      ]
-  ]
 
 selectTFButton : Bool -> Html Msg
 selectTFButton bool =
@@ -752,22 +726,31 @@ selectTFButton bool =
   else
     button [ onClick (SelectAllTF False), style "display" "block" ] [ text "UnSelect All"]
 
-selectbox : String -> List (String) -> (String -> Msg) -> String -> Html Msg
-selectbox title_ choices handle class_ =
-  div [ class class_ ] [
-    label
-      [ ]
-      [ text title_
-      , select
-        [ onInput handle
-        , class "u-full-width"
+
+selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg
+selectbox title_ choices handle class_ i =
+  let
+    def = List.drop i choices |> List.head
+    nls = List.map
+            (\a -> option
+                    [ value a
+                    , selected <| (Just a) == def
+                    ]
+                    [ text a ])
+            choices
+  in
+    div [ class class_ ] [
+      label
+        [ ]
+        [ text title_
+        , select
+          [ onInput handle
+          , class "u-full-width"
+          ]
+          nls
         ]
-        (List.map
-          (\a -> option [ value a ] [ text a ])
-          choices
-        )
-      ]
-  ]
+    ]
+
 
 pdpOption : PdpRecord -> Html Msg
 pdpOption pr =
@@ -845,6 +828,7 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
 
 -- MISC type conversions
 
+
 safeString : Maybe String -> String
 safeString ms =
   case ms of
@@ -878,14 +862,15 @@ stringMaybeInt v =
     Nothing ->
       ""
 
-
-formatDate : Maybe Date -> String
-formatDate dd =
-  case dd of
-    Just d ->
-      Date.toIsoString d
+strMaybeDate : Maybe CustomDate -> String
+strMaybeDate ccd =
+  case ccd of
+    Just cd ->
+      MyDate.formatRequest cd
     Nothing ->
       ""
+
+
 strCounty : Maybe String -> String
 strCounty c =
   case c of
@@ -952,7 +937,7 @@ getPlans model =
           ++ "&gender=" ++ model.gender
           ++ "&tobacco=" ++ ( model.tobacco |> boolString )
           ++ "&discounts=" ++ ( model.discounts |> boolString )
-          ++ "&date=" ++ ( formatDate model.date )
+          ++ "&date=" ++ ( strMaybeDate model.date )
 
       url3 =  checkAddPlan model.planN "N" url2
       url4 =  checkAddPlan model.planF "F" url3
