@@ -4576,7 +4576,30 @@ function _Http_track(router, xhr, tracker)
 			size: event.lengthComputable ? $elm$core$Maybe$Just(event.total) : $elm$core$Maybe$Nothing
 		}))));
 	});
-}var $elm$core$Basics$EQ = {$: 'EQ'};
+}
+
+function _Url_percentEncode(string)
+{
+	return encodeURIComponent(string);
+}
+
+function _Url_percentDecode(string)
+{
+	try
+	{
+		return $elm$core$Maybe$Just(decodeURIComponent(string));
+	}
+	catch (e)
+	{
+		return $elm$core$Maybe$Nothing;
+	}
+}var $author$project$Main$LinkClicked = function (a) {
+	return {$: 'LinkClicked', a: a};
+};
+var $author$project$Main$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
+var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
 var $elm$core$List$cons = _List_cons;
@@ -5364,7 +5387,7 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$element = _Browser_element;
+var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$GotTime = function (a) {
 	return {$: 'GotTime', a: a};
 };
@@ -5396,38 +5419,41 @@ var $elm$time$Time$Posix = function (a) {
 };
 var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
 var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
-var $author$project$Main$init = function (_v0) {
-	return _Utils_Tuple2(
-		{
-			age: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
-			counties: _List_fromArray(
-				['']),
-			county: $elm$core$Maybe$Nothing,
-			date: $elm$core$Maybe$Nothing,
-			dateSelectChoices: _List_Nil,
-			discounts: false,
-			gender: 'M',
-			name: '',
-			pdpList: $elm$core$Maybe$Nothing,
-			pdpRate: $elm$core$Maybe$Nothing,
-			planF: false,
-			planG: false,
-			planN: false,
-			recentError: '',
-			response: $elm$core$Maybe$Nothing,
-			selectButton: true,
-			state: $author$project$Main$Ready,
-			tableRows: $elm$core$Maybe$Nothing,
-			tableState: $billstclair$elm_sortable_table$Table$initialSort('F'),
-			timeNow: $elm$core$Maybe$Nothing,
-			tobacco: false,
-			today: $elm$core$Maybe$Nothing,
-			valid: false,
-			visibleRows: $elm$core$Maybe$Nothing,
-			zip: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
-		},
-		A2($elm$core$Task$perform, $author$project$Main$GotTime, $elm$time$Time$now));
-};
+var $author$project$Main$init = F3(
+	function (flags, url, key) {
+		return _Utils_Tuple2(
+			{
+				age: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
+				counties: _List_fromArray(
+					['']),
+				county: $elm$core$Maybe$Nothing,
+				date: $elm$core$Maybe$Nothing,
+				dateSelectChoices: _List_Nil,
+				discounts: false,
+				gender: 'M',
+				key: key,
+				name: '',
+				pdpList: $elm$core$Maybe$Nothing,
+				pdpRate: $elm$core$Maybe$Nothing,
+				planF: false,
+				planG: false,
+				planN: false,
+				recentError: '',
+				response: $elm$core$Maybe$Nothing,
+				selectButton: true,
+				state: $author$project$Main$Ready,
+				tableRows: $elm$core$Maybe$Nothing,
+				tableState: $billstclair$elm_sortable_table$Table$initialSort('F'),
+				timeNow: $elm$core$Maybe$Nothing,
+				tobacco: false,
+				today: $elm$core$Maybe$Nothing,
+				url: url,
+				valid: false,
+				visibleRows: $elm$core$Maybe$Nothing,
+				zip: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
+			},
+			A2($elm$core$Task$perform, $author$project$Main$GotTime, $elm$time$Time$now));
+	});
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Main$subscriptions = function (model) {
@@ -5441,15 +5467,9 @@ var $author$project$MyDate$CustomDate = F2(
 var $author$project$Main$Failure = function (a) {
 	return {$: 'Failure', a: a};
 };
-var $author$project$Main$Loading = function (a) {
-	return {$: 'Loading', a: a};
-};
+var $author$project$Main$Loading = {$: 'Loading'};
 var $author$project$Main$PDP = {$: 'PDP'};
 var $author$project$Main$Plan = {$: 'Plan'};
-var $author$project$Main$Success = function (a) {
-	return {$: 'Success', a: a};
-};
-var $author$project$Main$Valid = {$: 'Valid'};
 var $elm$time$Time$Apr = {$: 'Apr'};
 var $elm$time$Time$Aug = {$: 'Aug'};
 var $elm$time$Time$Dec = {$: 'Dec'};
@@ -6462,7 +6482,7 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 	}
 };
 var $author$project$Main$getPlans = function (model) {
-	if (_Utils_eq(model.state, $author$project$Main$Valid)) {
+	if (model.valid) {
 		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
 		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + (model.gender + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + $author$project$Main$strMaybeDate(model.date))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.planN, 'N', url2);
@@ -6518,6 +6538,7 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
+var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $elm$core$Maybe$map = F2(
 	function (f, maybe) {
 		if (maybe.$ === 'Just') {
@@ -6613,6 +6634,7 @@ var $author$project$Main$presets = $elm$core$Dict$fromList(
 			_List_fromArray(
 				[72052, 72850, 67369, 79413, 70580]))
 		]));
+var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
@@ -6758,6 +6780,50 @@ var $author$project$MyDate$toString = function (cd) {
 	}();
 	return monthString + (' ' + yearString);
 };
+var $elm$url$Url$addPort = F2(
+	function (maybePort, starter) {
+		if (maybePort.$ === 'Nothing') {
+			return starter;
+		} else {
+			var port_ = maybePort.a;
+			return starter + (':' + $elm$core$String$fromInt(port_));
+		}
+	});
+var $elm$url$Url$addPrefixed = F3(
+	function (prefix, maybeSegment, starter) {
+		if (maybeSegment.$ === 'Nothing') {
+			return starter;
+		} else {
+			var segment = maybeSegment.a;
+			return _Utils_ap(
+				starter,
+				_Utils_ap(prefix, segment));
+		}
+	});
+var $elm$url$Url$toString = function (url) {
+	var http = function () {
+		var _v0 = url.protocol;
+		if (_v0.$ === 'Http') {
+			return 'http://';
+		} else {
+			return 'https://';
+		}
+	}();
+	return A3(
+		$elm$url$Url$addPrefixed,
+		'#',
+		url.fragment,
+		A3(
+			$elm$url$Url$addPrefixed,
+			'?',
+			url.query,
+			_Utils_ap(
+				A2(
+					$elm$url$Url$addPort,
+					url.port_,
+					_Utils_ap(http, url.host)),
+				url.path)));
+};
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
 		return $elm$time$Time$toCivil(
@@ -6769,6 +6835,251 @@ var $author$project$Main$toggle = F2(
 			tablerow,
 			{selected: !tablerow.selected}) : tablerow;
 	});
+var $elm$url$Url$Parser$State = F5(
+	function (visited, unvisited, params, frag, value) {
+		return {frag: frag, params: params, unvisited: unvisited, value: value, visited: visited};
+	});
+var $elm$url$Url$Parser$getFirstMatch = function (states) {
+	getFirstMatch:
+	while (true) {
+		if (!states.b) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var state = states.a;
+			var rest = states.b;
+			var _v1 = state.unvisited;
+			if (!_v1.b) {
+				return $elm$core$Maybe$Just(state.value);
+			} else {
+				if ((_v1.a === '') && (!_v1.b.b)) {
+					return $elm$core$Maybe$Just(state.value);
+				} else {
+					var $temp$states = rest;
+					states = $temp$states;
+					continue getFirstMatch;
+				}
+			}
+		}
+	}
+};
+var $elm$url$Url$Parser$removeFinalEmpty = function (segments) {
+	if (!segments.b) {
+		return _List_Nil;
+	} else {
+		if ((segments.a === '') && (!segments.b.b)) {
+			return _List_Nil;
+		} else {
+			var segment = segments.a;
+			var rest = segments.b;
+			return A2(
+				$elm$core$List$cons,
+				segment,
+				$elm$url$Url$Parser$removeFinalEmpty(rest));
+		}
+	}
+};
+var $elm$url$Url$Parser$preparePath = function (path) {
+	var _v0 = A2($elm$core$String$split, '/', path);
+	if (_v0.b && (_v0.a === '')) {
+		var segments = _v0.b;
+		return $elm$url$Url$Parser$removeFinalEmpty(segments);
+	} else {
+		var segments = _v0;
+		return $elm$url$Url$Parser$removeFinalEmpty(segments);
+	}
+};
+var $elm$url$Url$Parser$addToParametersHelp = F2(
+	function (value, maybeList) {
+		if (maybeList.$ === 'Nothing') {
+			return $elm$core$Maybe$Just(
+				_List_fromArray(
+					[value]));
+		} else {
+			var list = maybeList.a;
+			return $elm$core$Maybe$Just(
+				A2($elm$core$List$cons, value, list));
+		}
+	});
+var $elm$url$Url$percentDecode = _Url_percentDecode;
+var $elm$url$Url$Parser$addParam = F2(
+	function (segment, dict) {
+		var _v0 = A2($elm$core$String$split, '=', segment);
+		if ((_v0.b && _v0.b.b) && (!_v0.b.b.b)) {
+			var rawKey = _v0.a;
+			var _v1 = _v0.b;
+			var rawValue = _v1.a;
+			var _v2 = $elm$url$Url$percentDecode(rawKey);
+			if (_v2.$ === 'Nothing') {
+				return dict;
+			} else {
+				var key = _v2.a;
+				var _v3 = $elm$url$Url$percentDecode(rawValue);
+				if (_v3.$ === 'Nothing') {
+					return dict;
+				} else {
+					var value = _v3.a;
+					return A3(
+						$elm$core$Dict$update,
+						key,
+						$elm$url$Url$Parser$addToParametersHelp(value),
+						dict);
+				}
+			}
+		} else {
+			return dict;
+		}
+	});
+var $elm$url$Url$Parser$prepareQuery = function (maybeQuery) {
+	if (maybeQuery.$ === 'Nothing') {
+		return $elm$core$Dict$empty;
+	} else {
+		var qry = maybeQuery.a;
+		return A3(
+			$elm$core$List$foldr,
+			$elm$url$Url$Parser$addParam,
+			$elm$core$Dict$empty,
+			A2($elm$core$String$split, '&', qry));
+	}
+};
+var $elm$url$Url$Parser$parse = F2(
+	function (_v0, url) {
+		var parser = _v0.a;
+		return $elm$url$Url$Parser$getFirstMatch(
+			parser(
+				A5(
+					$elm$url$Url$Parser$State,
+					_List_Nil,
+					$elm$url$Url$Parser$preparePath(url.path),
+					$elm$url$Url$Parser$prepareQuery(url.query),
+					url.fragment,
+					$elm$core$Basics$identity)));
+	});
+var $author$project$Main$Output = {$: 'Output'};
+var $author$project$Main$Results = {$: 'Results'};
+var $elm$url$Url$Parser$Parser = function (a) {
+	return {$: 'Parser', a: a};
+};
+var $elm$url$Url$Parser$mapState = F2(
+	function (func, _v0) {
+		var visited = _v0.visited;
+		var unvisited = _v0.unvisited;
+		var params = _v0.params;
+		var frag = _v0.frag;
+		var value = _v0.value;
+		return A5(
+			$elm$url$Url$Parser$State,
+			visited,
+			unvisited,
+			params,
+			frag,
+			func(value));
+	});
+var $elm$url$Url$Parser$map = F2(
+	function (subValue, _v0) {
+		var parseArg = _v0.a;
+		return $elm$url$Url$Parser$Parser(
+			function (_v1) {
+				var visited = _v1.visited;
+				var unvisited = _v1.unvisited;
+				var params = _v1.params;
+				var frag = _v1.frag;
+				var value = _v1.value;
+				return A2(
+					$elm$core$List$map,
+					$elm$url$Url$Parser$mapState(value),
+					parseArg(
+						A5($elm$url$Url$Parser$State, visited, unvisited, params, frag, subValue)));
+			});
+	});
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $elm$core$List$concatMap = F2(
+	function (f, list) {
+		return $elm$core$List$concat(
+			A2($elm$core$List$map, f, list));
+	});
+var $elm$url$Url$Parser$oneOf = function (parsers) {
+	return $elm$url$Url$Parser$Parser(
+		function (state) {
+			return A2(
+				$elm$core$List$concatMap,
+				function (_v0) {
+					var parser = _v0.a;
+					return parser(state);
+				},
+				parsers);
+		});
+};
+var $elm$url$Url$Parser$s = function (str) {
+	return $elm$url$Url$Parser$Parser(
+		function (_v0) {
+			var visited = _v0.visited;
+			var unvisited = _v0.unvisited;
+			var params = _v0.params;
+			var frag = _v0.frag;
+			var value = _v0.value;
+			if (!unvisited.b) {
+				return _List_Nil;
+			} else {
+				var next = unvisited.a;
+				var rest = unvisited.b;
+				return _Utils_eq(next, str) ? _List_fromArray(
+					[
+						A5(
+						$elm$url$Url$Parser$State,
+						A2($elm$core$List$cons, next, visited),
+						rest,
+						params,
+						frag,
+						value)
+					]) : _List_Nil;
+			}
+		});
+};
+var $author$project$Main$routeParser = $elm$url$Url$Parser$oneOf(
+	_List_fromArray(
+		[
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Main$Ready,
+			$elm$url$Url$Parser$s('')),
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Main$Ready,
+			$elm$url$Url$Parser$s('home')),
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Main$Results,
+			$elm$url$Url$Parser$s('results')),
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Main$Output,
+			$elm$url$Url$Parser$s('output'))
+		]));
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Main$urlToRoute = function (url) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		$author$project$Main$Ready,
+		A2($elm$url$Url$Parser$parse, $author$project$Main$routeParser, url));
+};
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Main$isValid = function (model) {
@@ -6793,20 +7104,40 @@ var $author$project$Main$isValid = function (model) {
 	}
 };
 var $author$project$Main$validateModel = function (model) {
-	var _v0 = $author$project$Main$isValid(model);
-	if (_v0) {
-		return _Utils_update(
-			model,
-			{state: $author$project$Main$Valid, valid: true});
-	} else {
-		return _Utils_update(
-			model,
-			{valid: false});
-	}
+	return _Utils_update(
+		model,
+		{
+			valid: $author$project$Main$isValid(model)
+		});
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
+			case 'LinkClicked':
+				var urlRequest = msg.a;
+				if (urlRequest.$ === 'Internal') {
+					var url = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.key,
+							$elm$url$Url$toString(url)));
+				} else {
+					var href = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				}
+			case 'UrlChanged':
+				var url = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							state: $author$project$Main$urlToRoute(url)
+						}),
+					$elm$core$Platform$Cmd$none);
 			case 'SetTableState':
 				var newState = msg.a;
 				return _Utils_Tuple2(
@@ -6828,13 +7159,10 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'SubmitForm':
 				var vModel = $author$project$Main$validateModel(model);
-				return _Utils_eq(vModel.state, $author$project$Main$Valid) ? _Utils_Tuple2(
+				return vModel.valid ? _Utils_Tuple2(
 					_Utils_update(
 						vModel,
-						{
-							response: $elm$core$Maybe$Nothing,
-							state: $author$project$Main$Loading('Plan(s)')
-						}),
+						{response: $elm$core$Maybe$Nothing, state: $author$project$Main$Loading}),
 					$author$project$Main$getPlans(vModel)) : _Utils_Tuple2(
 					_Utils_update(
 						vModel,
@@ -6844,9 +7172,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{
-							state: $author$project$Main$Loading('PDP')
-						}),
+						{state: $author$project$Main$Loading}),
 					$author$project$Main$getPDP(model));
 			case 'SetName':
 				var str = msg.a;
@@ -6858,9 +7184,9 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SetAge':
 				var str = msg.a;
-				var _v1 = $elm$core$String$toInt(str);
-				if (_v1.$ === 'Just') {
-					var i = _v1.a;
+				var _v2 = $elm$core$String$toInt(str);
+				if (_v2.$ === 'Just') {
+					var i = _v2.a;
 					var minAge = 65;
 					var maxAge = 120;
 					var errorMessage = (_Utils_cmp(i, minAge) < 1) ? 'Age must be 65 or older' : ((_Utils_cmp(i, maxAge) > 0) ? 'Seems too old; check age' : '');
@@ -6889,9 +7215,9 @@ var $author$project$Main$update = F2(
 				}
 			case 'SetZip':
 				var str = msg.a;
-				var _v2 = $elm$core$String$toInt(str);
-				if (_v2.$ === 'Just') {
-					var i = _v2.a;
+				var _v3 = $elm$core$String$toInt(str);
+				if (_v3.$ === 'Just') {
+					var i = _v3.a;
 					if ($elm$core$String$length(str) === 5) {
 						var newModel = $author$project$Main$validateModel(
 							_Utils_update(
@@ -6969,13 +7295,13 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPreset':
 				var str = msg.a;
-				var _v3 = model.tableRows;
-				if (_v3.$ === 'Just') {
-					var tr = _v3.a;
+				var _v4 = model.tableRows;
+				if (_v4.$ === 'Just') {
+					var tr = _v4.a;
 					var newTableRows = function () {
-						var _v4 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
-						if (_v4.$ === 'Just') {
-							var ls = _v4.a;
+						var _v5 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
+						if (_v5.$ === 'Just') {
+							var ls = _v5.a;
 							return $elm$core$Maybe$Just(
 								A2(
 									$elm$core$List$map,
@@ -7099,17 +7425,30 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
+					var nn = $elm$url$Url$fromString(
+						$elm$url$Url$toString(model.url) + '/results');
+					var nurl = function () {
+						if (nn.$ === 'Just') {
+							var n = nn.a;
+							return n;
+						} else {
+							return model.url;
+						}
+					}();
 					var newRows = A2($elm$core$List$map, $author$project$Main$planToRow, response);
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{
 								response: $elm$core$Maybe$Just(response),
-								state: $author$project$Main$Success(response),
 								tableRows: $elm$core$Maybe$Just(newRows),
+								url: nurl,
 								visibleRows: $elm$core$Maybe$Just(newRows)
 							}),
-						$elm$core$Platform$Cmd$none);
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.key,
+							$elm$url$Url$toString(nurl)));
 				} else {
 					var error = rmsg.a;
 					return _Utils_Tuple2(
@@ -7158,8 +7497,6 @@ var $author$project$Main$update = F2(
 						model,
 						{visibleRows: newTableRows}),
 					$elm$core$Platform$Cmd$none);
-			case 'Reset':
-				return $author$project$Main$init(_Utils_Tuple0);
 			default:
 				var timenow = msg.a;
 				var td = A2(
@@ -7193,6 +7530,7 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 		}
 	});
+var $elm$html$Html$b = _VirtualDom_node('b');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7216,8 +7554,9 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
-var $author$project$Main$Reset = {$: 'Reset'};
 var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
@@ -7272,8 +7611,6 @@ var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$checkbox = F4(
 	function (title_, fvalue, handle, class_) {
@@ -8246,17 +8583,6 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$button,
 						_List_fromArray(
 							[
-								$elm$html$Html$Events$onClick($author$project$Main$Reset),
-								A2($elm$html$Html$Attributes$style, 'display', 'block')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Reset')
-							])),
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
 								$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
 								A2($elm$html$Html$Attributes$style, 'display', 'block')
 							]),
@@ -8326,17 +8652,6 @@ var $author$project$Main$variousViews = function (model) {
 							[
 								$elm$html$Html$text('I could not load ZIPs for some reason. '),
 								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$Reset),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Reset')
-									])),
-								A2(
 								$elm$html$Html$div,
 								_List_Nil,
 								_List_fromArray(
@@ -8351,17 +8666,6 @@ var $author$project$Main$variousViews = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$text('I could not load PDP for some reason. '),
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$Reset),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Reset')
-									])),
 								A2(
 								$elm$html$Html$button,
 								_List_fromArray(
@@ -8388,17 +8692,6 @@ var $author$project$Main$variousViews = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$text('I could not load Plan(s) for some reason. '),
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$Reset),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Reset')
-									])),
 								A2(
 								$elm$html$Html$button,
 								_List_fromArray(
@@ -8434,23 +8727,7 @@ var $author$project$Main$variousViews = function (model) {
 							])),
 						$author$project$Main$renderResults(model)
 					]));
-		case 'Valid':
-			return A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
-							])),
-						$author$project$Main$renderResults(model)
-					]));
 		case 'Loading':
-			var str = _v0.a;
 			return A2(
 				$elm$html$Html$div,
 				_List_Nil,
@@ -8463,10 +8740,23 @@ var $author$project$Main$variousViews = function (model) {
 							[
 								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
 							])),
-						$elm$html$Html$text('Loading ' + (str + '....'))
+						$elm$html$Html$text('Loading....')
+					]));
+		case 'Results':
+			return A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$author$project$Main$renderResults(model)
+							]))
 					]));
 		default:
-			var pd = _v0.a;
 			return A2(
 				$elm$html$Html$div,
 				_List_Nil,
@@ -8477,9 +8767,8 @@ var $author$project$Main$variousViews = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
-							])),
-						$author$project$Main$renderResults(model)
+								$elm$html$Html$text('This is where the output will be')
+							]))
 					]));
 	}
 };
@@ -8490,27 +8779,42 @@ var $elm$html$Html$Attributes$width = function (n) {
 		$elm$core$String$fromInt(n));
 };
 var $author$project$Main$view = function (model) {
-	return A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('container')
-			]),
-		_List_fromArray(
+	return {
+		body: _List_fromArray(
 			[
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$src('images/logo.png'),
-						$elm$html$Html$Attributes$height(100),
-						$elm$html$Html$Attributes$width(360)
+						$elm$html$Html$Attributes$class('container')
 					]),
-				_List_Nil),
-				$author$project$Main$variousViews(model)
-			]));
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$img,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$src('images/logo.png'),
+								$elm$html$Html$Attributes$height(100),
+								$elm$html$Html$Attributes$width(360)
+							]),
+						_List_Nil),
+						$elm$html$Html$text('the current URL is: '),
+						A2(
+						$elm$html$Html$b,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(
+								$elm$url$Url$toString(model.url))
+							])),
+						$author$project$Main$variousViews(model)
+					]))
+			]),
+		title: 'Enlightnu Quoting App'
+	};
 };
-var $author$project$Main$main = $elm$browser$Browser$element(
-	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
+var $author$project$Main$main = $elm$browser$Browser$application(
+	{init: $author$project$Main$init, onUrlChange: $author$project$Main$UrlChanged, onUrlRequest: $author$project$Main$LinkClicked, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));

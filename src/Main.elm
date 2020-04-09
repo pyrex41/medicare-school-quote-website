@@ -1,6 +1,10 @@
 module Main exposing (..)
 
 import Browser
+import Browser.Navigation as Nav
+import Url
+import Url.Builder
+import Url.Parser exposing (Parser, (</>), oneOf)
 import Html exposing (..)
 import Task exposing (Task)
 import Html.Attributes exposing (..)
@@ -15,13 +19,15 @@ import MyDate exposing (CustomDate, addMonth)
 
 -- MAIN
 
-
+main : Program () Model Msg
 main =
-  Browser.element
+  Browser.application
     { init = init
     , update = update
     , subscriptions = subscriptions
     , view = view
+    , onUrlChange = UrlChanged
+    , onUrlRequest = LinkClicked
     }
 
 
@@ -29,7 +35,9 @@ main =
 -- MODEL
 
 type alias Model =
-  { name : String
+  { key : Nav.Key
+  , url : Url.Url
+  , name : String
   , age :  ValidInt
   , zip : ValidInt
   , counties : List String
@@ -87,15 +95,19 @@ type alias TableRow =
 
 type ViewState
   = Failure Fail
-  | Loading String
+  | Loading
   | Ready
-  | Valid
-  | Success (List PlanQuote)
+  | Results
+  | Output
 
 
-init : () -> (Model, Cmd Msg)
-init _ =
-    ( { name = ""
+
+
+init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg)
+init flags url key =
+    ( { key = key
+      , url = url
+      , name = ""
       , age = ValidInt Nothing False "Please enter an age"
       , zip = ValidInt Nothing False "Please enter a 5-digit ZIP"
       , counties = [""]
@@ -125,6 +137,23 @@ init _ =
     )
 
 
+-- URL ROUTING
+
+routeParser : Parser (ViewState -> a) a
+routeParser =
+  Url.Parser.oneOf
+    [ Url.Parser.map Ready    (Url.Parser.s "")
+    , Url.Parser.map Ready    (Url.Parser.s "home")
+    , Url.Parser.map Results  (Url.Parser.s "results")
+    , Url.Parser.map Output   (Url.Parser.s "output")
+    ]
+
+urlToRoute : Url.Url -> ViewState
+urlToRoute url =
+  url
+    |> Url.Parser.parse routeParser
+    |> Maybe.withDefault Ready
+
 
 -- UPDATE
 
@@ -149,13 +178,14 @@ type Msg
   | ZipResponse (Result Http.Error (List String))
   | PlanResponse (Result Http.Error (List PlanQuote))
   | PDPResponse (Result Http.Error (List PdpRecord))
-  | Reset -- is this going to return a string?
   | ReceiveDate CustomDate
   | SetTableState Table.State
   | ToggleSelected Int
   | SelectAllTF Bool
   | HideSelected
   | GotTime Time.Posix
+  | LinkClicked Browser.UrlRequest
+  | UrlChanged Url.Url
 
 type Fail
   = Counties
@@ -166,6 +196,18 @@ type Fail
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
+    LinkClicked urlRequest ->
+      case urlRequest of
+        Browser.Internal url ->
+          ( model, Nav.pushUrl model.key (Url.toString url) )
+        Browser.External href ->
+          ( model, Nav.load href)
+
+    UrlChanged url ->
+      ( { model | state = urlToRoute url }
+      , Cmd.none
+      )
+
     SetTableState newState ->
       ( { model | tableState = newState }
       , Cmd.none
@@ -186,9 +228,9 @@ update msg model =
         vModel = validateModel model
 
       in
-        if vModel.state == Valid then
+        if vModel.valid then
           ( { vModel | response = Nothing
-                     , state = Loading "Plan(s)"
+                     , state = Loading
             }
           , getPlans vModel
           )
@@ -198,7 +240,7 @@ update msg model =
           )
 
     RequestPDP ->
-      ( { model | state = Loading "PDP" }, getPDP model )
+      ( { model | state = Loading }, getPDP model )
 
     SetName str ->
         ( validateModel { model | name = str }
@@ -359,13 +401,19 @@ update msg model =
         Ok response  ->
           let
             newRows = List.map planToRow response
+            nn = Url.fromString <| ( Url.toString model.url ) ++ "/results"
+            nurl = case nn of
+              Just n ->
+                n
+              Nothing ->
+                model.url
           in
-            ( { model | state = Success response
-                      , response = Just response
+            ( { model | response = Just response
                       , tableRows = Just newRows
                       , visibleRows = Just newRows
+                      , url = nurl
               }
-            , Cmd.none
+            , Nav.pushUrl model.key (Url.toString nurl)
             )
         Err error ->
           ( { model | state = Failure Plan
@@ -395,9 +443,6 @@ update msg model =
           }
         , Cmd.none
         )
-
-    Reset ->
-      init ()
 
     GotTime timenow ->
       let
@@ -451,16 +496,23 @@ subscriptions model =
 -- VIEW
 
 
-view : Model -> Html Msg
+view : Model -> Browser.Document Msg
 view model =
-  div [ class "container"]
-    [ img [ src "images/logo.png"
-          , height 100
-          , width 360
-          ]
-          [  ]
-    , variousViews model
-    ]
+  { title = "Enlightnu Quoting App"
+  , body =
+      [ div [ class "container"]
+        [ img [ src "images/logo.png"
+              , height 100
+              , width 360
+              ]
+              [  ]
+        , text "the current URL is: "
+        , b [] [ text (Url.toString model.url) ]
+        , variousViews model
+        ]
+      ]
+  }
+
 
 -- v---v FOR TESTING
 
@@ -495,20 +547,17 @@ variousViews model =
         Counties ->
           div []
             [ text "I could not load ZIPs for some reason. "
-            , button [ onClick Reset , style "display" "block" ] [ text "Reset" ]
             , div [] [ text model.recentError]
             ]
         PDP ->
           div []
             [ text "I could not load PDP for some reason. "
-            , button [ onClick Reset , style "display" "block" ] [ text "Reset" ]
             , button [ onClick RequestPDP, style "display" "block" ] [ text "Resubmit PDP"]
             , div [] [ text model.recentError]
             ]
         Plan ->
           div []
             [ text "I could not load Plan(s) for some reason. "
-            , button [ onClick Reset , style "display" "block" ] [ text "Reset" ]
             , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit Plan Form"]
             , div [] [ text model.recentError]
             ]
@@ -520,25 +569,23 @@ variousViews model =
         , renderResults model
         ]
 
-    Valid ->
-      div [ ]
-        [ div []
-          [ renderForm model SubmitForm "Submit" ]
-        , renderResults model
-        ]
-
-    Loading str ->
+    Loading ->
       div [ ]
           [ div []
             [ renderForm model SubmitForm "Submit" ]
-          , text <| "Loading " ++ str ++ "...."
+          , text <| "Loading...."
           ]
 
-    Success pd ->
+    Results ->
       div [ ]
         [ div []
-          [ renderForm model SubmitForm "Submit" ]
-        , renderResults model
+          [ renderResults model ]
+        ]
+
+    Output ->
+      div [ ]
+          [ div []
+            [ text <| "This is where the output will be" ]
           ]
 
 
@@ -566,14 +613,7 @@ isValid model =
 
 validateModel : Model -> Model
 validateModel model =
-  case (isValid model) of
-    True ->
-      { model | valid = True
-              , state = Valid
-      }
-    False ->
-      { model | valid = False
-      }
+  { model | valid = isValid model }
 
 
 
@@ -652,8 +692,7 @@ renderResults model =
       div []
           ( List.map
             (\a -> ( div [ class "row" ] [a] ) )
-            [ button [ onClick Reset, style "display" "block" ] [ text "Reset" ]
-            , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
+            [   button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
             , pdpSelectBox model.pdpList (\a -> SelectPDP a)
             , p [ class "six columns"] [ text " We seem to have data :" ]
             , button [ onClick HideSelected, style "display" "block" ] [ text "Remove Selected"]
@@ -927,7 +966,7 @@ checkAddPlan b plan str =
 
 getPlans : Model -> Cmd Msg
 getPlans model =
-  if model.state == Valid then
+  if model.valid then
     let
       url1 =  "https://enlightnu-quote-api.herokuapp.com/api/plans?"
       url2 = url1
