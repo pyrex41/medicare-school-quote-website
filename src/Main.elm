@@ -142,8 +142,7 @@ init flags url key =
 routeParser : Parser (ViewState -> a) a
 routeParser =
   Url.Parser.oneOf
-    [ Url.Parser.map Ready    (Url.Parser.s "")
-    , Url.Parser.map Ready    (Url.Parser.s "home")
+    [ Url.Parser.map Ready    (Url.Parser.s "home")
     , Url.Parser.map Results  (Url.Parser.s "results")
     , Url.Parser.map Output   (Url.Parser.s "output")
     ]
@@ -335,7 +334,9 @@ update msg model =
             , Cmd.none
             )
         Nothing ->
-          ( model, Cmd.none )
+          ( { model | selectButton = False }
+          , Cmd.none
+          )
 
     HideSelected ->
       let
@@ -567,7 +568,6 @@ variousViews model =
       div [ ]
         [ div []
           [ renderForm model SubmitForm "Submit" ]
-        , renderResults model
         ]
 
     Loading ->

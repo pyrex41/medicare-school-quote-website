@@ -7051,10 +7051,6 @@ var $author$project$Main$routeParser = $elm$url$Url$Parser$oneOf(
 			A2(
 			$elm$url$Url$Parser$map,
 			$author$project$Main$Ready,
-			$elm$url$Url$Parser$s('')),
-			A2(
-			$elm$url$Url$Parser$map,
-			$author$project$Main$Ready,
 			$elm$url$Url$Parser$s('home')),
 			A2(
 			$elm$url$Url$Parser$map,
@@ -7322,7 +7318,11 @@ var $author$project$Main$update = F2(
 							{selectButton: false, visibleRows: newTableRows}),
 						$elm$core$Platform$Cmd$none);
 				} else {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{selectButton: false}),
+						$elm$core$Platform$Cmd$none);
 				}
 			case 'HideSelected':
 				var unselectRows = A2(
@@ -8725,8 +8725,7 @@ var $author$project$Main$variousViews = function (model) {
 						_List_fromArray(
 							[
 								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
-							])),
-						$author$project$Main$renderResults(model)
+							]))
 					]));
 		case 'Loading':
 			return A2(
