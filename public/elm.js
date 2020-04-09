@@ -5470,6 +5470,7 @@ var $author$project$Main$Failure = function (a) {
 var $author$project$Main$Loading = {$: 'Loading'};
 var $author$project$Main$PDP = {$: 'PDP'};
 var $author$project$Main$Plan = {$: 'Plan'};
+var $author$project$Main$Results = {$: 'Results'};
 var $elm$time$Time$Apr = {$: 'Apr'};
 var $elm$time$Time$Aug = {$: 'Aug'};
 var $elm$time$Time$Dec = {$: 'Dec'};
@@ -6955,7 +6956,6 @@ var $elm$url$Url$Parser$parse = F2(
 					$elm$core$Basics$identity)));
 	});
 var $author$project$Main$Output = {$: 'Output'};
-var $author$project$Main$Results = {$: 'Results'};
 var $elm$url$Url$Parser$Parser = function (a) {
 	return {$: 'Parser', a: a};
 };
@@ -7426,7 +7426,7 @@ var $author$project$Main$update = F2(
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
 					var nn = $elm$url$Url$fromString(
-						$elm$url$Url$toString(model.url) + '/results');
+						$elm$url$Url$toString(model.url) + 'results');
 					var nurl = function () {
 						if (nn.$ === 'Just') {
 							var n = nn.a;
@@ -7441,6 +7441,7 @@ var $author$project$Main$update = F2(
 							model,
 							{
 								response: $elm$core$Maybe$Just(response),
+								state: $author$project$Main$Results,
 								tableRows: $elm$core$Maybe$Just(newRows),
 								url: nurl,
 								visibleRows: $elm$core$Maybe$Just(newRows)

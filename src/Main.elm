@@ -401,7 +401,7 @@ update msg model =
         Ok response  ->
           let
             newRows = List.map planToRow response
-            nn = Url.fromString <| ( Url.toString model.url ) ++ "/results"
+            nn = Url.fromString <| ( Url.toString model.url ) ++ "results"
             nurl = case nn of
               Just n ->
                 n
@@ -412,6 +412,7 @@ update msg model =
                       , tableRows = Just newRows
                       , visibleRows = Just newRows
                       , url = nurl
+                      , state = Results
               }
             , Nav.pushUrl model.key (Url.toString nurl)
             )
