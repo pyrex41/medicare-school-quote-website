@@ -198,12 +198,8 @@ update msg model =
   case msg of
     ShowOutput ->
       let
-        nn = Url.fromString <| ( Url.toString model.url ) ++ "output"
-        nurl = case nn of
-          Just n ->
-            n
-          Nothing ->
-            model.url
+        curl = model.url
+        nurl = { curl | path = "/output" }
       in
         ( { model | url = nurl
                   , state = Output }
@@ -416,12 +412,8 @@ update msg model =
         Ok response  ->
           let
             newRows = List.map planToRow response
-            nn = Url.fromString <| ( Url.toString model.url ) ++ "results"
-            nurl = case nn of
-              Just n ->
-                n
-              Nothing ->
-                model.url
+            curl = model.url
+            nurl = { curl | path = "/results" }
 
           in
             ( { model | response = Just response
@@ -434,12 +426,8 @@ update msg model =
             )
         Err error ->
           let
-            en = Url.fromString <| ( Url.toString model.url ) ++ "error"
-            eurl = case en of
-              Just n ->
-                n
-              Nothing ->
-                model.url
+            curl = model.url
+            eurl = { curl | path = "/error" }
           in
             ( { model | state = Failure Plan
                       , recentError = errorToString error
@@ -727,9 +715,17 @@ renderResults model =
                 0
             ]
         , div [ class "row" ]
-            [ selectTFButton model.selectButton
-            , button [ onClick HideSelected, style "display" "block", class "three columns" ] [ text "Remove Selected"]
-            , button [ onClick ShowOutput, style "block" "display", class "button-primary" ] [ text "Show Output" ]
+            [ div [ class "three columns" ] [ selectTFButton model.selectButton ]
+            , div [ class "three columns" ]
+                [ button
+                  [ onClick HideSelected, style "display" "block", class "three columns" ]
+                  [ text "Remove Selected"]
+                ]
+            , div [ class "three columns" ]
+                [ button
+                  [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+                  [ text "Show Output" ]
+                ]
             ]
         , div [] [ Table.view config model.tableState tr ]
         , div [ class "row" ] [ button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ] ]
@@ -789,9 +785,9 @@ renderList lst =
 selectTFButton : Bool -> Html Msg
 selectTFButton bool =
   if bool then
-    button [ onClick (SelectAllTF True), style "display" "block", class "three columns" ] [ text "Select All"]
+    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Select All"]
   else
-    button [ onClick (SelectAllTF False), style "display" "block", class "three columns" ] [ text "UnSelect All"]
+    button [ onClick (SelectAllTF False), style "display" "block" ] [ text "UnSelect All"]
 
 
 selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg

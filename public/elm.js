@@ -7110,16 +7110,10 @@ var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'ShowOutput':
-				var nn = $elm$url$Url$fromString(
-					$elm$url$Url$toString(model.url) + 'output');
-				var nurl = function () {
-					if (nn.$ === 'Just') {
-						var n = nn.a;
-						return n;
-					} else {
-						return model.url;
-					}
-				}();
+				var curl = model.url;
+				var nurl = _Utils_update(
+					curl,
+					{path: '/output'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7199,9 +7193,9 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SetAge':
 				var str = msg.a;
-				var _v3 = $elm$core$String$toInt(str);
-				if (_v3.$ === 'Just') {
-					var i = _v3.a;
+				var _v2 = $elm$core$String$toInt(str);
+				if (_v2.$ === 'Just') {
+					var i = _v2.a;
 					var minAge = 65;
 					var maxAge = 120;
 					var errorMessage = (_Utils_cmp(i, minAge) < 1) ? 'Age must be 65 or older' : ((_Utils_cmp(i, maxAge) > 0) ? 'Seems too old; check age' : '');
@@ -7230,9 +7224,9 @@ var $author$project$Main$update = F2(
 				}
 			case 'SetZip':
 				var str = msg.a;
-				var _v4 = $elm$core$String$toInt(str);
-				if (_v4.$ === 'Just') {
-					var i = _v4.a;
+				var _v3 = $elm$core$String$toInt(str);
+				if (_v3.$ === 'Just') {
+					var i = _v3.a;
 					if ($elm$core$String$length(str) === 5) {
 						var newModel = $author$project$Main$validateModel(
 							_Utils_update(
@@ -7310,13 +7304,13 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPreset':
 				var str = msg.a;
-				var _v5 = model.tableRows;
-				if (_v5.$ === 'Just') {
-					var tr = _v5.a;
+				var _v4 = model.tableRows;
+				if (_v4.$ === 'Just') {
+					var tr = _v4.a;
 					var newTableRows = function () {
-						var _v6 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
-						if (_v6.$ === 'Just') {
-							var ls = _v6.a;
+						var _v5 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
+						if (_v5.$ === 'Just') {
+							var ls = _v5.a;
 							return $elm$core$Maybe$Just(
 								A2(
 									$elm$core$List$map,
@@ -7444,17 +7438,11 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
-					var nn = $elm$url$Url$fromString(
-						$elm$url$Url$toString(model.url) + 'results');
-					var nurl = function () {
-						if (nn.$ === 'Just') {
-							var n = nn.a;
-							return n;
-						} else {
-							return model.url;
-						}
-					}();
 					var newRows = A2($elm$core$List$map, $author$project$Main$planToRow, response);
+					var curl = model.url;
+					var nurl = _Utils_update(
+						curl,
+						{path: '/results'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7471,16 +7459,10 @@ var $author$project$Main$update = F2(
 							$elm$url$Url$toString(nurl)));
 				} else {
 					var error = rmsg.a;
-					var en = $elm$url$Url$fromString(
-						$elm$url$Url$toString(model.url) + 'error');
-					var eurl = function () {
-						if (en.$ === 'Just') {
-							var n = en.a;
-							return n;
-						} else {
-							return model.url;
-						}
-					}();
+					var curl = model.url;
+					var eurl = _Utils_update(
+						curl,
+						{path: '/error'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -8355,8 +8337,7 @@ var $author$project$Main$selectTFButton = function (bool) {
 			[
 				$elm$html$Html$Events$onClick(
 				$author$project$Main$SelectAllTF(true)),
-				A2($elm$html$Html$Attributes$style, 'display', 'block'),
-				$elm$html$Html$Attributes$class('three columns')
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
 			[
@@ -8367,8 +8348,7 @@ var $author$project$Main$selectTFButton = function (bool) {
 			[
 				$elm$html$Html$Events$onClick(
 				$author$project$Main$SelectAllTF(false)),
-				A2($elm$html$Html$Attributes$style, 'display', 'block'),
-				$elm$html$Html$Attributes$class('three columns')
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
 			[
@@ -8662,30 +8642,57 @@ var $author$project$Main$renderResults = function (model) {
 						]),
 					_List_fromArray(
 						[
-							$author$project$Main$selectTFButton(model.selectButton),
 							A2(
-							$elm$html$Html$button,
+							$elm$html$Html$div,
 							_List_fromArray(
 								[
-									$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
-									A2($elm$html$Html$Attributes$style, 'display', 'block'),
 									$elm$html$Html$Attributes$class('three columns')
 								]),
 							_List_fromArray(
 								[
-									$elm$html$Html$text('Remove Selected')
+									$author$project$Main$selectTFButton(model.selectButton)
 								])),
 							A2(
-							$elm$html$Html$button,
+							$elm$html$Html$div,
 							_List_fromArray(
 								[
-									$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-									A2($elm$html$Html$Attributes$style, 'block', 'display'),
-									$elm$html$Html$Attributes$class('button-primary')
+									$elm$html$Html$Attributes$class('three columns')
 								]),
 							_List_fromArray(
 								[
-									$elm$html$Html$text('Show Output')
+									A2(
+									$elm$html$Html$button,
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
+											A2($elm$html$Html$Attributes$style, 'display', 'block'),
+											$elm$html$Html$Attributes$class('three columns')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Remove Selected')
+										]))
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('three columns')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$button,
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+											A2($elm$html$Html$Attributes$style, 'block', 'display'),
+											$elm$html$Html$Attributes$class('button-primary')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Show Output')
+										]))
 								]))
 						])),
 					A2(
