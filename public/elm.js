@@ -7452,14 +7452,28 @@ var $author$project$Main$update = F2(
 							$elm$url$Url$toString(nurl)));
 				} else {
 					var error = rmsg.a;
+					var en = $elm$url$Url$fromString(
+						$elm$url$Url$toString(model.url) + 'error');
+					var eurl = function () {
+						if (en.$ === 'Just') {
+							var n = en.a;
+							return n;
+						} else {
+							return model.url;
+						}
+					}();
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{
 								recentError: $author$project$Main$errorToString(error),
-								state: $author$project$Main$Failure($author$project$Main$Plan)
+								state: $author$project$Main$Failure($author$project$Main$Plan),
+								url: eurl
 							}),
-						$elm$core$Platform$Cmd$none);
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.key,
+							$elm$url$Url$toString(eurl)));
 				}
 			case 'PDPResponse':
 				var rmsg = msg.a;

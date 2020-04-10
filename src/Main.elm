@@ -408,6 +408,7 @@ update msg model =
                 n
               Nothing ->
                 model.url
+
           in
             ( { model | response = Just response
                       , tableRows = Just newRows
@@ -418,10 +419,20 @@ update msg model =
             , Nav.pushUrl model.key (Url.toString nurl)
             )
         Err error ->
-          ( { model | state = Failure Plan
-                    , recentError = errorToString error
-            }
-          , Cmd.none )
+          let
+            en = Url.fromString <| ( Url.toString model.url ) ++ "error"
+            eurl = case en of
+              Just n ->
+                n
+              Nothing ->
+                model.url
+          in
+            ( { model | state = Failure Plan
+                      , recentError = errorToString error
+                      , url = eurl
+              }
+            , Nav.pushUrl model.key (Url.toString eurl)
+            )
 
     PDPResponse rmsg ->
       case rmsg of
