@@ -691,22 +691,24 @@ renderResults model =
   case model.visibleRows of
     Just tr ->
       div []
-          ( List.map
-            (\a -> ( div [ class "row" ] [a] ) )
-            [   button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
-            , pdpSelectBox model.pdpList (\a -> SelectPDP a)
-            , p [ class "six columns"] [ text " We seem to have data :" ]
-            , button [ onClick HideSelected, style "display" "block" ] [ text "Remove Selected"]
-            , selectTFButton model.selectButton
-            , selectbox
-                  "Preset"
-                  [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
-                  SelectPreset
-                  "three columns"
-                  0
-            , Table.view config model.tableState tr
+        [ div [ class "row" ]
+            [ button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ] ]
+        , div [ class "row" ] [ pdpSelectBox model.pdpList (\a -> SelectPDP a) ]
+        , div [ class "row" ]
+            [ selectbox
+                "Preset"
+                [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
+                SelectPreset
+                "three columns"
+                0
+            , p [] [ text <| safeString model.pdpRate ]
             ]
-          )
+        , div [ class "row" ]
+            [ button [ onClick HideSelected, style "display" "block", class "three columns" ] [ text "Remove Selected"]
+            , selectTFButton model.selectButton
+            ]
+        , div [] [ Table.view config model.tableState tr ]
+        ]
     Nothing ->
       div []
           [ text "" ]
@@ -762,9 +764,9 @@ renderList lst =
 selectTFButton : Bool -> Html Msg
 selectTFButton bool =
   if bool then
-    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Select All"]
+    button [ onClick (SelectAllTF True), style "display" "block", class "three columns" ] [ text "Select All"]
   else
-    button [ onClick (SelectAllTF False), style "display" "block" ] [ text "UnSelect All"]
+    button [ onClick (SelectAllTF False), style "display" "block", class "three columns" ] [ text "UnSelect All"]
 
 
 selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg

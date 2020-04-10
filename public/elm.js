@@ -8320,7 +8320,8 @@ var $author$project$Main$selectTFButton = function (bool) {
 			[
 				$elm$html$Html$Events$onClick(
 				$author$project$Main$SelectAllTF(true)),
-				A2($elm$html$Html$Attributes$style, 'display', 'block')
+				A2($elm$html$Html$Attributes$style, 'display', 'block'),
+				$elm$html$Html$Attributes$class('three columns')
 			]),
 		_List_fromArray(
 			[
@@ -8331,7 +8332,8 @@ var $author$project$Main$selectTFButton = function (bool) {
 			[
 				$elm$html$Html$Events$onClick(
 				$author$project$Main$SelectAllTF(false)),
-				A2($elm$html$Html$Attributes$style, 'display', 'block')
+				A2($elm$html$Html$Attributes$style, 'display', 'block'),
+				$elm$html$Html$Attributes$class('three columns')
 			]),
 		_List_fromArray(
 			[
@@ -8566,69 +8568,98 @@ var $author$project$Main$renderResults = function (model) {
 		return A2(
 			$elm$html$Html$div,
 			_List_Nil,
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[a]));
-				},
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
-								A2($elm$html$Html$Attributes$style, 'display', 'block')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Resubmit')
-							])),
-						A2(
-						$author$project$Main$pdpSelectBox,
-						model.pdpList,
-						function (a) {
-							return $author$project$Main$SelectPDP(a);
-						}),
-						A2(
-						$elm$html$Html$p,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('six columns')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text(' We seem to have data :')
-							])),
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
-								A2($elm$html$Html$Attributes$style, 'display', 'block')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Remove Selected')
-							])),
-						$author$project$Main$selectTFButton(model.selectButton),
-						A5(
-						$author$project$Main$selectbox,
-						'Preset',
-						_List_fromArray(
-							['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
-						$author$project$Main$SelectPreset,
-						'three columns',
-						0),
-						A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, tr)
-					])));
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
+									A2($elm$html$Html$Attributes$style, 'display', 'block')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Resubmit')
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$author$project$Main$pdpSelectBox,
+							model.pdpList,
+							function (a) {
+								return $author$project$Main$SelectPDP(a);
+							})
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A5(
+							$author$project$Main$selectbox,
+							'Preset',
+							_List_fromArray(
+								['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
+							$author$project$Main$SelectPreset,
+							'three columns',
+							0),
+							A2(
+							$elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text(
+									$author$project$Main$safeString(model.pdpRate))
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
+									A2($elm$html$Html$Attributes$style, 'display', 'block'),
+									$elm$html$Html$Attributes$class('three columns')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Remove Selected')
+								])),
+							$author$project$Main$selectTFButton(model.selectButton)
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, tr)
+						]))
+				]));
 	} else {
 		return A2(
 			$elm$html$Html$div,
