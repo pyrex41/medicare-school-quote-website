@@ -521,8 +521,6 @@ view model =
               , width 360
               ]
               [  ]
-        , text "the current URL is: "
-        , b [] [ text (Url.toString model.url) ]
         , variousViews model
         ]
       ]
@@ -718,7 +716,7 @@ renderResults model =
             [ div [ class "three columns" ] [ selectTFButton model.selectButton ]
             , div [ class "three columns" ]
                 [ button
-                  [ onClick HideSelected, style "display" "block", class "three columns" ]
+                  [ onClick HideSelected, style "display" "block" ]
                   [ text "Remove Selected"]
                 ]
             , div [ class "three columns" ]

@@ -7546,7 +7546,6 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$html$Html$b = _VirtualDom_node('b');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7570,8 +7569,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
 var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -7627,6 +7624,8 @@ var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$checkbox = F4(
 	function (title_, fvalue, handle, class_) {
@@ -8665,8 +8664,7 @@ var $author$project$Main$renderResults = function (model) {
 									_List_fromArray(
 										[
 											$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
-											A2($elm$html$Html$Attributes$style, 'display', 'block'),
-											$elm$html$Html$Attributes$class('three columns')
+											A2($elm$html$Html$Attributes$style, 'display', 'block')
 										]),
 									_List_fromArray(
 										[
@@ -8893,15 +8891,6 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$Attributes$width(360)
 							]),
 						_List_Nil),
-						$elm$html$Html$text('the current URL is: '),
-						A2(
-						$elm$html$Html$b,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(
-								$elm$url$Url$toString(model.url))
-							])),
 						$author$project$Main$variousViews(model)
 					]))
 			]),
