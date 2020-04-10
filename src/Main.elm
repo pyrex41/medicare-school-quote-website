@@ -185,6 +185,7 @@ type Msg
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
+  | ShowOutput
 
 type Fail
   = Counties
@@ -195,6 +196,19 @@ type Fail
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
+    ShowOutput ->
+      let
+        nn = Url.fromString <| ( Url.toString model.url ) ++ "output"
+        nurl = case nn of
+          Just n ->
+            n
+          Nothing ->
+            model.url
+      in
+        ( { model | url = nurl
+                  , state = Output }
+        , Nav.pushUrl model.key (Url.toString nurl))
+
     LinkClicked urlRequest ->
       case urlRequest of
         Browser.Internal url ->
@@ -702,9 +716,7 @@ renderResults model =
   case model.visibleRows of
     Just tr ->
       div []
-        [ div [ class "row" ]
-            [ button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ] ]
-        , div [ class "row" ] [ pdpSelectBox model.pdpList (\a -> SelectPDP a) ]
+        [ div [ class "row" ] [ pdpSelectBox model.pdpList (\a -> SelectPDP a) ]
         , div [ class "row" ] [ h4 [] [ text <| safeString model.pdpRate ] ]
         , div [ class "row" ]
             [ selectbox
@@ -715,10 +727,12 @@ renderResults model =
                 0
             ]
         , div [ class "row" ]
-            [ button [ onClick HideSelected, style "display" "block", class "three columns" ] [ text "Remove Selected"]
-            , selectTFButton model.selectButton
+            [ selectTFButton model.selectButton
+            , button [ onClick HideSelected, style "display" "block", class "three columns" ] [ text "Remove Selected"]
+            , button [ onClick ShowOutput, style "block" "display", class "button-primary" ] [ text "Show Output" ]
             ]
         , div [] [ Table.view config model.tableState tr ]
+        , div [ class "row" ] [ button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ] ]
         ]
     Nothing ->
       div []

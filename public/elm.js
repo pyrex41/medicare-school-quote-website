@@ -5468,6 +5468,7 @@ var $author$project$Main$Failure = function (a) {
 	return {$: 'Failure', a: a};
 };
 var $author$project$Main$Loading = {$: 'Loading'};
+var $author$project$Main$Output = {$: 'Output'};
 var $author$project$Main$PDP = {$: 'PDP'};
 var $author$project$Main$Plan = {$: 'Plan'};
 var $author$project$Main$Results = {$: 'Results'};
@@ -6955,7 +6956,6 @@ var $elm$url$Url$Parser$parse = F2(
 					url.fragment,
 					$elm$core$Basics$identity)));
 	});
-var $author$project$Main$Output = {$: 'Output'};
 var $elm$url$Url$Parser$Parser = function (a) {
 	return {$: 'Parser', a: a};
 };
@@ -7109,6 +7109,25 @@ var $author$project$Main$validateModel = function (model) {
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
+			case 'ShowOutput':
+				var nn = $elm$url$Url$fromString(
+					$elm$url$Url$toString(model.url) + 'output');
+				var nurl = function () {
+					if (nn.$ === 'Just') {
+						var n = nn.a;
+						return n;
+					} else {
+						return model.url;
+					}
+				}();
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{state: $author$project$Main$Output, url: nurl}),
+					A2(
+						$elm$browser$Browser$Navigation$pushUrl,
+						model.key,
+						$elm$url$Url$toString(nurl)));
 			case 'LinkClicked':
 				var urlRequest = msg.a;
 				if (urlRequest.$ === 'Internal') {
@@ -7180,9 +7199,9 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SetAge':
 				var str = msg.a;
-				var _v2 = $elm$core$String$toInt(str);
-				if (_v2.$ === 'Just') {
-					var i = _v2.a;
+				var _v3 = $elm$core$String$toInt(str);
+				if (_v3.$ === 'Just') {
+					var i = _v3.a;
 					var minAge = 65;
 					var maxAge = 120;
 					var errorMessage = (_Utils_cmp(i, minAge) < 1) ? 'Age must be 65 or older' : ((_Utils_cmp(i, maxAge) > 0) ? 'Seems too old; check age' : '');
@@ -7211,9 +7230,9 @@ var $author$project$Main$update = F2(
 				}
 			case 'SetZip':
 				var str = msg.a;
-				var _v3 = $elm$core$String$toInt(str);
-				if (_v3.$ === 'Just') {
-					var i = _v3.a;
+				var _v4 = $elm$core$String$toInt(str);
+				if (_v4.$ === 'Just') {
+					var i = _v4.a;
 					if ($elm$core$String$length(str) === 5) {
 						var newModel = $author$project$Main$validateModel(
 							_Utils_update(
@@ -7291,13 +7310,13 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPreset':
 				var str = msg.a;
-				var _v4 = model.tableRows;
-				if (_v4.$ === 'Just') {
-					var tr = _v4.a;
+				var _v5 = model.tableRows;
+				if (_v5.$ === 'Just') {
+					var tr = _v5.a;
 					var newTableRows = function () {
-						var _v5 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
-						if (_v5.$ === 'Just') {
-							var ls = _v5.a;
+						var _v6 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
+						if (_v6.$ === 'Just') {
+							var ls = _v6.a;
 							return $elm$core$Maybe$Just(
 								A2(
 									$elm$core$List$map,
@@ -8007,6 +8026,7 @@ var $author$project$Main$SelectPDP = function (a) {
 var $author$project$Main$SelectPreset = function (a) {
 	return {$: 'SelectPreset', a: a};
 };
+var $author$project$Main$ShowOutput = {$: 'ShowOutput'};
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 'SetTableState', a: a};
 };
@@ -8594,26 +8614,6 @@ var $author$project$Main$renderResults = function (model) {
 					_List_fromArray(
 						[
 							A2(
-							$elm$html$Html$button,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
-									A2($elm$html$Html$Attributes$style, 'display', 'block')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Resubmit')
-								]))
-						])),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('row')
-						]),
-					_List_fromArray(
-						[
-							A2(
 							$author$project$Main$pdpSelectBox,
 							model.pdpList,
 							function (a) {
@@ -8662,6 +8662,7 @@ var $author$project$Main$renderResults = function (model) {
 						]),
 					_List_fromArray(
 						[
+							$author$project$Main$selectTFButton(model.selectButton),
 							A2(
 							$elm$html$Html$button,
 							_List_fromArray(
@@ -8674,7 +8675,18 @@ var $author$project$Main$renderResults = function (model) {
 								[
 									$elm$html$Html$text('Remove Selected')
 								])),
-							$author$project$Main$selectTFButton(model.selectButton)
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+									A2($elm$html$Html$Attributes$style, 'block', 'display'),
+									$elm$html$Html$Attributes$class('button-primary')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Show Output')
+								]))
 						])),
 					A2(
 					$elm$html$Html$div,
@@ -8682,6 +8694,26 @@ var $author$project$Main$renderResults = function (model) {
 					_List_fromArray(
 						[
 							A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, tr)
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
+									A2($elm$html$Html$Attributes$style, 'display', 'block')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Resubmit')
+								]))
 						]))
 				]));
 	} else {
