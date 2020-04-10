@@ -705,6 +705,7 @@ renderResults model =
         [ div [ class "row" ]
             [ button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ] ]
         , div [ class "row" ] [ pdpSelectBox model.pdpList (\a -> SelectPDP a) ]
+        , div [ class "row" ] [ h4 [] [ text <| safeString model.pdpRate ] ]
         , div [ class "row" ]
             [ selectbox
                 "Preset"
@@ -712,7 +713,6 @@ renderResults model =
                 SelectPreset
                 "three columns"
                 0
-            , p [] [ text <| safeString model.pdpRate ]
             ]
         , div [ class "row" ]
             [ button [ onClick HideSelected, style "display" "block", class "three columns" ] [ text "Remove Selected"]

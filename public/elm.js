@@ -8249,6 +8249,7 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 		},
 		toMsg: $author$project$Main$SetTableState
 	});
+var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = function (pr) {
 	return A2(
@@ -8627,6 +8628,23 @@ var $author$project$Main$renderResults = function (model) {
 						]),
 					_List_fromArray(
 						[
+							A2(
+							$elm$html$Html$h4,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text(
+									$author$project$Main$safeString(model.pdpRate))
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
 							A5(
 							$author$project$Main$selectbox,
 							'Preset',
@@ -8634,15 +8652,7 @@ var $author$project$Main$renderResults = function (model) {
 								['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
 							$author$project$Main$SelectPreset,
 							'three columns',
-							0),
-							A2(
-							$elm$html$Html$p,
-							_List_Nil,
-							_List_fromArray(
-								[
-									$elm$html$Html$text(
-									$author$project$Main$safeString(model.pdpRate))
-								]))
+							0)
 						])),
 					A2(
 					$elm$html$Html$div,
