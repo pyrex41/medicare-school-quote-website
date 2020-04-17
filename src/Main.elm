@@ -744,7 +744,7 @@ renderOutput model =
   case model.visibleRows of
     Just vr ->
       Element.layout
-          [ Background.color (rgba 0 0 0 1)
+          [ Background.color (rgba 360 100 100 1)
             , Font.color (rgba 34 34 34 1)
           ]
             --, Font.italic

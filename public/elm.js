@@ -14025,7 +14025,7 @@ var $author$project$Main$renderOutput = function (model) {
 			_List_fromArray(
 				[
 					$mdgriffith$elm_ui$Element$Background$color(
-					A4($mdgriffith$elm_ui$Element$rgba, 0, 0, 0, 1)),
+					A4($mdgriffith$elm_ui$Element$rgba, 360, 100, 100, 1)),
 					$mdgriffith$elm_ui$Element$Font$color(
 					A4($mdgriffith$elm_ui$Element$rgba, 34, 34, 34, 1))
 				]),
