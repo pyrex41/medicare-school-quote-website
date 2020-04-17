@@ -744,9 +744,7 @@ renderOutput model =
   case model.visibleRows of
     Just vr ->
       Element.layout
-          [ Background.color (rgba 360 100 100 1)
-            , Font.color (rgba 34 34 34 1)
-          ]
+          []
             --, Font.italic
             --, Font.size 32
             --, Font.family
@@ -790,6 +788,7 @@ formatColumn pdp partb ttr =
                   Element.el
                     [ Background.color (rgba 240 240 240 1)
                     , Border.color (rgba 240 240 240 1)
+                    , Font.color (rgba 34 34 34 1)
                     ]
                     (Element.text tx)
               )

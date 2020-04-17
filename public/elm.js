@@ -8079,17 +8079,6 @@ var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
 			'background-color',
 			clr));
 };
-var $mdgriffith$elm_ui$Internal$Flag$fontColor = $mdgriffith$elm_ui$Internal$Flag$flag(14);
-var $mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$fontColor,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Colored,
-			'fc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(fontColor),
-			'color',
-			fontColor));
-};
 var $mdgriffith$elm_ui$Internal$Flag$borderColor = $mdgriffith$elm_ui$Internal$Flag$flag(28);
 var $mdgriffith$elm_ui$Element$Border$color = function (clr) {
 	return A2(
@@ -8100,6 +8089,17 @@ var $mdgriffith$elm_ui$Element$Border$color = function (clr) {
 			'bc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
 			'border-color',
 			clr));
+};
+var $mdgriffith$elm_ui$Internal$Flag$fontColor = $mdgriffith$elm_ui$Internal$Flag$flag(14);
+var $mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$fontColor,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Colored,
+			'fc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(fontColor),
+			'color',
+			fontColor));
 };
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
@@ -13728,7 +13728,9 @@ var $author$project$Main$formatColumn = F3(
 									$mdgriffith$elm_ui$Element$Background$color(
 									A4($mdgriffith$elm_ui$Element$rgba, 240, 240, 240, 1)),
 									$mdgriffith$elm_ui$Element$Border$color(
-									A4($mdgriffith$elm_ui$Element$rgba, 240, 240, 240, 1))
+									A4($mdgriffith$elm_ui$Element$rgba, 240, 240, 240, 1)),
+									$mdgriffith$elm_ui$Element$Font$color(
+									A4($mdgriffith$elm_ui$Element$rgba, 34, 34, 34, 1))
 								]),
 							$mdgriffith$elm_ui$Element$text(tx));
 					},
@@ -14022,13 +14024,7 @@ var $author$project$Main$renderOutput = function (model) {
 		var vr = _v0.a;
 		return A2(
 			$mdgriffith$elm_ui$Element$layout,
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$Background$color(
-					A4($mdgriffith$elm_ui$Element$rgba, 360, 100, 100, 1)),
-					$mdgriffith$elm_ui$Element$Font$color(
-					A4($mdgriffith$elm_ui$Element$rgba, 34, 34, 34, 1))
-				]),
+			_List_Nil,
 			A2(
 				$mdgriffith$elm_ui$Element$row,
 				_List_Nil,
