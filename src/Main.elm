@@ -11,11 +11,15 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
 import Json.Decode exposing (Decoder, field, string, at, map2, map3, map4,map5, maybe, null, oneOf, int)
-import Element
+import Element exposing (Element, rgb, rgba, Column)
+import Element.Background as Background
+import Element.Border as Border
+import Element.Font as Font
 import Table exposing (defaultCustomizations)
 import Dict exposing (Dict)
 import Time exposing (Month, utc)
 import MyDate exposing (CustomDate, addMonth)
+import Round
 
 -- MAIN
 
@@ -54,6 +58,7 @@ type alias Model =
   , response : Maybe (List PlanQuote)
   , pdpList : Maybe (List PdpRecord)
   , pdpRate : Maybe String
+  , partB : Maybe String
   , recentError : String
   , today : Maybe CustomDate
   , tableState : Table.State
@@ -93,6 +98,7 @@ type alias TableRow =
   , selected : Bool
   }
 
+
 type ViewState
   = Failure Fail
   | Loading
@@ -124,6 +130,7 @@ init flags url key =
       , response = Nothing
       , pdpList = Nothing
       , pdpRate = Nothing
+      , partB = Just "$230.00"
       , recentError = ""
       , today = Nothing
       , tableState = Table.initialSort "F"
@@ -597,7 +604,7 @@ variousViews model =
     Output ->
       div [ ]
           [ div []
-            [ text <| "This is where the output will be" ]
+            [ text "placeholder" ]--renderOutput model ]
           ]
 
 
@@ -732,6 +739,66 @@ renderResults model =
       div []
           [ text "" ]
 
+renderOutput : Model -> Html msg
+renderOutput model =
+  case model.visibleRows of
+    Just vr ->
+      Element.layout
+          [ Background.color (rgba 0 0 0 1)
+            , Font.color (rgba 1 1 1 1)
+            , Font.italic
+            , Font.size 32
+            , Font.family
+                [ Font.external
+                    { url = "https://fonts.googleapis.com/css?family=EB+Garamond"
+                    , name = "EB Garamond"
+                    }
+                , Font.sansSerif
+                ]
+            ]
+        <|
+          Element.row
+            []
+            ( List.map
+                (formatColumn model.pdpRate model.partB)
+                vr
+            )
+    Nothing ->
+      div []
+        [ text "no output"]
+
+
+formatColumn : Maybe String -> Maybe String -> TableRow -> Element msg
+formatColumn pdp partb ttr =
+  let
+      fpdp = safeCurrencyFloat pdp
+      fpartb = safeCurrencyFloat partb
+      fplan = safeCurrencyFloat (Just ttr.fRate)
+      total = "$" ++ Round.round 2 (fpdp + fpartb + fplan)
+    in
+      Element.column
+        []
+        ( [ Element.el
+              [ Background.color (rgb 0 0.5 0)
+              , Border.color (rgb 0 0.7 0)
+              ]
+              (Element.text ttr.company)
+          ] ++
+          ( List.map
+              ( \tx ->
+                  Element.el
+                    [ Background.color (rgb 0 0.1 0)
+                    , Border.color (rgb 0 0.9 0)
+                    ]
+                    (Element.text tx)
+              )
+              [ ttr.fRate
+              , safeString pdp
+              , safeString partb
+              , total
+              ]
+          )
+        )
 
 -- TABLE CONFIGURATION
 
@@ -955,6 +1022,19 @@ safeChecked mb =
       checked b
     Nothing ->
       checked False
+
+safeCurrencyFloat : Maybe String -> Float
+safeCurrencyFloat ss =
+  case ss of
+    Just s ->
+      case String.toFloat (String.replace "$" "" s) of
+        Just f ->
+          f
+        Nothing ->
+          0.0
+    Nothing ->
+      0.0
+
 
 -- HTTP Requests & JSON
 

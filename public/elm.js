@@ -5433,6 +5433,7 @@ var $author$project$Main$init = F3(
 				gender: 'M',
 				key: key,
 				name: '',
+				partB: $elm$core$Maybe$Just('$230.00'),
 				pdpList: $elm$core$Maybe$Nothing,
 				pdpRate: $elm$core$Maybe$Nothing,
 				planF: false,
@@ -8859,7 +8860,7 @@ var $author$project$Main$variousViews = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('This is where the output will be')
+								$elm$html$Html$text('placeholder')
 							]))
 					]));
 	}
