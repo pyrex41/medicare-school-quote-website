@@ -780,6 +780,7 @@ formatColumn pdp partb ttr =
         ( [ Element.el
               [ Background.color (rgba 51 195 240 1)
               , Border.color (rgba 51 195 240 1)
+              , Font.color (rgba 34 34 34 1)
               ]
               (Element.text ttr.company)
           ] ++

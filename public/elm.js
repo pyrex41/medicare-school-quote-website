@@ -13714,7 +13714,9 @@ var $author$project$Main$formatColumn = F3(
 								$mdgriffith$elm_ui$Element$Background$color(
 								A4($mdgriffith$elm_ui$Element$rgba, 51, 195, 240, 1)),
 								$mdgriffith$elm_ui$Element$Border$color(
-								A4($mdgriffith$elm_ui$Element$rgba, 51, 195, 240, 1))
+								A4($mdgriffith$elm_ui$Element$rgba, 51, 195, 240, 1)),
+								$mdgriffith$elm_ui$Element$Font$color(
+								A4($mdgriffith$elm_ui$Element$rgba, 34, 34, 34, 1))
 							]),
 						$mdgriffith$elm_ui$Element$text(ttr.company))
 					]),
