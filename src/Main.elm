@@ -584,7 +584,8 @@ variousViews model =
 
     Ready ->
       div [ ]
-        [ div []
+        [ text "new"
+        , div []
           [ renderForm model SubmitForm "Submit" ]
         ]
 
