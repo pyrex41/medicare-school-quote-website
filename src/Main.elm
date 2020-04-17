@@ -584,8 +584,7 @@ variousViews model =
 
     Ready ->
       div [ ]
-        [ text "new"
-        , div []
+        [ div []
           [ renderForm model SubmitForm "Submit" ]
         ]
 
@@ -746,17 +745,18 @@ renderOutput model =
     Just vr ->
       Element.layout
           [ Background.color (rgba 0 0 0 1)
-            , Font.color (rgba 1 1 1 1)
-            , Font.italic
-            , Font.size 32
-            , Font.family
-                [ Font.external
-                    { url = "https://fonts.googleapis.com/css?family=EB+Garamond"
-                    , name = "EB Garamond"
-                    }
-                , Font.sansSerif
-                ]
-            ]
+            , Font.color (rgba 34 34 34 1)
+          ]
+            --, Font.italic
+            --, Font.size 32
+            --, Font.family
+              --  [ Font.external
+                  --  { url = "https://fonts.googleapis.com/css?family=EB+Garamond"
+              --      , name = "EB Garamond"
+              --      }
+            --    , Font.sansSerif
+          --      ]
+          --  ]
         <|
           Element.row
             []
@@ -780,16 +780,16 @@ formatColumn pdp partb ttr =
       Element.column
         []
         ( [ Element.el
-              [ Background.color (rgb 0 0.5 0)
-              , Border.color (rgb 0 0.7 0)
+              [ Background.color (rgba 51 195 240 1)
+              , Border.color (rgba 51 195 240 1)
               ]
               (Element.text ttr.company)
           ] ++
           ( List.map
               ( \tx ->
                   Element.el
-                    [ Background.color (rgb 0 0.1 0)
-                    , Border.color (rgb 0 0.9 0)
+                    [ Background.color (rgba 240 240 240 1)
+                    , Border.color (rgba 240 240 240 1)
                     ]
                     (Element.text tx)
               )
