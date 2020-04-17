@@ -604,7 +604,7 @@ variousViews model =
     Output ->
       div [ ]
           [ div []
-            [ text "placeholder" ]--renderOutput model ]
+            [ renderOutput model ]--renderOutput model ]
           ]
 
 
