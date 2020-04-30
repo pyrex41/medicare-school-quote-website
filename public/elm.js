@@ -7359,20 +7359,13 @@ var $author$project$Main$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{
-								preset: str,
-								selectButton: (str === 'all') ? true : false,
-								visibleRows: newTableRows
-							}),
+							{preset: str, selectButton: str === 'all', visibleRows: newTableRows}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{
-								preset: str,
-								selectButton: (str === 'all') ? true : false
-							}),
+							{preset: str, selectButton: str === 'all'}),
 						$elm$core$Platform$Cmd$none);
 				}
 			case 'HideSelected':
@@ -8830,28 +8823,17 @@ var $author$project$Main$SelectAllTF = function (a) {
 	return {$: 'SelectAllTF', a: a};
 };
 var $author$project$Main$selectTFButton = function (bool) {
-	return bool ? A2(
+	return A2(
 		$elm$html$Html$button,
 		_List_fromArray(
 			[
 				$elm$html$Html$Events$onClick(
-				$author$project$Main$SelectAllTF(true)),
+				$author$project$Main$SelectAllTF(bool)),
 				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
 			[
 				$elm$html$Html$text('Select All')
-			])) : A2(
-		$elm$html$Html$button,
-		_List_fromArray(
-			[
-				$elm$html$Html$Events$onClick(
-				$author$project$Main$SelectAllTF(false)),
-				A2($elm$html$Html$Attributes$style, 'display', 'block')
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('UnSelect All')
 			]));
 };
 var $elm$html$Html$caption = _VirtualDom_node('caption');

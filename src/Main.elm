@@ -348,13 +348,13 @@ update msg model =
                 Just tr
           in
             ( { model | visibleRows = newTableRows
-                      , selectButton = if str == "all" then True else False
+                      , selectButton =  (str == "all")
                       , preset = str
               }
             , Cmd.none
             )
         Nothing ->
-          ( { model | selectButton = if str == "all" then True else False
+          ( { model | selectButton = ( str == "all" )
                     , preset = str
             }
           , Cmd.none
@@ -840,11 +840,7 @@ renderList lst =
 
 selectTFButton : Bool -> Html Msg
 selectTFButton bool =
-  if bool then
-    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Select All"]
-  else
-    button [ onClick (SelectAllTF False), style "display" "block" ] [ text "UnSelect All"]
-
+  button [ onClick (SelectAllTF bool), style "display" "block" ] [ text "Select All"]
 
 selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
