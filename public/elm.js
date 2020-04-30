@@ -8365,7 +8365,7 @@ var $author$project$Main$renderOutput = function (model) {
 			'Total',
 			_List_fromArray(
 				[
-					A2($elm$html$Html$Attributes$style, 'background', '#d9ffcc')
+					A2($elm$html$Html$Attributes$style, 'background', '#d9ffccs')
 				]),
 			A2(
 				$elm$core$List$map,
