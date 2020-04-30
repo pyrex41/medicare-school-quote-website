@@ -7397,7 +7397,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{selectButton: !buttonValue, visibleRows: newVisibleRows}),
+						{selectButton: bool, visibleRows: newVisibleRows}),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPDP':
 				var pr = msg.a;
@@ -8839,7 +8839,7 @@ var $author$project$Main$selectTFButton = function (bool) {
 		_List_fromArray(
 			[
 				$elm$html$Html$Events$onClick(
-				$author$project$Main$SelectAllTF(true)),
+				$author$project$Main$SelectAllTF(false)),
 				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
