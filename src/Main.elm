@@ -765,13 +765,13 @@ renderOutput model =
           div []
               [ table [ class "u-full-width" ]
                   [ thead [] [ companyNames ]
-                  ]
                   , tbody []
                     [ pdpRow
                     , partBRow
                     , fRates
                     , totals
                     ]
+                  ]
               ]
       Nothing ->
         text "No Output Selected"

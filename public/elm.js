@@ -8424,13 +8424,13 @@ var $author$project$Main$renderOutput = function (model) {
 							$elm$html$Html$thead,
 							_List_Nil,
 							_List_fromArray(
-								[companyNames]))
-						])),
-					A2(
-					$elm$html$Html$tbody,
-					_List_Nil,
-					_List_fromArray(
-						[pdpRow, partBRow, fRates, totals]))
+								[companyNames])),
+							A2(
+							$elm$html$Html$tbody,
+							_List_Nil,
+							_List_fromArray(
+								[pdpRow, partBRow, fRates, totals]))
+						]))
 				]));
 	} else {
 		return $elm$html$Html$text('No Output Selected');
