@@ -348,13 +348,13 @@ update msg model =
                 Just tr
           in
             ( { model | visibleRows = newTableRows
-                      , selectButton = False
+                      , selectButton = if str == "all" then True else False
                       , preset = str
               }
             , Cmd.none
             )
         Nothing ->
-          ( { model | selectButton = False
+          ( { model | selectButton = if str == "all" then True else False
                     , preset = str
             }
           , Cmd.none

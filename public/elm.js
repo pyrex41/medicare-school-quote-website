@@ -7359,13 +7359,20 @@ var $author$project$Main$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{preset: str, selectButton: false, visibleRows: newTableRows}),
+							{
+								preset: str,
+								selectButton: (str === 'all') ? true : false,
+								visibleRows: newTableRows
+							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{preset: str, selectButton: false}),
+							{
+								preset: str,
+								selectButton: (str === 'all') ? true : false
+							}),
 						$elm$core$Platform$Cmd$none);
 				}
 			case 'HideSelected':
