@@ -354,7 +354,9 @@ update msg model =
             , Cmd.none
             )
         Nothing ->
-          ( { model | selectButton = False }
+          ( { model | selectButton = False
+                    , preset = str
+            }
           , Cmd.none
           )
 

@@ -7365,7 +7365,7 @@ var $author$project$Main$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{selectButton: false}),
+							{preset: str, selectButton: false}),
 						$elm$core$Platform$Cmd$none);
 				}
 			case 'HideSelected':
