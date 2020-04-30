@@ -741,30 +741,42 @@ renderResults model =
 
 renderOutput : Model -> Html msg
 renderOutput model =
-  case model.visibleRows of
-    Just vr ->
-      Element.layout
-          []
-            --, Font.italic
-            --, Font.size 32
-            --, Font.family
-              --  [ Font.external
-                  --  { url = "https://fonts.googleapis.com/css?family=EB+Garamond"
-              --      , name = "EB Garamond"
-              --      }
-            --    , Font.sansSerif
-          --      ]
-          --  ]
-        <|
-          Element.row
-            []
-            ( List.map
-                (formatColumn model.pdpRate model.partB)
-                vr
-            )
-    Nothing ->
-      div []
-        [ text "no output"]
+  let
+    pdp = safeCurrencyFloat model.pdpRate
+    partb = safeCurrencyFloat model.partB
+    mycalc = currencyAddThree pdp partb
+    --fplan = safeCurrencyFloat (Just ttr.fRate)
+    --total = "$" ++ Round.round 2 (fpdp + fpartb + fplan)
+  in
+    case model.visibleRows of
+      Just vr ->
+        let
+          companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
+          pdpRow = toBodyRow "PDP Rate" <| List.map (\a -> safeString model.pdpRate) vr
+          partBRow = toBodyRow "Part B Rate" <| List.map (\a -> safeString model.partB) vr
+          fRates = toBodyRow "Plan F Rate" <| List.map (\a -> a.fRate) vr
+          totals = toBodyRow "Total"
+                      <| List.map
+                          (\a ->
+                            mycalc (safeCurrencyFloat (Just a.fRate))
+                          )
+                          vr
+        in
+          div []
+              [ table []
+                  [ thead [] [ companyNames ]
+                  ]
+                  , tbody []
+                    [ pdpRow
+                    , partBRow
+                    , fRates
+                    , totals
+                    ]
+              ]
+      Nothing ->
+        text "No Output Selected"
+
+
 
 
 formatColumn : Maybe String -> Maybe String -> TableRow -> Element msg
@@ -807,18 +819,18 @@ config : Table.Config TableRow Msg
 config =
   Table.customConfig
       { toId = .company
-        , toMsg = SetTableState
-        , columns =
-            [ checkboxColumn
-            , Table.stringColumn "Company" .company
-            , Table.stringColumn "F Rate" .fRate
-            , Table.stringColumn "G Rate" .gRate
-            , Table.stringColumn "N Rate" .nRate
-            , Table.intColumn "naic" .naic
-            ]
-        , customizations =
-            { defaultCustomizations | rowAttrs = toRowAttrs }
-        }
+      , toMsg = SetTableState
+      , columns =
+          [ checkboxColumn
+          , Table.stringColumn "Company" .company
+          , Table.stringColumn "F Rate" .fRate
+          , Table.stringColumn "G Rate" .gRate
+          , Table.stringColumn "N Rate" .nRate
+          , Table.intColumn "naic" .naic
+          ]
+      , customizations =
+          { defaultCustomizations | rowAttrs = toRowAttrs }
+      }
 
 toRowAttrs : TableRow -> List (Attribute Msg)
 toRowAttrs tablerow =
@@ -953,6 +965,36 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
             ]
         ]
 
+-- Output Table View funcs
+toHeadRow : String -> (List String) -> Html msg
+toHeadRow rowname l =
+  let
+    ls = [rowname] ++ l
+  in
+    tr []
+      <| List.map
+          (\a ->
+              th [] [ text a ]
+          )
+          ls
+
+
+toBodyRow : String -> (List String) -> Html msg
+toBodyRow rowname l =
+  let
+    ls = [rowname] ++ l
+  in
+    tr []
+      <| List.map
+          (\a ->
+              td [] [ text a ]
+          )
+          ls
+
+
+currencyAddThree : Float -> Float -> Float -> String
+currencyAddThree a b c =
+  "$" ++ (Round.round 2 (a+b+c))
 
 
 -- MISC type conversions
