@@ -8308,8 +8308,8 @@ var $elm$html$Html$tbody = _VirtualDom_node('tbody');
 var $elm$html$Html$thead = _VirtualDom_node('thead');
 var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
-var $author$project$Main$toBodyRow = F2(
-	function (rowname, l) {
+var $author$project$Main$toBodyRow = F3(
+	function (rowname, attrs, l) {
 		var ls = _Utils_ap(
 			_List_fromArray(
 				[rowname]),
@@ -8322,7 +8322,7 @@ var $author$project$Main$toBodyRow = F2(
 				function (a) {
 					return A2(
 						$elm$html$Html$td,
-						_List_Nil,
+						attrs,
 						_List_fromArray(
 							[
 								$elm$html$Html$text(a)
@@ -8360,9 +8360,13 @@ var $author$project$Main$renderOutput = function (model) {
 	var _v0 = model.visibleRows;
 	if (_v0.$ === 'Just') {
 		var vr = _v0.a;
-		var totals = A2(
+		var totals = A3(
 			$author$project$Main$toBodyRow,
 			'Total',
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'background', '#CEFAF8')
+				]),
 			A2(
 				$elm$core$List$map,
 				function (a) {
@@ -8371,27 +8375,30 @@ var $author$project$Main$renderOutput = function (model) {
 							$elm$core$Maybe$Just(a.fRate)));
 				},
 				vr));
-		var pdpRow = A2(
+		var pdpRow = A3(
 			$author$project$Main$toBodyRow,
 			'PDP Rate',
+			_List_Nil,
 			A2(
 				$elm$core$List$map,
 				function (a) {
 					return $author$project$Main$safeString(model.pdpRate);
 				},
 				vr));
-		var partBRow = A2(
+		var partBRow = A3(
 			$author$project$Main$toBodyRow,
 			'Part B Rate',
+			_List_Nil,
 			A2(
 				$elm$core$List$map,
 				function (a) {
 					return $author$project$Main$safeString(model.partB);
 				},
 				vr));
-		var fRates = A2(
+		var fRates = A3(
 			$author$project$Main$toBodyRow,
 			'Plan F Rate',
+			_List_Nil,
 			A2(
 				$elm$core$List$map,
 				function (a) {

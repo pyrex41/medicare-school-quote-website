@@ -752,10 +752,10 @@ renderOutput model =
       Just vr ->
         let
           companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
-          pdpRow = toBodyRow "PDP Rate" <| List.map (\a -> safeString model.pdpRate) vr
-          partBRow = toBodyRow "Part B Rate" <| List.map (\a -> safeString model.partB) vr
-          fRates = toBodyRow "Plan F Rate" <| List.map (\a -> a.fRate) vr
-          totals = toBodyRow "Total"
+          pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpRate) vr
+          partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
+          fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
+          totals = toBodyRow "Total" [ style "background" "#CEFAF8" ]
                       <| List.map
                           (\a ->
                             mycalc (safeCurrencyFloat (Just a.fRate))
@@ -943,15 +943,15 @@ toHeadRow rowname l =
           ls
 
 
-toBodyRow : String -> (List String) -> Html msg
-toBodyRow rowname l =
+toBodyRow : String -> List (Attribute msg)-> (List String) -> Html msg
+toBodyRow rowname attrs l =
   let
     ls = [rowname] ++ l
   in
     tr []
       <| List.map
           (\a ->
-              td [] [ text a ]
+              td attrs [ text a ]
           )
           ls
 
