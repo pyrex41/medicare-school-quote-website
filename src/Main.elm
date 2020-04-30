@@ -57,7 +57,7 @@ type alias Model =
   , valid : Bool
   , response : Maybe (List PlanQuote)
   , pdpList : Maybe (List PdpRecord)
-  , pdpRate : Maybe String
+  , pdpSelect : Maybe String
   , partB : Maybe String
   , recentError : String
   , today : Maybe CustomDate
@@ -129,7 +129,7 @@ init flags url key =
       , valid = False
       , response = Nothing
       , pdpList = Nothing
-      , pdpRate = Nothing
+      , pdpSelect = Nothing
       , partB = Just "$230.00"
       , recentError = ""
       , today = Nothing
@@ -378,7 +378,7 @@ update msg model =
         )
 
     SelectPDP pr ->
-      ( { model | pdpRate = Just pr }
+      ( { model | pdpSelect = Just pr }
       , Cmd.none )
 
     ToggleTobacco  ->
@@ -446,11 +446,18 @@ update msg model =
     PDPResponse rmsg ->
       case rmsg of
         Ok response ->
-          (   { model | pdpList = Just response
-                      , pdpRate = Just <| getRate <| List.head response
-              }
-          , Cmd.none
-          )
+          let
+            prs = case (List.head response) of
+              Just pr ->
+                Just pr.rate
+              Nothing ->
+                Nothing
+          in
+            (   { model | pdpList = Just response
+                        , pdpSelect = prs
+                }
+            , Cmd.none
+            )
         Err error ->
           ( { model | state = Failure PDP
                     , recentError = errorToString error
@@ -709,8 +716,8 @@ renderResults model =
   case model.visibleRows of
     Just tr ->
       div []
-        [ div [ class "row" ] [ pdpSelectBox model.pdpList (\a -> SelectPDP a) ]
-        , div [ class "row" ] [ h4 [] [ text <| safeString model.pdpRate ] ]
+        [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+        , div [ class "row" ] [ h4 [] [ text <| safeString model.pdpSelect ] ]
         , div [ class "row" ]
             [ selectbox
                 "Preset"
@@ -742,7 +749,7 @@ renderResults model =
 renderOutput : Model -> Html msg
 renderOutput model =
   let
-    pdp = safeCurrencyFloat model.pdpRate
+    pdp = safeCurrencyFloat model.pdpSelect
     partb = safeCurrencyFloat model.partB
     mycalc = currencyAddThree pdp partb
     --fplan = safeCurrencyFloat (Just ttr.fRate)
@@ -752,7 +759,7 @@ renderOutput model =
       Just vr ->
         let
           companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
-          pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpRate) vr
+          pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
           partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
           fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
           totals = toBodyRow "Total"
@@ -858,12 +865,12 @@ selectbox title_ choices handle class_ i =
     ]
 
 
-pdpOption : PdpRecord -> Html Msg
-pdpOption pr =
-  option [ value pr.rate ] [ text pr.plan ]
+pdpOption : Maybe String ->  PdpRecord -> Html Msg
+pdpOption def pr =
+  option [ value pr.rate,  selected <| (Just pr.rate) == def ] [ text pr.plan ]
 
-pdpSelectBox : Maybe (List PdpRecord) -> (String -> Msg) -> Html Msg
-pdpSelectBox mplist handle =
+pdpSelectBox : Maybe (List PdpRecord) -> Maybe String -> (String -> Msg) -> Html Msg
+pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
       div [class "six columns"] [
@@ -873,7 +880,7 @@ pdpSelectBox mplist handle =
           , select
             [ onInput handle , class "u-full-width"]
             ( List.map
-                pdpOption
+                (pdpOption selectedPdp)
                 plist
             )
           ]
@@ -964,6 +971,13 @@ currencyAddThree a b c =
 
 -- MISC type conversions
 
+safeShowPDP : Maybe PdpRecord -> String
+safeShowPDP pr =
+  case pr of
+    Just p ->
+      p.rate
+    Nothing ->
+      ""
 
 safeString : Maybe String -> String
 safeString ms =

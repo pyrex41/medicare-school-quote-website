@@ -5472,7 +5472,7 @@ var $author$project$Main$init = F3(
 				name: '',
 				partB: $elm$core$Maybe$Just('$230.00'),
 				pdpList: $elm$core$Maybe$Nothing,
-				pdpRate: $elm$core$Maybe$Nothing,
+				pdpSelect: $elm$core$Maybe$Nothing,
 				planF: false,
 				planG: false,
 				planN: false,
@@ -6537,14 +6537,6 @@ var $author$project$Main$getPlans = function (model) {
 		return $elm$core$Platform$Cmd$none;
 	}
 };
-var $author$project$Main$getRate = function (pr) {
-	if (pr.$ === 'Just') {
-		var p = pr.a;
-		return p.rate;
-	} else {
-		return '';
-	}
-};
 var $author$project$Main$ZipResponse = function (a) {
 	return {$: 'ZipResponse', a: a};
 };
@@ -7412,7 +7404,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							pdpRate: $elm$core$Maybe$Just(pr)
+							pdpSelect: $elm$core$Maybe$Just(pr)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'ToggleTobacco':
@@ -7518,14 +7510,21 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
+					var prs = function () {
+						var _v9 = $elm$core$List$head(response);
+						if (_v9.$ === 'Just') {
+							var pr = _v9.a;
+							return $elm$core$Maybe$Just(pr.rate);
+						} else {
+							return $elm$core$Maybe$Nothing;
+						}
+					}();
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{
 								pdpList: $elm$core$Maybe$Just(response),
-								pdpRate: $elm$core$Maybe$Just(
-									$author$project$Main$getRate(
-										$elm$core$List$head(response)))
+								pdpSelect: prs
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
@@ -8354,7 +8353,7 @@ var $author$project$Main$toHeadRow = F2(
 				ls));
 	});
 var $author$project$Main$renderOutput = function (model) {
-	var pdp = $author$project$Main$safeCurrencyFloat(model.pdpRate);
+	var pdp = $author$project$Main$safeCurrencyFloat(model.pdpSelect);
 	var partb = $author$project$Main$safeCurrencyFloat(model.partB);
 	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
 	var _v0 = model.visibleRows;
@@ -8382,7 +8381,7 @@ var $author$project$Main$renderOutput = function (model) {
 			A2(
 				$elm$core$List$map,
 				function (a) {
-					return $author$project$Main$safeString(model.pdpRate);
+					return $author$project$Main$safeString(model.pdpSelect);
 				},
 				vr));
 		var partBRow = A3(
@@ -8693,20 +8692,25 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 	});
 var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$p = _VirtualDom_node('p');
-var $author$project$Main$pdpOption = function (pr) {
-	return A2(
-		$elm$html$Html$option,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$value(pr.rate)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text(pr.plan)
-			]));
-};
-var $author$project$Main$pdpSelectBox = F2(
-	function (mplist, handle) {
+var $author$project$Main$pdpOption = F2(
+	function (def, pr) {
+		return A2(
+			$elm$html$Html$option,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$value(pr.rate),
+					$elm$html$Html$Attributes$selected(
+					_Utils_eq(
+						$elm$core$Maybe$Just(pr.rate),
+						def))
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(pr.plan)
+				]));
+	});
+var $author$project$Main$pdpSelectBox = F3(
+	function (mplist, selectedPdp, handle) {
 		if (mplist.$ === 'Just') {
 			var plist = mplist.a;
 			return A2(
@@ -8739,7 +8743,10 @@ var $author$project$Main$pdpSelectBox = F2(
 										$elm$html$Html$Events$onInput(handle),
 										$elm$html$Html$Attributes$class('u-full-width')
 									]),
-								A2($elm$core$List$map, $author$project$Main$pdpOption, plist))
+								A2(
+									$elm$core$List$map,
+									$author$project$Main$pdpOption(selectedPdp),
+									plist))
 							]))
 					]));
 		} else {
@@ -9029,9 +9036,10 @@ var $author$project$Main$renderResults = function (model) {
 						]),
 					_List_fromArray(
 						[
-							A2(
+							A3(
 							$author$project$Main$pdpSelectBox,
 							model.pdpList,
+							model.pdpSelect,
 							function (a) {
 								return $author$project$Main$SelectPDP(a);
 							})
@@ -9050,7 +9058,7 @@ var $author$project$Main$renderResults = function (model) {
 							_List_fromArray(
 								[
 									$elm$html$Html$text(
-									$author$project$Main$safeString(model.pdpRate))
+									$author$project$Main$safeString(model.pdpSelect))
 								]))
 						])),
 					A2(
