@@ -67,6 +67,7 @@ type alias Model =
   , selectButton : Bool
   , timeNow : Maybe CustomDate
   , dateSelectChoices : List (String, CustomDate)
+  , preset : String
   }
 
 
@@ -139,6 +140,7 @@ init flags url key =
       , selectButton = True
       , timeNow = Nothing
       , dateSelectChoices = []
+      , preset = "all"
       }
     , Task.perform GotTime Time.now
     )
@@ -347,6 +349,7 @@ update msg model =
           in
             ( { model | visibleRows = newTableRows
                       , selectButton = False
+                      , preset = str
               }
             , Cmd.none
             )
@@ -721,6 +724,7 @@ renderResults model =
         , div [ class "row" ]
             [ selectbox
                 "Preset"
+                model.preset
                 [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
                 SelectPreset
                 "three columns"
@@ -864,6 +868,28 @@ selectbox title_ choices handle class_ i =
         ]
     ]
 
+defselectbox : String -> String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg
+defselectbox title_ def choices handle class_ i =
+  let
+    nls = List.map
+            (\a -> option
+                    [ value a
+                    , selected <| (Just a) == def
+                    ]
+                    [ text a ])
+            choices
+  in
+    div [ class class_ ] [
+      label
+        [ ]
+        [ text title_
+        , select
+          [ onInput handle
+          , class "u-full-width"
+          ]
+          nls
+        ]
+    ]
 
 pdpOption : Maybe String ->  PdpRecord -> Html Msg
 pdpOption def pr =
