@@ -8414,7 +8414,10 @@ var $author$project$Main$renderOutput = function (model) {
 				[
 					A2(
 					$elm$html$Html$table,
-					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('u-full-width')
+						]),
 					_List_fromArray(
 						[
 							A2(

@@ -763,7 +763,7 @@ renderOutput model =
                           vr
         in
           div []
-              [ table []
+              [ table [ class "u-full-width" ]
                   [ thead [] [ companyNames ]
                   ]
                   , tbody []
@@ -776,42 +776,6 @@ renderOutput model =
       Nothing ->
         text "No Output Selected"
 
-
-
-
-formatColumn : Maybe String -> Maybe String -> TableRow -> Element msg
-formatColumn pdp partb ttr =
-  let
-      fpdp = safeCurrencyFloat pdp
-      fpartb = safeCurrencyFloat partb
-      fplan = safeCurrencyFloat (Just ttr.fRate)
-      total = "$" ++ Round.round 2 (fpdp + fpartb + fplan)
-    in
-      Element.column
-        []
-        ( [ Element.el
-              [ Background.color (rgba 51 195 240 1)
-              , Border.color (rgba 51 195 240 1)
-              , Font.color (rgba 34 34 34 1)
-              ]
-              (Element.text ttr.company)
-          ] ++
-          ( List.map
-              ( \tx ->
-                  Element.el
-                    [ Background.color (rgba 51 195 240 1)
-                    , Border.color (rgba 51 195 240 1)
-                    , Font.color (rgba 34 34 34 1)
-                    ]
-                    (Element.text tx)
-              )
-              [ ttr.fRate
-              , safeString pdp
-              , safeString partb
-              , total
-              ]
-          )
-        )
 
 -- TABLE CONFIGURATION
 
