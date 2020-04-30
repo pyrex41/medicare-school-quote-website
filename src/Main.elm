@@ -722,7 +722,7 @@ renderResults model =
         [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
         , div [ class "row" ] [ h4 [] [ text <| safeString model.pdpSelect ] ]
         , div [ class "row" ]
-            [ selectbox
+            [ defselectbox
                 "Preset"
                 model.preset
                 [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
@@ -874,7 +874,7 @@ defselectbox title_ def choices handle class_ i =
     nls = List.map
             (\a -> option
                     [ value a
-                    , selected <| (Just a) == def
+                    , selected <| a == def
                     ]
                     [ text a ])
             choices

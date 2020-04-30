@@ -5476,6 +5476,7 @@ var $author$project$Main$init = F3(
 				planF: false,
 				planG: false,
 				planN: false,
+				preset: 'all',
 				recentError: '',
 				response: $elm$core$Maybe$Nothing,
 				selectButton: true,
@@ -7358,7 +7359,7 @@ var $author$project$Main$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{selectButton: false, visibleRows: newTableRows}),
+							{preset: str, selectButton: false, visibleRows: newTableRows}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(
@@ -8690,6 +8691,50 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 		},
 		toMsg: $author$project$Main$SetTableState
 	});
+var $author$project$Main$defselectbox = F6(
+	function (title_, def, choices, handle, class_, i) {
+		var nls = A2(
+			$elm$core$List$map,
+			function (a) {
+				return A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value(a),
+							$elm$html$Html$Attributes$selected(
+							_Utils_eq(a, def))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(a)
+						]));
+			},
+			choices);
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(title_),
+							A2(
+							$elm$html$Html$select,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onInput(handle),
+									$elm$html$Html$Attributes$class('u-full-width')
+								]),
+							nls)
+						]))
+				]));
+	});
 var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = F2(
@@ -9069,9 +9114,10 @@ var $author$project$Main$renderResults = function (model) {
 						]),
 					_List_fromArray(
 						[
-							A5(
-							$author$project$Main$selectbox,
+							A6(
+							$author$project$Main$defselectbox,
 							'Preset',
+							model.preset,
 							_List_fromArray(
 								['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
 							$author$project$Main$SelectPreset,
