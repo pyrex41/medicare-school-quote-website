@@ -840,8 +840,11 @@ renderList lst =
 
 selectTFButton : Bool -> Html Msg
 selectTFButton bool =
-  button [ onClick (SelectAllTF bool), style "display" "block" ] [ text "Select All"]
-
+  if bool then
+    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Select All"]
+  else
+    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Unselect All"]
+    
 selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
   let

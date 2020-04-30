@@ -8823,17 +8823,28 @@ var $author$project$Main$SelectAllTF = function (a) {
 	return {$: 'SelectAllTF', a: a};
 };
 var $author$project$Main$selectTFButton = function (bool) {
-	return A2(
+	return bool ? A2(
 		$elm$html$Html$button,
 		_List_fromArray(
 			[
 				$elm$html$Html$Events$onClick(
-				$author$project$Main$SelectAllTF(bool)),
+				$author$project$Main$SelectAllTF(true)),
 				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
 			[
 				$elm$html$Html$text('Select All')
+			])) : A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Events$onClick(
+				$author$project$Main$SelectAllTF(true)),
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Unselect All')
 			]));
 };
 var $elm$html$Html$caption = _VirtualDom_node('caption');
