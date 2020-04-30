@@ -756,7 +756,7 @@ renderOutput model =
           partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
           fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
           totals = toBodyRow "Total"
-                      [ style "background" "#d9ffccs" ]
+                      [ style "background" "#d9ffcc"]
                       <| List.map
                           (\a ->
                             mycalc (safeCurrencyFloat (Just a.fRate))
