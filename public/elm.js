@@ -7397,7 +7397,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{selectButton: bool, visibleRows: newVisibleRows}),
+						{selectButton: !buttonValue, visibleRows: newVisibleRows}),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPDP':
 				var pr = msg.a;

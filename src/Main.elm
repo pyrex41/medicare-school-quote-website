@@ -377,7 +377,7 @@ update msg model =
         newVisibleRows = Maybe.map ( List.map (tfselect buttonValue) ) model.visibleRows
       in
         ( { model | visibleRows = newVisibleRows
-                  , selectButton = bool
+                  , selectButton = not buttonValue
           }
         , Cmd.none
         )
