@@ -762,8 +762,9 @@ renderOutput model =
     --total = "$" ++ Round.round 2 (fpdp + fpartb + fplan)
   in
     case model.visibleRows of
-      Just vr ->
+      Just v ->
         let
+          vr = List.filter (\a -> a.selected) v
           companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
           pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
           partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr

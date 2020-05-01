@@ -8359,7 +8359,13 @@ var $author$project$Main$renderOutput = function (model) {
 	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
 	var _v0 = model.visibleRows;
 	if (_v0.$ === 'Just') {
-		var vr = _v0.a;
+		var v = _v0.a;
+		var vr = A2(
+			$elm$core$List$filter,
+			function (a) {
+				return a.selected;
+			},
+			v);
 		var totals = A3(
 			$author$project$Main$toBodyRow,
 			'Total',
