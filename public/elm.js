@@ -8828,7 +8828,7 @@ var $author$project$Main$selectTFButton = function (bool) {
 		_List_fromArray(
 			[
 				$elm$html$Html$Events$onClick(
-				$author$project$Main$SelectAllTF(true)),
+				$author$project$Main$SelectAllTF(false)),
 				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
@@ -8839,7 +8839,7 @@ var $author$project$Main$selectTFButton = function (bool) {
 		_List_fromArray(
 			[
 				$elm$html$Html$Events$onClick(
-				$author$project$Main$SelectAllTF(false)),
+				$author$project$Main$SelectAllTF(true)),
 				A2($elm$html$Html$Attributes$style, 'display', 'block')
 			]),
 		_List_fromArray(
