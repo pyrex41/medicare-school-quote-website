@@ -791,7 +791,7 @@ renderOutput model =
                           vr
           nTotals = totalRow
                       "N Plan Total"
-                      "#f51980"
+                      "#e6770f"
                       "#e60f0f"
                       <| List.map
                           (\a ->

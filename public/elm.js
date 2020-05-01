@@ -8448,7 +8448,7 @@ var $author$project$Main$renderOutput = function (model) {
 		var nTotals = A4(
 			$author$project$Main$totalRow,
 			'N Plan Total',
-			'#f51980',
+			'#e6770f',
 			'#e60f0f',
 			A2(
 				$elm$core$List$map,
