@@ -373,8 +373,8 @@ update msg model =
 
     SelectAllTF bool ->
       let
-        newVisibleRows = Maybe.map ( List.map (tfselect bool) ) model.visibleRows
         buttonValue = model.selectButton
+        newVisibleRows = Maybe.map ( List.map (tfselect buttonValue) ) model.visibleRows
       in
         ( { model | visibleRows = newVisibleRows
                   , selectButton = bool

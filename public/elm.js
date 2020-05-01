@@ -7388,12 +7388,12 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'SelectAllTF':
 				var bool = msg.a;
+				var buttonValue = model.selectButton;
 				var newVisibleRows = A2(
 					$elm$core$Maybe$map,
 					$elm$core$List$map(
-						$author$project$Main$tfselect(bool)),
+						$author$project$Main$tfselect(buttonValue)),
 					model.visibleRows);
-				var buttonValue = model.selectButton;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
