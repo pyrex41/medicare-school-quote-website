@@ -8366,21 +8366,6 @@ var $author$project$Main$renderOutput = function (model) {
 				return a.selected;
 			},
 			v);
-		var totals = A3(
-			$author$project$Main$toBodyRow,
-			'Total',
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'background', '#d9ffcc')
-				]),
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return mycalc(
-						$author$project$Main$safeCurrencyFloat(
-							$elm$core$Maybe$Just(a.fRate)));
-				},
-				vr));
 		var pdpRow = A3(
 			$author$project$Main$toBodyRow,
 			'PDP Rate',
@@ -8399,6 +8384,71 @@ var $author$project$Main$renderOutput = function (model) {
 				$elm$core$List$map,
 				function (a) {
 					return $author$project$Main$safeString(model.partB);
+				},
+				vr));
+		var nTotals = A3(
+			$author$project$Main$toBodyRow,
+			'N Plan Total',
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'background', '#f51980')
+				]),
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return mycalc(
+						$author$project$Main$safeCurrencyFloat(
+							$elm$core$Maybe$Just(a.nRate)));
+				},
+				vr));
+		var nRates = A3(
+			$author$project$Main$toBodyRow,
+			'Plan N Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return a.nRate;
+				},
+				vr));
+		var gTotals = A3(
+			$author$project$Main$toBodyRow,
+			'G Plan Total',
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'background', '#6ccbfe')
+				]),
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return mycalc(
+						$author$project$Main$safeCurrencyFloat(
+							$elm$core$Maybe$Just(a.gRate)));
+				},
+				vr));
+		var gRates = A3(
+			$author$project$Main$toBodyRow,
+			'Plan G Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return a.gRate;
+				},
+				vr));
+		var fTotals = A3(
+			$author$project$Main$toBodyRow,
+			'F Plan Total',
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'background', '#d9ffcc')
+				]),
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return mycalc(
+						$author$project$Main$safeCurrencyFloat(
+							$elm$core$Maybe$Just(a.fRate)));
 				},
 				vr));
 		var fRates = A3(
@@ -8442,7 +8492,7 @@ var $author$project$Main$renderOutput = function (model) {
 							$elm$html$Html$tbody,
 							_List_Nil,
 							_List_fromArray(
-								[pdpRow, partBRow, fRates, totals]))
+								[pdpRow, partBRow, fRates, fTotals, gRates, gTotals, nRates, nTotals]))
 						]))
 				]));
 	} else {

@@ -769,11 +769,27 @@ renderOutput model =
           pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
           partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
           fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
-          totals = toBodyRow "Total"
+          gRates = toBodyRow "Plan G Rate" [] <| List.map (\a -> a.gRate) vr
+          nRates = toBodyRow "Plan N Rate" [] <| List.map (\a -> a.nRate) vr
+          fTotals = toBodyRow "F Plan Total"
                       [ style "background" "#d9ffcc"]
                       <| List.map
                           (\a ->
                             mycalc (safeCurrencyFloat (Just a.fRate))
+                          )
+                          vr
+          gTotals = toBodyRow "G Plan Total"
+                      [ style "background" "#6ccbfe"]
+                      <| List.map
+                          (\a ->
+                            mycalc (safeCurrencyFloat (Just a.gRate))
+                          )
+                          vr
+          nTotals = toBodyRow "N Plan Total"
+                      [ style "background" "#f51980"]
+                      <| List.map
+                          (\a ->
+                            mycalc (safeCurrencyFloat (Just a.nRate))
                           )
                           vr
         in
@@ -784,7 +800,11 @@ renderOutput model =
                     [ pdpRow
                     , partBRow
                     , fRates
-                    , totals
+                    , fTotals
+                    , gRates
+                    , gTotals
+                    , nRates
+                    , nTotals
                     ]
                   ]
               ]
