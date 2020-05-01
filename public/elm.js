@@ -8377,7 +8377,13 @@ var $elm$core$List$minimum = function (list) {
 };
 var $author$project$Main$totalRow = F4(
 	function (rowname, col1, col2, l) {
-		var mm = $elm$core$List$minimum(l);
+		var mm = $elm$core$List$minimum(
+			A2(
+				$elm$core$List$filter,
+				function (a) {
+					return a !== '$ ---.--';
+				},
+				l));
 		var m = function () {
 			if (mm.$ === 'Just') {
 				var n = mm.a;

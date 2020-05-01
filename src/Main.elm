@@ -1008,7 +1008,7 @@ totalRow  : String -> String -> String -> (List String) -> Html msg
 totalRow rowname col1 col2 l =
   let
     ls = [rowname] ++ l
-    mm = List.minimum l
+    mm = List.minimum <| List.filter (\a -> a /= "$ ---.--") l
     m = case mm of
       Just n ->
         n
