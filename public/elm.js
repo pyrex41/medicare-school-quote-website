@@ -8353,6 +8353,59 @@ var $author$project$Main$toHeadRow = F2(
 				},
 				ls));
 	});
+var $author$project$Main$customBackground = F4(
+	function (col1, col2, tv, v) {
+		var c = _Utils_eq(tv, v) ? col2 : col1;
+		return _List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'background', c)
+			]);
+	});
+var $elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
+	});
+var $elm$core$List$minimum = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(
+			A3($elm$core$List$foldl, $elm$core$Basics$min, x, xs));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Main$totalRow = F4(
+	function (rowname, col1, col2, l) {
+		var mm = $elm$core$List$minimum(l);
+		var m = function () {
+			if (mm.$ === 'Just') {
+				var n = mm.a;
+				return n;
+			} else {
+				return '';
+			}
+		}();
+		var ls = _Utils_ap(
+			_List_fromArray(
+				[rowname]),
+			l);
+		return A2(
+			$elm$html$Html$tr,
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$td,
+						A4($author$project$Main$customBackground, col1, col2, m, a),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(a)
+							]));
+				},
+				ls));
+	});
 var $author$project$Main$renderOutput = function (model) {
 	var pdp = $author$project$Main$safeCurrencyFloat(model.pdpSelect);
 	var partb = $author$project$Main$safeCurrencyFloat(model.partB);
@@ -8386,13 +8439,11 @@ var $author$project$Main$renderOutput = function (model) {
 					return $author$project$Main$safeString(model.partB);
 				},
 				vr));
-		var nTotals = A3(
-			$author$project$Main$toBodyRow,
+		var nTotals = A4(
+			$author$project$Main$totalRow,
 			'N Plan Total',
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'background', '#f51980')
-				]),
+			'#f51980',
+			'#e60f0f',
 			A2(
 				$elm$core$List$map,
 				function (a) {
@@ -8411,13 +8462,11 @@ var $author$project$Main$renderOutput = function (model) {
 					return a.nRate;
 				},
 				vr));
-		var gTotals = A3(
-			$author$project$Main$toBodyRow,
+		var gTotals = A4(
+			$author$project$Main$totalRow,
 			'G Plan Total',
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'background', '#6ccbfe')
-				]),
+			'#6ccbfe',
+			'#e60f0f',
 			A2(
 				$elm$core$List$map,
 				function (a) {
@@ -8436,13 +8485,11 @@ var $author$project$Main$renderOutput = function (model) {
 					return a.gRate;
 				},
 				vr));
-		var fTotals = A3(
-			$author$project$Main$toBodyRow,
+		var fTotals = A4(
+			$author$project$Main$totalRow,
 			'F Plan Total',
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'background', '#d9ffcc')
-				]),
+			'#d9ffcc',
+			'#e60f0f',
 			A2(
 				$elm$core$List$map,
 				function (a) {

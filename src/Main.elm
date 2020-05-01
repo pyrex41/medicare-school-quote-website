@@ -771,22 +771,28 @@ renderOutput model =
           fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
           gRates = toBodyRow "Plan G Rate" [] <| List.map (\a -> a.gRate) vr
           nRates = toBodyRow "Plan N Rate" [] <| List.map (\a -> a.nRate) vr
-          fTotals = toBodyRow "F Plan Total"
-                      [ style "background" "#d9ffcc"]
+          fTotals = totalRow
+                      "F Plan Total"
+                      "#d9ffcc"
+                      "#e60f0f"
                       <| List.map
                           (\a ->
                             mycalc (safeCurrencyFloat (Just a.fRate))
                           )
                           vr
-          gTotals = toBodyRow "G Plan Total"
-                      [ style "background" "#6ccbfe"]
+          gTotals = totalRow
+                      "G Plan Total"
+                      "#6ccbfe"
+                      "#e60f0f"
                       <| List.map
                           (\a ->
                             mycalc (safeCurrencyFloat (Just a.gRate))
                           )
                           vr
-          nTotals = toBodyRow "N Plan Total"
-                      [ style "background" "#f51980"]
+          nTotals = totalRow
+                      "N Plan Total"
+                      "#f51980"
+                      "#e60f0f"
                       <| List.map
                           (\a ->
                             mycalc (safeCurrencyFloat (Just a.nRate))
@@ -998,6 +1004,35 @@ toHeadRow rowname l =
           )
           ls
 
+totalRow  : String -> String -> String -> (List String) -> Html msg
+totalRow rowname col1 col2 l =
+  let
+    ls = [rowname] ++ l
+    mm = List.minimum l
+    m = case mm of
+      Just n ->
+        n
+      Nothing ->
+        ""
+  in
+    tr []
+      <| List.map
+          (\a ->
+              td
+                (customBackground col1 col2 m a)
+                [ text a ]
+          )
+          ls
+
+customBackground : String -> String -> String -> String -> List (Attribute msg)
+customBackground col1 col2 tv v =
+  let
+    c = if tv == v then
+          col2
+        else
+          col1
+  in
+    [ style "background" c ]
 
 toBodyRow : String -> List (Attribute msg)-> (List String) -> Html msg
 toBodyRow rowname attrs l =
