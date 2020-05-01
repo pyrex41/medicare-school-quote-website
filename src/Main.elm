@@ -1014,7 +1014,10 @@ toBodyRow rowname attrs l =
 
 currencyAddThree : Float -> Float -> Float -> String
 currencyAddThree a b c =
-  "$" ++ (Round.round 2 (a+b+c))
+  if c == 0 then
+    "$ ---.--"
+  else
+    "$" ++ (Round.round 2 (a+b+c))
 
 
 -- MISC type conversions

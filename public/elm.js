@@ -8278,7 +8278,7 @@ var $myrho$elm_round$Round$round = $myrho$elm_round$Round$roundFun(
 		}));
 var $author$project$Main$currencyAddThree = F3(
 	function (a, b, c) {
-		return '$' + A2($myrho$elm_round$Round$round, 2, (a + b) + c);
+		return (!c) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, (a + b) + c));
 	});
 var $elm$core$String$replace = F3(
 	function (before, after, string) {
