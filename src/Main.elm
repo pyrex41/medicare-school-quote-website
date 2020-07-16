@@ -707,7 +707,7 @@ renderForm model func buttonLabel =
         , selectbox  "Gender" ["Male", "Female"] SelectGender "three columns" 0
         , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate "three columns" 1
         , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  "u-full-width"
-        , checkbox  "Apply Discounts?" model.discounts ToggleDiscounts "u-full-width"
+        , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts "u-full-width"
         , h5 [ class "u-full-width" ] [ text "Which Plans?" ]
         , checkbox "Plan N" model.planN ToggleN "u-full-width"
         , checkbox "Plan F" model.planF ToggleF "u-full-width"
