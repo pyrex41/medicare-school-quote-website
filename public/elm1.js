@@ -7997,7 +7997,7 @@ var $author$project$Main$renderForm = F3(
 						'three columns',
 						1),
 						A4($author$project$Main$checkbox, 'Tobacco User?', model.aB, $author$project$Main$ToggleTobacco, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Apply Discounts?', model.aq, $author$project$Main$ToggleDiscounts, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Apply Household Discount?', model.aq, $author$project$Main$ToggleDiscounts, 'u-full-width'),
 						A2(
 						$elm$html$Html$h5,
 						_List_fromArray(
