@@ -796,9 +796,16 @@ categoryColumn : Table.Column TableRow Msg
 categoryColumn =
   Table.customColumn
     { name = "Category"
-    , viewData = (\a -> "") << .priority --String.fromInt << .priority
+    , viewData = categoryLabel << .category --String.fromInt << .priority
     , sorter = Table.increasingOrDecreasingBy .priority
     }
+
+categoryLabel : RowCategory -> String
+categoryLabel r =
+  case r of
+    Preferred -> "Preferred"
+    NonPreferred -> "Non-Preferred"
+    Outside -> "Outside"
 
 viewRows : Bool -> RowCategory -> Maybe (List TableRow) -> Maybe ( List TableRow)
 viewRows b c l =

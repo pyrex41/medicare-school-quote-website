@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.bL.aM === region.b8.aM)
+	if (region.bL.aM === region.b7.aM)
 	{
 		return 'on line ' + region.bL.aM;
 	}
-	return 'on lines ' + region.bL.aM + ' through ' + region.b8.aM;
+	return 'on lines ' + region.bL.aM + ' through ' + region.b7.aM;
 }
 
 
@@ -2706,7 +2706,7 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 	return {
 		O: func(record.O),
 		bM: record.bM,
-		bH: record.bH
+		bI: record.bI
 	}
 });
 
@@ -2978,7 +2978,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.bM;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.bH) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.bI) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -4060,8 +4060,8 @@ function _Browser_application(impl)
 					sendToApp(onUrlRequest(
 						(next
 							&& curr.cF === next.cF
-							&& curr.ck === next.ck
-							&& curr.cA.a === next.cA.a
+							&& curr.cj === next.cj
+							&& curr.cz.a === next.cz.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4237,7 +4237,7 @@ function _Browser_getViewport()
 			c8: _Browser_window.pageXOffset,
 			c9: _Browser_window.pageYOffset,
 			c5: _Browser_doc.documentElement.clientWidth,
-			cg: _Browser_doc.documentElement.clientHeight
+			cf: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4248,7 +4248,7 @@ function _Browser_getScene()
 	var elem = _Browser_doc.documentElement;
 	return {
 		c5: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		cg: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		cf: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4273,13 +4273,13 @@ function _Browser_getViewportOf(id)
 		return {
 			cO: {
 				c5: node.scrollWidth,
-				cg: node.scrollHeight
+				cf: node.scrollHeight
 			},
 			c2: {
 				c8: node.scrollLeft,
 				c9: node.scrollTop,
 				c5: node.clientWidth,
-				cg: node.clientHeight
+				cf: node.clientHeight
 			}
 		};
 	});
@@ -4314,13 +4314,13 @@ function _Browser_getElement(id)
 				c8: x,
 				c9: y,
 				c5: _Browser_doc.documentElement.clientWidth,
-				cg: _Browser_doc.documentElement.clientHeight
+				cf: _Browser_doc.documentElement.clientHeight
 			},
 			dO: {
 				c8: x + rect.left,
 				c9: y + rect.top,
 				c5: rect.width,
-				cg: rect.height
+				cf: rect.height
 			}
 		};
 	});
@@ -4440,7 +4440,7 @@ var _Http_toTask = F3(function(router, toTask, request)
 
 function _Http_configureRequest(xhr, request)
 {
-	for (var headers = request.cf; headers.b; headers = headers.b) // WHILE_CONS
+	for (var headers = request.ce; headers.b; headers = headers.b) // WHILE_CONS
 	{
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
@@ -4470,7 +4470,7 @@ function _Http_toMetadata(xhr)
 		v: xhr.responseURL,
 		ev: xhr.status,
 		ew: xhr.statusText,
-		cf: _Http_parseHeaders(xhr.getAllResponseHeaders())
+		ce: _Http_parseHeaders(xhr.getAllResponseHeaders())
 	};
 }
 
@@ -5140,7 +5140,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {cd: fragment, ck: host, bF: path, cA: port_, cF: protocol, cG: query};
+		return {cc: fragment, cj: host, bG: path, cz: port_, cF: protocol, cG: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5425,7 +5425,7 @@ var $author$project$Main$GotTime = function (a) {
 var $author$project$Main$Ready = {$: 2};
 var $author$project$Main$ValidInt = F3(
 	function (value, valid, comment) {
-		return {b5: comment, w: valid, aE: value};
+		return {b4: comment, w: valid, aE: value};
 	});
 var $billstclair$elm_sortable_table$Table$State = F2(
 	function (a, b) {
@@ -5468,7 +5468,7 @@ var $author$project$Main$init = F3(
 				ac: false,
 				ad: false,
 				ae: false,
-				cB: 'all',
+				cA: 'all',
 				ah: '',
 				a9: $elm$core$Maybe$Nothing,
 				cP: true,
@@ -6385,7 +6385,7 @@ var $elm$http$Http$cmdMap = F2(
 					dk: r.dk,
 					ds: r.ds,
 					a$: A2(_Http_mapExpect, func, r.a$),
-					cf: r.cf,
+					ce: r.ce,
 					d6: r.d6,
 					eQ: r.eQ,
 					cY: r.cY,
@@ -6412,11 +6412,11 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{dk: false, ds: r.ds, a$: r.a$, cf: r.cf, d6: r.d6, eQ: r.eQ, cY: r.cY, v: r.v}));
+			{dk: false, ds: r.ds, a$: r.a$, ce: r.ce, d6: r.d6, eQ: r.eQ, cY: r.cY, v: r.v}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{ds: $elm$http$Http$emptyBody, a$: r.a$, cf: _List_Nil, d6: 'GET', eQ: $elm$core$Maybe$Nothing, cY: $elm$core$Maybe$Nothing, v: r.v});
+		{ds: $elm$http$Http$emptyBody, a$: r.a$, ce: _List_Nil, d6: 'GET', eQ: $elm$core$Maybe$Nothing, cY: $elm$core$Maybe$Nothing, v: r.v});
 };
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
@@ -6584,7 +6584,7 @@ var $elm$core$Tuple$pair = F2(
 var $author$project$Main$Preferred = 0;
 var $author$project$Main$TableRow = F8(
 	function (company, fRate, gRate, nRate, naic, selected, category, priority) {
-		return {b0: category, S: company, aw: fRate, ax: gRate, az: nRate, X: naic, bI: priority, ai: selected};
+		return {bk: category, S: company, aw: fRate, ax: gRate, az: nRate, X: naic, cB: priority, ai: selected};
 	});
 var $author$project$Main$NonPreferred = 1;
 var $author$project$Main$Outside = 2;
@@ -6729,7 +6729,7 @@ var $elm$time$Time$toCivil = function (minutes) {
 	var month = mp + ((mp < 10) ? 3 : (-9));
 	var year = yearOfEra + (era * 400);
 	return {
-		b7: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
+		b6: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
 		a5: month,
 		bd: year + ((month <= 2) ? 1 : 0)
 	};
@@ -6830,7 +6830,7 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.cd,
+		url.cc,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
@@ -6838,9 +6838,9 @@ var $elm$url$Url$toString = function (url) {
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.cA,
-					_Utils_ap(http, url.ck)),
-				url.bF)));
+					url.cz,
+					_Utils_ap(http, url.cj)),
+				url.bG)));
 };
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
@@ -6967,9 +6967,9 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.bF),
+					$elm$url$Url$Parser$preparePath(url.bG),
 					$elm$url$Url$Parser$prepareQuery(url.cG),
-					url.cd,
+					url.cc,
 					$elm$core$Basics$identity)));
 	});
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
@@ -7124,7 +7124,7 @@ var $author$project$Main$update = F2(
 				var curl = model.v;
 				var nurl = _Utils_update(
 					curl,
-					{bF: '/output'});
+					{bG: '/output'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7428,7 +7428,7 @@ var $author$project$Main$update = F2(
 					var curl = model.v;
 					var nurl = _Utils_update(
 						curl,
-						{bF: '/results'});
+						{bG: '/results'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7447,7 +7447,7 @@ var $author$project$Main$update = F2(
 					var curl = model.v;
 					var eurl = _Utils_update(
 						curl,
-						{bF: '/error'});
+						{bG: '/error'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7898,7 +7898,7 @@ var $author$project$Main$validateVI = function (field) {
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(field.b5)
+					$elm$html$Html$text(field.b4)
 				]));
 	}
 };
@@ -8501,6 +8501,16 @@ var $author$project$Main$TogglePreferred = {$: 20};
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 19, a: a};
 };
+var $author$project$Main$categoryLabel = function (r) {
+	switch (r) {
+		case 0:
+			return 'Preferred';
+		case 1:
+			return 'Non-Preferred';
+		default:
+			return 'Outside';
+	}
+};
 var $elm$core$Basics$composeL = F3(
 	function (g, f, x) {
 		return g(
@@ -8546,15 +8556,13 @@ var $author$project$Main$categoryColumn = $billstclair$elm_sortable_table$Table$
 		Y: 'Category',
 		cT: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(
 			function ($) {
-				return $.bI;
+				return $.cB;
 			}),
 		c1: A2(
 			$elm$core$Basics$composeL,
-			function (a) {
-				return '';
-			},
+			$author$project$Main$categoryLabel,
 			function ($) {
-				return $.bI;
+				return $.bk;
 			})
 	});
 var $billstclair$elm_sortable_table$Table$None = {$: 0};
@@ -9090,7 +9098,7 @@ var $author$project$Main$viewRows = F3(
 						A2(
 							$elm$core$List$filter,
 							function (a) {
-								return _Utils_eq(a.b0, c);
+								return _Utils_eq(a.bk, c);
 							},
 							ll)));
 			} else {
