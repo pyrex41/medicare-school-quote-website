@@ -369,15 +369,15 @@ update msg model =
       , Cmd.none )
 
     TogglePreferred ->
-      ( validateModel { model | planG = not model.viewPreferred }
+      ( validateModel { model | viewPreferred = not model.viewPreferred }
       , Cmd.none )
 
     ToggleNonPreferred ->
-      ( validateModel { model | planG = not model.viewNonpreferred }
+      ( validateModel { model | viewNonpreferred = not model.viewNonpreferred }
       , Cmd.none )
 
     ToggleOutside ->
-      ( validateModel { model | planG = not model.viewOutside }
+      ( validateModel { model | viewOutside = not model.viewOutside }
       , Cmd.none )
 
     ToggleSelect i ->
