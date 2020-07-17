@@ -460,7 +460,7 @@ update msg model =
                 Nothing
 
           in
-            (   { model | pdpList = Just response
+            (   { model | pdpList = Just pr_sort
                         , pdpSelect = prs
                 }
             , Cmd.none

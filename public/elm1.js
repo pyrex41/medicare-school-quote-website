@@ -7518,7 +7518,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								a7: $elm$core$Maybe$Just(response),
+								a7: $elm$core$Maybe$Just(pr_sort),
 								Q: prs
 							}),
 						$elm$core$Platform$Cmd$none);
