@@ -797,7 +797,7 @@ categoryColumn =
   Table.customColumn
     { name = "Category"
     , viewData = String.fromInt << .priority
-    , sorter = Table.decreasingBy .priority
+    , sorter = Table.incrasingOrdecreasingBy .priority
     }
 
 viewRows : Bool -> RowCategory -> Maybe (List TableRow) -> Maybe ( List TableRow)
