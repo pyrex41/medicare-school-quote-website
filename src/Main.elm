@@ -943,10 +943,11 @@ pdpSelectBox mplist selectedPdp handle =
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
           , select
             [ onInput handle , class "u-full-width"]
-            ( List.map
-                (pdpOption selectedPdp)
-                plist
-            )
+            List.sort <|  ( List.map
+                              (pdpOption selectedPdp)
+                              plist
+                          )
+
           ]
       ]
     Nothing ->
