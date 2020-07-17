@@ -4411,13 +4411,13 @@ var _Http_toTask = F3(function(router, toTask, request)
 	return _Scheduler_binding(function(callback)
 	{
 		function done(response) {
-			callback(toTask(request.aZ.a(response)));
+			callback(toTask(request.a_.a(response)));
 		}
 
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('error', function() { done($elm$http$Http$NetworkError_); });
 		xhr.addEventListener('timeout', function() { done($elm$http$Http$Timeout_); });
-		xhr.addEventListener('load', function() { done(_Http_toResponse(request.aZ.b, xhr)); });
+		xhr.addEventListener('load', function() { done(_Http_toResponse(request.a_.b, xhr)); });
 		$elm$core$Maybe$isJust(request.cT) && _Http_track(router, xhr, request.cT.a);
 
 		try {
@@ -4445,7 +4445,7 @@ function _Http_configureRequest(xhr, request)
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
 	xhr.timeout = request.eL.a || 0;
-	xhr.responseType = request.aZ.d;
+	xhr.responseType = request.a_.d;
 	xhr.withCredentials = request.de;
 }
 
@@ -5453,22 +5453,22 @@ var $author$project$Main$init = F3(
 		return _Utils_Tuple2(
 			{
 				J: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
-				aY: _List_fromArray(
+				aZ: _List_fromArray(
 					['']),
 				ap: $elm$core$Maybe$Nothing,
 				W: $elm$core$Maybe$Nothing,
 				aq: _List_Nil,
 				ar: false,
-				a$: 'M',
+				a0: 'M',
 				av: key,
 				ax: '',
-				a5: $elm$core$Maybe$Just('$230.00'),
-				a6: $elm$core$Maybe$Nothing,
+				a6: $elm$core$Maybe$Just('$230.00'),
+				a7: $elm$core$Maybe$Nothing,
 				Q: $elm$core$Maybe$Nothing,
 				ab: false,
 				ac: false,
 				ad: false,
-				aL: 'all',
+				aM: 'all',
 				ag: '',
 				a8: $elm$core$Maybe$Nothing,
 				ah: true,
@@ -5493,7 +5493,7 @@ var $author$project$Main$subscriptions = function (model) {
 var $author$project$Main$Counties = 0;
 var $author$project$MyDate$CustomDate = F2(
 	function (month, year) {
-		return {a3: month, bd: year};
+		return {a4: month, bd: year};
 	});
 var $author$project$Main$Failure = function (a) {
 	return {$: 0, a: a};
@@ -5576,7 +5576,7 @@ var $author$project$MyDate$monthInt = function (m) {
 };
 var $author$project$MyDate$addMonth = F2(
 	function (i, cd) {
-		var di = $author$project$MyDate$monthInt(cd.a3) + i;
+		var di = $author$project$MyDate$monthInt(cd.a4) + i;
 		var newMonth = $author$project$MyDate$intMonth(
 			A2($elm$core$Basics$modBy, 12, di));
 		var newYear = cd.bd + (((di - 1) / 12) | 0);
@@ -6382,7 +6382,7 @@ var $elm$http$Http$cmdMap = F2(
 				{
 					de: r.de,
 					dm: r.dm,
-					aZ: A2(_Http_mapExpect, func, r.aZ),
+					a_: A2(_Http_mapExpect, func, r.a_),
 					cd: r.cd,
 					d0: r.d0,
 					eL: r.eL,
@@ -6410,17 +6410,17 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{de: false, dm: r.dm, aZ: r.aZ, cd: r.cd, d0: r.d0, eL: r.eL, cT: r.cT, v: r.v}));
+			{de: false, dm: r.dm, a_: r.a_, cd: r.cd, d0: r.d0, eL: r.eL, cT: r.cT, v: r.v}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{dm: $elm$http$Http$emptyBody, aZ: r.aZ, cd: _List_Nil, d0: 'GET', eL: $elm$core$Maybe$Nothing, cT: $elm$core$Maybe$Nothing, v: r.v});
+		{dm: $elm$http$Http$emptyBody, a_: r.a_, cd: _List_Nil, d0: 'GET', eL: $elm$core$Maybe$Nothing, cT: $elm$core$Maybe$Nothing, v: r.v});
 };
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Main$PdpRecord = F2(
 	function (plan, rate) {
-		return {a7: plan, ae: rate};
+		return {aL: plan, ae: rate};
 	});
 var $elm$json$Json$Decode$string = _Json_decodeString;
 var $author$project$Main$pdpPlanDecoder = A3(
@@ -6443,7 +6443,7 @@ var $author$project$Main$stringMaybeInt = function (v) {
 var $author$project$Main$getPDP = function (model) {
 	return $elm$http$Http$get(
 		{
-			aZ: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
+			a_: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
 			v: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.z.aC)
 		});
 };
@@ -6502,7 +6502,7 @@ var $author$project$Main$strCounty = function (c) {
 };
 var $author$project$MyDate$formatRequest = function (cd) {
 	var ys = $elm$core$String$fromInt(cd.bd);
-	var mi = $author$project$MyDate$monthInt(cd.a3);
+	var mi = $author$project$MyDate$monthInt(cd.a4);
 	var ms = (mi < 10) ? ('0' + $elm$core$String$fromInt(mi)) : $elm$core$String$fromInt(mi);
 	return ys + ('-' + (ms + '-01'));
 };
@@ -6517,13 +6517,13 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 var $author$project$Main$getPlans = function (model) {
 	if (model.w) {
 		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.z.aC) + ('&age=' + ($author$project$Main$stringMaybeInt(model.J.aC) + ('&county=' + ($author$project$Main$strCounty(model.ap) + ('&gender=' + (model.a$ + ('&tobacco=' + ($author$project$Main$boolString(model.aB) + ('&discounts=' + ($author$project$Main$boolString(model.ar) + ('&date=' + $author$project$Main$strMaybeDate(model.W))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.z.aC) + ('&age=' + ($author$project$Main$stringMaybeInt(model.J.aC) + ('&county=' + ($author$project$Main$strCounty(model.ap) + ('&gender=' + (model.a0 + ('&tobacco=' + ($author$project$Main$boolString(model.aB) + ('&discounts=' + ($author$project$Main$boolString(model.ar) + ('&date=' + $author$project$Main$strMaybeDate(model.W))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.ad, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.ab, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.ac, 'G', url4);
 		return $elm$http$Http$get(
 			{
-				aZ: A2($elm$http$Http$expectJson, $author$project$Main$PlanResponse, $author$project$Main$planXDecoder),
+				a_: A2($elm$http$Http$expectJson, $author$project$Main$PlanResponse, $author$project$Main$planXDecoder),
 				v: url5
 			});
 	} else {
@@ -6543,13 +6543,13 @@ var $author$project$Main$getZip = function (model) {
 		var z = zip.a;
 		return $elm$http$Http$get(
 			{
-				aZ: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
+				a_: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
 				v: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
 			});
 	} else {
 		return $elm$http$Http$get(
 			{
-				aZ: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
+				a_: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
 				v: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + ''
 			});
 	}
@@ -6737,14 +6737,14 @@ var $elm$time$Time$toCivil = function (minutes) {
 	var year = yearOfEra + (era * 400);
 	return {
 		b5: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		a3: month,
+		a4: month,
 		bd: year + ((month <= 2) ? 1 : 0)
 	};
 };
 var $elm$time$Time$toMonth = F2(
 	function (zone, time) {
 		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a3;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a4;
 		switch (_v0) {
 			case 1:
 				return 0;
@@ -6775,7 +6775,7 @@ var $elm$time$Time$toMonth = F2(
 var $author$project$MyDate$toString = function (cd) {
 	var yearString = $elm$core$String$fromInt(cd.bd);
 	var monthString = function () {
-		var _v0 = cd.a3;
+		var _v0 = cd.a4;
 		switch (_v0) {
 			case 0:
 				return 'January';
@@ -7291,7 +7291,7 @@ var $author$project$Main$update = F2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{a$: g})),
+							{a0: g})),
 					$elm$core$Platform$Cmd$none);
 			case 7:
 				var str = msg.a;
@@ -7346,13 +7346,13 @@ var $author$project$Main$update = F2(
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{aL: str, ah: str === 'all', x: newTableRows}),
+							{aM: str, ah: str === 'all', x: newTableRows}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
-							{aL: str, ah: str === 'all'}),
+							{aM: str, ah: str === 'all'}),
 						$elm$core$Platform$Cmd$none);
 				}
 			case 23:
@@ -7437,7 +7437,7 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									aY: response,
+									aZ: response,
 									ap: $elm$core$List$head(response),
 									n: $author$project$Main$Ready
 								})),
@@ -7511,7 +7511,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								a6: $elm$core$Maybe$Just(response),
+								a7: $elm$core$Maybe$Just(response),
 								Q: prs
 							}),
 						$elm$core$Platform$Cmd$none);
@@ -7980,7 +7980,7 @@ var $author$project$Main$renderForm = F3(
 						$author$project$Main$SetZip,
 						$author$project$Main$validateVI(model.z),
 						'two columns'),
-						A5($author$project$Main$selectbox, 'County', model.aY, $author$project$Main$SelectCounty, 'three columns', 0),
+						A5($author$project$Main$selectbox, 'County', model.aZ, $author$project$Main$SelectCounty, 'three columns', 0),
 						A5(
 						$author$project$Main$selectbox,
 						'Gender',
@@ -8387,7 +8387,7 @@ var $author$project$Main$totalRow = F4(
 	});
 var $author$project$Main$renderOutput = function (model) {
 	var pdp = $author$project$Main$safeCurrencyFloat(model.Q);
-	var partb = $author$project$Main$safeCurrencyFloat(model.a5);
+	var partb = $author$project$Main$safeCurrencyFloat(model.a6);
 	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
 	var _v0 = model.x;
 	if (!_v0.$) {
@@ -8415,7 +8415,7 @@ var $author$project$Main$renderOutput = function (model) {
 			A2(
 				$elm$core$List$map,
 				function (a) {
-					return $author$project$Main$safeString(model.a5);
+					return $author$project$Main$safeString(model.a6);
 				},
 				vr));
 		var nTotals = A4(
@@ -8820,7 +8820,7 @@ var $author$project$Main$pdpOption = F2(
 		var p_name = A2(
 			$elm$core$String$endsWith,
 			'(PDP)',
-			$elm$core$String$trimRight(pr.a7)) ? A3($elm$core$String$slice, 0, -6, pr.a7) : pr.a7;
+			$elm$core$String$trimRight(pr.aL)) ? A3($elm$core$String$slice, 0, -6, pr.aL) : pr.aL;
 		var p_text = p_name + (' ' + r_val);
 		return A2(
 			$elm$html$Html$option,
@@ -8841,6 +8841,12 @@ var $author$project$Main$pdpSelectBox = F3(
 	function (mplist, selectedPdp, handle) {
 		if (!mplist.$) {
 			var plist = mplist.a;
+			var filt_plist = A2(
+				$elm$core$List$sortBy,
+				function ($) {
+					return $.aL;
+				},
+				plist);
 			return A2(
 				$elm$html$Html$div,
 				_List_fromArray(
@@ -8874,7 +8880,7 @@ var $author$project$Main$pdpSelectBox = F3(
 								A2(
 									$elm$core$List$map,
 									$author$project$Main$pdpOption(selectedPdp),
-									plist))
+									filt_plist))
 							]))
 					]));
 		} else {
@@ -9166,7 +9172,7 @@ var $author$project$Main$renderResults = function (model) {
 						[
 							A3(
 							$author$project$Main$pdpSelectBox,
-							model.a6,
+							model.a7,
 							model.Q,
 							function (a) {
 								return $author$project$Main$SelectPDP(a);
@@ -9200,7 +9206,7 @@ var $author$project$Main$renderResults = function (model) {
 							A6(
 							$author$project$Main$defselectbox,
 							'Preset',
-							model.aL,
+							model.aM,
 							_List_fromArray(
 								['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
 							$author$project$Main$SelectPreset,

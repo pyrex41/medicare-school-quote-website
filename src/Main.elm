@@ -937,19 +937,21 @@ pdpSelectBox : Maybe (List PdpRecord) -> Maybe String -> (String -> Msg) -> Html
 pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
-      div [class "six columns"] [
-        label
-          [ ]
-          [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
-          , select
-            [ onInput handle , class "u-full-width"]
-            List.sort <|  ( List.map
-                              (pdpOption selectedPdp)
-                              plist
-                          )
-
-          ]
-      ]
+      let
+        filt_plist = List.sortBy .plan plist
+      in
+        div [class "six columns"] [
+          label
+            [ ]
+            [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
+            , select
+              [ onInput handle , class "u-full-width"]
+              ( List.map
+                  (pdpOption selectedPdp)
+                  filt_plist
+              )
+            ]
+        ]
     Nothing ->
       p [] [
         label
