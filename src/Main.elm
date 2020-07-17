@@ -457,6 +457,7 @@ update msg model =
                 Just pr.rate
               Nothing ->
                 Nothing
+
           in
             (   { model | pdpList = Just response
                         , pdpSelect = prs
@@ -709,9 +710,9 @@ renderForm model func buttonLabel =
         , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  "u-full-width"
         , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts "u-full-width"
         , h5 [ class "u-full-width" ] [ text "Which Plans?" ]
+        , checkbox "Plan G" model.planG ToggleG "u-full-width"
         , checkbox "Plan N" model.planN ToggleN "u-full-width"
         , checkbox "Plan F" model.planF ToggleF "u-full-width"
-        , checkbox "Plan G" model.planG ToggleG "u-full-width"
         , button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
         ]
     )
@@ -828,9 +829,9 @@ config =
       , columns =
           [ checkboxColumn
           , Table.stringColumn "Company" .company
-          , Table.stringColumn "F Rate" .fRate
           , Table.stringColumn "G Rate" .gRate
           , Table.stringColumn "N Rate" .nRate
+          , Table.stringColumn "F Rate" .fRate
           , Table.intColumn "naic" .naic
           ]
       , customizations =
@@ -921,7 +922,16 @@ defselectbox title_ def choices handle class_ i =
 
 pdpOption : Maybe String ->  PdpRecord -> Html Msg
 pdpOption def pr =
-  option [ value pr.rate,  selected <| (Just pr.rate) == def ] [ text pr.plan ]
+  let
+    p_name =
+      if String.endsWith "(PDP)" (String.trimRight pr.plan) then
+        String.slice 0 -6 pr.plan
+      else
+        pr.plan
+    r_val = pr.rate
+    p_text = p_name ++ " " ++ r_val
+  in
+    option [ value pr.rate,  selected <| (Just pr.rate) == def ] [ text p_text ]
 
 pdpSelectBox : Maybe (List PdpRecord) -> Maybe String -> (String -> Msg) -> Html Msg
 pdpSelectBox mplist selectedPdp handle =
@@ -930,7 +940,7 @@ pdpSelectBox mplist selectedPdp handle =
       div [class "six columns"] [
         label
           [ ]
-          [ span [ class "label-body"] [ text "Select PDP:"]
+          [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
           , select
             [ onInput handle , class "u-full-width"]
             ( List.map
@@ -1226,10 +1236,12 @@ getPDP model =
 
 pdpPlanDecoder : Decoder PdpRecord
 pdpPlanDecoder =
-  map2
-    PdpRecord
-    ( field "Plan Name" string )
-    ( field "rate" string )
+    map2
+      PdpRecord
+      ( field "Plan Name" string )
+      ( field "rate" string )
+
+
 
 pdpDecoder : Decoder (List PdpRecord)
 pdpDecoder =
