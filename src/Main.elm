@@ -201,6 +201,7 @@ type Msg
   | TogglePreferred
   | ToggleNonPreferred
   | ToggleOutside
+  | ToggleSelectAll
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
@@ -389,6 +390,10 @@ update msg model =
                           ( \a -> List.map (toggle i) a )
                           model.tableRows
         }
+      , Cmd.none)
+
+    ToggleSelectAll ->
+      ( { model | selectButton = not model.selectButton }
       , Cmd.none)
 
     ZipResponse rmsg ->
@@ -699,25 +704,33 @@ renderResults model =
     showNonPreferred = viewRows model.viewNonpreferred NonPreferred model.tableRows
     showOutside = viewRows model.viewOutside Outside model.tableRows
     showRows = safeConcat [showPreferred, showNonPreferred, showOutside]
+    selectButtonText = case model.selectButton of
+      True -> "Select All"
+      False -> "DeselectAll"
   in
-  div []
-    [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
-    , checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
-    , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
-    , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
-    , div [ class "three columns" ]
-        [ button
-          [ onClick ShowOutput, style "block" "display", class "button-primary" ]
-          [ text "Show Output" ]
-        ]
-    , case showRows of
-        Just sr ->
-          Table.view config model.tableState sr
-        Nothing ->
-          Table.view config model.tableState []
-          --div [] [ text "" ]
-    , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
-    ]
+    div []
+      [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+      , div [ class "row" ]
+          [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
+          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
+          , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
+          ]
+      , div [ class "three columns" ]
+          [ button
+            [ onClick ToggleSelectAll, style "block" "display", class "button-primary" ]
+            [ text selectButtonText ]
+          , button
+            [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+            [ text "Show Output" ]
+          ]
+      , case showRows of
+          Just sr ->
+            Table.view config model.tableState sr
+          Nothing ->
+            Table.view config model.tableState []
+            --div [] [ text "" ]
+      , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
+      ]
 
 
 renderOutput : Model -> Html msg
