@@ -63,7 +63,9 @@ type alias Model =
   , today : Maybe CustomDate
   , tableState : Table.State
   , tableRows : Maybe (List TableRow)
-  , visibleRows : Maybe (List TableRow)
+  , viewPreferred : Bool
+  , viewNonpreferred : Bool
+  , viewOutside : Bool
   , selectButton : Bool
   , timeNow : Maybe CustomDate
   , dateSelectChoices : List (String, CustomDate)
@@ -82,6 +84,11 @@ type alias PdpRecord =
   , rate : String
   }
 
+type RowCategory
+  = Preferred
+  | NonPreferred
+  | Outside
+
 type alias PlanQuote =
   { company : String
   , fRate : Maybe String
@@ -97,6 +104,7 @@ type alias TableRow =
   , nRate : String
   , naic : Int
   , selected : Bool
+  , category : RowCategory
   }
 
 
@@ -134,9 +142,11 @@ init flags url key =
       , partB = Just "$230.00"
       , recentError = ""
       , today = Nothing
-      , tableState = Table.initialSort "F"
+      , tableState = Table.initialSort "Company"
       , tableRows = Nothing
-      , visibleRows = Nothing
+      , viewPreferred = True
+      , viewNonpreferred = False
+      , viewOutside = False
       , selectButton = True
       , timeNow = Nothing
       , dateSelectChoices = []
@@ -175,7 +185,6 @@ type Msg
   | SetZip String
   | SelectGender String
   | SelectCounty String
-  | SelectPreset String
   | SelectDate String
   | SelectPDP String
   | ToggleTobacco
@@ -188,13 +197,14 @@ type Msg
   | PDPResponse (Result Http.Error (List PdpRecord))
   | ReceiveDate CustomDate
   | SetTableState Table.State
-  | ToggleSelected Int
-  | SelectAllTF Bool
-  | HideSelected
+  | TogglePreferred
+  | ToggleNonPreferred
+  | ToggleOutside
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
   | ShowOutput
+  | ToggleSelect Int
 
 type Fail
   = Counties
@@ -334,54 +344,6 @@ update msg model =
         , Cmd.none
         )
 
-    SelectPreset str ->
-      case model.tableRows of
-        Just tr ->
-          let
-            newTableRows = case Dict.get str presets of
-              Just ls ->
-                Just <|
-                  List.map
-                  (tfselect True)
-                  <| List.filter ( \a -> List.member a.naic ls ) tr
-              Nothing ->
-                Just tr
-          in
-            ( { model | visibleRows = newTableRows
-                      , selectButton =  (str == "all")
-                      , preset = str
-              }
-            , Cmd.none
-            )
-        Nothing ->
-          ( { model | selectButton = ( str == "all" )
-                    , preset = str
-            }
-          , Cmd.none
-          )
-
-    HideSelected ->
-      let
-        rowsToKeep = Maybe.map ( List.filter (\a -> a.selected == False) ) model.visibleRows
-        unselectRows = Maybe.map ( List.map (tfselect False) ) model.tableRows
-      in
-        ( { model | visibleRows = rowsToKeep
-                  , tableRows = unselectRows
-          }
-        , Cmd.none
-        )
-
-    SelectAllTF bool ->
-      let
-        buttonValue = model.selectButton
-        newVisibleRows = Maybe.map ( List.map (tfselect buttonValue) ) model.visibleRows
-      in
-        ( { model | visibleRows = newVisibleRows
-                  , selectButton = not buttonValue
-          }
-        , Cmd.none
-        )
-
     SelectPDP pr ->
       ( { model | pdpSelect = Just pr }
       , Cmd.none )
@@ -406,6 +368,26 @@ update msg model =
       ( validateModel { model | planG = not model.planG }
       , Cmd.none )
 
+    TogglePreferred ->
+      ( validateModel { model | planG = not model.viewPreferred }
+      , Cmd.none )
+
+    ToggleNonPreferred ->
+      ( validateModel { model | planG = not model.viewNonpreferred }
+      , Cmd.none )
+
+    ToggleOutside ->
+      ( validateModel { model | planG = not model.viewOutside }
+      , Cmd.none )
+
+    ToggleSelect i ->
+      ( { model | tableRows =
+                        Maybe.map
+                          ( \a -> List.map (toggle i) a )
+                          model.tableRows
+        }
+      , Cmd.none)
+
     ZipResponse rmsg ->
       case rmsg of
         Ok response ->
@@ -426,11 +408,9 @@ update msg model =
             newRows = List.map planToRow response
             curl = model.url
             nurl = { curl | path = "/results" }
-
           in
             ( { model | response = Just response
                       , tableRows = Just newRows
-                      , visibleRows = Just newRows
                       , url = nurl
                       , state = Results
               }
@@ -470,15 +450,6 @@ update msg model =
                     , recentError = errorToString error
             }
           , Cmd.none )
-
-    ToggleSelected naic ->
-      let
-        newTableRows = Maybe.map (List.map (toggle naic)) model.visibleRows
-      in
-        ( { model | visibleRows = newTableRows
-          }
-        , Cmd.none
-        )
 
     GotTime timenow ->
       let
@@ -720,39 +691,30 @@ renderForm model func buttonLabel =
 
 renderResults : Model -> Html Msg
 renderResults model =
-  case model.visibleRows of
-    Just tr ->
-      div []
-        [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
-        , div [ class "row" ] [ h4 [] [ text <| safeString model.pdpSelect ] ]
-        , div [ class "row" ]
-            [ defselectbox
-                "Preset"
-                model.preset
-                [ "all", "kansas_city", "st_louis_il", "st_louis_mo"]
-                SelectPreset
-                "three columns"
-                0
-            ]
-        , div [ class "row" ]
-            [ div [ class "three columns" ] [ selectTFButton model.selectButton ]
-            , div [ class "three columns" ]
-                [ button
-                  [ onClick HideSelected, style "display" "block" ]
-                  [ text "Remove Selected"]
-                ]
-            , div [ class "three columns" ]
-                [ button
-                  [ onClick ShowOutput, style "block" "display", class "button-primary" ]
-                  [ text "Show Output" ]
-                ]
-            ]
-        , div [] [ Table.view config model.tableState tr ]
-        , div [ class "row" ] [ button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ] ]
-        ]
-    Nothing ->
-      div []
-          [ text "" ]
+  let
+    showPreferred = viewRows model.viewPreferred Preferred model.tableRows
+    showNonPreferred = viewRows model.viewNonpreferred NonPreferred model.tableRows
+    showOutside = viewRows model.viewOutside Outside model.tableRows
+    showRows = safeConcat [showPreferred, showNonPreferred, showOutside]
+  in
+    case showRows of
+      Just sr ->
+        div []
+          [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+          , checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
+          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
+          , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
+          , div [ class "three columns" ]
+              [ button
+                [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+                [ text "Show Output" ]
+              ]
+          , Table.view config model.tableState sr
+          , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
+          ]
+      Nothing ->
+        div []
+            [ text "" ]
 
 renderOutput : Model -> Html msg
 renderOutput model =
@@ -760,67 +722,103 @@ renderOutput model =
     pdp = safeCurrencyFloat model.pdpSelect
     partb = safeCurrencyFloat model.partB
     mycalc = currencyAddThree pdp partb
+    showModel = model.viewPreferred || model.viewNonpreferred || model.viewOutside
     --fplan = safeCurrencyFloat (Just ttr.fRate)
     --total = "$" ++ Round.round 2 (fpdp + fpartb + fplan)
   in
-    case model.visibleRows of
-      Just v ->
-        let
-          vr = List.filter (\a -> a.selected) v
-          companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
-          pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
-          partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
-          fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
-          gRates = toBodyRow "Plan G Rate" [] <| List.map (\a -> a.gRate) vr
-          nRates = toBodyRow "Plan N Rate" [] <| List.map (\a -> a.nRate) vr
-          fTotals = totalRow
-                      "F Plan Total"
-                      "#d9ffcc"
-                      "#e60f0f"
-                      <| List.map
-                          (\a ->
-                            mycalc (safeCurrencyFloat (Just a.fRate))
-                          )
-                          vr
-          gTotals = totalRow
-                      "G Plan Total"
-                      "#6ccbfe"
-                      "#e60f0f"
-                      <| List.map
-                          (\a ->
-                            mycalc (safeCurrencyFloat (Just a.gRate))
-                          )
-                          vr
-          nTotals = totalRow
-                      "N Plan Total"
-                      "#e6770f"
-                      "#e60f0f"
-                      <| List.map
-                          (\a ->
-                            mycalc (safeCurrencyFloat (Just a.nRate))
-                          )
-                          vr
-        in
-          div []
-              [ table [ class "u-full-width" ]
-                  [ thead [] [ companyNames ]
-                  , tbody []
-                    [ pdpRow
-                    , partBRow
-                    , fRates
-                    , fTotals
-                    , gRates
-                    , gTotals
-                    , nRates
-                    , nTotals
+    case model.tableRows of
+      Just tr ->
+        if showModel then
+          let
+            vr = List.filter (\a -> a.selected) tr
+            companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
+            pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
+            partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
+            fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
+            gRates = toBodyRow "Plan G Rate" [] <| List.map (\a -> a.gRate) vr
+            nRates = toBodyRow "Plan N Rate" [] <| List.map (\a -> a.nRate) vr
+            fTotals = totalRow
+                        "F Plan Total"
+                        "#d9ffcc"
+                        "#e60f0f"
+                        <| List.map
+                            (\a ->
+                              mycalc (safeCurrencyFloat (Just a.fRate))
+                            )
+                            vr
+            gTotals = totalRow
+                        "G Plan Total"
+                        "#6ccbfe"
+                        "#e60f0f"
+                        <| List.map
+                            (\a ->
+                              mycalc (safeCurrencyFloat (Just a.gRate))
+                            )
+                            vr
+            nTotals = totalRow
+                        "N Plan Total"
+                        "#e6770f"
+                        "#e60f0f"
+                        <| List.map
+                            (\a ->
+                              mycalc (safeCurrencyFloat (Just a.nRate))
+                            )
+                            vr
+          in
+            div []
+                [ table [ class "u-full-width" ]
+                    [ thead [] [ companyNames ]
+                    , tbody []
+                      [ pdpRow
+                      , partBRow
+                      , fRates
+                      , fTotals
+                      , gRates
+                      , gTotals
+                      , nRates
+                      , nTotals
+                      ]
                     ]
-                  ]
-              ]
+                ]
+        else
+          text "No Output Selected"
       Nothing ->
-        text "No Output Selected"
+        text "No Output Available"
 
 
 -- TABLE CONFIGURATION
+
+viewRows : Bool -> RowCategory -> Maybe (List TableRow) -> Maybe ( List TableRow)
+viewRows b c l =
+  if b then
+    case l of
+      Just ll ->
+        Just <| List.filter (\a -> a.category == c) ll
+      Nothing ->
+        Nothing
+  else
+    Nothing
+
+safeAppend : Maybe (List a) -> Maybe (List a) -> Maybe (List a)
+safeAppend a b =
+  case a of
+    Just aa ->
+      case b of
+        Just bb ->
+          Just <| List.append aa bb
+        Nothing ->
+          a
+    Nothing ->
+      case b of
+        Just bb ->
+          b
+        Nothing ->
+          Nothing
+
+safeConcat : List (Maybe (List a)) -> Maybe (List a)
+safeConcat l =
+  List.foldr safeAppend Nothing l
+
 
 config : Table.Config TableRow Msg
 config =
@@ -841,7 +839,7 @@ config =
 
 toRowAttrs : TableRow -> List (Attribute Msg)
 toRowAttrs tablerow =
-    [ onClick (ToggleSelected tablerow.naic)
+    [ onClick (ToggleSelect tablerow.naic)
     , style "background"
         (if tablerow.selected then
             "#CEFAF8"
@@ -850,7 +848,6 @@ toRowAttrs tablerow =
             "white"
         )
     ]
-
 
 checkboxColumn : Table.Column TableRow Msg
 checkboxColumn =
@@ -866,13 +863,6 @@ renderList lst =
        |> List.map (\l -> li [] [ text l ])
        |> ul []
 
-
-selectTFButton : Bool -> Html Msg
-selectTFButton bool =
-  if bool then
-    button [ onClick (SelectAllTF False), style "display" "block" ] [ text "Select All"]
-  else
-    button [ onClick (SelectAllTF True), style "display" "block" ] [ text "Unselect All"]
 
 selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
@@ -1087,13 +1077,18 @@ safeString ms =
 
 planToRow : PlanQuote -> TableRow
 planToRow pq =
-  TableRow
-    pq.company
-    ( safeString pq.fRate )
-    ( safeString pq.gRate )
-    ( safeString pq.nRate )
-    pq.naic
-    False
+  let
+    category = findCategory pq.naic
+    showRowInit = category == Preferred
+  in
+    TableRow
+      pq.company
+      ( safeString pq.fRate )
+      ( safeString pq.gRate )
+      ( safeString pq.nRate )
+      pq.naic
+      showRowInit
+      category
 
 boolString : Bool -> String
 boolString b =
@@ -1251,10 +1246,42 @@ pdpDecoder =
 
 
 -- PRESETS
+
+findCategory : Int -> RowCategory
+findCategory i =
+  let
+    preferred =
+      [ 66281 -- Transamerica
+      , 60054
+      , 67369 -- CIGNA
+      , 47171 --Blue Cross Blue Shielf of Kansas City
+      , 79143 --AARP Medicare Supplement Plans, insured by UnitedHealthcare
+      , 71412 --Mutual of Omaha
+      , 75052 --AETNA
+      ]
+    nonpreferred =
+      [ 79413  -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
+      , 66281  -- Transamerica
+      , 78700  -- AETNA HEALTH AND LIFE INSURANCE COMPANY
+      , 78972  -- (Anthem) Healthy Alliance Life Insurance Company
+      , 67369  -- Cigna
+      , 13100   -- Omaha Ins Co
+      ]
+  in
+    if List.member i preferred then
+      Preferred
+    else
+      if List.member i nonpreferred then
+        NonPreferred
+      else
+        Outside
+
+
+
 presets : Dict String (List Int)
 presets =
   Dict.fromList
-    [ ( "kansas_city",  [ 66281 -- Transamerica
+    [ ( "Preferred",  [ 66281 -- Transamerica
                         , 60054
                         , 67369 -- CIGNA
                         , 47171 --Blue Cross Blue Shielf of Kansas City
@@ -1263,7 +1290,7 @@ presets =
                         , 75052 --AETNA
                         ]
       )
-    , ( "st_louis_mo",  [ 79413  -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
+    , ( "Non-Preferred",  [ 79413  -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
                         , 66281  -- Transamerica
                         , 78700  -- AETNA HEALTH AND LIFE INSURANCE COMPANY
                         , 78972  -- (Anthem) Healthy Alliance Life Insurance Company
@@ -1271,7 +1298,7 @@ presets =
                         , 13100   -- Omaha Ins Co
                         ]
       )
-    , ( "st_louis_il",  [ 72052  -- AETNA Health Insurance
+    , ( "Outside",  [ 72052  -- AETNA Health Insurance
                         , 72850 -- united world life
                         , 67369 -- Cigna
                         , 79413 -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
