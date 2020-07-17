@@ -395,12 +395,28 @@ update msg model =
     ToggleSelectAll ->
       let
         newBool = not model.selectButton
+        prShow = if model.viewPreferred then newBool else False
+        nprShow = if model.viewNonpreferred then newBool else False
+        outShow = if model.viewOutside then newBool else False
       in
         ( { model | selectButton = newBool
                   , tableRows =
-                          Maybe.map
-                            ( List.map ( tfselect newBool ) )
-                            model.tableRows
+                        case model.tableRows of
+                          Just tr ->
+                            Just <|
+                              List.map
+                                (\a ->
+                                  case a.category of
+                                    Preferred ->
+                                      tfselect prShow a
+                                    NonPreferred ->
+                                      tfselect nprShow a
+                                    Outside ->
+                                      tfselect outShow a
+                                )
+                                tr
+                          Nothing ->
+                            Nothing
           }
         , Cmd.none)
 
@@ -500,6 +516,12 @@ tfselect : Bool -> TableRow -> TableRow
 tfselect tf tablerow =
   { tablerow | selected =  tf}
 
+flipAllVisible : Bool -> RowCategory -> TableRow -> TableRow
+flipAllVisible b c tr =
+  if ( b && (tr.category == c) ) then
+    { tr | selected = not tr.selected }
+  else
+    { tr | selected = False }
 
 removeRow : Int -> List TableRow -> List TableRow
 removeRow i ls =
@@ -713,8 +735,8 @@ renderResults model =
     showOutside = viewRows model.viewOutside Outside model.tableRows
     showRows = safeConcat [showPreferred, showNonPreferred, showOutside]
     selectButtonText = case model.selectButton of
-      True -> "Select All"
-      False -> "DeselectAll"
+      True -> "Deselect All"
+      False -> "Select All"
   in
     div []
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
