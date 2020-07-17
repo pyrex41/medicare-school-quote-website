@@ -5474,7 +5474,7 @@ var $author$project$Main$init = F3(
 				cP: true,
 				n: $author$project$Main$Ready,
 				I: $elm$core$Maybe$Nothing,
-				aC: $billstclair$elm_sortable_table$Table$initialSort('Company'),
+				aC: $billstclair$elm_sortable_table$Table$initialSort('Category'),
 				bc: $elm$core$Maybe$Nothing,
 				aD: false,
 				bR: $elm$core$Maybe$Nothing,
