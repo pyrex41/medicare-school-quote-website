@@ -794,7 +794,7 @@ viewRows b c l =
   if b then
     case l of
       Just ll ->
-        Just <| List.filter (\a -> a.category == c) ll
+        Just <| List.sortBy .company <| List.filter (\a -> a.category == c) ll
       Nothing ->
         Nothing
   else
