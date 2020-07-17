@@ -4411,13 +4411,13 @@ var _Http_toTask = F3(function(router, toTask, request)
 	return _Scheduler_binding(function(callback)
 	{
 		function done(response) {
-			callback(toTask(request.a_.a(response)));
+			callback(toTask(request.a$.a(response)));
 		}
 
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('error', function() { done($elm$http$Http$NetworkError_); });
 		xhr.addEventListener('timeout', function() { done($elm$http$Http$Timeout_); });
-		xhr.addEventListener('load', function() { done(_Http_toResponse(request.a_.b, xhr)); });
+		xhr.addEventListener('load', function() { done(_Http_toResponse(request.a$.b, xhr)); });
 		$elm$core$Maybe$isJust(request.cW) && _Http_track(router, xhr, request.cW.a);
 
 		try {
@@ -4445,7 +4445,7 @@ function _Http_configureRequest(xhr, request)
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
 	xhr.timeout = request.eO.a || 0;
-	xhr.responseType = request.a_.d;
+	xhr.responseType = request.a$.d;
 	xhr.withCredentials = request.dh;
 }
 
@@ -5453,28 +5453,28 @@ var $author$project$Main$init = F3(
 		return _Utils_Tuple2(
 			{
 				J: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
-				aZ: _List_fromArray(
+				a_: _List_fromArray(
 					['']),
 				ar: $elm$core$Maybe$Nothing,
 				U: $elm$core$Maybe$Nothing,
 				as: _List_Nil,
 				at: false,
-				a0: 'M',
+				a1: 'M',
 				ax: key,
 				az: '',
-				a6: $elm$core$Maybe$Just('$230.00'),
-				a7: $elm$core$Maybe$Nothing,
+				a7: $elm$core$Maybe$Just('$230.00'),
+				a8: $elm$core$Maybe$Nothing,
 				_: $elm$core$Maybe$Nothing,
 				aa: false,
 				ab: false,
 				ac: false,
 				cA: 'all',
 				af: '',
-				a8: $elm$core$Maybe$Nothing,
+				a9: $elm$core$Maybe$Nothing,
 				cO: true,
 				n: $author$project$Main$Ready,
 				I: $elm$core$Maybe$Nothing,
-				ba: $billstclair$elm_sortable_table$Table$initialSort('Company'),
+				aN: $billstclair$elm_sortable_table$Table$initialSort('Company'),
 				bc: $elm$core$Maybe$Nothing,
 				aC: false,
 				bQ: $elm$core$Maybe$Nothing,
@@ -5495,7 +5495,7 @@ var $author$project$Main$subscriptions = function (model) {
 var $author$project$Main$Counties = 0;
 var $author$project$MyDate$CustomDate = F2(
 	function (month, year) {
-		return {a4: month, bd: year};
+		return {a5: month, bd: year};
 	});
 var $author$project$Main$Failure = function (a) {
 	return {$: 0, a: a};
@@ -5578,7 +5578,7 @@ var $author$project$MyDate$monthInt = function (m) {
 };
 var $author$project$MyDate$addMonth = F2(
 	function (i, cd) {
-		var di = $author$project$MyDate$monthInt(cd.a4) + i;
+		var di = $author$project$MyDate$monthInt(cd.a5) + i;
 		var newMonth = $author$project$MyDate$intMonth(
 			A2($elm$core$Basics$modBy, 12, di));
 		var newYear = cd.bd + (((di - 1) / 12) | 0);
@@ -6384,7 +6384,7 @@ var $elm$http$Http$cmdMap = F2(
 				{
 					dh: r.dh,
 					dp: r.dp,
-					a_: A2(_Http_mapExpect, func, r.a_),
+					a$: A2(_Http_mapExpect, func, r.a$),
 					ce: r.ce,
 					d3: r.d3,
 					eO: r.eO,
@@ -6412,11 +6412,11 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{dh: false, dp: r.dp, a_: r.a_, ce: r.ce, d3: r.d3, eO: r.eO, cW: r.cW, v: r.v}));
+			{dh: false, dp: r.dp, a$: r.a$, ce: r.ce, d3: r.d3, eO: r.eO, cW: r.cW, v: r.v}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{dp: $elm$http$Http$emptyBody, a_: r.a_, ce: _List_Nil, d3: 'GET', eO: $elm$core$Maybe$Nothing, cW: $elm$core$Maybe$Nothing, v: r.v});
+		{dp: $elm$http$Http$emptyBody, a$: r.a$, ce: _List_Nil, d3: 'GET', eO: $elm$core$Maybe$Nothing, cW: $elm$core$Maybe$Nothing, v: r.v});
 };
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
@@ -6445,7 +6445,7 @@ var $author$project$Main$stringMaybeInt = function (v) {
 var $author$project$Main$getPDP = function (model) {
 	return $elm$http$Http$get(
 		{
-			a_: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
+			a$: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
 			v: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.y.aD)
 		});
 };
@@ -6504,7 +6504,7 @@ var $author$project$Main$strCounty = function (c) {
 };
 var $author$project$MyDate$formatRequest = function (cd) {
 	var ys = $elm$core$String$fromInt(cd.bd);
-	var mi = $author$project$MyDate$monthInt(cd.a4);
+	var mi = $author$project$MyDate$monthInt(cd.a5);
 	var ms = (mi < 10) ? ('0' + $elm$core$String$fromInt(mi)) : $elm$core$String$fromInt(mi);
 	return ys + ('-' + (ms + '-01'));
 };
@@ -6519,13 +6519,13 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 var $author$project$Main$getPlans = function (model) {
 	if (model.w) {
 		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.y.aD) + ('&age=' + ($author$project$Main$stringMaybeInt(model.J.aD) + ('&county=' + ($author$project$Main$strCounty(model.ar) + ('&gender=' + (model.a0 + ('&tobacco=' + ($author$project$Main$boolString(model.aC) + ('&discounts=' + ($author$project$Main$boolString(model.at) + ('&date=' + $author$project$Main$strMaybeDate(model.U))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.y.aD) + ('&age=' + ($author$project$Main$stringMaybeInt(model.J.aD) + ('&county=' + ($author$project$Main$strCounty(model.ar) + ('&gender=' + (model.a1 + ('&tobacco=' + ($author$project$Main$boolString(model.aC) + ('&discounts=' + ($author$project$Main$boolString(model.at) + ('&date=' + $author$project$Main$strMaybeDate(model.U))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.ac, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.aa, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.ab, 'G', url4);
 		return $elm$http$Http$get(
 			{
-				a_: A2($elm$http$Http$expectJson, $author$project$Main$PlanResponse, $author$project$Main$planXDecoder),
+				a$: A2($elm$http$Http$expectJson, $author$project$Main$PlanResponse, $author$project$Main$planXDecoder),
 				v: url5
 			});
 	} else {
@@ -6545,13 +6545,13 @@ var $author$project$Main$getZip = function (model) {
 		var z = zip.a;
 		return $elm$http$Http$get(
 			{
-				a_: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
+				a$: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
 				v: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
 			});
 	} else {
 		return $elm$http$Http$get(
 			{
-				a_: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
+				a$: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
 				v: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + ''
 			});
 	}
@@ -6719,14 +6719,14 @@ var $elm$time$Time$toCivil = function (minutes) {
 	var year = yearOfEra + (era * 400);
 	return {
 		b6: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		a4: month,
+		a5: month,
 		bd: year + ((month <= 2) ? 1 : 0)
 	};
 };
 var $elm$time$Time$toMonth = F2(
 	function (zone, time) {
 		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a4;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).a5;
 		switch (_v0) {
 			case 1:
 				return 0;
@@ -6757,7 +6757,7 @@ var $elm$time$Time$toMonth = F2(
 var $author$project$MyDate$toString = function (cd) {
 	var yearString = $elm$core$String$fromInt(cd.bd);
 	var monthString = function () {
-		var _v0 = cd.a4;
+		var _v0 = cd.a5;
 		switch (_v0) {
 			case 0:
 				return 'January';
@@ -7152,7 +7152,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{ba: newState}),
+						{aN: newState}),
 					$elm$core$Platform$Cmd$none);
 			case 18:
 				var td = msg.a;
@@ -7171,7 +7171,7 @@ var $author$project$Main$update = F2(
 				return vModel.w ? _Utils_Tuple2(
 					_Utils_update(
 						vModel,
-						{a8: $elm$core$Maybe$Nothing, n: $author$project$Main$Loading}),
+						{a9: $elm$core$Maybe$Nothing, n: $author$project$Main$Loading}),
 					$author$project$Main$getPlans(vModel)) : _Utils_Tuple2(
 					_Utils_update(
 						vModel,
@@ -7273,7 +7273,7 @@ var $author$project$Main$update = F2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{a0: g})),
+							{a1: g})),
 					$elm$core$Platform$Cmd$none);
 			case 7:
 				var str = msg.a;
@@ -7391,7 +7391,7 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									aZ: response,
+									a_: response,
 									ar: $elm$core$List$head(response),
 									n: $author$project$Main$Ready
 								})),
@@ -7419,7 +7419,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								a8: $elm$core$Maybe$Just(response),
+								a9: $elm$core$Maybe$Just(response),
 								n: $author$project$Main$Results,
 								I: $elm$core$Maybe$Just(newRows),
 								v: nurl
@@ -7470,7 +7470,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								a7: $elm$core$Maybe$Just(pr_sort),
+								a8: $elm$core$Maybe$Just(pr_sort),
 								_: prs
 							}),
 						$elm$core$Platform$Cmd$none);
@@ -7927,7 +7927,7 @@ var $author$project$Main$renderForm = F3(
 						$author$project$Main$SetZip,
 						$author$project$Main$validateVI(model.y),
 						'two columns'),
-						A5($author$project$Main$selectbox, 'County', model.aZ, $author$project$Main$SelectCounty, 'three columns', 0),
+						A5($author$project$Main$selectbox, 'County', model.a_, $author$project$Main$SelectCounty, 'three columns', 0),
 						A5(
 						$author$project$Main$selectbox,
 						'Gender',
@@ -8335,7 +8335,7 @@ var $author$project$Main$totalRow = F4(
 var $author$project$Main$renderOutput = function (model) {
 	var showModel = model.ak || (model.ai || model.aj);
 	var pdp = $author$project$Main$safeCurrencyFloat(model._);
-	var partb = $author$project$Main$safeCurrencyFloat(model.a6);
+	var partb = $author$project$Main$safeCurrencyFloat(model.a7);
 	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
 	var _v0 = model.I;
 	if (!_v0.$) {
@@ -8364,7 +8364,7 @@ var $author$project$Main$renderOutput = function (model) {
 				A2(
 					$elm$core$List$map,
 					function (a) {
-						return $author$project$Main$safeString(model.a6);
+						return $author$project$Main$safeString(model.a7);
 					},
 					vr));
 			var nTotals = A4(
@@ -9074,75 +9074,71 @@ var $author$project$Main$renderResults = function (model) {
 	var showRows = $author$project$Main$safeConcat(
 		_List_fromArray(
 			[showPreferred, showNonPreferred, showOutside]));
-	if (!showRows.$) {
-		var sr = showRows.a;
-		return A2(
-			$elm$html$Html$div,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('row')
-						]),
-					_List_fromArray(
-						[
-							A3(
-							$author$project$Main$pdpSelectBox,
-							model.a7,
-							model._,
-							function (a) {
-								return $author$project$Main$SelectPDP(a);
-							})
-						])),
-					A4($author$project$Main$checkbox, 'Preferred Plans', model.ak, $author$project$Main$TogglePreferred, 'u-full-width'),
-					A4($author$project$Main$checkbox, 'Non-Preferred Plans', model.ai, $author$project$Main$ToggleNonPreferred, 'u-full-width'),
-					A4($author$project$Main$checkbox, 'Outside Plans', model.aj, $author$project$Main$ToggleOutside, 'u-full-width'),
-					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('three columns')
-						]),
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$button,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-									A2($elm$html$Html$Attributes$style, 'block', 'display'),
-									$elm$html$Html$Attributes$class('button-primary')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text('Show Output')
-								]))
-						])),
-					A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.ba, sr),
-					A2(
-					$elm$html$Html$button,
-					_List_fromArray(
-						[
-							$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
-							A2($elm$html$Html$Attributes$style, 'display', 'block')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Resubmit')
-						]))
-				]));
-	} else {
-		return A2(
-			$elm$html$Html$div,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('')
-				]));
-	}
+	return A2(
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						A3(
+						$author$project$Main$pdpSelectBox,
+						model.a8,
+						model._,
+						function (a) {
+							return $author$project$Main$SelectPDP(a);
+						})
+					])),
+				A4($author$project$Main$checkbox, 'Preferred Plans', model.ak, $author$project$Main$TogglePreferred, 'u-full-width'),
+				A4($author$project$Main$checkbox, 'Non-Preferred Plans', model.ai, $author$project$Main$ToggleNonPreferred, 'u-full-width'),
+				A4($author$project$Main$checkbox, 'Outside Plans', model.aj, $author$project$Main$ToggleOutside, 'u-full-width'),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('three columns')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+								A2($elm$html$Html$Attributes$style, 'block', 'display'),
+								$elm$html$Html$Attributes$class('button-primary')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Show Output')
+							]))
+					])),
+				function () {
+				if (!showRows.$) {
+					var sr = showRows.a;
+					return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.aN, sr);
+				} else {
+					return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.aN, _List_Nil);
+				}
+			}(),
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
+						A2($elm$html$Html$Attributes$style, 'display', 'block')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Resubmit')
+					]))
+			]));
 };
 var $author$project$Main$variousViews = function (model) {
 	var _v0 = model.n;

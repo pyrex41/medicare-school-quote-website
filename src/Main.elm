@@ -697,24 +697,25 @@ renderResults model =
     showOutside = viewRows model.viewOutside Outside model.tableRows
     showRows = safeConcat [showPreferred, showNonPreferred, showOutside]
   in
-    case showRows of
-      Just sr ->
-        div []
-          [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
-          , checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
-          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
-          , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
-          , div [ class "three columns" ]
-              [ button
-                [ onClick ShowOutput, style "block" "display", class "button-primary" ]
-                [ text "Show Output" ]
-              ]
-          , Table.view config model.tableState sr
-          , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
-          ]
-      Nothing ->
-        div []
-            [ text "" ]
+  div []
+    [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+    , checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
+    , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
+    , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
+    , div [ class "three columns" ]
+        [ button
+          [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+          [ text "Show Output" ]
+        ]
+    , case showRows of
+        Just sr ->
+          Table.view config model.tableState sr
+        Nothing ->
+          Table.view config model.tableState []
+          --div [] [ text "" ]
+    , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
+    ]
+
 
 renderOutput : Model -> Html msg
 renderOutput model =
