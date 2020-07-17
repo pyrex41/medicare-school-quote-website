@@ -387,14 +387,22 @@ update msg model =
     ToggleSelect i ->
       ( { model | tableRows =
                         Maybe.map
-                          ( \a -> List.map (toggle i) a )
+                          ( List.map (toggle i) )
                           model.tableRows
         }
       , Cmd.none)
 
     ToggleSelectAll ->
-      ( { model | selectButton = not model.selectButton }
-      , Cmd.none)
+      let
+        newBool = not model.selectButton
+      in
+        ( { model | selectButton = newBool
+                  , tableRows =
+                          Maybe.map
+                            ( List.map ( tfselect newBool ) )
+                            model.tableRows
+          }
+        , Cmd.none)
 
     ZipResponse rmsg ->
       case rmsg of

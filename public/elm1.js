@@ -5473,7 +5473,7 @@ var $author$project$Main$init = F3(
 				ba: $elm$core$Maybe$Nothing,
 				aO: true,
 				n: $author$project$Main$Ready,
-				I: $elm$core$Maybe$Nothing,
+				y: $elm$core$Maybe$Nothing,
 				aC: $billstclair$elm_sortable_table$Table$initialSort('Category'),
 				bd: $elm$core$Maybe$Nothing,
 				aD: false,
@@ -5483,7 +5483,7 @@ var $author$project$Main$init = F3(
 				ak: false,
 				al: false,
 				am: true,
-				y: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
+				z: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
 			},
 			A2($elm$core$Task$perform, $author$project$Main$GotTime, $elm$time$Time$now));
 	});
@@ -6446,7 +6446,7 @@ var $author$project$Main$getPDP = function (model) {
 	return $elm$http$Http$get(
 		{
 			a0: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
-			v: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.y.aE)
+			v: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.z.aE)
 		});
 };
 var $author$project$Main$PlanResponse = function (a) {
@@ -6519,7 +6519,7 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 var $author$project$Main$getPlans = function (model) {
 	if (model.w) {
 		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.y.aE) + ('&age=' + ($author$project$Main$stringMaybeInt(model.J.aE) + ('&county=' + ($author$project$Main$strCounty(model.as) + ('&gender=' + (model.a2 + ('&tobacco=' + ($author$project$Main$boolString(model.aD) + ('&discounts=' + ($author$project$Main$boolString(model.au) + ('&date=' + $author$project$Main$strMaybeDate(model.U))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.z.aE) + ('&age=' + ($author$project$Main$stringMaybeInt(model.J.aE) + ('&county=' + ($author$project$Main$strCounty(model.as) + ('&gender=' + (model.a2 + ('&tobacco=' + ($author$project$Main$boolString(model.aD) + ('&discounts=' + ($author$project$Main$boolString(model.au) + ('&date=' + $author$project$Main$strMaybeDate(model.U))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.ae, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.ac, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.ad, 'G', url4);
@@ -6540,7 +6540,7 @@ var $author$project$Main$countyDecoder = A2(
 	'zip',
 	$elm$json$Json$Decode$list($elm$json$Json$Decode$string));
 var $author$project$Main$getZip = function (model) {
-	var zip = model.y.aE;
+	var zip = model.z.aE;
 	if (!zip.$) {
 		var z = zip.a;
 		return $elm$http$Http$get(
@@ -6672,6 +6672,12 @@ var $elm$core$List$tail = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
+var $author$project$Main$tfselect = F2(
+	function (tf, tablerow) {
+		return _Utils_update(
+			tablerow,
+			{ai: tf});
+	});
 var $elm$time$Time$flooredDiv = F2(
 	function (numerator, denominator) {
 		return $elm$core$Basics$floor(numerator / denominator);
@@ -7096,7 +7102,7 @@ var $author$project$Main$isValid = function (model) {
 			[
 				$elm$core$String$length(model.Y) > 0,
 				model.J.w,
-				model.y.w,
+				model.z.w,
 				model.ae || (model.ac || model.ad),
 				!_Utils_eq(model.as, $elm$core$Maybe$Nothing)
 			]);
@@ -7244,7 +7250,7 @@ var $author$project$Main$update = F2(
 								model,
 								{
 									n: $author$project$Main$Ready,
-									y: A3(
+									z: A3(
 										$author$project$Main$ValidInt,
 										$elm$core$Maybe$Just(i),
 										true,
@@ -7259,7 +7265,7 @@ var $author$project$Main$update = F2(
 								_Utils_update(
 									model,
 									{
-										y: A3(
+										z: A3(
 											$author$project$Main$ValidInt,
 											$elm$core$Maybe$Just(i),
 											false,
@@ -7273,7 +7279,7 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									y: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Zip must be a number')
+									z: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Zip must be a number')
 								})),
 						$elm$core$Platform$Cmd$none);
 				}
@@ -7385,22 +7391,26 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							I: A2(
+							y: A2(
 								$elm$core$Maybe$map,
-								function (a) {
-									return A2(
-										$elm$core$List$map,
-										$author$project$Main$toggle(i),
-										a);
-								},
-								model.I)
+								$elm$core$List$map(
+									$author$project$Main$toggle(i)),
+								model.y)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 23:
+				var newBool = !model.aO;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aO: !model.aO}),
+						{
+							aO: newBool,
+							y: A2(
+								$elm$core$Maybe$map,
+								$elm$core$List$map(
+									$author$project$Main$tfselect(newBool)),
+								model.y)
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 15:
 				var rmsg = msg.a;
@@ -7441,7 +7451,7 @@ var $author$project$Main$update = F2(
 							{
 								ba: $elm$core$Maybe$Just(response),
 								n: $author$project$Main$Results,
-								I: $elm$core$Maybe$Just(newRows),
+								y: $elm$core$Maybe$Just(newRows),
 								v: nurl
 							}),
 						A2(
@@ -7943,9 +7953,9 @@ var $author$project$Main$renderForm = F3(
 						$author$project$Main$textboxCheck,
 						'ZIP',
 						'12345',
-						model.y,
+						model.z,
 						$author$project$Main$SetZip,
-						$author$project$Main$validateVI(model.y),
+						$author$project$Main$validateVI(model.z),
 						'two columns'),
 						A5($author$project$Main$selectbox, 'County', model.a$, $author$project$Main$SelectCounty, 'three columns', 0),
 						A5(
@@ -8357,7 +8367,7 @@ var $author$project$Main$renderOutput = function (model) {
 	var pdp = $author$project$Main$safeCurrencyFloat(model.ab);
 	var partb = $author$project$Main$safeCurrencyFloat(model.a8);
 	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
-	var _v0 = model.I;
+	var _v0 = model.y;
 	if (!_v0.$) {
 		var tr = _v0.a;
 		if (showModel) {
@@ -9116,9 +9126,9 @@ var $author$project$Main$viewRows = F3(
 		}
 	});
 var $author$project$Main$renderResults = function (model) {
-	var showPreferred = A3($author$project$Main$viewRows, model.am, 0, model.I);
-	var showOutside = A3($author$project$Main$viewRows, model.al, 2, model.I);
-	var showNonPreferred = A3($author$project$Main$viewRows, model.ak, 1, model.I);
+	var showPreferred = A3($author$project$Main$viewRows, model.am, 0, model.y);
+	var showOutside = A3($author$project$Main$viewRows, model.al, 2, model.y);
+	var showNonPreferred = A3($author$project$Main$viewRows, model.ak, 1, model.y);
 	var showRows = $author$project$Main$safeConcat(
 		_List_fromArray(
 			[showPreferred, showNonPreferred, showOutside]));
