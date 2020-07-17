@@ -6664,6 +6664,7 @@ var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
 };
+var $elm$core$List$sortBy = _List_sortBy;
 var $elm$core$List$tail = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -7498,8 +7499,14 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (!rmsg.$) {
 					var response = rmsg.a;
+					var pr_sort = A2(
+						$elm$core$List$sortBy,
+						function ($) {
+							return $.aL;
+						},
+						response);
 					var prs = function () {
-						var _v9 = $elm$core$List$head(response);
+						var _v9 = $elm$core$List$head(pr_sort);
 						if (!_v9.$) {
 							var pr = _v9.a;
 							return $elm$core$Maybe$Just(pr.ae);
@@ -8675,7 +8682,6 @@ var $elm$core$Basics$composeL = F3(
 var $billstclair$elm_sortable_table$Table$IncOrDec = function (a) {
 	return {$: 3, a: a};
 };
-var $elm$core$List$sortBy = _List_sortBy;
 var $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy = function (toComparable) {
 	return $billstclair$elm_sortable_table$Table$IncOrDec(
 		$elm$core$List$sortBy(toComparable));
@@ -8841,12 +8847,7 @@ var $author$project$Main$pdpSelectBox = F3(
 	function (mplist, selectedPdp, handle) {
 		if (!mplist.$) {
 			var plist = mplist.a;
-			var filt_plist = A2(
-				$elm$core$List$sortBy,
-				function ($) {
-					return $.aL;
-				},
-				plist);
+			var filt_plist = plist;
 			return A2(
 				$elm$html$Html$div,
 				_List_fromArray(

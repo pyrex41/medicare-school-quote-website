@@ -452,7 +452,8 @@ update msg model =
       case rmsg of
         Ok response ->
           let
-            prs = case (List.head response) of
+            pr_sort = List.sortBy .plan response
+            prs = case (List.head pr_sort) of
               Just pr ->
                 Just pr.rate
               Nothing ->
@@ -938,7 +939,7 @@ pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
       let
-        filt_plist = List.sortBy .plan plist
+        filt_plist = plist
       in
         div [class "six columns"] [
           label
