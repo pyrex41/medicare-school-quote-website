@@ -8848,7 +8848,6 @@ var $author$project$Main$pdpSelectBox = F3(
 	function (mplist, selectedPdp, handle) {
 		if (!mplist.$) {
 			var plist = mplist.a;
-			var filt_plist = plist;
 			return A2(
 				$elm$html$Html$div,
 				_List_fromArray(
@@ -8882,7 +8881,7 @@ var $author$project$Main$pdpSelectBox = F3(
 								A2(
 									$elm$core$List$map,
 									$author$project$Main$pdpOption(selectedPdp),
-									filt_plist))
+									plist))
 							]))
 					]));
 		} else {
