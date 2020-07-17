@@ -930,7 +930,8 @@ pdpOption def pr =
       else
         pr.plan
     r_val = pr.rate
-    p_text = p_name ++ " " ++ r_val
+    p_name_pad = String.padRight 50 ' ' p_name
+    p_text = p_name_pad ++ r_val
   in
     option [ value pr.rate,  selected <| (Just pr.rate) == def ] [ text p_text ]
 

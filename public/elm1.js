@@ -8827,7 +8827,8 @@ var $author$project$Main$pdpOption = F2(
 			$elm$core$String$endsWith,
 			'(PDP)',
 			$elm$core$String$trimRight(pr.aL)) ? A3($elm$core$String$slice, 0, -6, pr.aL) : pr.aL;
-		var p_text = p_name + (' ' + r_val);
+		var p_name_pad = A3($elm$core$String$padRight, 50, ' ', p_name);
+		var p_text = _Utils_ap(p_name_pad, r_val);
 		return A2(
 			$elm$html$Html$option,
 			_List_fromArray(
