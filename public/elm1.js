@@ -8534,17 +8534,17 @@ var $billstclair$elm_sortable_table$Table$customColumn = function (_v0) {
 		A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, viewData),
 		sorter);
 };
-var $billstclair$elm_sortable_table$Table$Decreasing = function (a) {
-	return {$: 2, a: a};
+var $billstclair$elm_sortable_table$Table$IncOrDec = function (a) {
+	return {$: 3, a: a};
 };
-var $billstclair$elm_sortable_table$Table$decreasingBy = function (toComparable) {
-	return $billstclair$elm_sortable_table$Table$Decreasing(
+var $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy = function (toComparable) {
+	return $billstclair$elm_sortable_table$Table$IncOrDec(
 		$elm$core$List$sortBy(toComparable));
 };
 var $author$project$Main$categoryColumn = $billstclair$elm_sortable_table$Table$customColumn(
 	{
 		Y: 'Category',
-		cT: $billstclair$elm_sortable_table$Table$decreasingBy(
+		cT: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(
 			function ($) {
 				return $.bI;
 			}),
@@ -8681,13 +8681,6 @@ var $billstclair$elm_sortable_table$Table$simpleThead = function (headers) {
 		A2($elm$core$List$map, $billstclair$elm_sortable_table$Table$simpleTheadHelp, headers));
 };
 var $billstclair$elm_sortable_table$Table$defaultCustomizations = {bj: $elm$core$Maybe$Nothing, ei: $billstclair$elm_sortable_table$Table$simpleRowAttrs, bN: _List_Nil, bO: _List_Nil, bP: $elm$core$Maybe$Nothing, bQ: $billstclair$elm_sortable_table$Table$simpleThead};
-var $billstclair$elm_sortable_table$Table$IncOrDec = function (a) {
-	return {$: 3, a: a};
-};
-var $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy = function (toComparable) {
-	return $billstclair$elm_sortable_table$Table$IncOrDec(
-		$elm$core$List$sortBy(toComparable));
-};
 var $billstclair$elm_sortable_table$Table$stringColumn = F2(
 	function (name, toStr) {
 		return {
