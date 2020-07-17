@@ -105,6 +105,7 @@ type alias TableRow =
   , naic : Int
   , selected : Bool
   , category : RowCategory
+  , priority : Int
   }
 
 
@@ -369,7 +370,9 @@ update msg model =
       , Cmd.none )
 
     TogglePreferred ->
-      ( validateModel { model | viewPreferred = not model.viewPreferred }
+      ( validateModel { model | viewPreferred = not model.viewPreferred
+                              , tableState = Table.initialSort "category"
+                      }
       , Cmd.none )
 
     ToggleNonPreferred ->
@@ -789,6 +792,14 @@ renderOutput model =
 
 -- TABLE CONFIGURATION
 
+categoryColumn : Table.Column TableRow Msg
+categoryColumn =
+  Table.customColumn
+    { name = "Category"
+    , viewData = String.fromInt << .priority
+    , sorter = Table.decreasingBy .priority
+    }
+
 viewRows : Bool -> RowCategory -> Maybe (List TableRow) -> Maybe ( List TableRow)
 viewRows b c l =
   if b then
@@ -832,7 +843,7 @@ config =
           , Table.stringColumn "G Rate" .gRate
           , Table.stringColumn "N Rate" .nRate
           , Table.stringColumn "F Rate" .fRate
-          , Table.intColumn "naic" .naic
+          , categoryColumn
           ]
       , customizations =
           { defaultCustomizations | rowAttrs = toRowAttrs }
@@ -1081,6 +1092,10 @@ planToRow pq =
   let
     category = findCategory pq.naic
     showRowInit = category == Preferred
+    priority = case category of
+      Preferred -> 1
+      NonPreferred -> 2
+      Outside -> 3
   in
     TableRow
       pq.company
@@ -1090,6 +1105,7 @@ planToRow pq =
       pq.naic
       showRowInit
       category
+      priority
 
 boolString : Bool -> String
 boolString b =
