@@ -796,7 +796,7 @@ categoryColumn : Table.Column TableRow Msg
 categoryColumn =
   Table.customColumn
     { name = "Category"
-    , viewData = String.fromInt << .priority
+    , viewData = (\a -> "") << .priority --String.fromInt << .priority
     , sorter = Table.increasingOrDecreasingBy .priority
     }
 

@@ -8550,7 +8550,9 @@ var $author$project$Main$categoryColumn = $billstclair$elm_sortable_table$Table$
 			}),
 		c1: A2(
 			$elm$core$Basics$composeL,
-			$elm$core$String$fromInt,
+			function (a) {
+				return '';
+			},
 			function ($) {
 				return $.bI;
 			})
