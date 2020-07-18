@@ -98,6 +98,7 @@ type alias PlanQuote =
 
 type alias TableRow =
   { company : String
+  , displayName : String
   , fRate : String
   , gRate : String
   , nRate : String
@@ -892,7 +893,8 @@ config =
       , toMsg = SetTableState
       , columns =
           [ checkboxColumn
-          , Table.stringColumn "Company" .company
+          , Table.stringColumn "Company" .displayName
+          , Table.stringColumn "Full Namee" .company
           , Table.stringColumn "G Rate" .gRate
           , Table.stringColumn "N Rate" .nRate
           , Table.stringColumn "F Rate" .fRate
@@ -1152,6 +1154,7 @@ planToRow pq =
     displayName = Maybe.withDefault pq.company (findDisplayName pq.naic category)
   in
     TableRow
+      pq.company
       displayName
       ( safeString pq.fRate )
       ( safeString pq.gRate )
