@@ -200,6 +200,7 @@ type Msg
   | ToggleNonPreferred
   | ToggleOutside
   | DeselectAll
+  | SelectAll Maybe (List TableRow)
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
@@ -425,7 +426,18 @@ update msg model =
       let
         newRows = case model.tableRows of
           Just tr ->
-            Just <| List.map (\a -> { a | selected = False }) tr
+            Just <| List.map (\a -> { a | selected = False } ) tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | tableRows = newRows }
+        , Cmd.none )
+
+    SelectAll ls ->
+      let
+        newRows = case ls of
+          Just r ->
+            Just <| List.map (\a -> { a | selected = True } ) r
           Nothing ->
             Nothing
       in
@@ -737,11 +749,7 @@ renderForm model func buttonLabel =
 renderResults : Model -> Html Msg
 renderResults model =
   let
-    showPreferred = viewRows model.viewPreferred Preferred model.tableRows
-    showNonPreferred = viewRows model.viewNonpreferred NonPreferred model.tableRows
-    showOutside = viewRows model.viewOutside Outside model.tableRows
-    showRows = safeConcat [showPreferred, showNonPreferred, showOutside]
-    bList = [model.viewPreferred, model.viewNonpreferred, model.viewOutside]
+    showRows = viewRowsAll model
   in
     div []
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
@@ -755,6 +763,11 @@ renderResults model =
             [ button
               [ onClick ShowOutput, style "block" "display", class "button-primary" ]
               [ text "Show Output" ]
+            ]
+          , div [ class "two columns" ]
+            [ button
+              [ onClick ( SelectAll showRows ), style "block" "display", class "button" ]
+              [ text "Select All" ]
             ]
           , div [ class "two columns" ]
             [ button
@@ -883,6 +896,15 @@ viewRows b c l =
         Nothing
   else
     Nothing
+
+viewRowsAll : Model -> Maybe (List TableRow)
+viewRowsAll model =
+  let
+    showPreferred = viewRows model.viewPreferred Preferred model.tableRows
+    showNonPreferred = viewRows model.viewNonpreferred NonPreferred model.tableRows
+    showOutside = viewRows model.viewOutside Outside model.tableRows
+  in
+    safeConcat [showPreferred, showNonPreferred, showOutside]
 
 safeAppend : Maybe (List a) -> Maybe (List a) -> Maybe (List a)
 safeAppend a b =
