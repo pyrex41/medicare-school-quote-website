@@ -9558,7 +9558,6 @@ var $author$project$Main$renderResults = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
-										A2($elm$html$Html$Attributes$style, 'block', 'display'),
 										$elm$html$Html$Attributes$class('button')
 									]),
 								_List_fromArray(
