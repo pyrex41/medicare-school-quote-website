@@ -824,7 +824,7 @@ renderOutput model =
         if showModel then
           let
             vr = List.filter (\a -> a.selected) tr
-            companyNames = toHeadRow "" <| List.map (\a -> a.company) vr
+            companyNames = toHeadRow "" <| List.map (\a -> a.displayName) vr
             pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
             partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
             fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
