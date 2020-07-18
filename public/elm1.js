@@ -9191,9 +9191,9 @@ var $author$project$Main$renderResults = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A4($author$project$Main$checkbox, 'Preferred Plans', model.V, $author$project$Main$TogglePreferred, 'three column'),
-						A4($author$project$Main$checkbox, 'Non-Preferred Plans', model.T, $author$project$Main$ToggleNonPreferred, 'three column'),
-						A4($author$project$Main$checkbox, 'Outside Plans', model.U, $author$project$Main$ToggleOutside, 'three column')
+						A4($author$project$Main$checkbox, 'Preferred Plans', model.V, $author$project$Main$TogglePreferred, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Non-Preferred Plans', model.T, $author$project$Main$ToggleNonPreferred, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Outside Plans', model.U, $author$project$Main$ToggleOutside, 'u-full-width')
 					])),
 				A2(
 				$elm$html$Html$div,
