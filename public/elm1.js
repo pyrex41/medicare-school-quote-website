@@ -5471,8 +5471,8 @@ var $author$project$Main$init = F3(
 				cA: 'all',
 				al: '',
 				ba: $elm$core$Maybe$Nothing,
-				o: $author$project$Main$Ready,
-				m: $elm$core$Maybe$Nothing,
+				m: $author$project$Main$Ready,
+				n: $elm$core$Maybe$Nothing,
 				R: $billstclair$elm_sortable_table$Table$initialSort('Category'),
 				bd: $elm$core$Maybe$Nothing,
 				aD: false,
@@ -7138,7 +7138,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{o: $author$project$Main$Output, w: nurl}),
+						{m: $author$project$Main$Output, w: nurl}),
 					A2(
 						$elm$browser$Browser$Navigation$pushUrl,
 						model.az,
@@ -7165,7 +7165,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							o: $author$project$Main$urlToRoute(url)
+							m: $author$project$Main$urlToRoute(url)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 19:
@@ -7192,17 +7192,17 @@ var $author$project$Main$update = F2(
 				return vModel.x ? _Utils_Tuple2(
 					_Utils_update(
 						vModel,
-						{ba: $elm$core$Maybe$Nothing, o: $author$project$Main$Loading}),
+						{ba: $elm$core$Maybe$Nothing, m: $author$project$Main$Loading}),
 					$author$project$Main$getPlans(vModel)) : _Utils_Tuple2(
 					_Utils_update(
 						vModel,
-						{o: $author$project$Main$Ready}),
+						{m: $author$project$Main$Ready}),
 					$elm$core$Platform$Cmd$none);
 			case 2:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{o: $author$project$Main$Loading}),
+						{m: $author$project$Main$Loading}),
 					$author$project$Main$getPDP(model));
 			case 3:
 				var str = msg.a;
@@ -7253,7 +7253,7 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									o: $author$project$Main$Ready,
+									m: $author$project$Main$Ready,
 									z: A3(
 										$author$project$Main$ValidInt,
 										$elm$core$Maybe$Just(i),
@@ -7368,7 +7368,7 @@ var $author$project$Main$update = F2(
 			case 20:
 				var newBool = !model.V;
 				var newRows = function () {
-					var _v4 = model.m;
+					var _v4 = model.n;
 					if (!_v4.$) {
 						var tr = _v4.a;
 						return $elm$core$Maybe$Just(
@@ -7381,7 +7381,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							m: newRows,
+							n: newRows,
 							R: $billstclair$elm_sortable_table$Table$initialSort('category'),
 							V: newBool
 						}),
@@ -7389,7 +7389,7 @@ var $author$project$Main$update = F2(
 			case 21:
 				var newBool = !model.T;
 				var newRows = function () {
-					var _v5 = model.m;
+					var _v5 = model.n;
 					if (!_v5.$) {
 						var tr = _v5.a;
 						return $elm$core$Maybe$Just(
@@ -7402,7 +7402,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							m: newRows,
+							n: newRows,
 							R: $billstclair$elm_sortable_table$Table$initialSort('category'),
 							T: newBool
 						}),
@@ -7410,7 +7410,7 @@ var $author$project$Main$update = F2(
 			case 22:
 				var newBool = !model.U;
 				var newRows = function () {
-					var _v6 = model.m;
+					var _v6 = model.n;
 					if (!_v6.$) {
 						var tr = _v6.a;
 						return $elm$core$Maybe$Just(
@@ -7423,7 +7423,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							m: newRows,
+							n: newRows,
 							R: $billstclair$elm_sortable_table$Table$initialSort('category'),
 							U: newBool
 						}),
@@ -7434,11 +7434,11 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							m: A2(
+							n: A2(
 								$elm$core$Maybe$map,
 								$elm$core$List$map(
 									$author$project$Main$toggle(i)),
-								model.m)
+								model.n)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 15:
@@ -7452,7 +7452,7 @@ var $author$project$Main$update = F2(
 								{
 									a$: response,
 									at: $elm$core$List$head(response),
-									o: $author$project$Main$Ready
+									m: $author$project$Main$Ready
 								})),
 						$author$project$Main$getPDP(model));
 				} else {
@@ -7461,7 +7461,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								o: $author$project$Main$Failure(0)
+								m: $author$project$Main$Failure(0)
 							}),
 						$elm$core$Platform$Cmd$none);
 				}
@@ -7479,8 +7479,8 @@ var $author$project$Main$update = F2(
 							model,
 							{
 								ba: $elm$core$Maybe$Just(response),
-								o: $author$project$Main$Results,
-								m: $elm$core$Maybe$Just(newRows),
+								m: $author$project$Main$Results,
+								n: $elm$core$Maybe$Just(newRows),
 								w: nurl
 							}),
 						A2(
@@ -7498,7 +7498,7 @@ var $author$project$Main$update = F2(
 							model,
 							{
 								al: $author$project$Main$errorToString(error),
-								o: $author$project$Main$Failure(2),
+								m: $author$project$Main$Failure(2),
 								w: eurl
 							}),
 						A2(
@@ -7540,7 +7540,7 @@ var $author$project$Main$update = F2(
 							model,
 							{
 								al: $author$project$Main$errorToString(error),
-								o: $author$project$Main$Failure(1)
+								m: $author$project$Main$Failure(1)
 							}),
 						$elm$core$Platform$Cmd$none);
 				}
@@ -7949,6 +7949,7 @@ var $author$project$Main$validateVI = function (field) {
 };
 var $author$project$Main$renderForm = F3(
 	function (model, func, buttonLabel) {
+		var loadText = _Utils_eq(model.m, $author$project$Main$Loading) ? 'Loading...' : '';
 		return A2(
 			$elm$html$Html$form,
 			_List_fromArray(
@@ -8018,16 +8019,26 @@ var $author$project$Main$renderForm = F3(
 						A4($author$project$Main$checkbox, 'Plan N', model.ai, $author$project$Main$ToggleN, 'u-full-width'),
 						A4($author$project$Main$checkbox, 'Plan F', model.ag, $author$project$Main$ToggleF, 'u-full-width'),
 						A2(
-						$elm$html$Html$button,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								A2($elm$html$Html$Attributes$style, 'block', 'display'),
-								$elm$html$Html$Attributes$class('button-primary'),
-								$elm$html$Html$Attributes$disabled(!model.x)
+								$elm$html$Html$Attributes$class('row')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Submit')
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'block', 'display'),
+										$elm$html$Html$Attributes$class('button-primary'),
+										$elm$html$Html$Attributes$disabled(!model.x)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Submit')
+									])),
+								$elm$html$Html$text(loadText)
 							]))
 					])));
 	});
@@ -8396,7 +8407,7 @@ var $author$project$Main$renderOutput = function (model) {
 	var pdp = $author$project$Main$safeCurrencyFloat(model.af);
 	var partb = $author$project$Main$safeCurrencyFloat(model.a8);
 	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
-	var _v0 = model.m;
+	var _v0 = model.n;
 	if (!_v0.$) {
 		var tr = _v0.a;
 		if (showModel) {
@@ -9154,9 +9165,9 @@ var $author$project$Main$viewRows = F3(
 		}
 	});
 var $author$project$Main$renderResults = function (model) {
-	var showPreferred = A3($author$project$Main$viewRows, model.V, 0, model.m);
-	var showOutside = A3($author$project$Main$viewRows, model.U, 2, model.m);
-	var showNonPreferred = A3($author$project$Main$viewRows, model.T, 1, model.m);
+	var showPreferred = A3($author$project$Main$viewRows, model.V, 0, model.n);
+	var showOutside = A3($author$project$Main$viewRows, model.U, 2, model.n);
+	var showNonPreferred = A3($author$project$Main$viewRows, model.T, 1, model.n);
 	var showRows = $author$project$Main$safeConcat(
 		_List_fromArray(
 			[showPreferred, showNonPreferred, showOutside]));
@@ -9247,7 +9258,7 @@ var $author$project$Main$renderResults = function (model) {
 			]));
 };
 var $author$project$Main$variousViews = function (model) {
-	var _v0 = model.o;
+	var _v0 = model.m;
 	switch (_v0.$) {
 		case 0:
 			var fail = _v0.a;

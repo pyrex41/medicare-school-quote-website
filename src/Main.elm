@@ -695,26 +695,32 @@ viewCheckbox { selected } =
 
 renderForm : Model -> Msg -> String -> Html Msg
 renderForm model func buttonLabel =
-  Html.form
-    [ onSubmit func
-    ]
-    ( List.map
-        (\a -> (div [ class "row" ] [ a ] ) )
-        [ textbox  "Name" "John Smith" model.name SetName "four columns"
-        , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) "two columns"
-        , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) "two columns"
-        , selectbox "County" model.counties SelectCounty "three columns" 0
-        , selectbox  "Gender" ["Male", "Female"] SelectGender "three columns" 0
-        , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate "three columns" 1
-        , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  "u-full-width"
-        , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts "u-full-width"
-        , h5 [ class "u-full-width" ] [ text "Which Plans?" ]
-        , checkbox "Plan G" model.planG ToggleG "u-full-width"
-        , checkbox "Plan N" model.planN ToggleN "u-full-width"
-        , checkbox "Plan F" model.planF ToggleF "u-full-width"
-        , button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
-        ]
-    )
+  let
+    loadText = if model.state == Loading then "Loading..." else ""
+  in
+    Html.form
+      [ onSubmit func
+      ]
+      ( List.map
+          (\a -> (div [ class "row" ] [ a ] ) )
+          [ textbox  "Name" "John Smith" model.name SetName "four columns"
+          , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) "two columns"
+          , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) "two columns"
+          , selectbox "County" model.counties SelectCounty "three columns" 0
+          , selectbox  "Gender" ["Male", "Female"] SelectGender "three columns" 0
+          , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate "three columns" 1
+          , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  "u-full-width"
+          , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts "u-full-width"
+          , h5 [ class "u-full-width" ] [ text "Which Plans?" ]
+          , checkbox "Plan G" model.planG ToggleG "u-full-width"
+          , checkbox "Plan N" model.planN ToggleN "u-full-width"
+          , checkbox "Plan F" model.planF ToggleF "u-full-width"
+          , div [ class "row" ]
+              [ button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
+              , text <| loadText
+              ]
+          ]
+      )
 
 renderResults : Model -> Html Msg
 renderResults model =
