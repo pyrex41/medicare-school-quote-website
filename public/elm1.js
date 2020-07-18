@@ -8038,7 +8038,16 @@ var $author$project$Main$renderForm = F3(
 									[
 										$elm$html$Html$text('Submit')
 									])),
-								$elm$html$Html$text(loadText)
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('one column')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(loadText)
+									]))
 							]))
 					])));
 	});
