@@ -402,7 +402,7 @@ update msg model =
         newBool = not model.viewOutside
         newRows = case model.tableRows of
           Just tr ->
-            Just <| setRows Preferred newBool tr
+            Just <| setRows Outside newBool tr
           Nothing ->
             Nothing
       in

@@ -5502,6 +5502,7 @@ var $author$project$Main$Failure = function (a) {
 var $author$project$Main$Loading = {$: 1};
 var $author$project$Main$NonPreferred = 1;
 var $author$project$Main$Output = {$: 4};
+var $author$project$Main$Outside = 2;
 var $author$project$Main$PDP = 1;
 var $author$project$Main$Plan = 2;
 var $author$project$Main$Preferred = 0;
@@ -6586,7 +6587,6 @@ var $author$project$Main$TableRow = F8(
 	function (company, fRate, gRate, nRate, naic, selected, category, priority) {
 		return {aV: category, W: company, ax: fRate, ay: gRate, aA: nRate, aa: naic, cB: priority, am: selected};
 	});
-var $author$project$Main$Outside = 2;
 var $elm$core$List$any = F2(
 	function (isOkay, list) {
 		any:
@@ -7414,7 +7414,7 @@ var $author$project$Main$update = F2(
 					if (!_v6.$) {
 						var tr = _v6.a;
 						return $elm$core$Maybe$Just(
-							A3($author$project$Main$setRows, 0, newBool, tr));
+							A3($author$project$Main$setRows, 2, newBool, tr));
 					} else {
 						return $elm$core$Maybe$Nothing;
 					}
