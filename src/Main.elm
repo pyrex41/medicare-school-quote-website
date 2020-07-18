@@ -20,6 +20,7 @@ import Dict exposing (Dict)
 import Time exposing (Month, utc)
 import MyDate exposing (CustomDate, addMonth)
 import Round
+import Presets exposing (naicCategory, displayNames)
 
 -- MAIN
 
@@ -68,7 +69,6 @@ type alias Model =
   , viewOutside : Bool
   , timeNow : Maybe CustomDate
   , dateSelectChoices : List (String, CustomDate)
-  , preset : String
   }
 
 
@@ -149,7 +149,6 @@ init flags url key =
       , viewOutside = False
       , timeNow = Nothing
       , dateSelectChoices = []
-      , preset = "all"
       }
     , Task.perform GotTime Time.now
     )
@@ -387,7 +386,7 @@ update msg model =
         newBool = not model.viewNonpreferred
         newRows = case model.tableRows of
           Just tr ->
-            Just <| setRows NonPreferred newBool tr
+            Just <| setRows NonPreferred False tr
           Nothing ->
             Nothing
       in
@@ -402,7 +401,7 @@ update msg model =
         newBool = not model.viewOutside
         newRows = case model.tableRows of
           Just tr ->
-            Just <| setRows Outside newBool tr
+            Just <| setRows Outside False tr
           Nothing ->
             Nothing
       in
@@ -1150,9 +1149,10 @@ planToRow pq =
       Preferred -> 1
       NonPreferred -> 2
       Outside -> 3
+    displayName = Maybe.withDefault pq.company (findDisplayName pq.naic category)
   in
     TableRow
-      pq.company
+      displayName
       ( safeString pq.fRate )
       ( safeString pq.gRate )
       ( safeString pq.nRate )
@@ -1320,60 +1320,33 @@ pdpDecoder =
 
 findCategory : Int -> RowCategory
 findCategory i =
-  let
-    preferred =
-      [ 66281 -- Transamerica
-      , 60054
-      , 67369 -- CIGNA
-      , 47171 --Blue Cross Blue Shielf of Kansas City
-      , 79143 --AARP Medicare Supplement Plans, insured by UnitedHealthcare
-      , 71412 --Mutual of Omaha
-      , 75052 --AETNA
-      ]
-    nonpreferred =
-      [ 79413  -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
-      , 66281  -- Transamerica
-      , 78700  -- AETNA HEALTH AND LIFE INSURANCE COMPANY
-      , 78972  -- (Anthem) Healthy Alliance Life Insurance Company
-      , 67369  -- Cigna
-      , 13100   -- Omaha Ins Co
-      ]
-  in
-    if List.member i preferred then
-      Preferred
+  if List.member i naicCategory.preferred then
+    Preferred
+  else
+    if List.member i naicCategory.nonPreferred then
+      NonPreferred
     else
-      if List.member i nonpreferred then
-        NonPreferred
-      else
-        Outside
+      Outside
 
 
+findDisplayName : Int -> RowCategory -> Maybe String
+findDisplayName i cat =
+  case cat of
+    Preferred ->
+      findDisplayNameUtil i displayNames.preferred
+    NonPreferred ->
+      findDisplayNameUtil i displayNames.nonPreferred
+    Outside ->
+      Nothing
 
-presets : Dict String (List Int)
-presets =
-  Dict.fromList
-    [ ( "Preferred",  [ 66281 -- Transamerica
-                        , 60054
-                        , 67369 -- CIGNA
-                        , 47171 --Blue Cross Blue Shielf of Kansas City
-                        , 79143 --AARP Medicare Supplement Plans, insured by UnitedHealthcare
-                        , 71412 --Mutual of Omaha
-                        , 75052 --AETNA
-                        ]
-      )
-    , ( "Non-Preferred",  [ 79413  -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
-                        , 66281  -- Transamerica
-                        , 78700  -- AETNA HEALTH AND LIFE INSURANCE COMPANY
-                        , 78972  -- (Anthem) Healthy Alliance Life Insurance Company
-                        , 67369  -- Cigna
-                        , 13100   -- Omaha Ins Co
-                        ]
-      )
-    , ( "Outside",  [ 72052  -- AETNA Health Insurance
-                        , 72850 -- united world life
-                        , 67369 -- Cigna
-                        , 79413 -- AARP Medicare Supplement Plans, insured by UnitedHealthcare
-                        , 70580 -- Humana Insurance Company (Value)
-                        ]
-      )
-    ]
+
+findDisplayNameUtil : Int -> (List (Int, String)) -> Maybe String
+findDisplayNameUtil i tpls =
+  let
+    ls = List.filter (\a -> (Tuple.first a) == i) tpls
+  in
+    case List.head(ls) of
+      Just tup ->
+        Just <| Tuple.second(tup)
+      Nothing ->
+        Nothing
