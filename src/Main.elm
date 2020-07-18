@@ -778,14 +778,14 @@ renderResults model =
           [ div [ class "two columns" ]
               [ div [ class "u-full-width" ]
                     [ button
-                      [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+                      [ onClick ShowOutput, class "button-primary" ]
                       [ text "Show Output" ]
                     ]
               ]
           , div [ class "two columns"]
               [ div [ class "u-full-width" ]
                     [ button
-                      [ onClick ( SelectAll naicShow ), style "block" "display", class "button" ]
+                      [ onClick ( SelectAll naicShow ), class "button" ]
                       [ text "Select All" ]
                     ]
               ]
