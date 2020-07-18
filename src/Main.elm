@@ -603,7 +603,6 @@ variousViews model =
       div [ ]
           [ div [ class "row" ]
             [ renderForm model SubmitForm "Submit" ]
-          , text <| "Loading...."
           ]
 
     Results ->
@@ -716,7 +715,7 @@ renderForm model func buttonLabel =
           , checkbox "Plan N" model.planN ToggleN "u-full-width"
           , checkbox "Plan F" model.planF ToggleF "u-full-width"
           , div [ class "row" ]
-              [ div [ class "three columns" ]
+              [ div [ class "two columns" ]
                   [ button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ] ]
               , div [ class "one column" ] [ text <| loadText ]
               ]

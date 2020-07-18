@@ -8030,7 +8030,7 @@ var $author$project$Main$renderForm = F3(
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('three columns')
+										$elm$html$Html$Attributes$class('two columns')
 									]),
 								_List_fromArray(
 									[
@@ -9378,8 +9378,7 @@ var $author$project$Main$variousViews = function (model) {
 						_List_fromArray(
 							[
 								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
-							])),
-						$elm$html$Html$text('Loading....')
+							]))
 					]));
 		case 3:
 			return A2(
