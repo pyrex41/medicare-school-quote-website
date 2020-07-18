@@ -200,7 +200,7 @@ type Msg
   | ToggleNonPreferred
   | ToggleOutside
   | DeselectAll
-  | SelectAll Maybe (List TableRow)
+  | SelectAll (Maybe (List TableRow))
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
