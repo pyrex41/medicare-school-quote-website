@@ -9511,16 +9511,25 @@ var $author$project$Main$renderResults = function (model) {
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$button,
+								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-										A2($elm$html$Html$Attributes$style, 'block', 'display'),
-										$elm$html$Html$Attributes$class('button-primary')
+										$elm$html$Html$Attributes$class('u-full-width')
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Show Output')
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+												A2($elm$html$Html$Attributes$style, 'block', 'display'),
+												$elm$html$Html$Attributes$class('button-primary')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Show Output')
+											]))
 									]))
 							])),
 						A2(

@@ -776,10 +776,12 @@ renderResults model =
           ]
       , div [ class "row" ]
           [ div [ class "two columns" ]
-            [ button
-              [ onClick ShowOutput, style "block" "display", class "button-primary" ]
-              [ text "Show Output" ]
-            ]
+              [ div [ class "u-full-width" ]
+                    [ button
+                      [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+                      [ text "Show Output" ]
+                    ]
+              ]
           , div [ class "two columns" ]
             [ button
               [ onClick ( SelectAll naicShow ), style "block" "display", class "button" ]
