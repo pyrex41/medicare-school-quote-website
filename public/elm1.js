@@ -8027,27 +8027,36 @@ var $author$project$Main$renderForm = F3(
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'block', 'display'),
-										$elm$html$Html$Attributes$class('button-primary'),
-										$elm$html$Html$Attributes$disabled(!model.x)
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Submit')
-									])),
-								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('one column')
+										$elm$html$Html$Attributes$class('three columns')
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text(loadText)
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'block', 'display'),
+												$elm$html$Html$Attributes$class('button-primary'),
+												$elm$html$Html$Attributes$disabled(!model.x)
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Submit')
+											]))
 									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('one column')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(loadText)
 							]))
 					])));
 	});

@@ -716,9 +716,11 @@ renderForm model func buttonLabel =
           , checkbox "Plan N" model.planN ToggleN "u-full-width"
           , checkbox "Plan F" model.planF ToggleF "u-full-width"
           , div [ class "row" ]
-              [ button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
-              , div [ class "one column" ] [text <| loadText]
+              [ div [ class "three columns" ]
+                [ button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
+                ]
               ]
+          , div [ class "one column" ] [ text <| loadText]
           ]
       )
 
