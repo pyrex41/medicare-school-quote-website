@@ -9199,7 +9199,7 @@ var $author$project$Main$renderResults = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('three columns')
+						$elm$html$Html$Attributes$class('row')
 					]),
 				_List_fromArray(
 					[
@@ -9216,14 +9216,23 @@ var $author$project$Main$renderResults = function (model) {
 								$elm$html$Html$text('Show Output')
 							]))
 					])),
-				function () {
-				if (!showRows.$) {
-					var sr = showRows.a;
-					return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.R, sr);
-				} else {
-					return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.R, _List_Nil);
-				}
-			}(),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						function () {
+						if (!showRows.$) {
+							var sr = showRows.a;
+							return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.R, sr);
+						} else {
+							return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.R, _List_Nil);
+						}
+					}()
+					])),
 				A2(
 				$elm$html$Html$button,
 				_List_fromArray(

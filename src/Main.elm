@@ -732,16 +732,18 @@ renderResults model =
           , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
           , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
           ]
-      , div [ class "three columns" ]
+      , div [ class "row" ]
           [ button
             [ onClick ShowOutput, style "block" "display", class "button-primary" ]
             [ text "Show Output" ]
           ]
-      , case showRows of
-          Just sr ->
-            Table.view config model.tableState sr
-          Nothing ->
-            Table.view config model.tableState []
+      , div [ class "row" ]
+          [ case showRows of
+              Just sr ->
+                Table.view config model.tableState sr
+              Nothing ->
+                Table.view config model.tableState []
+          ]
             --div [] [ text "" ]
       , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
       ]
