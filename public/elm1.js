@@ -9457,7 +9457,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('float-right')
+								$elm$html$Html$Attributes$class('two columns')
 							]),
 						_List_fromArray(
 							[
@@ -9478,7 +9478,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('float-left')
+								$elm$html$Html$Attributes$class('two columns')
 							]),
 						_List_fromArray(
 							[
