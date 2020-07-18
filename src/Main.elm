@@ -718,9 +718,9 @@ renderForm model func buttonLabel =
           , div [ class "row" ]
               [ div [ class "three columns" ]
                 [ button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ]
+                , div [ class "one column" ] [ text <| loadText]
                 ]
               ]
-          , div [ class "one column" ] [ text <| loadText]
           ]
       )
 
