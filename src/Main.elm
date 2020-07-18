@@ -859,7 +859,7 @@ viewRows b c l =
   if b then
     case l of
       Just ll ->
-        Just <| List.sortBy .company <| List.filter (\a -> a.category == c) ll
+        Just <| List.sortBy .displayName <| List.filter (\a -> a.category == c) ll
       Nothing ->
         Nothing
   else
@@ -894,7 +894,7 @@ config =
       , columns =
           [ checkboxColumn
           , Table.stringColumn "Company" .displayName
-          , Table.stringColumn "Full Namee" .company
+          , Table.stringColumn "Full Name" .company
           , Table.stringColumn "G Rate" .gRate
           , Table.stringColumn "N Rate" .nRate
           , Table.stringColumn "F Rate" .fRate
