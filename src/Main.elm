@@ -751,12 +751,16 @@ renderResults model =
           , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
           ]
       , div [ class "row" ]
-          [ button
-            [ onClick ShowOutput, style "block" "display", class "button-primary" ]
-            [ text "Show Output" ]
-          , button
-            [ onClick DeselectAll, style "block" "display", class "button" ]
-            [ text "Deselect All" ]
+          [ div [ class "float-right" ]
+            [ button
+              [ onClick ShowOutput, style "block" "display", class "button-primary" ]
+              [ text "Show Output" ]
+            ]
+          , div [ class "float-left" ]
+            [ button
+              [ onClick DeselectAll, style "block" "display", class "button" ]
+              [ text "Deselect All" ]
+            ]
           ]
       , div [ class "row" ]
           [ case showRows of
