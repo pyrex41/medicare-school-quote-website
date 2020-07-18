@@ -200,7 +200,7 @@ type Msg
   | ToggleNonPreferred
   | ToggleOutside
   | DeselectAll
-  | SelectAll (Maybe (List TableRow))
+  | SelectAll (Maybe (List Int))
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
@@ -433,11 +433,15 @@ update msg model =
         ( { model | tableRows = newRows }
         , Cmd.none )
 
-    SelectAll ls ->
+    SelectAll ils ->
       let
-        newRows = case ls of
-          Just r ->
-            Just <| List.map (\a -> { a | selected = True } ) r
+        newRows = case model.tableRows of
+          Just tr ->
+            case ils of
+              Just ii ->
+                Just <| List.map ( selectByNaic ii ) tr
+              Nothing ->
+                Nothing
           Nothing ->
             Nothing
       in
@@ -532,6 +536,13 @@ toggle : Int -> TableRow -> TableRow
 toggle i tablerow =
   if tablerow.naic == i then
     { tablerow | selected = not tablerow.selected }
+  else
+    tablerow
+
+selectByNaic : (List Int) -> TableRow -> TableRow
+selectByNaic  ls tablerow =
+  if (List.member tablerow.naic ls) then
+    { tablerow | selected = True }
   else
     tablerow
 
@@ -750,6 +761,11 @@ renderResults : Model -> Html Msg
 renderResults model =
   let
     showRows = viewRowsAll model
+    naicShow = case showRows of
+      Just sr ->
+        Just <| List.map (\a -> a.naic) sr
+      Nothing ->
+        Nothing
   in
     div []
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
@@ -766,7 +782,7 @@ renderResults model =
             ]
           , div [ class "two columns" ]
             [ button
-              [ onClick ( SelectAll showRows ), style "block" "display", class "button" ]
+              [ onClick ( SelectAll naicShow ), style "block" "display", class "button" ]
               [ text "Select All" ]
             ]
           , div [ class "two columns" ]
