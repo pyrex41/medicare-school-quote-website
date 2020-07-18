@@ -199,6 +199,7 @@ type Msg
   | TogglePreferred
   | ToggleNonPreferred
   | ToggleOutside
+  | DeselectAll
   | GotTime Time.Posix
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
@@ -419,6 +420,17 @@ update msg model =
                           model.tableRows
         }
       , Cmd.none)
+
+    DeselectAll ->
+      let
+        newRows = case model.tableRows of
+          Just tr ->
+            Just <| List.map (\a -> { a | selected = False }) tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | tableRows = newRows }
+        , Cmd.none )
 
     ZipResponse rmsg ->
       case rmsg of
@@ -742,6 +754,9 @@ renderResults model =
           [ button
             [ onClick ShowOutput, style "block" "display", class "button-primary" ]
             [ text "Show Output" ]
+          , button
+            [ onClick DeselectAll, style "block" "display", class "button" ]
+            [ text "Deselect All" ]
           ]
       , div [ class "row" ]
           [ case showRows of
