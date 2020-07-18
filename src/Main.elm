@@ -782,16 +782,20 @@ renderResults model =
                       [ text "Show Output" ]
                     ]
               ]
-          , div [ class "two columns" ]
-            [ button
-              [ onClick ( SelectAll naicShow ), style "block" "display", class "button" ]
-              [ text "Select All" ]
-            ]
-          , div [ class "two columns" ]
-            [ button
-              [ onClick DeselectAll, class "button" ]
-              [ text "Deselect All" ]
-            ]
+          , div [ class "two columns"]
+              [ div [ class "u-full-width" ]
+                    [ button
+                      [ onClick ( SelectAll naicShow ), style "block" "display", class "button" ]
+                      [ text "Select All" ]
+                    ]
+              ]
+          , div [ class "two columns"]
+              [ div [ class "two columns" ]
+                    [ button
+                      [ onClick DeselectAll, class "button" ]
+                      [ text "Deselect All" ]
+                    ]
+              ]
           ]
       , div [ class "row" ]
           [ case showRows of
