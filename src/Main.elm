@@ -601,7 +601,7 @@ variousViews model =
 
     Loading ->
       div [ ]
-          [ div []
+          [ div [ class "row" ]
             [ renderForm model SubmitForm "Submit" ]
           , text <| "Loading...."
           ]

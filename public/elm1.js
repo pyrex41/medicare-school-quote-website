@@ -9342,7 +9342,10 @@ var $author$project$Main$variousViews = function (model) {
 					[
 						A2(
 						$elm$html$Html$div,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('row')
+							]),
 						_List_fromArray(
 							[
 								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
