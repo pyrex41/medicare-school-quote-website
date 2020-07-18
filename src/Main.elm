@@ -728,9 +728,9 @@ renderResults model =
     div []
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
-          [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
-          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
-          , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
+          [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred "three column"
+          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "three column"
+          , checkbox "Outside Plans" model.viewOutside ToggleOutside "three column"
           ]
       , div [ class "row" ]
           [ button
