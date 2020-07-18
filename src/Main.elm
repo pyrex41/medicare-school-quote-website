@@ -368,18 +368,49 @@ update msg model =
       , Cmd.none )
 
     TogglePreferred ->
-      ( validateModel { model | viewPreferred = not model.viewPreferred
-                              , tableState = Table.initialSort "category"
-                      }
-      , Cmd.none )
+      let
+        newBool = not model.viewPreferred
+        newRows = case model.tableRows of
+          Just tr ->
+            Just <| setRows Preferred newBool tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | viewPreferred = newBool
+                  , tableRows = newRows
+                  , tableState = Table.initialSort "category"
+          }
+        , Cmd.none )
 
     ToggleNonPreferred ->
-      ( validateModel { model | viewNonpreferred = not model.viewNonpreferred }
-      , Cmd.none )
+      let
+        newBool = not model.viewNonpreferred
+        newRows = case model.tableRows of
+          Just tr ->
+            Just <| setRows NonPreferred newBool tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | viewNonpreferred = newBool
+                  , tableRows = newRows
+                  , tableState = Table.initialSort "category"
+          }
+        , Cmd.none )
 
     ToggleOutside ->
-      ( validateModel { model | viewOutside = not model.viewOutside }
-      , Cmd.none )
+      let
+        newBool = not model.viewOutside
+        newRows = case model.tableRows of
+          Just tr ->
+            Just <| setRows Preferred newBool tr
+          Nothing ->
+            Nothing
+      in
+        ( { model | viewOutside = newBool
+                  , tableRows = newRows
+                  , tableState = Table.initialSort "category"
+          }
+        , Cmd.none )
 
     ToggleSelect i ->
       ( { model | tableRows =
@@ -795,6 +826,18 @@ categoryColumn =
     , viewData = categoryLabel << .category --String.fromInt << .priority
     , sorter = Table.increasingOrDecreasingBy .priority
     }
+
+setRows : RowCategory -> Bool -> List TableRow -> List TableRow
+setRows cat b trls =
+  List.map
+    ( \a ->
+        if a.category == cat then
+          { a | selected  = b }
+        else
+          a
+    )
+    trls
+
 
 categoryLabel : RowCategory -> String
 categoryLabel r =
