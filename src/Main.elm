@@ -787,7 +787,7 @@ renderResults model =
             ]
           , div [ class "two columns" ]
             [ button
-              [ onClick DeselectAll, style "block" "display", class "button" ]
+              [ onClick DeselectAll, class "button" ]
               [ text "Deselect All" ]
             ]
           ]
