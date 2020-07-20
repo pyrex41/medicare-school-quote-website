@@ -9213,7 +9213,7 @@ var $author$project$Main$pdpOption = F2(
 					$elm$html$Html$Attributes$value(p_text),
 					$elm$html$Html$Attributes$selected(
 					_Utils_eq(
-						$elm$core$Maybe$Just(pr.rate),
+						$elm$core$Maybe$Just(p_text),
 						def))
 				]),
 			_List_fromArray(

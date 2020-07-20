@@ -1089,7 +1089,7 @@ pdpOption def pr =
     r_val = pr.rate
     p_text = p_name ++ "   |   " ++ r_val
   in
-    option [ value p_text,  selected <| (Just pr.rate) == def ] [ text p_text ]
+    option [ value p_text,  selected <| (Just p_text) == def ] [ text p_text ]
 
 pdpSelectBox : Maybe (List PdpRecord) -> Maybe String -> (String -> Msg) -> Html Msg
 pdpSelectBox mplist selectedPdp handle =
