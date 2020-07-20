@@ -834,7 +834,7 @@ renderOutput model =
     pl = List.map Tuple.second tlf
     tables = List.map (outputTable model) pl
   in
-    div [] <| [personalInfo model] ++ tables
+    div [] <| [(personalInfo model), hr [] []] ++ tables
 
 
 renderOutputOld : Model -> Html msg
@@ -923,7 +923,7 @@ personalInfo model =
   in
     div []
       [ div [ class "row" ]
-        [ h2 [] [ text model.name ] ]
+        [ strong [] [ text model.name ] ]
       , div [ class "row"]
         [ p [ ] [ text row2 ] ]
       , div [ class "row" ]

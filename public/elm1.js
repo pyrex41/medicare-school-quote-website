@@ -8323,6 +8323,7 @@ var $author$project$Main$renderForm = F3(
 var $author$project$Main$F = {$: 'F'};
 var $author$project$Main$G = {$: 'G'};
 var $author$project$Main$N = {$: 'N'};
+var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
@@ -8808,8 +8809,8 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$p = _VirtualDom_node('p');
+var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
 		var _v2 = model.zip.value;
@@ -8853,7 +8854,7 @@ var $author$project$Main$personalInfo = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$h2,
+						$elm$html$Html$strong,
 						_List_Nil,
 						_List_fromArray(
 							[
@@ -8919,7 +8920,8 @@ var $author$project$Main$renderOutput = function (model) {
 		_Utils_ap(
 			_List_fromArray(
 				[
-					$author$project$Main$personalInfo(model)
+					$author$project$Main$personalInfo(model),
+					A2($elm$html$Html$hr, _List_Nil, _List_Nil)
 				]),
 			tables));
 };
