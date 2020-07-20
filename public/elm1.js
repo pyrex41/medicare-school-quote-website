@@ -8751,11 +8751,11 @@ var $author$project$Main$outputTable = F2(
 			var pText = function () {
 				switch (pt.$) {
 					case 'G':
-						return 'G';
+						return 'PLAN G';
 					case 'N':
-						return 'N';
+						return 'PLAN N';
 					default:
-						return 'F';
+						return 'PLAN F';
 				}
 			}();
 			var insuranceTotal = A2(
@@ -8783,7 +8783,7 @@ var $author$project$Main$outputTable = F2(
 			var grandTotalRow = A2($author$project$Main$simpleTotalRow, 'Grand Monthly Total', grandTotal);
 			var companyNames = A2(
 				$author$project$Main$toHeadRow,
-				'',
+				pText,
 				A2(
 					$elm$core$List$map,
 					function ($) {
@@ -8795,25 +8795,6 @@ var $author$project$Main$outputTable = F2(
 				_List_Nil,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$h5,
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'text-align', 'left')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('PLAN ' + pText)
-									]))
-							])),
 						A2(
 						$elm$html$Html$table,
 						_List_fromArray(

@@ -867,11 +867,11 @@ outputTable model pt =
     Just tr ->
       let
         pText = case pt of
-          G -> "G"
-          N -> "N"
-          F -> "F"
+          G -> "PLAN G"
+          N -> "PLAN N"
+          F -> "PLAN F"
         vr = List.sortBy ( \a -> a.displayName ) <| List.filter (\a -> a.selected) tr
-        companyNames = toHeadRow "" <| List.map .displayName vr
+        companyNames = toHeadRow pText <| List.map .displayName vr
         rates = rateUtil pt vr
         rateRow = toBodyRow (pTextUtil pt) [] rates
         pdp = safeCurrencyFloat model.pdpSelect
@@ -884,9 +884,7 @@ outputTable model pt =
         grandTotalRow = simpleTotalRow "Grand Monthly Total" grandTotal
       in
         div []
-            [ div [ class "row" ]
-              [ h5 [ style "text-align" "left" ] [ text ("PLAN "++pText) ] ]
-            , table [ class "u-full-width", style "table-layout" "fixed" ]
+            [ table [ class "u-full-width", style "table-layout" "fixed" ]
                 [ thead [] [ companyNames ]
                 , tbody []
                   [ rateRow
