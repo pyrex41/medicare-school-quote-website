@@ -8818,7 +8818,8 @@ var $author$project$Main$outputTable = F2(
 						$elm$html$Html$table,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('u-full-width'),
+								A2($elm$html$Html$Attributes$style, 'table-layout', 'fixed')
 							]),
 						_List_fromArray(
 							[

@@ -886,7 +886,7 @@ outputTable model pt =
         div []
             [ div [ class "row" ]
               [ h5 [ style "text-align" "left" ] [ text ("PLAN "++pText) ] ]
-            , table [ class "u-full-width" ]
+            , table [ class "u-full-width", style "table-layout" "fixed" ]
                 [ thead [] [ companyNames ]
                 , tbody []
                   [ rateRow
