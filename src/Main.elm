@@ -586,7 +586,12 @@ view : Model -> Browser.Document Msg
 view model =
   { title = "Enlightnu Quoting App"
   , body =
-      [ div [ class "container"]
+      [ div [ class "container"
+            , style "display" "block"
+            , style "width" "50%"
+            , style "margin-left" "auto"
+            , style "margin-right" "auto"
+            ]
         [ img [ src "images/logo.png"
               , height 134
               , width 642

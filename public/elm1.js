@@ -7860,6 +7860,8 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
 var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -8084,8 +8086,6 @@ var $author$project$Main$selectbox = F5(
 						]))
 				]));
 	});
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $author$project$Main$textbox = F5(
 	function (title_, placeholder_, fvalue, handle, class_) {
@@ -9900,7 +9900,11 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('container')
+						$elm$html$Html$Attributes$class('container'),
+						A2($elm$html$Html$Attributes$style, 'display', 'block'),
+						A2($elm$html$Html$Attributes$style, 'width', '50%'),
+						A2($elm$html$Html$Attributes$style, 'margin-left', 'auto'),
+						A2($elm$html$Html$Attributes$style, 'margin-right', 'auto')
 					]),
 				_List_fromArray(
 					[
