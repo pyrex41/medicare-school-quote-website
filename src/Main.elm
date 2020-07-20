@@ -885,7 +885,7 @@ outputTable model pt =
       in
         div []
             [ div [ class "row" ]
-              [ h2 [ style "text-align" "center" ] [ text ("PLAN "++pText) ] ]
+              [ h5 [ style "text-align" "left" ] [ text ("PLAN "++pText) ] ]
             , table [ class "u-full-width" ]
                 [ thead [] [ companyNames ]
                 , tbody []

@@ -8569,7 +8569,6 @@ var $author$project$Main$currencyAddTwo = F2(
 	function (a, b) {
 		return (!b) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, a + b));
 	});
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $author$project$Main$pTextUtil = function (pt) {
 	switch (pt.$) {
@@ -8805,10 +8804,10 @@ var $author$project$Main$outputTable = F2(
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$h2,
+								$elm$html$Html$h5,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+										A2($elm$html$Html$Attributes$style, 'text-align', 'left')
 									]),
 								_List_fromArray(
 									[

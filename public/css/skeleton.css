@@ -221,7 +221,7 @@ input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
   background-color: #f79452;
-  border-color: #36b2a1; }
+  border-color: #f79452; }
 .button.button-primary:disabled,
 button.button-primary:disabled,
 input[type="submit"].button-primary:disabled,
