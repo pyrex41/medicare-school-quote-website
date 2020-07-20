@@ -8569,6 +8569,7 @@ var $author$project$Main$currencyAddTwo = F2(
 	function (a, b) {
 		return (!b) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, a + b));
 	});
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $author$project$Main$pTextUtil = function (pt) {
 	switch (pt.$) {
@@ -8748,6 +8749,16 @@ var $author$project$Main$outputTable = F2(
 						return $author$project$Main$safeString(model.partB);
 					},
 					vr));
+			var pText = function () {
+				switch (pt.$) {
+					case 'G':
+						return 'G';
+					case 'N':
+						return 'N';
+					default:
+						return 'F';
+				}
+			}();
 			var insuranceTotal = A2(
 				$elm$core$List$map,
 				function (r) {
@@ -8785,6 +8796,25 @@ var $author$project$Main$outputTable = F2(
 				_List_Nil,
 				_List_fromArray(
 					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('row')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h2,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('PLAN ' + pText)
+									]))
+							])),
 						A2(
 						$elm$html$Html$table,
 						_List_fromArray(
