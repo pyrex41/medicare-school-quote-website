@@ -8757,8 +8757,7 @@ var $author$project$Main$outputTable = F2(
 				var _v3 = model.pdpSelect;
 				if (_v3.$ === 'Just') {
 					var pr = _v3.a;
-					return $elm$core$Maybe$Just(
-						$author$project$Main$pdpFullString(pr));
+					return $elm$core$Maybe$Just(pr.rate);
 				} else {
 					return $elm$core$Maybe$Nothing;
 				}

@@ -902,7 +902,7 @@ outputTable model pt =
             0.0
         pdpString = case model.pdpSelect of
           Just pr ->
-            Just <| pdpFullString pr
+            Just pr.rate
           Nothing ->
             Nothing
         pdpRow = toBodyRow "Drug Plan Monthly Premium" [] <| List.map (\a -> safeString pdpString) vr
