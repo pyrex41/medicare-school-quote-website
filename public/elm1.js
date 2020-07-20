@@ -8808,8 +8808,8 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
-var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$html$Html$h4 = _VirtualDom_node('h4');
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
 		var _v2 = model.zip.value;
@@ -8853,7 +8853,7 @@ var $author$project$Main$personalInfo = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$h3,
+						$elm$html$Html$h2,
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('six columns')
@@ -8872,7 +8872,7 @@ var $author$project$Main$personalInfo = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$h4,
+						$elm$html$Html$p,
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('six columns')
@@ -8891,7 +8891,7 @@ var $author$project$Main$personalInfo = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$h4,
+						$elm$html$Html$p,
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('u-full-width')
@@ -9210,7 +9210,6 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 		},
 		toMsg: $author$project$Main$SetTableState
 	});
-var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$core$String$endsWith = _String_endsWith;
 var $elm$core$String$trimRight = _String_trimRight;
 var $author$project$Main$pdpOption = F2(
