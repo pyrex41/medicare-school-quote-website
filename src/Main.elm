@@ -910,21 +910,11 @@ outputTable model pt =
         pdp = safeCurrencyFloat model.pdpSelect
         pdpRow = toBodyRow "Drug Plan Monthly Premium" [] <| List.map (\a -> safeString model.pdpSelect) vr
         insuranceTotal = List.map (\r -> currencyAddTwo pdp (safeCurrencyFloat (Just r))) rates
-        insuranceTotalRow =
-          totalRow
-            "Insurance Monthly Total"
-            "#d9ffcc"
-            "#e60f0f"
-            insuranceTotal
+        insuranceTotalRow = simpleTotalRow "Insurance Monthly Total" insuranceTotal
         partb = safeCurrencyFloat model.partB
         partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
         grandTotal = List.map (\t -> currencyAddThree pdp partb (safeCurrencyFloat (Just t))) rates
-        grandTotalRow =
-          totalRow
-            "Monthly Grand Total"
-            "#6ccbfe"
-            "#e60f0f"
-            grandTotal
+        grandTotalRow = simpleTotalRow "Grand Monthly Total" grandTotal
       in
         div []
             [ table [ class "u-full-width" ]
@@ -1234,6 +1224,15 @@ totalRow rowname col1 col2 l =
                 [ text a ]
           )
           ls
+
+simpleTotalRow : String -> List String -> Html msg
+simpleTotalRow rowname l =
+  let
+    ls = [rowname] ++ l
+  in
+    tr [] <| List.map
+                ( \a -> td [ style "background" "#d3d3d3" ] [ text a ] )
+                ls
 
 customBackground : String -> String -> String -> String -> List (Attribute msg)
 customBackground col1 col2 tv v =

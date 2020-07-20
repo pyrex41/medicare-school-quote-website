@@ -8186,13 +8186,40 @@ var $author$project$Main$safeCurrencyFloat = function (ss) {
 		return 0.0;
 	}
 };
-var $elm$html$Html$table = _VirtualDom_node('table');
-var $elm$html$Html$tbody = _VirtualDom_node('tbody');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$html$Html$thead = _VirtualDom_node('thead');
-var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
+var $author$project$Main$simpleTotalRow = F2(
+	function (rowname, l) {
+		var ls = _Utils_ap(
+			_List_fromArray(
+				[rowname]),
+			l);
+		return A2(
+			$elm$html$Html$tr,
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$td,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'background', '#d3d3d3')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(a)
+							]));
+				},
+				ls));
+	});
+var $elm$html$Html$table = _VirtualDom_node('table');
+var $elm$html$Html$tbody = _VirtualDom_node('tbody');
+var $elm$html$Html$thead = _VirtualDom_node('thead');
 var $author$project$Main$toBodyRow = F3(
 	function (rowname, attrs, l) {
 		var ls = _Utils_ap(
@@ -8231,67 +8258,6 @@ var $author$project$Main$toHeadRow = F2(
 					return A2(
 						$elm$html$Html$th,
 						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(a)
-							]));
-				},
-				ls));
-	});
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $author$project$Main$customBackground = F4(
-	function (col1, col2, tv, v) {
-		var c = _Utils_eq(tv, v) ? col2 : col1;
-		return _List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'background', c)
-			]);
-	});
-var $elm$core$Basics$min = F2(
-	function (x, y) {
-		return (_Utils_cmp(x, y) < 0) ? x : y;
-	});
-var $elm$core$List$minimum = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(
-			A3($elm$core$List$foldl, $elm$core$Basics$min, x, xs));
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $author$project$Main$totalRow = F4(
-	function (rowname, col1, col2, l) {
-		var mm = $elm$core$List$minimum(
-			A2(
-				$elm$core$List$filter,
-				function (a) {
-					return a !== '$ ---.--';
-				},
-				l));
-		var m = function () {
-			if (mm.$ === 'Just') {
-				var n = mm.a;
-				return n;
-			} else {
-				return '';
-			}
-		}();
-		var ls = _Utils_ap(
-			_List_fromArray(
-				[rowname]),
-			l);
-		return A2(
-			$elm$html$Html$tr,
-			_List_Nil,
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$td,
-						A4($author$project$Main$customBackground, col1, col2, m, a),
 						_List_fromArray(
 							[
 								$elm$html$Html$text(a)
@@ -8348,7 +8314,7 @@ var $author$project$Main$outputTable = F2(
 							$elm$core$Maybe$Just(r)));
 				},
 				rates);
-			var insuranceTotalRow = A4($author$project$Main$totalRow, 'Insurance Monthly Total', '#d9ffcc', '#e60f0f', insuranceTotal);
+			var insuranceTotalRow = A2($author$project$Main$simpleTotalRow, 'Insurance Monthly Total', insuranceTotal);
 			var grandTotal = A2(
 				$elm$core$List$map,
 				function (t) {
@@ -8360,7 +8326,7 @@ var $author$project$Main$outputTable = F2(
 							$elm$core$Maybe$Just(t)));
 				},
 				rates);
-			var grandTotalRow = A4($author$project$Main$totalRow, 'Monthly Grand Total', '#6ccbfe', '#e60f0f', grandTotal);
+			var grandTotalRow = A2($author$project$Main$simpleTotalRow, 'Grand Monthly Total', grandTotal);
 			var companyNames = A2(
 				$author$project$Main$toHeadRow,
 				'',
