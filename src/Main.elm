@@ -591,9 +591,14 @@ view model =
         [ img [ src "images/logo.png"
               , style "max-width" "500px"
               , style "height" "auto"
+              , style "margin" "auto"
+              , style "display" "block"
               ]
               [  ]
-        , variousViews model
+        , div [ style "margin" "auto"
+              , style "width" "70%"
+              ]
+              [ variousViews model ]
         ]
       ]
   }

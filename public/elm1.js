@@ -9898,10 +9898,22 @@ var $author$project$Main$view = function (model) {
 							[
 								$elm$html$Html$Attributes$src('images/logo.png'),
 								A2($elm$html$Html$Attributes$style, 'max-width', '500px'),
-								A2($elm$html$Html$Attributes$style, 'height', 'auto')
+								A2($elm$html$Html$Attributes$style, 'height', 'auto'),
+								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+								A2($elm$html$Html$Attributes$style, 'display', 'block')
 							]),
 						_List_Nil),
-						$author$project$Main$variousViews(model)
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+								A2($elm$html$Html$Attributes$style, 'width', '70%')
+							]),
+						_List_fromArray(
+							[
+								$author$project$Main$variousViews(model)
+							]))
 					]))
 			]),
 		title: 'Medicare School Quote'
