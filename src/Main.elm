@@ -828,11 +828,12 @@ renderResults model =
 
 renderOutput : Model -> Html msg
 renderOutput model =
-  div []
-    [ if model.planG then outputTable model G else text "what?"
-    , if model.planN then outputTable model N else text "what??"
-    , if model.planF then outputTable model F else text "what???"
-    ]
+  let
+    tl = List.map2 Tuple.pair [model.planG, model.planN, model.planF] [G,N,F]
+    tlf = List.filter (\a -> Tuple.first(a)) tl
+    pl = List.map Tuple.second tlf
+  in
+    div [] <| List.map (outputTable model) pl
 
 
 renderOutputOld : Model -> Html msg

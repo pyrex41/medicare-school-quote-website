@@ -8804,15 +8804,27 @@ var $author$project$Main$outputTable = F2(
 		}
 	});
 var $author$project$Main$renderOutput = function (model) {
+	var tl = A3(
+		$elm$core$List$map2,
+		$elm$core$Tuple$pair,
+		_List_fromArray(
+			[model.planG, model.planN, model.planF]),
+		_List_fromArray(
+			[$author$project$Main$G, $author$project$Main$N, $author$project$Main$F]));
+	var tlf = A2(
+		$elm$core$List$filter,
+		function (a) {
+			return a.a;
+		},
+		tl);
+	var pl = A2($elm$core$List$map, $elm$core$Tuple$second, tlf);
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
-		_List_fromArray(
-			[
-				model.planG ? A2($author$project$Main$outputTable, model, $author$project$Main$G) : $elm$html$Html$text('what?'),
-				model.planN ? A2($author$project$Main$outputTable, model, $author$project$Main$N) : $elm$html$Html$text('what??'),
-				model.planF ? A2($author$project$Main$outputTable, model, $author$project$Main$F) : $elm$html$Html$text('what???')
-			]));
+		A2(
+			$elm$core$List$map,
+			$author$project$Main$outputTable(model),
+			pl));
 };
 var $author$project$Main$DeselectAll = {$: 'DeselectAll'};
 var $author$project$Main$SelectAll = function (a) {
