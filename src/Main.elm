@@ -588,8 +588,8 @@ view model =
   , body =
       [ div [ class "container"]
         [ img [ src "images/logo.png"
-              , height 268
-              , width 1284
+              , height 134
+              , width 642
               ]
               [  ]
         , variousViews model

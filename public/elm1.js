@@ -9898,8 +9898,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$src('images/logo.png'),
-								$elm$html$Html$Attributes$height(268),
-								$elm$html$Html$Attributes$width(1284)
+								$elm$html$Html$Attributes$height(134),
+								$elm$html$Html$Attributes$width(642)
 							]),
 						_List_Nil),
 						$author$project$Main$variousViews(model)
