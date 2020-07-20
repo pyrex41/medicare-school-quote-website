@@ -826,9 +826,17 @@ renderResults model =
       , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
       ]
 
-
 renderOutput : Model -> Html msg
 renderOutput model =
+  div []
+    [ if model.planG then outputTable model G else text "what?"
+    , if model.planN then outputTable model N else text "what??"
+    , if model.planF then outputTable model F else text "what???"
+    ]
+
+
+renderOutputOld : Model -> Html msg
+renderOutputOld model =
   let
     pdp = safeCurrencyFloat model.pdpSelect
     partb = safeCurrencyFloat model.partB
