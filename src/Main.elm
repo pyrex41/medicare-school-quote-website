@@ -588,7 +588,7 @@ view model =
   , body =
       [ div [ class "container"
             , style "max-width" "100%"
-            , style "heigth" "auto"
+            , style "heigt" "auto"
             ]
         [ img [ src "images/logo.png"
               , style "max-width" "100%"

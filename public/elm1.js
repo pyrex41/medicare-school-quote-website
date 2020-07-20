@@ -9890,7 +9890,7 @@ var $author$project$Main$view = function (model) {
 					[
 						$elm$html$Html$Attributes$class('container'),
 						A2($elm$html$Html$Attributes$style, 'max-width', '100%'),
-						A2($elm$html$Html$Attributes$style, 'heigth', 'auto')
+						A2($elm$html$Html$Attributes$style, 'heigt', 'auto')
 					]),
 				_List_fromArray(
 					[
