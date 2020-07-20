@@ -6592,6 +6592,19 @@ var $elm$core$Tuple$pair = F2(
 	function (a, b) {
 		return _Utils_Tuple2(a, b);
 	});
+var $elm$core$String$endsWith = _String_endsWith;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
+var $elm$core$String$trimRight = _String_trimRight;
+var $author$project$Main$pdpFullString = function (pr) {
+	var r_val = pr.rate;
+	var p_name = A2(
+		$elm$core$String$endsWith,
+		'(PDP)',
+		$elm$core$String$trimRight(pr.plan)) ? A3($elm$core$String$slice, 0, -6, pr.plan) : pr.plan;
+	return p_name + ('   |   ' + r_val);
+};
 var $author$project$Main$TableRow = F9(
 	function (company, displayName, fRate, gRate, nRate, naic, selected, category, priority) {
 		return {category: category, company: company, displayName: displayName, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic, priority: priority, selected: selected};
@@ -6942,9 +6955,6 @@ var $elm$time$Time$toAdjustedMinutes = F2(
 				60000),
 			eras);
 	});
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $elm$time$Time$toCivil = function (minutes) {
 	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
 	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
@@ -7780,7 +7790,8 @@ var $author$project$Main$update = F2(
 						var _v13 = $elm$core$List$head(pr_sort);
 						if (_v13.$ === 'Just') {
 							var pr = _v13.a;
-							return $elm$core$Maybe$Just(pr.rate);
+							return $elm$core$Maybe$Just(
+								$author$project$Main$pdpFullString(pr));
 						} else {
 							return $elm$core$Maybe$Nothing;
 						}
@@ -9196,16 +9207,9 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 		toMsg: $author$project$Main$SetTableState
 	});
 var $elm$html$Html$p = _VirtualDom_node('p');
-var $elm$core$String$endsWith = _String_endsWith;
-var $elm$core$String$trimRight = _String_trimRight;
 var $author$project$Main$pdpOption = F2(
 	function (def, pr) {
-		var r_val = pr.rate;
-		var p_name = A2(
-			$elm$core$String$endsWith,
-			'(PDP)',
-			$elm$core$String$trimRight(pr.plan)) ? A3($elm$core$String$slice, 0, -6, pr.plan) : pr.plan;
-		var p_text = p_name + ('   |   ' + r_val);
+		var p_text = $author$project$Main$pdpFullString(pr);
 		return A2(
 			$elm$html$Html$option,
 			_List_fromArray(

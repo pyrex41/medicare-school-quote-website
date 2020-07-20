@@ -512,7 +512,7 @@ update msg model =
             pr_sort = List.sortBy .plan response
             prs = case (List.head pr_sort) of
               Just pr ->
-                Just pr.rate
+                Just <| pdpFullString pr
               Nothing ->
                 Nothing
 
@@ -1078,8 +1078,8 @@ defselectbox title_ def choices handle class_ i =
         ]
     ]
 
-pdpOption : Maybe String ->  PdpRecord -> Html Msg
-pdpOption def pr =
+pdpFullString : PdpRecord -> String
+pdpFullString pr =
   let
     p_name =
       if String.endsWith "(PDP)" (String.trimRight pr.plan) then
@@ -1087,7 +1087,13 @@ pdpOption def pr =
       else
         pr.plan
     r_val = pr.rate
-    p_text = p_name ++ "   |   " ++ r_val
+  in
+    p_name ++ "   |   " ++ r_val
+
+pdpOption : Maybe String ->  PdpRecord -> Html Msg
+pdpOption def pr =
+  let
+    p_text = pdpFullString pr
   in
     option [ value p_text,  selected <| (Just p_text) == def ] [ text p_text ]
 
