@@ -591,8 +591,8 @@ view model =
             , style "heigth" "auto"
             ]
         [ img [ src "images/logo.png"
-              , height 134
-              , width 642
+              , style "max-width" "100%"
+              , style "height" "auto"
               ]
               [  ]
         , variousViews model
