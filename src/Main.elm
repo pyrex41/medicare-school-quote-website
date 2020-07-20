@@ -587,10 +587,8 @@ view model =
   { title = "Enlightnu Quoting App"
   , body =
       [ div [ class "container"
-            , style "display" "block"
-            , style "width" "50%"
-            , style "margin-left" "auto"
-            , style "margin-right" "auto"
+            , style "max-width" "100%"
+            , style "heigth" "auto"
             ]
         [ img [ src "images/logo.png"
               , height 134

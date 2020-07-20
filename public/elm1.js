@@ -9901,10 +9901,8 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('container'),
-						A2($elm$html$Html$Attributes$style, 'display', 'block'),
-						A2($elm$html$Html$Attributes$style, 'width', '50%'),
-						A2($elm$html$Html$Attributes$style, 'margin-left', 'auto'),
-						A2($elm$html$Html$Attributes$style, 'margin-right', 'auto')
+						A2($elm$html$Html$Attributes$style, 'max-width', '100%'),
+						A2($elm$html$Html$Attributes$style, 'heigth', 'auto')
 					]),
 				_List_fromArray(
 					[
