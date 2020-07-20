@@ -9888,9 +9888,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('container'),
-						A2($elm$html$Html$Attributes$style, 'max-width', '100%'),
-						A2($elm$html$Html$Attributes$style, 'heigt', 'auto')
+						$elm$html$Html$Attributes$class('container')
 					]),
 				_List_fromArray(
 					[
