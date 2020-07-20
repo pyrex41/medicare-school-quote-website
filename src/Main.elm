@@ -911,7 +911,7 @@ outputTable model pt =
   case model.tableRows of
     Just tr ->
       let
-        vr = List.filter (\a -> a.selected) tr
+        vr = List.sortBy ( \a -> a.displayName ) <| List.filter (\a -> a.selected) tr
 
         companyNames = toHeadRow "" <| List.map .displayName vr
         rates = rateUtil pt vr

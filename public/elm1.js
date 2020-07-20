@@ -8709,11 +8709,16 @@ var $author$project$Main$outputTable = F2(
 		if (_v0.$ === 'Just') {
 			var tr = _v0.a;
 			var vr = A2(
-				$elm$core$List$filter,
+				$elm$core$List$sortBy,
 				function (a) {
-					return a.selected;
+					return a.displayName;
 				},
-				tr);
+				A2(
+					$elm$core$List$filter,
+					function (a) {
+						return a.selected;
+					},
+					tr));
 			var rates = A2($author$project$Main$rateUtil, pt, vr);
 			var rateRow = A3(
 				$author$project$Main$toBodyRow,
