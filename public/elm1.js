@@ -7546,13 +7546,36 @@ var $author$project$Main$update = F2(
 							{date: choice})),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectPDP':
-				var pr = msg.a;
+				var prstr = msg.a;
+				var prf = function () {
+					var _v5 = model.pdpList;
+					if (_v5.$ === 'Just') {
+						var pl = _v5.a;
+						return $elm$core$Maybe$Just(
+							A2(
+								$elm$core$List$filter,
+								function (a) {
+									return _Utils_eq(
+										$author$project$Main$pdpFullString(a),
+										prstr);
+								},
+								pl));
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
+				var pr = function () {
+					if (prf.$ === 'Just') {
+						var l = prf.a;
+						return $elm$core$List$head(l);
+					} else {
+						return $elm$core$Maybe$Nothing;
+					}
+				}();
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{
-							pdpSelect: $elm$core$Maybe$Just(pr)
-						}),
+						{pdpSelect: pr}),
 					$elm$core$Platform$Cmd$none);
 			case 'ToggleTobacco':
 				return _Utils_Tuple2(
@@ -7590,9 +7613,9 @@ var $author$project$Main$update = F2(
 			case 'TogglePreferred':
 				var newBool = !model.viewPreferred;
 				var newRows = function () {
-					var _v4 = model.tableRows;
-					if (_v4.$ === 'Just') {
-						var tr = _v4.a;
+					var _v6 = model.tableRows;
+					if (_v6.$ === 'Just') {
+						var tr = _v6.a;
 						return $elm$core$Maybe$Just(
 							A3($author$project$Main$setRows, $author$project$Main$Preferred, newBool, tr));
 					} else {
@@ -7610,9 +7633,9 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'ToggleNonPreferred':
 				var newRows = function () {
-					var _v5 = model.tableRows;
-					if (_v5.$ === 'Just') {
-						var tr = _v5.a;
+					var _v7 = model.tableRows;
+					if (_v7.$ === 'Just') {
+						var tr = _v7.a;
 						return $elm$core$Maybe$Just(
 							A3($author$project$Main$setRows, $author$project$Main$NonPreferred, false, tr));
 					} else {
@@ -7631,9 +7654,9 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'ToggleOutside':
 				var newRows = function () {
-					var _v6 = model.tableRows;
-					if (_v6.$ === 'Just') {
-						var tr = _v6.a;
+					var _v8 = model.tableRows;
+					if (_v8.$ === 'Just') {
+						var tr = _v8.a;
 						return $elm$core$Maybe$Just(
 							A3($author$project$Main$setRows, $author$project$Main$Outside, false, tr));
 					} else {
@@ -7665,9 +7688,9 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'DeselectAll':
 				var newRows = function () {
-					var _v7 = model.tableRows;
-					if (_v7.$ === 'Just') {
-						var tr = _v7.a;
+					var _v9 = model.tableRows;
+					if (_v9.$ === 'Just') {
+						var tr = _v9.a;
 						return $elm$core$Maybe$Just(
 							A2(
 								$elm$core$List$map,
@@ -7689,9 +7712,9 @@ var $author$project$Main$update = F2(
 			case 'SelectAll':
 				var ils = msg.a;
 				var newRows = function () {
-					var _v8 = model.tableRows;
-					if (_v8.$ === 'Just') {
-						var tr = _v8.a;
+					var _v10 = model.tableRows;
+					if (_v10.$ === 'Just') {
+						var tr = _v10.a;
 						if (ils.$ === 'Just') {
 							var ii = ils.a;
 							return $elm$core$Maybe$Just(
@@ -7787,11 +7810,10 @@ var $author$project$Main$update = F2(
 						},
 						response);
 					var prs = function () {
-						var _v13 = $elm$core$List$head(pr_sort);
-						if (_v13.$ === 'Just') {
-							var pr = _v13.a;
-							return $elm$core$Maybe$Just(
-								$author$project$Main$pdpFullString(pr));
+						var _v15 = $elm$core$List$head(pr_sort);
+						if (_v15.$ === 'Just') {
+							var pr = _v15.a;
+							return $elm$core$Maybe$Just(pr);
 						} else {
 							return $elm$core$Maybe$Nothing;
 						}
@@ -8731,6 +8753,16 @@ var $author$project$Main$outputTable = F2(
 				$author$project$Main$pTextUtil(pt),
 				_List_Nil,
 				rates);
+			var pdpString = function () {
+				var _v3 = model.pdpSelect;
+				if (_v3.$ === 'Just') {
+					var pr = _v3.a;
+					return $elm$core$Maybe$Just(
+						$author$project$Main$pdpFullString(pr));
+				} else {
+					return $elm$core$Maybe$Nothing;
+				}
+			}();
 			var pdpRow = A3(
 				$author$project$Main$toBodyRow,
 				'Drug Plan Monthly Premium',
@@ -8738,10 +8770,19 @@ var $author$project$Main$outputTable = F2(
 				A2(
 					$elm$core$List$map,
 					function (a) {
-						return $author$project$Main$safeString(model.pdpSelect);
+						return $author$project$Main$safeString(pdpString);
 					},
 					vr));
-			var pdp = $author$project$Main$safeCurrencyFloat(model.pdpSelect);
+			var pdp = function () {
+				var _v2 = model.pdpSelect;
+				if (_v2.$ === 'Just') {
+					var pr = _v2.a;
+					return $author$project$Main$safeCurrencyFloat(
+						$elm$core$Maybe$Just(pr.rate));
+				} else {
+					return 0.0;
+				}
+			}();
 			var partb = $author$project$Main$safeCurrencyFloat(model.partB);
 			var partBRow = A3(
 				$author$project$Main$toBodyRow,
@@ -8841,7 +8882,7 @@ var $author$project$Main$personalInfo = function (model) {
 		var _v1 = model.pdpSelect;
 		if (_v1.$ === 'Just') {
 			var pr = _v1.a;
-			return pr;
+			return $author$project$Main$pdpFullString(pr);
 		} else {
 			return '';
 		}
@@ -9211,6 +9252,15 @@ var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = F2(
 	function (def, pr) {
 		var p_text = $author$project$Main$pdpFullString(pr);
+		var def_text = function () {
+			if (def.$ === 'Just') {
+				var d = def.a;
+				return $elm$core$Maybe$Just(
+					$author$project$Main$pdpFullString(d));
+			} else {
+				return $elm$core$Maybe$Nothing;
+			}
+		}();
 		return A2(
 			$elm$html$Html$option,
 			_List_fromArray(
@@ -9219,7 +9269,7 @@ var $author$project$Main$pdpOption = F2(
 					$elm$html$Html$Attributes$selected(
 					_Utils_eq(
 						$elm$core$Maybe$Just(p_text),
-						def))
+						def_text))
 				]),
 			_List_fromArray(
 				[

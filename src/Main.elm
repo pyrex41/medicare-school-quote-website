@@ -59,7 +59,7 @@ type alias Model =
   , valid : Bool
   , response : Maybe (List PlanQuote)
   , pdpList : Maybe (List PdpRecord)
-  , pdpSelect : Maybe String
+  , pdpSelect : Maybe PdpRecord
   , partB : Maybe String
   , recentError : String
   , today : Maybe CustomDate
@@ -362,9 +362,21 @@ update msg model =
         , Cmd.none
         )
 
-    SelectPDP pr ->
-      ( { model | pdpSelect = Just pr }
-      , Cmd.none )
+    SelectPDP prstr ->
+      let
+        prf = case model.pdpList of
+          Just pl ->
+            Just <|List.filter
+              (\a -> (pdpFullString a) == prstr)
+              pl
+          Nothing ->
+            Nothing
+        pr = case prf of
+          Just l -> List.head l
+          Nothing -> Nothing
+      in
+        ( { model | pdpSelect = pr }
+        , Cmd.none )
 
     ToggleTobacco  ->
       ( { model | tobacco = not model.tobacco }
@@ -512,7 +524,7 @@ update msg model =
             pr_sort = List.sortBy .plan response
             prs = case (List.head pr_sort) of
               Just pr ->
-                Just <| pdpFullString pr
+                Just pr
               Nothing ->
                 Nothing
 
@@ -848,7 +860,7 @@ personalInfo model =
   let
     pdpText = case model.pdpSelect of
       Just pr ->
-        pr
+        pdpFullString pr
       Nothing ->
         ""
     ageText = case model.age.value of
@@ -883,8 +895,17 @@ outputTable model pt =
         companyNames = toHeadRow pText <| List.map .displayName vr
         rates = rateUtil pt vr
         rateRow = toBodyRow (pTextUtil pt) [] rates
-        pdp = safeCurrencyFloat model.pdpSelect
-        pdpRow = toBodyRow "Drug Plan Monthly Premium" [] <| List.map (\a -> safeString model.pdpSelect) vr
+        pdp = case model.pdpSelect of
+          Just pr ->
+            safeCurrencyFloat <| Just pr.rate
+          Nothing ->
+            0.0
+        pdpString = case model.pdpSelect of
+          Just pr ->
+            Just <| pdpFullString pr
+          Nothing ->
+            Nothing
+        pdpRow = toBodyRow "Drug Plan Monthly Premium" [] <| List.map (\a -> safeString pdpString) vr
         insuranceTotal = List.map (\r -> currencyAddTwo pdp (safeCurrencyFloat (Just r))) rates
         insuranceTotalRow = simpleTotalRow "Insurance Monthly Total" insuranceTotal
         partb = safeCurrencyFloat model.partB
@@ -1096,14 +1117,17 @@ pdpFullString pr =
   in
     p_name ++ "   |   " ++ r_val
 
-pdpOption : Maybe String ->  PdpRecord -> Html Msg
+pdpOption : Maybe PdpRecord ->  PdpRecord -> Html Msg
 pdpOption def pr =
   let
+    def_text = case def of
+      Just d -> Just <| pdpFullString d
+      Nothing -> Nothing
     p_text = pdpFullString pr
   in
-    option [ value p_text,  selected <| (Just p_text) == def ] [ text p_text ]
+    option [ value p_text,  selected <| (Just p_text) == def_text ] [ text p_text ]
 
-pdpSelectBox : Maybe (List PdpRecord) -> Maybe String -> (String -> Msg) -> Html Msg
+pdpSelectBox : Maybe (List PdpRecord) -> Maybe PdpRecord -> (String -> Msg) -> Html Msg
 pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
