@@ -7847,12 +7847,6 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$Attributes$height = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'height',
-		$elm$core$String$fromInt(n));
-};
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -9886,12 +9880,6 @@ var $author$project$Main$variousViews = function (model) {
 					]));
 	}
 };
-var $elm$html$Html$Attributes$width = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'width',
-		$elm$core$String$fromInt(n));
-};
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(
@@ -9911,8 +9899,8 @@ var $author$project$Main$view = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$src('images/logo.png'),
-								$elm$html$Html$Attributes$height(134),
-								$elm$html$Html$Attributes$width(642)
+								A2($elm$html$Html$Attributes$style, 'max-width', '100%'),
+								A2($elm$html$Html$Attributes$style, 'height', 'auto')
 							]),
 						_List_Nil),
 						$author$project$Main$variousViews(model)
