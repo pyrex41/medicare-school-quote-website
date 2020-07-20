@@ -8238,114 +8238,124 @@ var $author$project$Main$renderForm = F3(
 	function (model, func, buttonLabel) {
 		var loadText = _Utils_eq(model.state, $author$project$Main$Loading) ? 'Loading...' : '';
 		return A2(
-			$elm$html$Html$form,
+			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Events$onSubmit(func)
+					A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+					A2($elm$html$Html$Attributes$style, 'width', '70%')
 				]),
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$div,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$form,
+					_List_fromArray(
+						[
+							$elm$html$Html$Events$onSubmit(func)
+						]),
+					A2(
+						$elm$core$List$map,
+						function (a) {
+							return A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[a]));
+						},
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[a]));
-				},
-				_List_fromArray(
-					[
-						A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns'),
-						A6(
-						$author$project$Main$textboxCheck,
-						'Age',
-						'65',
-						model.age,
-						$author$project$Main$SetAge,
-						$author$project$Main$validateVI(model.age),
-						'two columns'),
-						A6(
-						$author$project$Main$textboxCheck,
-						'ZIP',
-						'12345',
-						model.zip,
-						$author$project$Main$SetZip,
-						$author$project$Main$validateVI(model.zip),
-						'two columns'),
-						A5($author$project$Main$selectbox, 'County', model.counties, $author$project$Main$SelectCounty, 'three columns', 0),
-						A5(
-						$author$project$Main$selectbox,
-						'Gender',
-						_List_fromArray(
-							['Male', 'Female']),
-						$author$project$Main$SelectGender,
-						'three columns',
-						0),
-						A5(
-						$author$project$Main$selectbox,
-						'Effective Date',
-						A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
-						$author$project$Main$SelectDate,
-						'three columns',
-						1),
-						A4($author$project$Main$checkbox, 'Tobacco User?', model.tobacco, $author$project$Main$ToggleTobacco, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Apply Household Discount?', model.discounts, $author$project$Main$ToggleDiscounts, 'u-full-width'),
-						A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('u-full-width')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Which Plans?')
-							])),
-						A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[
+								A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns'),
+								A6(
+								$author$project$Main$textboxCheck,
+								'Age',
+								'65',
+								model.age,
+								$author$project$Main$SetAge,
+								$author$project$Main$validateVI(model.age),
+								'two columns'),
+								A6(
+								$author$project$Main$textboxCheck,
+								'ZIP',
+								'12345',
+								model.zip,
+								$author$project$Main$SetZip,
+								$author$project$Main$validateVI(model.zip),
+								'two columns'),
+								A5($author$project$Main$selectbox, 'County', model.counties, $author$project$Main$SelectCounty, 'three columns', 0),
+								A5(
+								$author$project$Main$selectbox,
+								'Gender',
+								_List_fromArray(
+									['Male', 'Female']),
+								$author$project$Main$SelectGender,
+								'three columns',
+								0),
+								A5(
+								$author$project$Main$selectbox,
+								'Effective Date',
+								A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
+								$author$project$Main$SelectDate,
+								'three columns',
+								1),
+								A4($author$project$Main$checkbox, 'Tobacco User?', model.tobacco, $author$project$Main$ToggleTobacco, 'u-full-width'),
+								A4($author$project$Main$checkbox, 'Apply Household Discount?', model.discounts, $author$project$Main$ToggleDiscounts, 'u-full-width'),
+								A2(
+								$elm$html$Html$h5,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('u-full-width')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Which Plans?')
+									])),
+								A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
+								A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
+								A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('two columns')
+										$elm$html$Html$Attributes$class('row')
 									]),
 								_List_fromArray(
 									[
 										A2(
-										$elm$html$Html$button,
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												A2($elm$html$Html$Attributes$style, 'block', 'display'),
-												$elm$html$Html$Attributes$class('button-primary'),
-												$elm$html$Html$Attributes$disabled(!model.valid)
+												$elm$html$Html$Attributes$class('two columns')
 											]),
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Submit')
+												A2(
+												$elm$html$Html$button,
+												_List_fromArray(
+													[
+														A2($elm$html$Html$Attributes$style, 'block', 'display'),
+														$elm$html$Html$Attributes$class('button-primary'),
+														$elm$html$Html$Attributes$disabled(!model.valid)
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Submit')
+													]))
+											])),
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('one column')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(loadText)
 											]))
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('one column')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(loadText)
 									]))
-							]))
-					])));
+							])))
+				]));
 	});
 var $author$project$Main$F = {$: 'F'};
 var $author$project$Main$G = {$: 'G'};
@@ -9872,8 +9882,7 @@ var $author$project$Main$variousViews = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-								A2($elm$html$Html$Attributes$style, 'width', '70%')
+								$elm$html$Html$Attributes$class('row')
 							]),
 						_List_fromArray(
 							[
