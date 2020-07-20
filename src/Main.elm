@@ -882,7 +882,7 @@ outputTable model pt =
         insuranceTotal = List.map (\r -> currencyAddTwo pdp (safeCurrencyFloat (Just r))) rates
         insuranceTotalRow = simpleTotalRow "Insurance Monthly Total" insuranceTotal
         partb = safeCurrencyFloat model.partB
-        partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
+        partBRow = toBodyRow "Part B Monthly Premium" [] <| List.map (\a -> safeString model.partB) vr
         grandTotal = List.map (\t -> currencyAddThree pdp partb (safeCurrencyFloat (Just t))) rates
         grandTotalRow = simpleTotalRow "Grand Monthly Total" grandTotal
       in

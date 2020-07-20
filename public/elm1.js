@@ -8734,7 +8734,7 @@ var $author$project$Main$outputTable = F2(
 			var partb = $author$project$Main$safeCurrencyFloat(model.partB);
 			var partBRow = A3(
 				$author$project$Main$toBodyRow,
-				'Part B Rate',
+				'Part B Monthly Premium',
 				_List_Nil,
 				A2(
 					$elm$core$List$map,
