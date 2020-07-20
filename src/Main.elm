@@ -919,15 +919,13 @@ personalInfo model =
     zipText = case model.zip.value of
       Just v -> String.fromInt(v)
       Nothing -> ""
+    row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender
   in
     div []
       [ div [ class "row" ]
         [ h3 [ class "six columns" ] [ text model.name ] ]
       , div [ class "row"]
-        [ h4 [ class "two columns" ] [ text ageText ]
-        , h4 [ class "two columns" ] [text zipText ]
-        , h4 [ class "two columns" ] [ text model.gender ]
-        ]
+        [ h4 [ class "six columns" ] [ text row2 ] ]
       , div [ class "row" ]
         [ h4 [ class "u-full-width" ] [ text pdpText ] ]
       ]

@@ -8838,6 +8838,7 @@ var $author$project$Main$personalInfo = function (model) {
 			return '';
 		}
 	}();
+	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + model.gender))));
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -8874,31 +8875,11 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$h4,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('two columns')
+								$elm$html$Html$Attributes$class('six columns')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(ageText)
-							])),
-						A2(
-						$elm$html$Html$h4,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('two columns')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text(zipText)
-							])),
-						A2(
-						$elm$html$Html$h4,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('two columns')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text(model.gender)
+								$elm$html$Html$text(row2)
 							]))
 					])),
 				A2(
