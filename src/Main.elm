@@ -22,6 +22,7 @@ import MyDate exposing (CustomDate, addMonth)
 import Round
 import Presets exposing (naicCategory, displayNames)
 
+
 -- MAIN
 
 main : Program () Model Msg
@@ -69,6 +70,8 @@ type alias Model =
   , viewOutside : Bool
   , timeNow : Maybe CustomDate
   , dateSelectChoices : List (String, CustomDate)
+  , outputTableState : Table.State
+  , outputQuotes : Maybe (List OutputQuote)
   }
 
 
@@ -108,6 +111,13 @@ type alias TableRow =
   , priority : Int
   }
 
+type alias OutputQuote =
+  { planName : String
+  , displayName : String
+  , quote : String
+  , drugPremium : String
+  , partBPremium : String
+  }
 
 type ViewState
   = Failure Fail
@@ -115,6 +125,11 @@ type ViewState
   | Ready
   | Results
   | Output
+
+type PlanType
+  = G
+  | N
+  | F
 
 
 
@@ -140,7 +155,7 @@ init flags url key =
       , response = Nothing
       , pdpList = Nothing
       , pdpSelect = Nothing
-      , partB = Just "$230.00"
+      , partB = Just "$144.60"
       , recentError = ""
       , today = Nothing
       , tableState = Table.initialSort "Category"
@@ -150,6 +165,8 @@ init flags url key =
       , viewOutside = False
       , timeNow = Nothing
       , dateSelectChoices = []
+      , outputTableState = Table.initialSort "Title"
+      , outputQuotes = Nothing
       }
     , Task.perform GotTime Time.now
     )
@@ -531,6 +548,7 @@ update msg model =
         , Cmd.none
         )
 
+
 -- UPDATE FUNCS
 toggle : Int -> TableRow -> TableRow
 toggle i tablerow =
@@ -643,7 +661,7 @@ variousViews model =
     Results ->
       div [ ]
         [ div []
-          [ renderResults model ]
+          [ div [] [ outputTable model G ] ]
         ]
 
     Output ->
@@ -790,7 +808,7 @@ renderResults model =
                     ]
               ]
           , div [ class "two columns"]
-              [ div [ class "two columns" ]
+              [ div [ class "u-full-width" ]
                     [ button
                       [ onClick DeselectAll, class "button" ]
                       [ text "Deselect All" ]
@@ -878,6 +896,64 @@ renderOutput model =
       Nothing ->
         text "No Output Available"
 
+-- Output Table
+outputTable : Model -> PlanType -> Html msg
+outputTable model pt =
+  case model.tableRows of
+    Just tr ->
+      let
+        vr = List.filter (\a -> a.selected) tr
+
+        companyNames = toHeadRow "" <| List.map .displayName vr
+        rates = rateUtil pt vr
+        rateRow = toBodyRow (pTextUtil pt) [] rates
+        pdp = safeCurrencyFloat model.pdpSelect
+        pdpRow = toBodyRow "Drug Plan Monthly Premium" [] <| List.map (\a -> safeString model.pdpSelect) vr
+        insuranceTotal = List.map (\r -> currencyAddTwo pdp (safeCurrencyFloat (Just r))) rates
+        insuranceTotalRow =
+          totalRow
+            "Insurance Monthly Total"
+            "#d9ffcc"
+            "#e60f0f"
+            insuranceTotal
+        partb = safeCurrencyFloat model.partB
+        partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
+        grandTotal = List.map (\t -> currencyAddThree pdp partb (safeCurrencyFloat (Just t))) rates
+        grandTotalRow =
+          totalRow
+            "Monthly Grand Total"
+            "#6ccbfe"
+            "#e60f0f"
+            grandTotal
+      in
+        div []
+            [ table [ class "u-full-width" ]
+                [ thead [] [ companyNames ]
+                , tbody []
+                  [ rateRow
+                  , pdpRow
+                  , insuranceTotalRow
+                  , partBRow
+                  , grandTotalRow
+                  ]
+                ]
+            ]
+    Nothing -> text "No Output Available"
+
+
+pTextUtil : PlanType -> String
+pTextUtil pt =
+  case pt of
+    G -> "Plan G Monthly Premium"
+    N -> "Plan N Monthly Premium"
+    F -> "Plan F Monthly Premium"
+
+rateUtil : PlanType -> List TableRow -> List String
+rateUtil pt ls =
+  case pt of
+    G -> List.map .gRate ls
+    N -> List.map .nRate ls
+    F -> List.map .fRate ls
 
 -- TABLE CONFIGURATION
 
@@ -1124,6 +1200,9 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
         ]
 
 -- Output Table View funcs
+
+
+
 toHeadRow : String -> (List String) -> Html msg
 toHeadRow rowname l =
   let
@@ -1178,6 +1257,13 @@ toBodyRow rowname attrs l =
           )
           ls
 
+
+currencyAddTwo : Float -> Float -> String
+currencyAddTwo a b =
+  if b == 0 then
+    "$ ---.--"
+  else
+    "$" ++ (Round.round 2 (a+b))
 
 currencyAddThree : Float -> Float -> Float -> String
 currencyAddThree a b c =
