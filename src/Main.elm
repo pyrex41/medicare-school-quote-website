@@ -836,76 +836,6 @@ renderOutput model =
   in
     div [] <| [(personalInfo model)] ++ tables
 
-
-renderOutputOld : Model -> Html msg
-renderOutputOld model =
-  let
-    pdp = safeCurrencyFloat model.pdpSelect
-    partb = safeCurrencyFloat model.partB
-    mycalc = currencyAddThree pdp partb
-    showModel = model.viewPreferred || model.viewNonpreferred || model.viewOutside
-    --fplan = safeCurrencyFloat (Just ttr.fRate)
-    --total = "$" ++ Round.round 2 (fpdp + fpartb + fplan)
-  in
-    case model.tableRows of
-      Just tr ->
-        if showModel then
-          let
-            vr = List.filter (\a -> a.selected) tr
-            companyNames = toHeadRow "" <| List.map (\a -> a.displayName) vr
-            pdpRow = toBodyRow "PDP Rate" [] <| List.map (\a -> safeString model.pdpSelect) vr
-            partBRow = toBodyRow "Part B Rate" [] <| List.map (\a -> safeString model.partB) vr
-            fRates = toBodyRow "Plan F Rate" [] <| List.map (\a -> a.fRate) vr
-            gRates = toBodyRow "Plan G Rate" [] <| List.map (\a -> a.gRate) vr
-            nRates = toBodyRow "Plan N Rate" [] <| List.map (\a -> a.nRate) vr
-            fTotals = totalRow
-                        "F Plan Total"
-                        "#d9ffcc"
-                        "#e60f0f"
-                        <| List.map
-                            (\a ->
-                              mycalc (safeCurrencyFloat (Just a.fRate))
-                            )
-                            vr
-            gTotals = totalRow
-                        "G Plan Total"
-                        "#6ccbfe"
-                        "#e60f0f"
-                        <| List.map
-                            (\a ->
-                              mycalc (safeCurrencyFloat (Just a.gRate))
-                            )
-                            vr
-            nTotals = totalRow
-                        "N Plan Total"
-                        "#e6770f"
-                        "#e60f0f"
-                        <| List.map
-                            (\a ->
-                              mycalc (safeCurrencyFloat (Just a.nRate))
-                            )
-                            vr
-          in
-            div []
-                [ table [ class "u-full-width" ]
-                    [ thead [] [ companyNames ]
-                    , tbody []
-                      [ pdpRow
-                      , partBRow
-                      , fRates
-                      , fTotals
-                      , gRates
-                      , gTotals
-                      , nRates
-                      , nTotals
-                      ]
-                    ]
-                ]
-        else
-          text "No Output Selected"
-      Nothing ->
-        text "No Output Available"
-
 -- Output Page Utils
 personalInfo : Model -> Html msg
 personalInfo model =
@@ -936,8 +866,11 @@ outputTable model pt =
   case model.tableRows of
     Just tr ->
       let
+        pText = case pt of
+          G -> "G"
+          N -> "N"
+          F -> "F"
         vr = List.sortBy ( \a -> a.displayName ) <| List.filter (\a -> a.selected) tr
-
         companyNames = toHeadRow "" <| List.map .displayName vr
         rates = rateUtil pt vr
         rateRow = toBodyRow (pTextUtil pt) [] rates
@@ -951,7 +884,9 @@ outputTable model pt =
         grandTotalRow = simpleTotalRow "Grand Monthly Total" grandTotal
       in
         div []
-            [ table [ class "u-full-width" ]
+            [ div [ class "row" ]
+              [ h2 [ property "text-align" "center" ] [ text ("PLAN "++pText) ] ]
+            , table [ class "u-full-width" ]
                 [ thead [] [ companyNames ]
                 , tbody []
                   [ rateRow
