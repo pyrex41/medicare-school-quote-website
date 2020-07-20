@@ -8829,8 +8829,8 @@ var $author$project$Main$personalInfo = function (model) {
 	var pdpText = function () {
 		var _v1 = model.pdpSelect;
 		if (_v1.$ === 'Just') {
-			var s = _v1.a;
-			return s;
+			var pr = _v1.a;
+			return pr;
 		} else {
 			return '';
 		}
@@ -9205,17 +9205,12 @@ var $author$project$Main$pdpOption = F2(
 			$elm$core$String$endsWith,
 			'(PDP)',
 			$elm$core$String$trimRight(pr.plan)) ? A3($elm$core$String$slice, 0, -6, pr.plan) : pr.plan;
-		var p_name_pad = A3(
-			$elm$core$String$padRight,
-			50,
-			_Utils_chr(' '),
-			p_name);
-		var p_text = _Utils_ap(p_name_pad, r_val);
+		var p_text = p_name + ('   |   ' + r_val);
 		return A2(
 			$elm$html$Html$option,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$value(pr.rate),
+					$elm$html$Html$Attributes$value(p_text),
 					$elm$html$Html$Attributes$selected(
 					_Utils_eq(
 						$elm$core$Maybe$Just(pr.rate),

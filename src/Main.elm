@@ -842,8 +842,10 @@ personalInfo : Model -> Html msg
 personalInfo model =
   let
     pdpText = case model.pdpSelect of
-      Just s -> s
-      Nothing -> ""
+      Just pr ->
+        pr
+      Nothing ->
+        ""
     ageText = case model.age.value of
       Just a -> String.fromInt(a)
       Nothing -> ""
@@ -1085,10 +1087,9 @@ pdpOption def pr =
       else
         pr.plan
     r_val = pr.rate
-    p_name_pad = String.padRight 50 ' ' p_name
-    p_text = p_name_pad ++ r_val
+    p_text = p_name ++ "   |   " ++ r_val
   in
-    option [ value pr.rate,  selected <| (Just pr.rate) == def ] [ text p_text ]
+    option [ value p_text,  selected <| (Just pr.rate) == def ] [ text p_text ]
 
 pdpSelectBox : Maybe (List PdpRecord) -> Maybe String -> (String -> Msg) -> Html Msg
 pdpSelectBox mplist selectedPdp handle =
