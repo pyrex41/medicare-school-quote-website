@@ -667,7 +667,7 @@ variousViews model =
     Output ->
       div [ ]
           [ div []
-            [ outputTable model G ]--renderOutput model ]
+            [ renderOutput model ]--renderOutput model ]
           ]
 
 

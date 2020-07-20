@@ -7860,7 +7860,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $author$project$Main$G = {$: 'G'};
 var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
 var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $elm$html$Html$button = _VirtualDom_node('button');
@@ -7881,6 +7880,449 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $author$project$Main$SelectCounty = function (a) {
+	return {$: 'SelectCounty', a: a};
+};
+var $author$project$Main$SelectDate = function (a) {
+	return {$: 'SelectDate', a: a};
+};
+var $author$project$Main$SelectGender = function (a) {
+	return {$: 'SelectGender', a: a};
+};
+var $author$project$Main$SetAge = function (a) {
+	return {$: 'SetAge', a: a};
+};
+var $author$project$Main$SetName = function (a) {
+	return {$: 'SetName', a: a};
+};
+var $author$project$Main$SetZip = function (a) {
+	return {$: 'SetZip', a: a};
+};
+var $author$project$Main$ToggleDiscounts = {$: 'ToggleDiscounts'};
+var $author$project$Main$ToggleF = {$: 'ToggleF'};
+var $author$project$Main$ToggleG = {$: 'ToggleG'};
+var $author$project$Main$ToggleN = {$: 'ToggleN'};
+var $author$project$Main$ToggleTobacco = {$: 'ToggleTobacco'};
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $author$project$Main$checkbox = F4(
+	function (title_, fvalue, handle, class_) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$input,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$type_('checkbox'),
+									$elm$html$Html$Attributes$checked(fvalue),
+									$elm$html$Html$Events$onClick(handle)
+								]),
+							_List_Nil),
+							A2(
+							$elm$html$Html$span,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('label-body')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text(title_)
+								]))
+						]))
+				]));
+	});
+var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
+var $elm$html$Html$form = _VirtualDom_node('form');
+var $elm$html$Html$h5 = _VirtualDom_node('h5');
+var $elm$html$Html$Events$alwaysPreventDefault = function (msg) {
+	return _Utils_Tuple2(msg, true);
+};
+var $elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
+	return {$: 'MayPreventDefault', a: a};
+};
+var $elm$html$Html$Events$preventDefaultOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayPreventDefault(decoder));
+	});
+var $elm$html$Html$Events$onSubmit = function (msg) {
+	return A2(
+		$elm$html$Html$Events$preventDefaultOn,
+		'submit',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysPreventDefault,
+			$elm$json$Json$Decode$succeed(msg)));
+};
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$select = _VirtualDom_node('select');
+var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$Main$selectbox = F5(
+	function (title_, choices, handle, class_, i) {
+		var def = $elm$core$List$head(
+			A2($elm$core$List$drop, i, choices));
+		var nls = A2(
+			$elm$core$List$map,
+			function (a) {
+				return A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value(a),
+							$elm$html$Html$Attributes$selected(
+							_Utils_eq(
+								$elm$core$Maybe$Just(a),
+								def))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(a)
+						]));
+			},
+			choices);
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(title_),
+							A2(
+							$elm$html$Html$select,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onInput(handle),
+									$elm$html$Html$Attributes$class('u-full-width')
+								]),
+							nls)
+						]))
+				]));
+	});
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $author$project$Main$textbox = F5(
+	function (title_, placeholder_, fvalue, handle, class_) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(title_),
+							A2(
+							$elm$html$Html$input,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$type_('text'),
+									$elm$html$Html$Attributes$class('u-full-width'),
+									$elm$html$Html$Attributes$placeholder(placeholder_),
+									$elm$html$Html$Attributes$value(fvalue),
+									$elm$html$Html$Events$onInput(handle)
+								]),
+							_List_Nil)
+						]))
+				]));
+	});
+var $author$project$Main$textboxCheck = F6(
+	function (title_, placeholder_, fvalue, handle, validator, class_) {
+		var _v0 = fvalue.value;
+		if (_v0.$ === 'Just') {
+			var i = _v0.a;
+			return A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(class_)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(title_),
+								A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$type_('text'),
+										$elm$html$Html$Attributes$class('u-full-width'),
+										$elm$html$Html$Attributes$placeholder(placeholder_),
+										$elm$html$Html$Attributes$value(
+										$elm$core$String$fromInt(i)),
+										$elm$html$Html$Events$onInput(handle)
+									]),
+								_List_Nil),
+								validator
+							]))
+					]));
+		} else {
+			return A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(class_)
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$label,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(title_),
+								A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$type_('text'),
+										$elm$html$Html$Attributes$class('u-full-width'),
+										$elm$html$Html$Attributes$placeholder(placeholder_),
+										$elm$html$Html$Attributes$value(''),
+										$elm$html$Html$Events$onInput(handle)
+									]),
+								_List_Nil)
+							]))
+					]));
+		}
+	});
+var $author$project$Main$validateVI = function (field) {
+	var _v0 = field.valid;
+	if (_v0) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'color', 'green')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('')
+				]));
+	} else {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'color', 'red')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(field.comment)
+				]));
+	}
+};
+var $author$project$Main$renderForm = F3(
+	function (model, func, buttonLabel) {
+		var loadText = _Utils_eq(model.state, $author$project$Main$Loading) ? 'Loading...' : '';
+		return A2(
+			$elm$html$Html$form,
+			_List_fromArray(
+				[
+					$elm$html$Html$Events$onSubmit(func)
+				]),
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('row')
+							]),
+						_List_fromArray(
+							[a]));
+				},
+				_List_fromArray(
+					[
+						A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns'),
+						A6(
+						$author$project$Main$textboxCheck,
+						'Age',
+						'65',
+						model.age,
+						$author$project$Main$SetAge,
+						$author$project$Main$validateVI(model.age),
+						'two columns'),
+						A6(
+						$author$project$Main$textboxCheck,
+						'ZIP',
+						'12345',
+						model.zip,
+						$author$project$Main$SetZip,
+						$author$project$Main$validateVI(model.zip),
+						'two columns'),
+						A5($author$project$Main$selectbox, 'County', model.counties, $author$project$Main$SelectCounty, 'three columns', 0),
+						A5(
+						$author$project$Main$selectbox,
+						'Gender',
+						_List_fromArray(
+							['Male', 'Female']),
+						$author$project$Main$SelectGender,
+						'three columns',
+						0),
+						A5(
+						$author$project$Main$selectbox,
+						'Effective Date',
+						A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
+						$author$project$Main$SelectDate,
+						'three columns',
+						1),
+						A4($author$project$Main$checkbox, 'Tobacco User?', model.tobacco, $author$project$Main$ToggleTobacco, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Apply Household Discount?', model.discounts, $author$project$Main$ToggleDiscounts, 'u-full-width'),
+						A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Which Plans?')
+							])),
+						A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('row')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('two columns')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'block', 'display'),
+												$elm$html$Html$Attributes$class('button-primary'),
+												$elm$html$Html$Attributes$disabled(!model.valid)
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Submit')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('one column')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(loadText)
+									]))
+							]))
+					])));
+	});
+var $author$project$Main$F = {$: 'F'};
+var $author$project$Main$G = {$: 'G'};
+var $author$project$Main$N = {$: 'N'};
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
@@ -8186,11 +8628,7 @@ var $author$project$Main$safeCurrencyFloat = function (ss) {
 		return 0.0;
 	}
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$html$Html$td = _VirtualDom_node('td');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$tr = _VirtualDom_node('tr');
 var $author$project$Main$simpleTotalRow = F2(
 	function (rowname, l) {
@@ -8365,442 +8803,17 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
-var $author$project$Main$SelectCounty = function (a) {
-	return {$: 'SelectCounty', a: a};
-};
-var $author$project$Main$SelectDate = function (a) {
-	return {$: 'SelectDate', a: a};
-};
-var $author$project$Main$SelectGender = function (a) {
-	return {$: 'SelectGender', a: a};
-};
-var $author$project$Main$SetAge = function (a) {
-	return {$: 'SetAge', a: a};
-};
-var $author$project$Main$SetName = function (a) {
-	return {$: 'SetName', a: a};
-};
-var $author$project$Main$SetZip = function (a) {
-	return {$: 'SetZip', a: a};
-};
-var $author$project$Main$ToggleDiscounts = {$: 'ToggleDiscounts'};
-var $author$project$Main$ToggleF = {$: 'ToggleF'};
-var $author$project$Main$ToggleG = {$: 'ToggleG'};
-var $author$project$Main$ToggleN = {$: 'ToggleN'};
-var $author$project$Main$ToggleTobacco = {$: 'ToggleTobacco'};
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
-	});
-var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$html$Html$label = _VirtualDom_node('label');
-var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
-var $author$project$Main$checkbox = F4(
-	function (title_, fvalue, handle, class_) {
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(class_)
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$label,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$input,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$type_('checkbox'),
-									$elm$html$Html$Attributes$checked(fvalue),
-									$elm$html$Html$Events$onClick(handle)
-								]),
-							_List_Nil),
-							A2(
-							$elm$html$Html$span,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$class('label-body')
-								]),
-							_List_fromArray(
-								[
-									$elm$html$Html$text(title_)
-								]))
-						]))
-				]));
-	});
-var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
-var $elm$html$Html$form = _VirtualDom_node('form');
-var $elm$html$Html$h5 = _VirtualDom_node('h5');
-var $elm$html$Html$Events$alwaysPreventDefault = function (msg) {
-	return _Utils_Tuple2(msg, true);
-};
-var $elm$virtual_dom$VirtualDom$MayPreventDefault = function (a) {
-	return {$: 'MayPreventDefault', a: a};
-};
-var $elm$html$Html$Events$preventDefaultOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayPreventDefault(decoder));
-	});
-var $elm$html$Html$Events$onSubmit = function (msg) {
+var $author$project$Main$renderOutput = function (model) {
 	return A2(
-		$elm$html$Html$Events$preventDefaultOn,
-		'submit',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysPreventDefault,
-			$elm$json$Json$Decode$succeed(msg)));
+		$elm$html$Html$div,
+		_List_Nil,
+		_List_fromArray(
+			[
+				model.planG ? A2($author$project$Main$outputTable, model, $author$project$Main$G) : $elm$html$Html$text('what?'),
+				model.planN ? A2($author$project$Main$outputTable, model, $author$project$Main$N) : $elm$html$Html$text('what??'),
+				model.planF ? A2($author$project$Main$outputTable, model, $author$project$Main$F) : $elm$html$Html$text('what???')
+			]));
 };
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
-		}
-	});
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
-var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$select = _VirtualDom_node('select');
-var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
-var $author$project$Main$selectbox = F5(
-	function (title_, choices, handle, class_, i) {
-		var def = $elm$core$List$head(
-			A2($elm$core$List$drop, i, choices));
-		var nls = A2(
-			$elm$core$List$map,
-			function (a) {
-				return A2(
-					$elm$html$Html$option,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$value(a),
-							$elm$html$Html$Attributes$selected(
-							_Utils_eq(
-								$elm$core$Maybe$Just(a),
-								def))
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(a)
-						]));
-			},
-			choices);
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(class_)
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$label,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text(title_),
-							A2(
-							$elm$html$Html$select,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onInput(handle),
-									$elm$html$Html$Attributes$class('u-full-width')
-								]),
-							nls)
-						]))
-				]));
-	});
-var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
-var $author$project$Main$textbox = F5(
-	function (title_, placeholder_, fvalue, handle, class_) {
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(class_)
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$label,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text(title_),
-							A2(
-							$elm$html$Html$input,
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$type_('text'),
-									$elm$html$Html$Attributes$class('u-full-width'),
-									$elm$html$Html$Attributes$placeholder(placeholder_),
-									$elm$html$Html$Attributes$value(fvalue),
-									$elm$html$Html$Events$onInput(handle)
-								]),
-							_List_Nil)
-						]))
-				]));
-	});
-var $author$project$Main$textboxCheck = F6(
-	function (title_, placeholder_, fvalue, handle, validator, class_) {
-		var _v0 = fvalue.value;
-		if (_v0.$ === 'Just') {
-			var i = _v0.a;
-			return A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class(class_)
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$label,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(title_),
-								A2(
-								$elm$html$Html$input,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$type_('text'),
-										$elm$html$Html$Attributes$class('u-full-width'),
-										$elm$html$Html$Attributes$placeholder(placeholder_),
-										$elm$html$Html$Attributes$value(
-										$elm$core$String$fromInt(i)),
-										$elm$html$Html$Events$onInput(handle)
-									]),
-								_List_Nil),
-								validator
-							]))
-					]));
-		} else {
-			return A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class(class_)
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$label,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(title_),
-								A2(
-								$elm$html$Html$input,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$type_('text'),
-										$elm$html$Html$Attributes$class('u-full-width'),
-										$elm$html$Html$Attributes$placeholder(placeholder_),
-										$elm$html$Html$Attributes$value(''),
-										$elm$html$Html$Events$onInput(handle)
-									]),
-								_List_Nil)
-							]))
-					]));
-		}
-	});
-var $author$project$Main$validateVI = function (field) {
-	var _v0 = field.valid;
-	if (_v0) {
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'color', 'green')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('')
-				]));
-	} else {
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'color', 'red')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(field.comment)
-				]));
-	}
-};
-var $author$project$Main$renderForm = F3(
-	function (model, func, buttonLabel) {
-		var loadText = _Utils_eq(model.state, $author$project$Main$Loading) ? 'Loading...' : '';
-		return A2(
-			$elm$html$Html$form,
-			_List_fromArray(
-				[
-					$elm$html$Html$Events$onSubmit(func)
-				]),
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[a]));
-				},
-				_List_fromArray(
-					[
-						A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns'),
-						A6(
-						$author$project$Main$textboxCheck,
-						'Age',
-						'65',
-						model.age,
-						$author$project$Main$SetAge,
-						$author$project$Main$validateVI(model.age),
-						'two columns'),
-						A6(
-						$author$project$Main$textboxCheck,
-						'ZIP',
-						'12345',
-						model.zip,
-						$author$project$Main$SetZip,
-						$author$project$Main$validateVI(model.zip),
-						'two columns'),
-						A5($author$project$Main$selectbox, 'County', model.counties, $author$project$Main$SelectCounty, 'three columns', 0),
-						A5(
-						$author$project$Main$selectbox,
-						'Gender',
-						_List_fromArray(
-							['Male', 'Female']),
-						$author$project$Main$SelectGender,
-						'three columns',
-						0),
-						A5(
-						$author$project$Main$selectbox,
-						'Effective Date',
-						A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
-						$author$project$Main$SelectDate,
-						'three columns',
-						1),
-						A4($author$project$Main$checkbox, 'Tobacco User?', model.tobacco, $author$project$Main$ToggleTobacco, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Apply Household Discount?', model.discounts, $author$project$Main$ToggleDiscounts, 'u-full-width'),
-						A2(
-						$elm$html$Html$h5,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('u-full-width')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Which Plans?')
-							])),
-						A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('two columns')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												A2($elm$html$Html$Attributes$style, 'block', 'display'),
-												$elm$html$Html$Attributes$class('button-primary'),
-												$elm$html$Html$Attributes$disabled(!model.valid)
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Submit')
-											]))
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('one column')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(loadText)
-									]))
-							]))
-					])));
-	});
 var $author$project$Main$DeselectAll = {$: 'DeselectAll'};
 var $author$project$Main$SelectAll = function (a) {
 	return {$: 'SelectAll', a: a};
@@ -9759,7 +9772,7 @@ var $author$project$Main$variousViews = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								A2($author$project$Main$outputTable, model, $author$project$Main$G)
+								$author$project$Main$renderOutput(model)
 							]))
 					]));
 	}
