@@ -661,13 +661,13 @@ variousViews model =
     Results ->
       div [ ]
         [ div []
-          [ div [] [ outputTable model G ] ]
+          [ div [] [ renderResults model] ]
         ]
 
     Output ->
       div [ ]
           [ div []
-            [ renderOutput model ]--renderOutput model ]
+            [ outputTable model G ]--renderOutput model ]
           ]
 
 
