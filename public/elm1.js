@@ -9870,7 +9870,11 @@ var $author$project$Main$variousViews = function (model) {
 					[
 						A2(
 						$elm$html$Html$div,
-						_List_Nil,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+								A2($elm$html$Html$Attributes$style, 'width', '70%')
+							]),
 						_List_fromArray(
 							[
 								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
@@ -9952,17 +9956,7 @@ var $author$project$Main$view = function (model) {
 								A2($elm$html$Html$Attributes$style, 'display', 'block')
 							]),
 						_List_Nil),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-								A2($elm$html$Html$Attributes$style, 'width', '70%')
-							]),
-						_List_fromArray(
-							[
-								$author$project$Main$variousViews(model)
-							]))
+						$author$project$Main$variousViews(model)
 					]))
 			]),
 		title: 'Medicare School Quote'

@@ -607,10 +607,7 @@ view model =
               , style "display" "block"
               ]
               [  ]
-        , div [ style "margin" "auto"
-              , style "width" "70%"
-              ]
-              [ variousViews model ]
+        , variousViews model
         ]
       ]
   }
@@ -666,7 +663,9 @@ variousViews model =
 
     Ready ->
       div [ ]
-        [ div []
+        [ div [ style "margin" "auto"
+              , style "width" "70%"
+              ]
           [ renderForm model SubmitForm "Submit" ]
         ]
 
