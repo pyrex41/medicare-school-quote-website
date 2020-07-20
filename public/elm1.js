@@ -8808,6 +8808,123 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
+var $elm$html$Html$h4 = _VirtualDom_node('h4');
+var $author$project$Main$personalInfo = function (model) {
+	var zipText = function () {
+		var _v2 = model.zip.value;
+		if (_v2.$ === 'Just') {
+			var v = _v2.a;
+			return $elm$core$String$fromInt(v);
+		} else {
+			return '';
+		}
+	}();
+	var pdpText = function () {
+		var _v1 = model.pdpSelect;
+		if (_v1.$ === 'Just') {
+			var s = _v1.a;
+			return s;
+		} else {
+			return '';
+		}
+	}();
+	var ageText = function () {
+		var _v0 = model.age.value;
+		if (_v0.$ === 'Just') {
+			var a = _v0.a;
+			return $elm$core$String$fromInt(a);
+		} else {
+			return '';
+		}
+	}();
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('six columns')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$h3,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('u-full-width')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(model.name)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('two columns')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h4,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(ageText)
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('two columns')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h4,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(zipText)
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('two columns')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h4,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(model.gender)
+							]))
+					])),
+				A2(
+				$elm$html$Html$h4,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('u-full-width')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(pdpText)
+					]))
+			]));
+};
 var $author$project$Main$renderOutput = function (model) {
 	var tl = A3(
 		$elm$core$List$map2,
@@ -8823,13 +8940,19 @@ var $author$project$Main$renderOutput = function (model) {
 		},
 		tl);
 	var pl = A2($elm$core$List$map, $elm$core$Tuple$second, tlf);
+	var tables = A2(
+		$elm$core$List$map,
+		$author$project$Main$outputTable(model),
+		pl);
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
-		A2(
-			$elm$core$List$map,
-			$author$project$Main$outputTable(model),
-			pl));
+		_Utils_ap(
+			_List_fromArray(
+				[
+					$author$project$Main$personalInfo(model)
+				]),
+			tables));
 };
 var $author$project$Main$DeselectAll = {$: 'DeselectAll'};
 var $author$project$Main$SelectAll = function (a) {

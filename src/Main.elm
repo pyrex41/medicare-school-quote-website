@@ -832,8 +832,9 @@ renderOutput model =
     tl = List.map2 Tuple.pair [model.planG, model.planN, model.planF] [G,N,F]
     tlf = List.filter (\a -> Tuple.first(a)) tl
     pl = List.map Tuple.second tlf
+    tables = List.map (outputTable model) pl
   in
-    div [] <| List.map (outputTable model) pl
+    div [] <| [personalInfo model] ++ tables
 
 
 renderOutputOld : Model -> Html msg
@@ -905,7 +906,35 @@ renderOutputOld model =
       Nothing ->
         text "No Output Available"
 
--- Output Table
+-- Output Page Utils
+personalInfo : Model -> Html msg
+personalInfo model =
+  let
+    pdpText = case model.pdpSelect of
+      Just s -> s
+      Nothing -> ""
+    ageText = case model.age.value of
+      Just a -> String.fromInt(a)
+      Nothing -> ""
+    zipText = case model.zip.value of
+      Just v -> String.fromInt(v)
+      Nothing -> ""
+  in
+    div [ class "six columns"]
+      [ h3 [ class "u-full-width" ] [ text model.name ]
+      , div [ class "two columns"]
+        [ h4 [ class "u-full-width" ] [ text ageText ]
+        ]
+      , div [ class "two columns"]
+        [ h4 [ class "u-full-width" ] [text zipText ]
+        ]
+      , div [ class "two columns"]
+        [ h4 [ class "u-full-width" ] [ text model.gender ]
+        ]
+      , h4 [ class "u-full-width" ] [ text pdpText ]
+      ]
+
+
 outputTable : Model -> PlanType -> Html msg
 outputTable model pt =
   case model.tableRows of
