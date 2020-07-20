@@ -8846,6 +8846,7 @@ var $author$project$Main$personalInfo = function (model) {
 			return '';
 		}
 	}();
+	var dsc = model.discounts ? 'Yes' : 'No';
 	var ageText = function () {
 		var _v0 = model.age.value;
 		if (_v0.$ === 'Just') {
@@ -8855,7 +8856,7 @@ var $author$project$Main$personalInfo = function (model) {
 			return '';
 		}
 	}();
-	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + model.gender))));
+	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + (model.gender + ('   |   ' + ('Discount Applied: ' + dsc)))))));
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,

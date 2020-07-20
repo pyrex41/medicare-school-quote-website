@@ -852,7 +852,8 @@ personalInfo model =
     zipText = case model.zip.value of
       Just v -> String.fromInt(v)
       Nothing -> ""
-    row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender
+    dsc = if model.discounts then "Yes" else "No"
+    row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender ++ "   |   " ++ "Discount Applied: " ++ dsc
   in
     div []
       [ div [ class "row" ]
