@@ -9904,7 +9904,7 @@ var $author$project$Main$view = function (model) {
 						$author$project$Main$variousViews(model)
 					]))
 			]),
-		title: 'Enlightnu Quoting App'
+		title: 'Medicare School Quote'
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(

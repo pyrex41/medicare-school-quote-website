@@ -584,7 +584,7 @@ subscriptions model =
 
 view : Model -> Browser.Document Msg
 view model =
-  { title = "Enlightnu Quoting App"
+  { title = "Medicare School Quote"
   , body =
       [ div [ class "container"
             ]
