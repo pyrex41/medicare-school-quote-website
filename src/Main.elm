@@ -588,13 +588,11 @@ view model =
   , body =
       [ div [ class "container"
             ]
-        [ div [ class "divbox" ]
-          [ img [ src "images/logo.png"
+        [ img [ src "images/logo.png"
               , style "max-width" "500px"
               , style "height" "auto"
               ]
               [  ]
-          ]
         , variousViews model
         ]
       ]

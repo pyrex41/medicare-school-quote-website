@@ -9893,23 +9893,14 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$div,
+						$elm$html$Html$img,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('divbox')
+								$elm$html$Html$Attributes$src('images/logo.png'),
+								A2($elm$html$Html$Attributes$style, 'max-width', '500px'),
+								A2($elm$html$Html$Attributes$style, 'height', 'auto')
 							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$img,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$src('images/logo.png'),
-										A2($elm$html$Html$Attributes$style, 'max-width', '500px'),
-										A2($elm$html$Html$Attributes$style, 'height', 'auto')
-									]),
-								_List_Nil)
-							])),
+						_List_Nil),
 						$author$project$Main$variousViews(model)
 					]))
 			]),
