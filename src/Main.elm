@@ -834,7 +834,7 @@ renderOutput model =
     pl = List.map Tuple.second tlf
     tables = List.map (outputTable model) pl
   in
-    div [] <| [(personalInfo model), hr [] []] ++ tables
+    div [] <| [(personalInfo model)] ++ tables
 
 
 renderOutputOld : Model -> Html msg
@@ -925,9 +925,9 @@ personalInfo model =
       [ div [ class "row" ]
         [ strong [] [ text model.name ] ]
       , div [ class "row"]
-        [ p [ ] [ text row2 ] ]
+        [ text row2 ]
       , div [ class "row" ]
-        [ p [ ] [ text pdpText ] ]
+        [ text pdpText ]
       ]
 
 
@@ -961,6 +961,7 @@ outputTable model pt =
                   , grandTotalRow
                   ]
                 ]
+            , hr [] []
             ]
     Nothing -> text "No Output Available"
 

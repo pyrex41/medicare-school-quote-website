@@ -8323,7 +8323,6 @@ var $author$project$Main$renderForm = F3(
 var $author$project$Main$F = {$: 'F'};
 var $author$project$Main$G = {$: 'G'};
 var $author$project$Main$N = {$: 'N'};
-var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
@@ -8570,6 +8569,7 @@ var $author$project$Main$currencyAddTwo = F2(
 	function (a, b) {
 		return (!b) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, a + b));
 	});
+var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $author$project$Main$pTextUtil = function (pt) {
 	switch (pt.$) {
 		case 'G':
@@ -8803,13 +8803,13 @@ var $author$project$Main$outputTable = F2(
 								_List_Nil,
 								_List_fromArray(
 									[rateRow, pdpRow, insuranceTotalRow, partBRow, grandTotalRow]))
-							]))
+							])),
+						A2($elm$html$Html$hr, _List_Nil, _List_Nil)
 					]));
 		} else {
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
-var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
@@ -8869,13 +8869,7 @@ var $author$project$Main$personalInfo = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$p,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(row2)
-							]))
+						$elm$html$Html$text(row2)
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -8885,13 +8879,7 @@ var $author$project$Main$personalInfo = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$p,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(pdpText)
-							]))
+						$elm$html$Html$text(pdpText)
 					]))
 			]));
 };
@@ -8920,8 +8908,7 @@ var $author$project$Main$renderOutput = function (model) {
 		_Utils_ap(
 			_List_fromArray(
 				[
-					$author$project$Main$personalInfo(model),
-					A2($elm$html$Html$hr, _List_Nil, _List_Nil)
+					$author$project$Main$personalInfo(model)
 				]),
 			tables));
 };
@@ -9203,6 +9190,7 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 		},
 		toMsg: $author$project$Main$SetTableState
 	});
+var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$core$String$endsWith = _String_endsWith;
 var $elm$core$String$trimRight = _String_trimRight;
 var $author$project$Main$pdpOption = F2(
