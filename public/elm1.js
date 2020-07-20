@@ -8840,27 +8840,33 @@ var $author$project$Main$personalInfo = function (model) {
 	}();
 	return A2(
 		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('six columns')
-			]),
+		_List_Nil,
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$h3,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('u-full-width')
+						$elm$html$Html$Attributes$class('row')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text(model.name)
+						A2(
+						$elm$html$Html$h3,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('six columns')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(model.name)
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('two columns')
+						$elm$html$Html$Attributes$class('row')
 					]),
 				_List_fromArray(
 					[
@@ -8868,45 +8874,27 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$h4,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('two columns')
 							]),
 						_List_fromArray(
 							[
 								$elm$html$Html$text(ageText)
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('two columns')
-					]),
-				_List_fromArray(
-					[
+							])),
 						A2(
 						$elm$html$Html$h4,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('two columns')
 							]),
 						_List_fromArray(
 							[
 								$elm$html$Html$text(zipText)
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('two columns')
-					]),
-				_List_fromArray(
-					[
+							])),
 						A2(
 						$elm$html$Html$h4,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('two columns')
 							]),
 						_List_fromArray(
 							[
@@ -8914,14 +8902,23 @@ var $author$project$Main$personalInfo = function (model) {
 							]))
 					])),
 				A2(
-				$elm$html$Html$h4,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('u-full-width')
+						$elm$html$Html$Attributes$class('row')
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text(pdpText)
+						A2(
+						$elm$html$Html$h4,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(pdpText)
+							]))
 					]))
 			]));
 };

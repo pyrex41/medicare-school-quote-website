@@ -920,18 +920,16 @@ personalInfo model =
       Just v -> String.fromInt(v)
       Nothing -> ""
   in
-    div [ class "six columns"]
-      [ h3 [ class "u-full-width" ] [ text model.name ]
-      , div [ class "two columns"]
-        [ h4 [ class "u-full-width" ] [ text ageText ]
+    div []
+      [ div [ class "row" ]
+        [ h3 [ class "six columns" ] [ text model.name ] ]
+      , div [ class "row"]
+        [ h4 [ class "two columns" ] [ text ageText ]
+        , h4 [ class "two columns" ] [text zipText ]
+        , h4 [ class "two columns" ] [ text model.gender ]
         ]
-      , div [ class "two columns"]
-        [ h4 [ class "u-full-width" ] [text zipText ]
-        ]
-      , div [ class "two columns"]
-        [ h4 [ class "u-full-width" ] [ text model.gender ]
-        ]
-      , h4 [ class "u-full-width" ] [ text pdpText ]
+      , div [ class "row" ]
+        [ h4 [ class "u-full-width" ] [ text pdpText ] ]
       ]
 
 
