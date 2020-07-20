@@ -923,11 +923,11 @@ personalInfo model =
   in
     div []
       [ div [ class "row" ]
-        [ h2 [ class "six columns" ] [ text model.name ] ]
+        [ h2 [] [ text model.name ] ]
       , div [ class "row"]
-        [ p [ class "six columns" ] [ text row2 ] ]
+        [ p [ ] [ text row2 ] ]
       , div [ class "row" ]
-        [ p [ class "u-full-width" ] [ text pdpText ] ]
+        [ p [ ] [ text pdpText ] ]
       ]
 
 

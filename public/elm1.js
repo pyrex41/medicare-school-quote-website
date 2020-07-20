@@ -8854,10 +8854,7 @@ var $author$project$Main$personalInfo = function (model) {
 					[
 						A2(
 						$elm$html$Html$h2,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('six columns')
-							]),
+						_List_Nil,
 						_List_fromArray(
 							[
 								$elm$html$Html$text(model.name)
@@ -8873,10 +8870,7 @@ var $author$project$Main$personalInfo = function (model) {
 					[
 						A2(
 						$elm$html$Html$p,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('six columns')
-							]),
+						_List_Nil,
 						_List_fromArray(
 							[
 								$elm$html$Html$text(row2)
@@ -8892,10 +8886,7 @@ var $author$project$Main$personalInfo = function (model) {
 					[
 						A2(
 						$elm$html$Html$p,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('u-full-width')
-							]),
+						_List_Nil,
 						_List_fromArray(
 							[
 								$elm$html$Html$text(pdpText)
