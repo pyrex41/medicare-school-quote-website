@@ -8400,6 +8400,7 @@ var $author$project$Main$renderForm = F3(
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('button-primary'),
+														A2($elm$html$Html$Attributes$style, 'width', '80%'),
 														A2($elm$html$Html$Attributes$style, 'position', 'relative'),
 														$elm$html$Html$Attributes$disabled(!model.valid)
 													]),
@@ -8921,18 +8922,24 @@ var $author$project$Main$outputTable = F2(
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('u-full-width'),
-								A2($elm$html$Html$Attributes$style, 'table-layout', 'fixed')
+								$elm$html$Html$Attributes$class('mytable')
 							]),
 						_List_fromArray(
 							[
 								A2(
 								$elm$html$Html$thead,
-								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('myth')
+									]),
 								_List_fromArray(
 									[companyNames])),
 								A2(
 								$elm$html$Html$tbody,
-								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('mytb')
+									]),
 								_List_fromArray(
 									[rateRow, pdpRow, insuranceTotalRow, partBRow, grandTotalRow]))
 							])),

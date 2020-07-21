@@ -784,6 +784,7 @@ renderForm model func buttonLabel =
                   [ div [ class "three columns", class "offset-by-four columns" ]
                       [ button
                           [ class "button-primary"
+                          , style "width" "80%"
                           , style "position" "relative"
                           , disabled (not model.valid) ] [ text "Submit" ]
                       , div [ class "one column", class "offset-by-seven columns" ] [ text <| loadText ]
@@ -907,9 +908,11 @@ outputTable model pt =
         grandTotalRow = simpleTotalRow "Grand Monthly Total" grandTotal
       in
         div []
-            [ table [ class "u-full-width", style "table-layout" "fixed" ]
-                [ thead [] [ companyNames ]
-                , tbody []
+            [ table [ class "u-full-width"
+                    , class "mytable"
+                    ]
+                [ thead [ class "myth" ] [ companyNames ]
+                , tbody [ class "mytb" ]
                   [ rateRow
                   , pdpRow
                   , insuranceTotalRow
