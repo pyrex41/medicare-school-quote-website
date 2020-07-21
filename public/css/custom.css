@@ -9,7 +9,7 @@
 }
 
 .mytable {
-  border-collapse;
+  border-collapse: collapse;
 }
 
 .myth {
@@ -19,9 +19,15 @@
   border-left: solid 1px #fff;
 }
 
-.mytr {
+.mytd {
+  padding: 0.5rem;
+  text-align: left;
   border-right: solid 1px #fff;
   border-left: solid 1px #fff;
+}
+
+.mytr {
+  border: none;
   padding: 0.5rem;
   text-align: left;
 }
