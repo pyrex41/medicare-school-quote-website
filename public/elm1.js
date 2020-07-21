@@ -9486,7 +9486,7 @@ var $author$project$Main$pdpSelectBox = F3(
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('six columns'),
-						$elm$html$Html$Attributes$class('offset-by-two columns')
+						$elm$html$Html$Attributes$class('offset-by-three columns')
 					]),
 				_List_fromArray(
 					[
@@ -9864,7 +9864,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-four columns')
+								$elm$html$Html$Attributes$class('offset-by-three columns')
 							]),
 						_List_fromArray(
 							[
