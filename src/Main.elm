@@ -809,17 +809,17 @@ renderResults model =
       , div [ class "row" ]
           [ div [ class "four columns" ]
               [ button
-                  [ onClick ShowOutput, class "button-primary" ]
+                  [ onClick ShowOutput, class "button-primary", style "width" "50%", style "position" "relative" ]
                   [ text "Show Output" ]
               ]
           , div [ class "four columns"]
               [ button
-                  [ onClick ( SelectAll naicShow ), class "button" ]
+                  [ onClick ( SelectAll naicShow ), class "button", style "width" "50%", style "position" "relative" ]
                   [ text "Select All" ]
               ]
           , div [ class "four columns"]
               [ button
-                  [ onClick DeselectAll, class "button" ]
+                  [ onClick DeselectAll, class "button", style "width" "50%", style "position" "relative" ]
                   [ text "Deselect All" ]
               ]
           ]

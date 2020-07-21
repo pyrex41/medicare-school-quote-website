@@ -9691,7 +9691,9 @@ var $author$project$Main$renderResults = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-										$elm$html$Html$Attributes$class('button-primary')
+										$elm$html$Html$Attributes$class('button-primary'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%'),
+										A2($elm$html$Html$Attributes$style, 'position', 'relative')
 									]),
 								_List_fromArray(
 									[
@@ -9712,7 +9714,9 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$Events$onClick(
 										$author$project$Main$SelectAll(naicShow)),
-										$elm$html$Html$Attributes$class('button')
+										$elm$html$Html$Attributes$class('button'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%'),
+										A2($elm$html$Html$Attributes$style, 'position', 'relative')
 									]),
 								_List_fromArray(
 									[
@@ -9732,7 +9736,9 @@ var $author$project$Main$renderResults = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
-										$elm$html$Html$Attributes$class('button')
+										$elm$html$Html$Attributes$class('button'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%'),
+										A2($elm$html$Html$Attributes$style, 'position', 'relative')
 									]),
 								_List_fromArray(
 									[
