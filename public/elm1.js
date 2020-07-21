@@ -9394,7 +9394,7 @@ var $author$project$Main$toRowAttrs = function (tablerow) {
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
-			tablerow.selected ? '#CEFAF8' : 'white')
+			tablerow.selected ? '#ffbf63' : 'white')
 		]);
 };
 var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customConfig(
