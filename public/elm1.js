@@ -7365,6 +7365,32 @@ var $author$project$Main$update = F2(
 						$elm$browser$Browser$Navigation$pushUrl,
 						model.key,
 						$elm$url$Url$toString(nurl)));
+			case 'ShowSubmitForm':
+				var curl = model.url;
+				var nurl = _Utils_update(
+					curl,
+					{path: '/home'});
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{state: $author$project$Main$Ready, url: nurl}),
+					A2(
+						$elm$browser$Browser$Navigation$pushUrl,
+						model.key,
+						$elm$url$Url$toString(nurl)));
+			case 'ShowResults':
+				var curl = model.url;
+				var nurl = _Utils_update(
+					curl,
+					{path: '/results'});
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{state: $author$project$Main$Results, url: nurl}),
+					A2(
+						$elm$browser$Browser$Navigation$pushUrl,
+						model.key,
+						$elm$url$Url$toString(nurl)));
 			case 'LinkClicked':
 				var urlRequest = msg.a;
 				if (urlRequest.$ === 'Internal') {
@@ -8977,6 +9003,8 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
+var $author$project$Main$ShowResults = {$: 'ShowResults'};
+var $author$project$Main$ShowSubmitForm = {$: 'ShowSubmitForm'};
 var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
@@ -9048,6 +9076,55 @@ var $author$project$Main$personalInfo = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$text(pdpText)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('three columns')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
+										A2($elm$html$Html$Attributes$style, 'display', 'block')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Request New Quote')
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('three columns')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
+										A2($elm$html$Html$Attributes$style, 'display', 'block')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Request New Quote')
+									]))
+							]))
 					]))
 			]));
 };

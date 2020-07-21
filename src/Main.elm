@@ -222,6 +222,8 @@ type Msg
   | LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
   | ShowOutput
+  | ShowSubmitForm
+  | ShowResults
   | ToggleSelect Int
 
 type Fail
@@ -240,6 +242,24 @@ update msg model =
       in
         ( { model | url = nurl
                   , state = Output }
+        , Nav.pushUrl model.key (Url.toString nurl))
+
+    ShowSubmitForm ->
+      let
+        curl = model.url
+        nurl = { curl | path = "/home" }
+      in
+        ( { model | url = nurl
+                  , state = Ready }
+        , Nav.pushUrl model.key (Url.toString nurl))
+
+    ShowResults ->
+      let
+        curl = model.url
+        nurl = { curl | path = "/results" }
+      in
+        ( { model | url = nurl
+                  , state = Results }
         , Nav.pushUrl model.key (Url.toString nurl))
 
     LinkClicked urlRequest ->
@@ -847,7 +867,7 @@ renderResults model =
             --div [] [ text "" ]
       ]
 
-renderOutput : Model -> Html msg
+renderOutput : Model -> Html Msg
 renderOutput model =
   let
     tl = List.map2 Tuple.pair [model.planG, model.planN, model.planF] [G,N,F]
@@ -857,8 +877,10 @@ renderOutput model =
   in
     div [] <| [(personalInfo model)] ++ tables
 
+
+
 -- Output Page Utils
-personalInfo : Model -> Html msg
+personalInfo : Model -> Html Msg
 personalInfo model =
   let
     pdpText = case model.pdpSelect of
@@ -882,10 +904,16 @@ personalInfo model =
         [ text row2 ]
       , div [ class "row" ]
         [ text pdpText ]
+      , div [ class "row" ]
+        [ div [ class "three columns" ]
+          [ button [ onClick ShowSubmitForm, style "display" "block" ] [ text "Request New Quote" ] ]
+        , div [ class "three columns"]
+          [ button [ onClick ShowResults, style "display" "block" ] [ text "Request New Quote" ] ]
+        ]
       ]
 
 
-outputTable : Model -> PlanType -> Html msg
+outputTable : Model -> PlanType -> Html Msg
 outputTable model pt =
   case model.tableRows of
     Just tr ->
