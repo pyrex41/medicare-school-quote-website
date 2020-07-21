@@ -759,7 +759,19 @@ viewCheckbox { selected } =
 renderForm : Model -> Msg -> String -> Html Msg
 renderForm model func buttonLabel =
   let
-    loadText = if model.state == Loading then "Loading..." else ""
+    submitButton =
+      if model.state == Loading then
+        button
+          [ class "button"
+          , style "width" "80%"
+          , style "position" "relative"
+          , disabled True ] [ text "Loading" ]
+      else
+        button
+            [ class "button-primary"
+            , style "width" "80%"
+            , style "position" "relative"
+            , disabled (not model.valid) ] [ text "Submit" ]
   in
     div [
         ]
@@ -781,14 +793,9 @@ renderForm model func buttonLabel =
               , checkbox "Plan N" model.planN ToggleN [ "three columns", "offset-by-four columns"]
               , checkbox "Plan F" model.planF ToggleF [ "three columns", "offset-by-four columns"]
               , div [ class "row" ]
-                  [ div [ class "three columns", class "offset-by-four columns" ]
-                      [ button
-                          [ class "button-primary"
-                          , style "width" "80%"
-                          , style "position" "relative"
-                          , disabled (not model.valid) ] [ text "Submit" ]
-                      , div [ class "one column", class "offset-by-eight columns" ] [ text  loadText ]
-                      ]
+                  [ div
+                    [ class "three columns", class "offset-by-four columns" ]
+                      [ submitButton ]
                   ]
               ]
           )

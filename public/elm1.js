@@ -8245,7 +8245,31 @@ var $author$project$Main$validateVI = function (field) {
 };
 var $author$project$Main$renderForm = F3(
 	function (model, func, buttonLabel) {
-		var loadText = _Utils_eq(model.state, $author$project$Main$Loading) ? 'Loading...' : '';
+		var submitButton = _Utils_eq(model.state, $author$project$Main$Loading) ? A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('button'),
+					A2($elm$html$Html$Attributes$style, 'width', '80%'),
+					A2($elm$html$Html$Attributes$style, 'position', 'relative'),
+					$elm$html$Html$Attributes$disabled(true)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Loading')
+				])) : A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('button-primary'),
+					A2($elm$html$Html$Attributes$style, 'width', '80%'),
+					A2($elm$html$Html$Attributes$style, 'position', 'relative'),
+					$elm$html$Html$Attributes$disabled(!model.valid)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Submit')
+				]));
 		return A2(
 			$elm$html$Html$div,
 			_List_Nil,
@@ -8394,32 +8418,7 @@ var $author$project$Main$renderForm = F3(
 												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$button,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('button-primary'),
-														A2($elm$html$Html$Attributes$style, 'width', '80%'),
-														A2($elm$html$Html$Attributes$style, 'position', 'relative'),
-														$elm$html$Html$Attributes$disabled(!model.valid)
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Submit')
-													])),
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('one column'),
-														$elm$html$Html$Attributes$class('offset-by-eight columns')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text(loadText)
-													]))
-											]))
+											[submitButton]))
 									]))
 							])))
 				]));
