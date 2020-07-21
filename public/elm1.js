@@ -9156,7 +9156,11 @@ var $author$project$Main$renderOutput = function (model) {
 		pl);
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('ten columns'),
+				$elm$html$Html$Attributes$class('offset-by-one column')
+			]),
 		_Utils_ap(
 			_List_fromArray(
 				[

@@ -877,7 +877,7 @@ renderOutput model =
     pl = List.map Tuple.second tlf
     tables = List.map (outputTable model) pl
   in
-    div [] <| [(personalInfo model)] ++ tables
+    div [ class "ten columns", class "offset-by-one column" ] <| [(personalInfo model)] ++ tables
 
 
 
