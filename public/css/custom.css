@@ -1,4 +1,7 @@
 .divbox {
-  max-width: 800px;
-  position: relative;  
-}
+  max-width: 600px;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; }
