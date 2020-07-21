@@ -211,8 +211,8 @@ input[type="submit"]:disabled,
 input[type="reset"]:disabled,
 input[type="button"]:disabled {
   color: #4a4542;
-  background-color: #ffbf63;
-  border-color: #ffbf63; }
+  background-color: #f79452;
+  border-color: #f79452; }
 .button.button-primary,
 button.button-primary,
 input[type="submit"].button-primary,
