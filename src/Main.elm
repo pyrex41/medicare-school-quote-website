@@ -764,12 +764,16 @@ renderForm model func buttonLabel =
         button
           [ class "button"
           , style "width" "100%"
-          , disabled True ] [ text "Loading" ]
+          , disabled True
+          ]
+          [ text "Loading" ]
       else
         button
             [ class "button-primary"
             , style "width" "100%"
-            , disabled (not model.valid) ] [ text "Submit" ]
+            , disabled (not model.valid)
+            ]
+            [ text "Submit" ]
   in
     div [
         ]
