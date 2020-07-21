@@ -6529,7 +6529,7 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 };
 var $author$project$Main$getPlans = function (model) {
 	if (model.valid) {
-		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
+		var url1 = 'https://medicare-school-quote-tool.herokuapp.com/api/plans?';
 		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + (model.gender + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + $author$project$Main$strMaybeDate(model.date))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.planN, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.planF, 'F', url3);
@@ -6557,13 +6557,13 @@ var $author$project$Main$getZip = function (model) {
 		return $elm$http$Http$get(
 			{
 				expect: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
-				url: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
+				url: 'https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
 			});
 	} else {
 		return $elm$http$Http$get(
 			{
 				expect: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
-				url: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + ''
+				url: 'https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=' + ''
 			});
 	}
 };

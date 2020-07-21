@@ -1432,12 +1432,12 @@ getZip model =
     case zip of
       Just z ->
         Http.get
-          { url = "https://enlightnu-quote-api.herokuapp.com/api/counties?zip=" ++ String.fromInt(z)
+          { url = "https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=" ++ String.fromInt(z)
           , expect = Http.expectJson ZipResponse countyDecoder
           }
       Nothing ->
         Http.get
-          { url = "https://enlightnu-quote-api.herokuapp.com/api/counties?zip=" ++ ""
+          { url = "https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=" ++ ""
           , expect = Http.expectJson ZipResponse countyDecoder
           }
 
@@ -1456,7 +1456,7 @@ getPlans : Model -> Cmd Msg
 getPlans model =
   if model.valid then
     let
-      url1 =  "https://enlightnu-quote-api.herokuapp.com/api/plans?"
+      url1 =  "https://medicare-school-quote-tool.herokuapp.com/api/plans?"
       url2 = url1
           ++ "zip=" ++ ( stringMaybeInt model.zip.value )
           ++ "&age=" ++ ( stringMaybeInt model.age.value )
