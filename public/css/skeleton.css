@@ -201,7 +201,7 @@ input[type="button"]:focus {
   border-color: #d1bdb2;
   background-color: #d1bdb2;
   outline: 0; }
-.button.:disabled,
+.button:disabled,
 button:disabled,
 input[type="submit"]:disabled,
 input[type="reset"]:disabled,
