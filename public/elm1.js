@@ -9682,7 +9682,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('four columns')
+								$elm$html$Html$Attributes$class('three columns')
 							]),
 						_List_fromArray(
 							[
@@ -9699,16 +9699,14 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$text('Show Output')
 									]))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('three columns')
+							]),
+						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
