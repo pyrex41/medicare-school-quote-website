@@ -9639,10 +9639,7 @@ var $author$project$Main$renderResults = function (model) {
 	}();
 	return A2(
 		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('divbox')
-			]),
+		_List_Nil,
 		_List_fromArray(
 			[
 				A2(

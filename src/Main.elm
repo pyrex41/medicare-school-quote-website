@@ -799,7 +799,7 @@ renderResults model =
       Nothing ->
         Nothing
   in
-    div [ class "divbox" ]
+    div [ ]
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
