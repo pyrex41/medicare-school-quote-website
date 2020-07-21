@@ -844,12 +844,12 @@ renderResults model =
               ]
           ]
       , div [ class "row" ]
-          [ div [ class "seven columns", style "padding-top" "1.2em" ]
+          [ div [ class "six columns", class "offset-by-one column", style "padding-top" "1.2em" ]
               [ button
                   [ onClick ShowOutput, class "button-primary", style "display" "block" ]
                   [ text "Show Output" ]
               ]
-          , div [ class "five columns", style "padding-top" "1.2em" ]
+          , div [ class "four columns", style "padding-top" "1.2em" ]
             [ button
               [ onClick (SelectAll naicShow), class "button", style "width" "50%" ]
               [ text "Select All" ]
@@ -899,7 +899,7 @@ personalInfo model =
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender ++ "   |   " ++ "Discount Applied: " ++ dsc
   in
-    div [ style "padding-top" "2em", style "padding-top" "3em" ]
+    div [ style "padding-top" "2em", style "padding-bottom" "3em" ]
       [ div [ class "row" ]
           [ div [ class "seven columns" ]
             [ div [ class "row" ] [ strong [] [ text model.name ] ]

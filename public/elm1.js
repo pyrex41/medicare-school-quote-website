@@ -9041,7 +9041,7 @@ var $author$project$Main$personalInfo = function (model) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'padding-top', '2em'),
-				A2($elm$html$Html$Attributes$style, 'padding-top', '3em')
+				A2($elm$html$Html$Attributes$style, 'padding-bottom', '3em')
 			]),
 		_List_fromArray(
 			[
@@ -9903,7 +9903,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('seven columns'),
+								$elm$html$Html$Attributes$class('six columns'),
+								$elm$html$Html$Attributes$class('offset-by-one column'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -9925,7 +9926,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('five columns'),
+								$elm$html$Html$Attributes$class('four columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
