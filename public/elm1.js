@@ -9112,6 +9112,7 @@ var $author$project$Main$personalInfo = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
+										$elm$html$Html$Attributes$class('button'),
 										A2($elm$html$Html$Attributes$style, 'display', 'block')
 									]),
 								_List_fromArray(
@@ -9133,6 +9134,7 @@ var $author$project$Main$personalInfo = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
+										$elm$html$Html$Attributes$class('button'),
 										A2($elm$html$Html$Attributes$style, 'display', 'block')
 									]),
 								_List_fromArray(
@@ -9894,7 +9896,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns')
+								$elm$html$Html$Attributes$class('six columns'),
+								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
 							[
@@ -9903,7 +9906,8 @@ var $author$project$Main$renderResults = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-										$elm$html$Html$Attributes$class('button-primary')
+										$elm$html$Html$Attributes$class('button-primary'),
+										A2($elm$html$Html$Attributes$style, 'display', 'block')
 									]),
 								_List_fromArray(
 									[
@@ -9914,7 +9918,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('three columns')
+								$elm$html$Html$Attributes$class('three columns'),
+								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
 							[
@@ -9925,7 +9930,7 @@ var $author$project$Main$renderResults = function (model) {
 										$elm$html$Html$Events$onClick(
 										$author$project$Main$SelectAll(naicShow)),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '100%')
+										A2($elm$html$Html$Attributes$style, 'display', 'block')
 									]),
 								_List_fromArray(
 									[
@@ -9936,7 +9941,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('three columns')
+								$elm$html$Html$Attributes$class('three columns'),
+								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
 							[
@@ -9946,7 +9952,7 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '100%')
+										A2($elm$html$Html$Attributes$style, 'display', 'block')
 									]),
 								_List_fromArray(
 									[
