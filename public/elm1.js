@@ -9057,7 +9057,7 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('seven columns')
+								$elm$html$Html$Attributes$class('six columns')
 							]),
 						_List_fromArray(
 							[
@@ -9113,8 +9113,7 @@ var $author$project$Main$personalInfo = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '45%'),
-										A2($elm$html$Html$Attributes$style, 'padding-right', '3em')
+										A2($elm$html$Html$Attributes$style, 'width', '45%')
 									]),
 								_List_fromArray(
 									[
