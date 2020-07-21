@@ -1220,7 +1220,7 @@ toHeadRow rowname l =
     ls = List.map
             (\a -> th [] [ text a ])
             l
-    lsh = [ th [] [ strong  []  [ text rowname ] ] ]
+    lsh = [ th [] [ h4  []  [ text rowname ] ] ]
     lcomb = lsh ++ ls
   in
     tr [] lcomb

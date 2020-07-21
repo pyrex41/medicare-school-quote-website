@@ -8782,7 +8782,7 @@ var $author$project$Main$toBodyRow = F3(
 				},
 				ls));
 	});
-var $elm$html$Html$strong = _VirtualDom_node('strong');
+var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $author$project$Main$toHeadRow = F2(
 	function (rowname, l) {
@@ -8794,7 +8794,7 @@ var $author$project$Main$toHeadRow = F2(
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$strong,
+						$elm$html$Html$h4,
 						_List_Nil,
 						_List_fromArray(
 							[
@@ -8951,6 +8951,7 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
+var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
 		var _v2 = model.zip.value;
