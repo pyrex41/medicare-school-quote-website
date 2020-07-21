@@ -8250,8 +8250,7 @@ var $author$project$Main$renderForm = F3(
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('button'),
-					A2($elm$html$Html$Attributes$style, 'width', '80%'),
-					A2($elm$html$Html$Attributes$style, 'position', 'relative'),
+					A2($elm$html$Html$Attributes$style, 'width', '100%'),
 					$elm$html$Html$Attributes$disabled(true)
 				]),
 			_List_fromArray(
@@ -8262,8 +8261,7 @@ var $author$project$Main$renderForm = F3(
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('button-primary'),
-					A2($elm$html$Html$Attributes$style, 'width', '80%'),
-					A2($elm$html$Html$Attributes$style, 'position', 'relative'),
+					A2($elm$html$Html$Attributes$style, 'width', '100%'),
 					$elm$html$Html$Attributes$disabled(!model.valid)
 				]),
 			_List_fromArray(
@@ -8352,14 +8350,14 @@ var $author$project$Main$renderForm = F3(
 								model.tobacco,
 								$author$project$Main$ToggleTobacco,
 								_List_fromArray(
-									['three columns', 'offset-by-four columns'])),
+									['four columns', 'offset-by-four columns'])),
 								A4(
 								$author$project$Main$checkbox,
 								'Apply Household Discount?',
 								model.discounts,
 								$author$project$Main$ToggleDiscounts,
 								_List_fromArray(
-									['three columns', 'offset-by-four columns'])),
+									['four columns', 'offset-by-four columns'])),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -8387,21 +8385,21 @@ var $author$project$Main$renderForm = F3(
 								model.planG,
 								$author$project$Main$ToggleG,
 								_List_fromArray(
-									['three columns', 'offset-by-four columns'])),
+									['four columns', 'offset-by-four columns'])),
 								A4(
 								$author$project$Main$checkbox,
 								'Plan N',
 								model.planN,
 								$author$project$Main$ToggleN,
 								_List_fromArray(
-									['three columns', 'offset-by-four columns'])),
+									['four columns', 'offset-by-four columns'])),
 								A4(
 								$author$project$Main$checkbox,
 								'Plan F',
 								model.planF,
 								$author$project$Main$ToggleF,
 								_List_fromArray(
-									['three columns', 'offset-by-four columns'])),
+									['four columns', 'offset-by-four columns'])),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -8414,8 +8412,8 @@ var $author$project$Main$renderForm = F3(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('three columns'),
-												$elm$html$Html$Attributes$class('offset-by-four columns')
+												$elm$html$Html$Attributes$class('two columns'),
+												$elm$html$Html$Attributes$class('offset-by-five columns')
 											]),
 										_List_fromArray(
 											[submitButton]))
