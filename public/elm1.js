@@ -9968,14 +9968,23 @@ var $author$project$Main$renderResults = function (model) {
 					]),
 				_List_fromArray(
 					[
-						function () {
-						if (showRows.$ === 'Just') {
-							var sr = showRows.a;
-							return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, sr);
-						} else {
-							return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, _List_Nil);
-						}
-					}()
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								function () {
+								if (showRows.$ === 'Just') {
+									var sr = showRows.a;
+									return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, sr);
+								} else {
+									return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, _List_Nil);
+								}
+							}()
+							]))
 					]))
 			]));
 };

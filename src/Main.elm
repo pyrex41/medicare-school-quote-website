@@ -852,13 +852,14 @@ renderResults model =
             [ button [ onClick DeselectAll, class "button", style "display" "block" ] [ text "Deselect All" ] ]
           ]
       , div [ class "row" ]
-          [ case showRows of
-              Just sr ->
-                Table.view config model.tableState sr
-              Nothing ->
-                Table.view config model.tableState []
+          [ div [ class "u-full-width" ]
+            [ case showRows of
+                Just sr ->
+                  Table.view config model.tableState sr
+                Nothing ->
+                  Table.view config model.tableState []
+            ]
           ]
-            --div [] [ text "" ]
       ]
 
 renderOutput : Model -> Html Msg
