@@ -8390,7 +8390,7 @@ var $author$project$Main$renderForm = F3(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('two columns'),
+												$elm$html$Html$Attributes$class('three columns'),
 												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
@@ -8402,6 +8402,7 @@ var $author$project$Main$renderForm = F3(
 														A2($elm$html$Html$Attributes$style, 'block', 'display'),
 														$elm$html$Html$Attributes$class('button-primary'),
 														A2($elm$html$Html$Attributes$style, 'text-align', 'relative'),
+														A2($elm$html$Html$Attributes$style, 'width', '80%'),
 														$elm$html$Html$Attributes$disabled(!model.valid)
 													]),
 												_List_fromArray(
