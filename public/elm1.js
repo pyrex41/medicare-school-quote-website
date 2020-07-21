@@ -9394,7 +9394,7 @@ var $author$project$Main$toRowAttrs = function (tablerow) {
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
-			tablerow.selected ? '#36b2a1' : 'white')
+			tablerow.selected ? '#CEFAF8' : 'white')
 		]);
 };
 var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customConfig(
@@ -9903,7 +9903,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('eight columns'),
+								$elm$html$Html$Attributes$class('six columns'),
+								$elm$html$Html$Attributes$class('offset-by-one column'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(

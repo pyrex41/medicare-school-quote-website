@@ -844,7 +844,7 @@ renderResults model =
               ]
           ]
       , div [ class "row" ]
-          [ div [ class "eight columns", style "padding-top" "1.2em" ]
+          [ div [ class "six columns", class "offset-by-one column", style "padding-top" "1.2em" ]
               [ button
                   [ onClick ShowOutput, class "button-primary", style "display" "block" ]
                   [ text "Show Output" ]
@@ -1072,7 +1072,7 @@ toRowAttrs tablerow =
     [ onClick (ToggleSelect tablerow.naic)
     , style "background"
         (if tablerow.selected then
-            "#36b2a1"
+            "#CEFAF8"
 
          else
             "white"
