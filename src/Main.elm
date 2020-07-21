@@ -828,12 +828,12 @@ renderResults model =
               ]
           , div [ class "three columns"]
               [ button
-                  [ onClick ( SelectAll naicShow ), class "button", style "width" "70%", style "text-align" "center" ]
+                  [ onClick ( SelectAll naicShow ), class "button", style "width" "100" ]
                   [ text "Select All" ]
               ]
           , div [ class "three columns"]
               [ button
-                  [ onClick DeselectAll, class "button", style "width" "70%", style "text-align" "center" ]
+                  [ onClick DeselectAll, class "button", style "width" "100%" ]
                   [ text "Deselect All" ]
               ]
           ]
