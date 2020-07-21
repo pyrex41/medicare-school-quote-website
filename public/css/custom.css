@@ -16,5 +16,6 @@ td {
   border-left: 1px solid #4a4542;
   border-right: 1px solid #4a4542;
   border-bottom: 1px solid #4a4542;
-  padding: 3em;
+  text-align: center;
+  padding: 1em;
 }
