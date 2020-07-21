@@ -8782,7 +8782,6 @@ var $author$project$Main$toBodyRow = F3(
 				},
 				ls));
 	});
-var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $author$project$Main$toHeadRow = F2(
 	function (rowname, l) {
@@ -8790,16 +8789,13 @@ var $author$project$Main$toHeadRow = F2(
 			[
 				A2(
 				$elm$html$Html$th,
-				_List_Nil,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$h4,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(rowname)
-							]))
+						A2($elm$html$Html$Attributes$style, 'font-size', '1.8rem')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(rowname)
 					]))
 			]);
 		var ls = A2(
