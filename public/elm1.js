@@ -9970,7 +9970,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('ten columns')
 							]),
 						_List_fromArray(
 							[

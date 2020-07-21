@@ -859,7 +859,7 @@ renderResults model =
             ]
           ]
       , div [ class "row" ]
-          [ div [ class "u-full-width" ]
+          [ div [ class "ten columns" ]
             [ case showRows of
                 Just sr ->
                   Table.view config model.tableState sr
