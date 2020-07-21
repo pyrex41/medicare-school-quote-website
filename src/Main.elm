@@ -837,14 +837,14 @@ renderResults model =
       [ div [ class "row" ]
         [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
-          [ div [ class "offset-by-one column" ]
+          [ div [ ]
               [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred ["u-full-width"]
               , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
               , checkbox "Outside Plans" model.viewOutside ToggleOutside ["u-full-width"]
               ]
           ]
       , div [ class "row" ]
-          [ div [ class "six columns", class "offset-by-one column", style "padding-top" "1.2em" ]
+          [ div [ class "eight columns", style "padding-top" "1.2em" ]
               [ button
                   [ onClick ShowOutput, class "button-primary", style "display" "block" ]
                   [ text "Show Output" ]
@@ -859,7 +859,7 @@ renderResults model =
             ]
           ]
       , div [ class "row" ]
-          [ div [ class "ten columns", class "offset-by-one column" ]
+          [ div [ class "twelve columns" ]
             [ case showRows of
                 Just sr ->
                   Table.view config model.tableState sr
@@ -1168,7 +1168,7 @@ pdpSelectBox : Maybe (List PdpRecord) -> Maybe PdpRecord -> (String -> Msg) -> H
 pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
-      div [class "six columns", class "offset-by-one column"] [
+      div [class "six columns" ] [
         label
           [ ]
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]

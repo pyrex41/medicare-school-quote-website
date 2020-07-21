@@ -9485,8 +9485,7 @@ var $author$project$Main$pdpSelectBox = F3(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('six columns'),
-						$elm$html$Html$Attributes$class('offset-by-one column')
+						$elm$html$Html$Attributes$class('six columns')
 					]),
 				_List_fromArray(
 					[
@@ -9862,10 +9861,7 @@ var $author$project$Main$renderResults = function (model) {
 					[
 						A2(
 						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
-							]),
+						_List_Nil,
 						_List_fromArray(
 							[
 								A4(
@@ -9903,8 +9899,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns'),
-								$elm$html$Html$Attributes$class('offset-by-one column'),
+								$elm$html$Html$Attributes$class('eight columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -9970,8 +9965,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('ten columns'),
-								$elm$html$Html$Attributes$class('offset-by-one column')
+								$elm$html$Html$Attributes$class('twelve columns')
 							]),
 						_List_fromArray(
 							[
