@@ -9102,7 +9102,7 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('five columns'),
+								$elm$html$Html$Attributes$class('six columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -9113,7 +9113,8 @@ var $author$project$Main$personalInfo = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
+										A2($elm$html$Html$Attributes$style, 'width', '45%'),
+										A2($elm$html$Html$Attributes$style, 'padding-right', '3em')
 									]),
 								_List_fromArray(
 									[
@@ -9125,7 +9126,7 @@ var $author$project$Main$personalInfo = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
+										A2($elm$html$Html$Attributes$style, 'width', '45%')
 									]),
 								_List_fromArray(
 									[
