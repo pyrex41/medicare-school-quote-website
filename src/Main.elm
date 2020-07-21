@@ -904,7 +904,7 @@ personalInfo model =
             , div [ class "row" ] [ text row2 ]
             , div [ class "row" ] [ text pdpText]
             ]
-          , div [ class "three columns", style "padding" "10% 0" ]
+          , div [ class "three columns", style "padding-top" "1.5em" ]
             [ button [ onClick ShowSubmitForm, style "display" "block" ] [ text "Request New Quote" ] ]
           , div [ class "three columns"]
             [ button [ onClick ShowResults, style "display" "block" ] [ text "Choose New Plans" ] ]

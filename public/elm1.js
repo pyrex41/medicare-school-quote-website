@@ -9103,7 +9103,7 @@ var $author$project$Main$personalInfo = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('three columns'),
-								A2($elm$html$Html$Attributes$style, 'padding', '10% 0')
+								A2($elm$html$Html$Attributes$style, 'padding-top', '1.5em')
 							]),
 						_List_fromArray(
 							[
