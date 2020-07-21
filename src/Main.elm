@@ -897,19 +897,18 @@ personalInfo model =
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender ++ "   |   " ++ "Discount Applied: " ++ dsc
   in
-    div [ style "padding-top" "2em" ]
+    div [ style "padding-top" "2em", style "padding-top" "3em" ]
       [ div [ class "row" ]
           [ div [ class "six columns" ]
             [ div [ class "row" ] [ strong [] [ text model.name ] ]
             , div [ class "row" ] [ text row2 ]
             , div [ class "row" ] [ text pdpText]
             ]
-          , div [ class "three columns" ]
+          , div [ class "three columns", style "vertical-alighn" "center" ]
             [ button [ onClick ShowSubmitForm, style "display" "block" ] [ text "Request New Quote" ] ]
           , div [ class "three columns"]
             [ button [ onClick ShowResults, style "display" "block" ] [ text "Choose New Plans" ] ]
           ]
-      , hr [] []
       ]
 
 
