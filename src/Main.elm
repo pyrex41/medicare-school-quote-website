@@ -799,7 +799,7 @@ renderResults model =
       Nothing ->
         Nothing
   in
-    div []
+    div [ class "divbox" ]
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
@@ -814,12 +814,12 @@ renderResults model =
               ]
           , div [ class "three columns"]
               [ button
-                  [ onClick ( SelectAll naicShow ), class "button", style "width" "100%", style "text-align" "center" ]
+                  [ onClick ( SelectAll naicShow ), class "button", style "width" "70%", style "text-align" "center" ]
                   [ text "Select All" ]
               ]
           , div [ class "three columns"]
               [ button
-                  [ onClick DeselectAll, class "button", style "width" "100%", style "text-align" "center" ]
+                  [ onClick DeselectAll, class "button", style "width" "70%", style "text-align" "center" ]
                   [ text "Deselect All" ]
               ]
           ]
@@ -831,7 +831,6 @@ renderResults model =
                 Table.view config model.tableState []
           ]
             --div [] [ text "" ]
-      , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit" ]
       ]
 
 renderOutput : Model -> Html msg

@@ -9639,7 +9639,10 @@ var $author$project$Main$renderResults = function (model) {
 	}();
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('divbox')
+			]),
 		_List_fromArray(
 			[
 				A2(
@@ -9713,7 +9716,7 @@ var $author$project$Main$renderResults = function (model) {
 										$elm$html$Html$Events$onClick(
 										$author$project$Main$SelectAll(naicShow)),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '100%'),
+										A2($elm$html$Html$Attributes$style, 'width', '70%'),
 										A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 									]),
 								_List_fromArray(
@@ -9735,7 +9738,7 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '100%'),
+										A2($elm$html$Html$Attributes$style, 'width', '70%'),
 										A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 									]),
 								_List_fromArray(
@@ -9760,17 +9763,6 @@ var $author$project$Main$renderResults = function (model) {
 							return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, _List_Nil);
 						}
 					}()
-					])),
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
-						A2($elm$html$Html$Attributes$style, 'display', 'block')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Resubmit')
 					]))
 			]));
 };
