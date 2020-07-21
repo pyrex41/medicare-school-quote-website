@@ -9053,22 +9053,6 @@ var $author$project$Main$personalInfo = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$strong,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(model.name)
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
@@ -9076,7 +9060,42 @@ var $author$project$Main$personalInfo = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text(row2)
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$strong,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text(model.name)
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(row2)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(pdpText)
+									]))
 							])),
 						A2(
 						$elm$html$Html$div,
@@ -9117,25 +9136,6 @@ var $author$project$Main$personalInfo = function (model) {
 									[
 										$elm$html$Html$text('Choose New Plans')
 									]))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('six columns')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text(pdpText)
 							]))
 					])),
 				A2($elm$html$Html$hr, _List_Nil, _List_Nil)
