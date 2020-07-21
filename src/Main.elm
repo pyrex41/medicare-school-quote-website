@@ -918,9 +918,10 @@ outputTable model pt =
       in
         div []
             [ table [ class "u-full-width"
+                    , class "mytable"
                     ]
-                [ thead [] [ companyNames ]
-                , tbody []
+                [ thead [ class "myth" ] [ companyNames ]
+                , tbody [ class "mytr" ]
                   [ rateRow
                   , pdpRow
                   , insuranceTotalRow

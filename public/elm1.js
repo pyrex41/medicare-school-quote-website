@@ -8918,18 +8918,25 @@ var $author$project$Main$outputTable = F2(
 						$elm$html$Html$table,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('u-full-width'),
+								$elm$html$Html$Attributes$class('mytable')
 							]),
 						_List_fromArray(
 							[
 								A2(
 								$elm$html$Html$thead,
-								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('myth')
+									]),
 								_List_fromArray(
 									[companyNames])),
 								A2(
 								$elm$html$Html$tbody,
-								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('mytr')
+									]),
 								_List_fromArray(
 									[rateRow, pdpRow, insuranceTotalRow, partBRow, grandTotalRow]))
 							])),
