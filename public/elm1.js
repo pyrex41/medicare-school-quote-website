@@ -6457,7 +6457,7 @@ var $author$project$Main$getPDP = function (model) {
 	return $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
-			url: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.zip.value)
+			url: 'https://medicare-school-quote-tool.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.zip.value)
 		});
 };
 var $author$project$Main$PlanResponse = function (a) {
@@ -9843,13 +9843,23 @@ var $author$project$Main$renderResults = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A3(
-						$author$project$Main$pdpSelectBox,
-						model.pdpList,
-						model.pdpSelect,
-						function (a) {
-							return $author$project$Main$SelectPDP(a);
-						})
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('four columns'),
+								$elm$html$Html$Attributes$class('offset-by-four columns')
+							]),
+						_List_fromArray(
+							[
+								A3(
+								$author$project$Main$pdpSelectBox,
+								model.pdpList,
+								model.pdpSelect,
+								function (a) {
+									return $author$project$Main$SelectPDP(a);
+								})
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,
@@ -9859,27 +9869,37 @@ var $author$project$Main$renderResults = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A4(
-						$author$project$Main$checkbox,
-						'Preferred Plans',
-						model.viewPreferred,
-						$author$project$Main$TogglePreferred,
+						A2(
+						$elm$html$Html$div,
 						_List_fromArray(
-							['u-full-width'])),
-						A4(
-						$author$project$Main$checkbox,
-						'Non-Preferred Plans',
-						model.viewNonpreferred,
-						$author$project$Main$ToggleNonPreferred,
+							[
+								$elm$html$Html$Attributes$class('four columns'),
+								$elm$html$Html$Attributes$class('offset-by-four columns')
+							]),
 						_List_fromArray(
-							['u-full-width'])),
-						A4(
-						$author$project$Main$checkbox,
-						'Outside Plans',
-						model.viewOutside,
-						$author$project$Main$ToggleOutside,
-						_List_fromArray(
-							['u-full-width']))
+							[
+								A4(
+								$author$project$Main$checkbox,
+								'Preferred Plans',
+								model.viewPreferred,
+								$author$project$Main$TogglePreferred,
+								_List_fromArray(
+									['u-full-width'])),
+								A4(
+								$author$project$Main$checkbox,
+								'Non-Preferred Plans',
+								model.viewNonpreferred,
+								$author$project$Main$ToggleNonPreferred,
+								_List_fromArray(
+									['u-full-width'])),
+								A4(
+								$author$project$Main$checkbox,
+								'Outside Plans',
+								model.viewOutside,
+								$author$project$Main$ToggleOutside,
+								_List_fromArray(
+									['u-full-width']))
+							]))
 					])),
 				A2(
 				$elm$html$Html$div,

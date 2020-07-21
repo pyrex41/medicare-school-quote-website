@@ -834,11 +834,16 @@ renderResults model =
         Nothing
   in
     div [ ]
-      [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+      [ div [ class "row" ]
+        [ div [ class "four columns", class "offset-by-four columns" ]
+            [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+        ]
       , div [ class "row" ]
-          [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred ["u-full-width"]
-          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
-          , checkbox "Outside Plans" model.viewOutside ToggleOutside ["u-full-width"]
+          [ div [ class "four columns", class "offset-by-four columns" ]
+              [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred ["u-full-width"]
+              , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
+              , checkbox "Outside Plans" model.viewOutside ToggleOutside ["u-full-width"]
+              ]
           ]
       , div [ class "row" ]
           [ div [ class "seven columns", style "padding-top" "1.2em" ]
@@ -1498,7 +1503,7 @@ planXDecoder =
 getPDP : Model -> Cmd Msg
 getPDP model =
   Http.get
-    { url = "https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=" ++ ( stringMaybeInt model.zip.value )
+    { url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?zip=" ++ ( stringMaybeInt model.zip.value )
     , expect = Http.expectJson PDPResponse pdpDecoder
     }
 
