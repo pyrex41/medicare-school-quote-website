@@ -9117,7 +9117,7 @@ var $author$project$Main$personalInfo = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('New Quote')
+										$elm$html$Html$text('Edit Info')
 									])),
 								A2(
 								$elm$html$Html$button,
@@ -9129,7 +9129,7 @@ var $author$project$Main$personalInfo = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('New Plans')
+										$elm$html$Html$text('Edit Plans')
 									]))
 							]))
 					]))
