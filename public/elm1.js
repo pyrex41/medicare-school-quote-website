@@ -9896,7 +9896,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns'),
+								$elm$html$Html$Attributes$class('eight columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -9919,7 +9919,6 @@ var $author$project$Main$renderResults = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('four columns'),
-								$elm$html$Html$Attributes$class('offset-by-eight columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
