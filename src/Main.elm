@@ -787,7 +787,7 @@ renderForm model func buttonLabel =
                           , style "width" "80%"
                           , style "position" "relative"
                           , disabled (not model.valid) ] [ text "Submit" ]
-                      , div [ class "one column", class "offset-by-seven columns" ] [ text <| loadText ]
+                      , div [ class "one column", class "offset-by-eight columns" ] [ text  loadText ]
                       ]
                   ]
               ]

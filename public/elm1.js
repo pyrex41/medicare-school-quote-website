@@ -8413,7 +8413,7 @@ var $author$project$Main$renderForm = F3(
 												_List_fromArray(
 													[
 														$elm$html$Html$Attributes$class('one column'),
-														$elm$html$Html$Attributes$class('offset-by-seven columns')
+														$elm$html$Html$Attributes$class('offset-by-eight columns')
 													]),
 												_List_fromArray(
 													[
