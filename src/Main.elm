@@ -859,7 +859,7 @@ renderResults model =
             ]
           ]
       , div [ class "row" ]
-          [ div [ class "ten columns" ]
+          [ div [ class "ten columns", class "offset-by-one column" ]
             [ case showRows of
                 Just sr ->
                   Table.view config model.tableState sr
