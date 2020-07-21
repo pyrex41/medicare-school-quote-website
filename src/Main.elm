@@ -897,7 +897,7 @@ outputTable model pt =
         vr = List.sortBy ( \a -> a.displayName ) <| List.filter (\a -> a.selected) tr
         companyNames = toHeadRow pText <| List.map .displayName vr
         rates = rateUtil pt vr
-        rateRow = toBodyRow (pTextUtil pt) [] rates
+        rateRow = toBodyRow (pTextUtil pt) [ class "mytd" ] rates
         pdp = case model.pdpSelect of
           Just pr ->
             safeCurrencyFloat <| Just pr.rate
@@ -908,11 +908,11 @@ outputTable model pt =
             Just pr.rate
           Nothing ->
             Nothing
-        pdpRow = toBodyRow "Drug Plan Monthly Premium" [] <| List.map (\a -> safeString pdpString) vr
+        pdpRow = toBodyRow "Drug Plan Monthly Premium" [ class "mytd "] <| List.map (\a -> safeString pdpString) vr
         insuranceTotal = List.map (\r -> currencyAddTwo pdp (safeCurrencyFloat (Just r))) rates
         insuranceTotalRow = simpleTotalRow "Insurance Monthly Total" insuranceTotal
         partb = safeCurrencyFloat model.partB
-        partBRow = toBodyRow "Part B Monthly Premium" [] <| List.map (\a -> safeString model.partB) vr
+        partBRow = toBodyRow "Part B Monthly Premium" [ class "mytd" ] <| List.map (\a -> safeString model.partB) vr
         grandTotal = List.map (\t -> currencyAddThree pdp partb (safeCurrencyFloat (Just t))) rates
         grandTotalRow = simpleTotalRow "Grand Monthly Total" grandTotal
       in
@@ -921,7 +921,7 @@ outputTable model pt =
                     , class "mytable"
                     ]
                 [ thead [ class "myth" ] [ companyNames ]
-                , tbody [ class "mytr" ]
+                , tbody [ ]
                   [ rateRow
                   , pdpRow
                   , insuranceTotalRow
