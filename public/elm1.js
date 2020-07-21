@@ -9188,18 +9188,6 @@ var $billstclair$elm_sortable_table$Table$simpleThead = function (headers) {
 		A2($elm$core$List$map, $billstclair$elm_sortable_table$Table$simpleTheadHelp, headers));
 };
 var $billstclair$elm_sortable_table$Table$defaultCustomizations = {caption: $elm$core$Maybe$Nothing, rowAttrs: $billstclair$elm_sortable_table$Table$simpleRowAttrs, tableAttrs: _List_Nil, tbodyAttrs: _List_Nil, tfoot: $elm$core$Maybe$Nothing, thead: $billstclair$elm_sortable_table$Table$simpleThead};
-var $billstclair$elm_sortable_table$Table$intColumn = F2(
-	function (name, toInt) {
-		return $billstclair$elm_sortable_table$Table$Column(
-			{
-				name: name,
-				sorter: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(toInt),
-				viewData: A2(
-					$elm$core$Basics$composeL,
-					A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, $elm$core$String$fromInt),
-					toInt)
-			});
-	});
 var $billstclair$elm_sortable_table$Table$stringColumn = F2(
 	function (name, toStr) {
 		return $billstclair$elm_sortable_table$Table$Column(
@@ -9257,12 +9245,6 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 				'F Rate',
 				function ($) {
 					return $.fRate;
-				}),
-				A2(
-				$billstclair$elm_sortable_table$Table$intColumn,
-				'NAIC',
-				function ($) {
-					return $.naic;
 				}),
 				$author$project$Main$categoryColumn
 			]),

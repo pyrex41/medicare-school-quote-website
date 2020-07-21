@@ -1021,7 +1021,6 @@ config =
           , Table.stringColumn "G Rate" .gRate
           , Table.stringColumn "N Rate" .nRate
           , Table.stringColumn "F Rate" .fRate
-          , Table.intColumn "NAIC" .naic
           , categoryColumn
           ]
       , customizations =
