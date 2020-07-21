@@ -9692,19 +9692,28 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
 										$elm$html$Html$Attributes$class('button-primary'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%'),
+										A2($elm$html$Html$Attributes$style, 'width', '100%'),
 										A2($elm$html$Html$Attributes$style, 'position', 'relative')
 									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Show Output')
 									]))
-							])),
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('four columns')
+								$elm$html$Html$Attributes$class('three columns')
 							]),
 						_List_fromArray(
 							[
@@ -9715,7 +9724,7 @@ var $author$project$Main$renderResults = function (model) {
 										$elm$html$Html$Events$onClick(
 										$author$project$Main$SelectAll(naicShow)),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%'),
+										A2($elm$html$Html$Attributes$style, 'width', '100%'),
 										A2($elm$html$Html$Attributes$style, 'position', 'relative')
 									]),
 								_List_fromArray(
@@ -9727,7 +9736,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('four columns')
+								$elm$html$Html$Attributes$class('three columns')
 							]),
 						_List_fromArray(
 							[
@@ -9737,7 +9746,7 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%'),
+										A2($elm$html$Html$Attributes$style, 'width', '100%'),
 										A2($elm$html$Html$Attributes$style, 'position', 'relative')
 									]),
 								_List_fromArray(
