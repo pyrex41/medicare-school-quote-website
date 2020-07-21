@@ -9682,7 +9682,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('two columns')
+								$elm$html$Html$Attributes$class('four columns')
 							]),
 						_List_fromArray(
 							[
@@ -9702,7 +9702,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('two columns')
+								$elm$html$Html$Attributes$class('four columns')
 							]),
 						_List_fromArray(
 							[
@@ -9723,7 +9723,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('two columns')
+								$elm$html$Html$Attributes$class('four columns')
 							]),
 						_List_fromArray(
 							[
