@@ -1059,7 +1059,9 @@ config =
           , categoryColumn
           ]
       , customizations =
-          { defaultCustomizations | rowAttrs = toRowAttrs }
+          { defaultCustomizations | rowAttrs = toRowAttrs
+                                  , tableAttrs = [ style "margin-left" "auto", style "margin-right" "auto" ]
+          }
       }
 
 toRowAttrs : TableRow -> List (Attribute Msg)

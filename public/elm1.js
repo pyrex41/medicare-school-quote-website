@@ -9446,7 +9446,14 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 			]),
 		customizations: _Utils_update(
 			$billstclair$elm_sortable_table$Table$defaultCustomizations,
-			{rowAttrs: $author$project$Main$toRowAttrs}),
+			{
+				rowAttrs: $author$project$Main$toRowAttrs,
+				tableAttrs: _List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'margin-left', 'auto'),
+						A2($elm$html$Html$Attributes$style, 'margin-right', 'auto')
+					])
+			}),
 		toId: function ($) {
 			return $.company;
 		},
