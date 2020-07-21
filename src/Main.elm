@@ -761,14 +761,14 @@ renderForm model func buttonLabel =
   let
     loadText = if model.state == Loading then "Loading..." else ""
   in
-    div [ class "divbox"
+    div [ 
         ]
         [ Html.form
           [ onSubmit func
           ]
           ( List.map
               (\a -> (div [ class "row" ] [ a ] ) )
-              [ textbox  "Name" "John Smith" model.name SetName "four columns"
+              [ textbox  "Name" "John Smith" model.name SetName "four columns offset-by-four-columns"
               , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) "two columns"
               , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) "two columns"
               , selectbox "County" model.counties SelectCounty "three columns" 0

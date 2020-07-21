@@ -8239,10 +8239,7 @@ var $author$project$Main$renderForm = F3(
 		var loadText = _Utils_eq(model.state, $author$project$Main$Loading) ? 'Loading...' : '';
 		return A2(
 			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('divbox')
-				]),
+			_List_Nil,
 			_List_fromArray(
 				[
 					A2(
@@ -8265,7 +8262,7 @@ var $author$project$Main$renderForm = F3(
 						},
 						_List_fromArray(
 							[
-								A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns'),
+								A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns offset-by-four-columns'),
 								A6(
 								$author$project$Main$textboxCheck,
 								'Age',
