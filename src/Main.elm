@@ -782,7 +782,7 @@ renderForm model func buttonLabel =
               , checkbox "Plan F" model.planF ToggleF [ "three columns", "offset-by-four columns"]
               , div [ class "row" ]
                   [ div [ class "two columns", class "offset-by-four columns" ]
-                      [ button [ style "block" "display", class "button-primary", style "position" "relative", disabled (not model.valid) ] [ text "Submit" ] ]
+                      [ button [ style "block" "display", class "button-primary", style "text-align" "relative", disabled (not model.valid) ] [ text "Submit" ] ]
                   , div [ class "one column", class "offset-by-four columns" ] [ text <| loadText ]
                   ]
               ]
