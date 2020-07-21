@@ -7949,12 +7949,15 @@ var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$checkbox = F4(
 	function (title_, fvalue, handle, class_) {
+		var cl = A2(
+			$elm$core$List$map,
+			function (a) {
+				return $elm$html$Html$Attributes$class(a);
+			},
+			class_);
 		return A2(
 			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(class_)
-				]),
+			cl,
 			_List_fromArray(
 				[
 					A2(
@@ -8088,12 +8091,15 @@ var $author$project$Main$selectbox = F5(
 						]));
 			},
 			choices);
+		var cl = A2(
+			$elm$core$List$map,
+			function (a) {
+				return $elm$html$Html$Attributes$class(a);
+			},
+			class_);
 		return A2(
 			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(class_)
-				]),
+			cl,
 			_List_fromArray(
 				[
 					A2(
@@ -8149,15 +8155,18 @@ var $author$project$Main$textbox = F5(
 	});
 var $author$project$Main$textboxCheck = F6(
 	function (title_, placeholder_, fvalue, handle, validator, class_) {
+		var cl = A2(
+			$elm$core$List$map,
+			function (a) {
+				return $elm$html$Html$Attributes$class(a);
+			},
+			class_);
 		var _v0 = fvalue.value;
 		if (_v0.$ === 'Just') {
 			var i = _v0.a;
 			return A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class(class_)
-					]),
+				cl,
 				_List_fromArray(
 					[
 						A2(
@@ -8184,10 +8193,7 @@ var $author$project$Main$textboxCheck = F6(
 		} else {
 			return A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class(class_)
-					]),
+				cl,
 				_List_fromArray(
 					[
 						A2(
@@ -8280,7 +8286,8 @@ var $author$project$Main$renderForm = F3(
 								model.age,
 								$author$project$Main$SetAge,
 								$author$project$Main$validateVI(model.age),
-								'two columns'),
+								_List_fromArray(
+									['two columns', 'offset-by-four columns'])),
 								A6(
 								$author$project$Main$textboxCheck,
 								'ZIP',
@@ -8288,25 +8295,47 @@ var $author$project$Main$renderForm = F3(
 								model.zip,
 								$author$project$Main$SetZip,
 								$author$project$Main$validateVI(model.zip),
-								'two columns'),
-								A5($author$project$Main$selectbox, 'County', model.counties, $author$project$Main$SelectCounty, 'three columns', 0),
+								_List_fromArray(
+									['two columns', 'offset-by-four columns'])),
+								A5(
+								$author$project$Main$selectbox,
+								'County',
+								model.counties,
+								$author$project$Main$SelectCounty,
+								_List_fromArray(
+									['three columns', 'offset-by-four columns']),
+								0),
 								A5(
 								$author$project$Main$selectbox,
 								'Gender',
 								_List_fromArray(
 									['Male', 'Female']),
 								$author$project$Main$SelectGender,
-								'three columns',
+								_List_fromArray(
+									['three columns', 'offset-by-four columns']),
 								0),
 								A5(
 								$author$project$Main$selectbox,
 								'Effective Date',
 								A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
 								$author$project$Main$SelectDate,
-								'three columns',
+								_List_fromArray(
+									['three columns', 'offset-by-four columns']),
 								1),
-								A4($author$project$Main$checkbox, 'Tobacco User?', model.tobacco, $author$project$Main$ToggleTobacco, 'u-full-width'),
-								A4($author$project$Main$checkbox, 'Apply Household Discount?', model.discounts, $author$project$Main$ToggleDiscounts, 'u-full-width'),
+								A4(
+								$author$project$Main$checkbox,
+								'Tobacco User?',
+								model.tobacco,
+								$author$project$Main$ToggleTobacco,
+								_List_fromArray(
+									['three columns', 'offset-by-four columns'])),
+								A4(
+								$author$project$Main$checkbox,
+								'Apply Household Discount?',
+								model.discounts,
+								$author$project$Main$ToggleDiscounts,
+								_List_fromArray(
+									['three columns', 'offset-by-four columns'])),
 								A2(
 								$elm$html$Html$h5,
 								_List_fromArray(
@@ -8317,9 +8346,27 @@ var $author$project$Main$renderForm = F3(
 									[
 										$elm$html$Html$text('Which Plans?')
 									])),
-								A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
-								A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
-								A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
+								A4(
+								$author$project$Main$checkbox,
+								'Plan G',
+								model.planG,
+								$author$project$Main$ToggleG,
+								_List_fromArray(
+									['three columns', 'offset-by-four columns'])),
+								A4(
+								$author$project$Main$checkbox,
+								'Plan N',
+								model.planN,
+								$author$project$Main$ToggleN,
+								_List_fromArray(
+									['three columns', 'offset-by-four columns'])),
+								A4(
+								$author$project$Main$checkbox,
+								'Plan F',
+								model.planF,
+								$author$project$Main$ToggleF,
+								_List_fromArray(
+									['three columns', 'offset-by-four columns'])),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -8332,7 +8379,8 @@ var $author$project$Main$renderForm = F3(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('two columns')
+												$elm$html$Html$Attributes$class('two columns'),
+												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
 											[
@@ -8353,7 +8401,8 @@ var $author$project$Main$renderForm = F3(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('one column')
+												$elm$html$Html$Attributes$class('one column'),
+												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
 											[
@@ -9673,9 +9722,27 @@ var $author$project$Main$renderResults = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A4($author$project$Main$checkbox, 'Preferred Plans', model.viewPreferred, $author$project$Main$TogglePreferred, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Non-Preferred Plans', model.viewNonpreferred, $author$project$Main$ToggleNonPreferred, 'u-full-width'),
-						A4($author$project$Main$checkbox, 'Outside Plans', model.viewOutside, $author$project$Main$ToggleOutside, 'u-full-width')
+						A4(
+						$author$project$Main$checkbox,
+						'Preferred Plans',
+						model.viewPreferred,
+						$author$project$Main$TogglePreferred,
+						_List_fromArray(
+							['u-full-width'])),
+						A4(
+						$author$project$Main$checkbox,
+						'Non-Preferred Plans',
+						model.viewNonpreferred,
+						$author$project$Main$ToggleNonPreferred,
+						_List_fromArray(
+							['u-full-width'])),
+						A4(
+						$author$project$Main$checkbox,
+						'Outside Plans',
+						model.viewOutside,
+						$author$project$Main$ToggleOutside,
+						_List_fromArray(
+							['u-full-width']))
 					])),
 				A2(
 				$elm$html$Html$div,

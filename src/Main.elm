@@ -769,21 +769,21 @@ renderForm model func buttonLabel =
           ( List.map
               (\a -> (div [ class "row" ] [ a ] ) )
               [ textbox  "Name" "John Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
-              , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) "two columns"
-              , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) "two columns"
-              , selectbox "County" model.counties SelectCounty "three columns" 0
-              , selectbox  "Gender" ["Male", "Female"] SelectGender "three columns" 0
-              , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate "three columns" 1
-              , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  "u-full-width"
-              , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts "u-full-width"
+              , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) [ "two columns", "offset-by-four columns" ]
+              , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
+              , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns"] 0
+              , selectbox  "Gender" ["Male", "Female"] SelectGender [ "three columns", "offset-by-four columns"] 0
+              , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate [ "three columns", "offset-by-four columns"] 1
+              , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  [ "three columns", "offset-by-four columns"]
+              , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts [ "three columns", "offset-by-four columns"]
               , h5 [ class "u-full-width" ] [ text "Which Plans?" ]
-              , checkbox "Plan G" model.planG ToggleG "u-full-width"
-              , checkbox "Plan N" model.planN ToggleN "u-full-width"
-              , checkbox "Plan F" model.planF ToggleF "u-full-width"
+              , checkbox "Plan G" model.planG ToggleG [ "three columns", "offset-by-four columns"]
+              , checkbox "Plan N" model.planN ToggleN [ "three columns", "offset-by-four columns"]
+              , checkbox "Plan F" model.planF ToggleF [ "three columns", "offset-by-four columns"]
               , div [ class "row" ]
-                  [ div [ class "two columns" ]
+                  [ div [ class "two columns", class "offset-by-four columns" ]
                       [ button [ style "block" "display", class "button-primary", disabled (not model.valid) ] [ text "Submit" ] ]
-                  , div [ class "one column" ] [ text <| loadText ]
+                  , div [ class "one column", class "offset-by-four columns" ] [ text <| loadText ]
                   ]
               ]
           )
@@ -802,9 +802,9 @@ renderResults model =
     div [ ]
       [ div [ class "row" ] [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
-          [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred "u-full-width"
-          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred "u-full-width"
-          , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
+          [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred ["u-full-width"]
+          , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
+          , checkbox "Outside Plans" model.viewOutside ToggleOutside ["u-full-width"]
           ]
       , div [ class "row" ]
           [ div [ class "six columns" ]
@@ -1047,9 +1047,10 @@ renderList lst =
        |> ul []
 
 
-selectbox : String -> List (String) -> (String -> Msg) -> String -> Int -> Html Msg
+selectbox : String -> List (String) -> (String -> Msg) -> List String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
   let
+    cl = List.map (\a -> class a) class_
     def = List.drop i choices |> List.head
     nls = List.map
             (\a -> option
@@ -1059,7 +1060,7 @@ selectbox title_ choices handle class_ i =
                     [ text a ])
             choices
   in
-    div [ class class_ ] [
+    div cl [
       label
         [ ]
         [ text title_
@@ -1143,15 +1144,18 @@ pdpSelectBox mplist selectedPdp handle =
       ]
 
 
-checkbox : String -> Bool -> Msg -> String -> Html Msg
+checkbox : String -> Bool -> Msg -> List String -> Html Msg
 checkbox title_ fvalue handle class_=
-    div [ class class_ ] [
-      label
-        [ ]
-        [ input [ type_ "checkbox", checked fvalue, onClick handle ] []
-        , span [ class "label-body" ] [ text title_ ]
-        ]
-    ]
+  let
+    cl = List.map (\a -> class a) class_
+  in
+      div cl [
+        label
+          [ ]
+          [ input [ type_ "checkbox", checked fvalue, onClick handle ] []
+          , span [ class "label-body" ] [ text title_ ]
+          ]
+      ]
 
 textbox : String -> String -> String -> (String -> Msg) -> List String -> Html Msg
 textbox title_ placeholder_ fvalue handle classLs =
@@ -1166,26 +1170,29 @@ textbox title_ placeholder_ fvalue handle classLs =
         ]
     ]
 
-textboxCheck : String -> String -> ValidInt -> (String -> Msg) -> Html Msg -> String -> Html Msg
+textboxCheck : String -> String -> ValidInt -> (String -> Msg) -> Html Msg -> List String -> Html Msg
 textboxCheck title_ placeholder_ fvalue handle validator class_ =
-  case fvalue.value of
-    Just i ->
-      div [ class class_ ] [
-        label
-          [  ]
-          [ text title_
-          , input [ type_ "text", class "u-full-width", placeholder placeholder_, value (String.fromInt i), onInput handle ] []
-          , validator
-          ]
-      ]
-    Nothing ->
-        div [ class class_ ] [
+  let
+    cl = List.map (\a -> class a) class_
+  in
+    case fvalue.value of
+      Just i ->
+        div cl [
           label
             [  ]
             [ text title_
-            , input [ type_ "text", class "u-full-width", placeholder placeholder_, value "", onInput handle ] []
+            , input [ type_ "text", class "u-full-width", placeholder placeholder_, value (String.fromInt i), onInput handle ] []
+            , validator
             ]
         ]
+      Nothing ->
+          div cl [
+            label
+              [  ]
+              [ text title_
+              , input [ type_ "text", class "u-full-width", placeholder placeholder_, value "", onInput handle ] []
+              ]
+          ]
 
 -- Output Table View funcs
 
