@@ -8401,7 +8401,7 @@ var $author$project$Main$renderForm = F3(
 													[
 														A2($elm$html$Html$Attributes$style, 'block', 'display'),
 														$elm$html$Html$Attributes$class('button-primary'),
-														A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
+														A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
 														A2($elm$html$Html$Attributes$style, 'width', '80%'),
 														$elm$html$Html$Attributes$disabled(!model.valid)
 													]),

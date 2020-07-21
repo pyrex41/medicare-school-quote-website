@@ -783,8 +783,9 @@ renderForm model func buttonLabel =
               , div [ class "row" ]
                   [ div [ class "three columns", class "offset-by-four columns" ]
                       [ button
-                          [ style "block" "display", class "button-primary"
-                          , style "text-align" "center"
+                          [ style "block" "display"
+                          , class "button-primary"
+                          , style "margin" "auto"
                           , style "width" "80%"
                           , disabled (not model.valid) ] [ text "Submit" ]
                       , div [ class "one column", class "offset-by-four columns" ] [ text <| loadText ]
