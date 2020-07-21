@@ -9057,7 +9057,7 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns')
+								$elm$html$Html$Attributes$class('seven columns')
 							]),
 						_List_fromArray(
 							[
@@ -9102,7 +9102,7 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('three columns'),
+								$elm$html$Html$Attributes$class('five columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -9113,29 +9113,19 @@ var $author$project$Main$personalInfo = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
+										A2($elm$html$Html$Attributes$style, 'width', '50%')
 									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Request New Quote')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('three columns'),
-								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
-							]),
-						_List_fromArray(
-							[
+									])),
 								A2(
 								$elm$html$Html$button,
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
+										A2($elm$html$Html$Attributes$style, 'width', '50%')
 									]),
 								_List_fromArray(
 									[
@@ -9903,7 +9893,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('eight columns'),
+								$elm$html$Html$Attributes$class('seven columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -9925,7 +9915,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('four columns'),
+								$elm$html$Html$Attributes$class('five columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
