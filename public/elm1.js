@@ -8115,13 +8115,16 @@ var $author$project$Main$selectbox = F5(
 	});
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $author$project$Main$textbox = F5(
-	function (title_, placeholder_, fvalue, handle, class_) {
+	function (title_, placeholder_, fvalue, handle, classLs) {
+		var cl = A2(
+			$elm$core$List$map,
+			function (a) {
+				return $elm$html$Html$Attributes$class(a);
+			},
+			classLs);
 		return A2(
 			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class(class_)
-				]),
+			cl,
 			_List_fromArray(
 				[
 					A2(
@@ -8262,7 +8265,14 @@ var $author$project$Main$renderForm = F3(
 						},
 						_List_fromArray(
 							[
-								A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns offset-by-four-columns'),
+								A5(
+								$author$project$Main$textbox,
+								'Name',
+								'John Smith',
+								model.name,
+								$author$project$Main$SetName,
+								_List_fromArray(
+									['four columns', 'offset-by-four columns'])),
 								A6(
 								$author$project$Main$textboxCheck,
 								'Age',

@@ -761,14 +761,14 @@ renderForm model func buttonLabel =
   let
     loadText = if model.state == Loading then "Loading..." else ""
   in
-    div [ 
+    div [
         ]
         [ Html.form
           [ onSubmit func
           ]
           ( List.map
               (\a -> (div [ class "row" ] [ a ] ) )
-              [ textbox  "Name" "John Smith" model.name SetName "four columns offset-by-four-columns"
+              [ textbox  "Name" "John Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
               , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) "two columns"
               , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) "two columns"
               , selectbox "County" model.counties SelectCounty "three columns" 0
@@ -1153,15 +1153,18 @@ checkbox title_ fvalue handle class_=
         ]
     ]
 
-textbox : String -> String -> String -> (String -> Msg) -> String -> Html Msg
-textbox title_ placeholder_ fvalue handle class_ =
-  div [ class class_ ] [
-    label
-      [ ]
-      [ text title_
-      , input [ type_ "text", class "u-full-width", placeholder placeholder_, value fvalue, onInput handle ] []
-      ]
-  ]
+textbox : String -> String -> String -> (String -> Msg) -> List String -> Html Msg
+textbox title_ placeholder_ fvalue handle classLs =
+  let
+    cl = List.map (\a -> class a) classLs
+  in
+    div cl [
+      label
+        [ ]
+        [ text title_
+        , input [ type_ "text", class "u-full-width", placeholder placeholder_, value fvalue, onInput handle ] []
+        ]
+    ]
 
 textboxCheck : String -> String -> ValidInt -> (String -> Msg) -> Html Msg -> String -> Html Msg
 textboxCheck title_ placeholder_ fvalue handle validator class_ =
