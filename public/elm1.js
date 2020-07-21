@@ -9930,7 +9930,6 @@ var $author$project$Main$renderResults = function (model) {
 										$elm$html$Html$Events$onClick(
 										$author$project$Main$SelectAll(naicShow)),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block'),
 										A2($elm$html$Html$Attributes$style, 'width', '50%')
 									]),
 								_List_fromArray(
@@ -9943,7 +9942,6 @@ var $author$project$Main$renderResults = function (model) {
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block'),
 										A2($elm$html$Html$Attributes$style, 'width', '50%')
 									]),
 								_List_fromArray(

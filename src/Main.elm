@@ -848,10 +848,10 @@ renderResults model =
               ]
           , div [ class "four columns", style "padding-top" "1.2em" ]
             [ button
-              [ onClick (SelectAll naicShow), class "button", style "display" "block", style "width" "50%" ]
+              [ onClick (SelectAll naicShow), class "button", style "width" "50%" ]
               [ text "Select All" ]
             , button
-              [ onClick DeselectAll, class "button", style "display" "block", style "width" "50%" ]
+              [ onClick DeselectAll, class "button", style "width" "50%" ]
               [ text "Deselect All" ]
             ]
           ]
