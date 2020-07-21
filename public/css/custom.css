@@ -9,17 +9,19 @@
 }
 
 .mytable {
-  border-spacing: 0.5rem;
+  border-collapse;
 }
 
 .myth {
-  border: 1px solid #999;
   padding: 0.5rem;
   text-align: left;
+  border-right: solid 1px #f00;
+  border-left: solid 1px #f00;
 }
 
 .mytr {
-  border: 1px solid #999;
+  border-right: solid 1px #f00;
+  border-left: solid 1px #f00;
   padding: 0.5rem;
   text-align: left;
 }
