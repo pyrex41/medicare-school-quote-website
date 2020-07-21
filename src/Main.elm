@@ -903,13 +903,13 @@ personalInfo model =
       , div [ class "row"]
         [ text row2 ]
       , div [ class "row" ]
-        [ text pdpText ]
-      , div [ class "row" ]
-        [ div [ class "three columns" ]
+        [ div [ class "six columns" ] [ text pdpText ]
+        , div [ class "three columns" ]
           [ button [ onClick ShowSubmitForm, style "display" "block" ] [ text "Request New Quote" ] ]
         , div [ class "three columns"]
           [ button [ onClick ShowResults, style "display" "block" ] [ text "Request New Quote" ] ]
         ]
+      , hr [] []
       ]
 
 
