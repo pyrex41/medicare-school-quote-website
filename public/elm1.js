@@ -9040,7 +9040,8 @@ var $author$project$Main$personalInfo = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'padding-top', '2em')
+				A2($elm$html$Html$Attributes$style, 'padding-top', '2em'),
+				A2($elm$html$Html$Attributes$style, 'padding-top', '3em')
 			]),
 		_List_fromArray(
 			[
@@ -9101,7 +9102,8 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('three columns')
+								$elm$html$Html$Attributes$class('three columns'),
+								A2($elm$html$Html$Attributes$style, 'vertical-alighn', 'center')
 							]),
 						_List_fromArray(
 							[
@@ -9137,8 +9139,7 @@ var $author$project$Main$personalInfo = function (model) {
 										$elm$html$Html$text('Choose New Plans')
 									]))
 							]))
-					])),
-				A2($elm$html$Html$hr, _List_Nil, _List_Nil)
+					]))
 			]));
 };
 var $author$project$Main$renderOutput = function (model) {
