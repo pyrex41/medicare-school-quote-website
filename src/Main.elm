@@ -855,7 +855,7 @@ renderResults model =
               [ text "Select All" ]
             , button
               [ onClick DeselectAll, class "button", style "width" "50%" ]
-              [ text "Deselect All" ]
+              [ text "Clear All" ]
             ]
           ]
       , div [ class "row" ]

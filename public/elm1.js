@@ -9954,7 +9954,7 @@ var $author$project$Main$renderResults = function (model) {
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Deselect All')
+										$elm$html$Html$text('Clear All')
 									]))
 							]))
 					])),
