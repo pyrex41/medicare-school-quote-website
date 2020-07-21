@@ -8401,6 +8401,7 @@ var $author$project$Main$renderForm = F3(
 													[
 														A2($elm$html$Html$Attributes$style, 'block', 'display'),
 														$elm$html$Html$Attributes$class('button-primary'),
+														A2($elm$html$Html$Attributes$style, 'position', 'relative'),
 														$elm$html$Html$Attributes$disabled(!model.valid)
 													]),
 												_List_fromArray(
