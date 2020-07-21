@@ -8782,28 +8782,40 @@ var $author$project$Main$toBodyRow = F3(
 				},
 				ls));
 	});
+var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $author$project$Main$toHeadRow = F2(
 	function (rowname, l) {
-		var ls = _Utils_ap(
-			_List_fromArray(
-				[rowname]),
-			l);
-		return A2(
-			$elm$html$Html$tr,
-			_List_Nil,
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$th,
+		var lsh = _List_fromArray(
+			[
+				A2(
+				$elm$html$Html$th,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$strong,
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text(a)
-							]));
-				},
-				ls));
+								$elm$html$Html$text(rowname)
+							]))
+					]))
+			]);
+		var ls = A2(
+			$elm$core$List$map,
+			function (a) {
+				return A2(
+					$elm$html$Html$th,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(a)
+						]));
+			},
+			l);
+		var lcomb = _Utils_ap(lsh, ls);
+		return A2($elm$html$Html$tr, _List_Nil, lcomb);
 	});
 var $author$project$Main$outputTable = F2(
 	function (model, pt) {
@@ -8939,7 +8951,6 @@ var $author$project$Main$outputTable = F2(
 			return $elm$html$Html$text('No Output Available');
 		}
 	});
-var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
 		var _v2 = model.zip.value;

@@ -1217,14 +1217,13 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
 toHeadRow : String -> (List String) -> Html msg
 toHeadRow rowname l =
   let
-    ls = [rowname] ++ l
+    ls = List.map
+            (\a -> th [] [ text a ])
+            l
+    lsh = [ th [] [ strong  []  [ text rowname ] ] ]
+    lcomb = lsh ++ ls
   in
-    tr []
-      <| List.map
-          (\a ->
-              th [] [ text a ]
-          )
-          ls
+    tr [] lcomb
 
 totalRow  : String -> String -> String -> (List String) -> Html msg
 totalRow rowname col1 col2 l =
