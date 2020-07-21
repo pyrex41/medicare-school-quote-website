@@ -9038,7 +9038,10 @@ var $author$project$Main$personalInfo = function (model) {
 	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + (model.gender + ('   |   ' + ('Discount Applied: ' + dsc)))))));
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'padding-top', '2em')
+			]),
 		_List_fromArray(
 			[
 				A2(
