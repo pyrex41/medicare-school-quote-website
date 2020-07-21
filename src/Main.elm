@@ -807,20 +807,19 @@ renderResults model =
           , checkbox "Outside Plans" model.viewOutside ToggleOutside "u-full-width"
           ]
       , div [ class "row" ]
-          [ div [ class "three columns" ]
+          [ div [ class "six columns" ]
               [ button
-                  [ onClick ShowOutput, class "button-primary", style "width" "100%", style "position" "relative" ]
+                  [ onClick ShowOutput, class "button-primary" ]
                   [ text "Show Output" ]
               ]
-          , div [ class "three columns" ] []
           , div [ class "three columns"]
               [ button
-                  [ onClick ( SelectAll naicShow ), class "button", style "width" "100%", style "position" "relative" ]
+                  [ onClick ( SelectAll naicShow ), class "button", style "width" "100%", style "text-align" "center" ]
                   [ text "Select All" ]
               ]
           , div [ class "three columns"]
               [ button
-                  [ onClick DeselectAll, class "button", style "width" "100%", style "position" "relative" ]
+                  [ onClick DeselectAll, class "button", style "width" "100%", style "text-align" "center" ]
                   [ text "Deselect All" ]
               ]
           ]

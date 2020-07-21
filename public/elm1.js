@@ -9682,7 +9682,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('three columns')
+								$elm$html$Html$Attributes$class('six columns')
 							]),
 						_List_fromArray(
 							[
@@ -9691,22 +9691,13 @@ var $author$project$Main$renderResults = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-										$elm$html$Html$Attributes$class('button-primary'),
-										A2($elm$html$Html$Attributes$style, 'width', '100%'),
-										A2($elm$html$Html$Attributes$style, 'position', 'relative')
+										$elm$html$Html$Attributes$class('button-primary')
 									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Show Output')
 									]))
 							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('three columns')
-							]),
-						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
@@ -9723,7 +9714,7 @@ var $author$project$Main$renderResults = function (model) {
 										$author$project$Main$SelectAll(naicShow)),
 										$elm$html$Html$Attributes$class('button'),
 										A2($elm$html$Html$Attributes$style, 'width', '100%'),
-										A2($elm$html$Html$Attributes$style, 'position', 'relative')
+										A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 									]),
 								_List_fromArray(
 									[
@@ -9745,7 +9736,7 @@ var $author$project$Main$renderResults = function (model) {
 										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
 										$elm$html$Html$Attributes$class('button'),
 										A2($elm$html$Html$Attributes$style, 'width', '100%'),
-										A2($elm$html$Html$Attributes$style, 'position', 'relative')
+										A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 									]),
 								_List_fromArray(
 									[
