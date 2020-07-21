@@ -7978,7 +7978,9 @@ var $author$project$Main$checkbox = F4(
 							$elm$html$Html$span,
 							_List_fromArray(
 								[
-									$elm$html$Html$Attributes$class('label-body')
+									$elm$html$Html$Attributes$class('label-body'),
+									A2($elm$html$Html$Attributes$style, 'display', 'block'),
+									A2($elm$html$Html$Attributes$style, 'position', 'relative')
 								]),
 							_List_fromArray(
 								[

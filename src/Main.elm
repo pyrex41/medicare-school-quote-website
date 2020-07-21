@@ -1169,7 +1169,7 @@ checkbox title_ fvalue handle class_=
         label
           [ ]
           [ input [ type_ "checkbox", checked fvalue, onClick handle ] []
-          , span [ class "label-body" ] [ text title_ ]
+          , span [ class "label-body", style "display" "block", style "position" "relative" ] [ text title_ ]
           ]
       ]
 
