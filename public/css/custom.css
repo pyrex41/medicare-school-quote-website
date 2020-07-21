@@ -8,12 +8,12 @@
   margin: auto
 }
 
-th {
+.out-th {
   border-bottom: 1px solic #4a4542;
   text-align: center;
 }
 
-td {
+.out-td {
   border-left: 1px solid #4a4542;
   border-right: 1px solid #4a4542;
   border-bottom: 1px solid #4a4542;
