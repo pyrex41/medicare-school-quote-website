@@ -9057,7 +9057,7 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns')
+								$elm$html$Html$Attributes$class('seven columns')
 							]),
 						_List_fromArray(
 							[
@@ -9102,43 +9102,34 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns'),
+								$elm$html$Html$Attributes$class('five columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$div,
+								$elm$html$Html$button,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'float', 'right')
+										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
+										$elm$html$Html$Attributes$class('button'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%')
 									]),
 								_List_fromArray(
 									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-												$elm$html$Html$Attributes$class('button'),
-												A2($elm$html$Html$Attributes$style, 'width', '45%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Request New Quote')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-												$elm$html$Html$Attributes$class('button'),
-												A2($elm$html$Html$Attributes$style, 'width', '45%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Choose New Plans')
-											]))
+										$elm$html$Html$text('Request New Quote')
+									])),
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
+										$elm$html$Html$Attributes$class('button'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Choose New Plans')
 									]))
 							]))
 					]))
