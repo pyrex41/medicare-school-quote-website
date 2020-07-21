@@ -761,8 +761,7 @@ renderForm model func buttonLabel =
   let
     loadText = if model.state == Loading then "Loading..." else ""
   in
-    div [ style "margin" "auto"
-          , style "width" "70%"
+    div [ class "divbox"
         ]
         [ Html.form
           [ onSubmit func
@@ -1022,6 +1021,7 @@ config =
           , Table.stringColumn "G Rate" .gRate
           , Table.stringColumn "N Rate" .nRate
           , Table.stringColumn "F Rate" .fRate
+          , Table.intColumn "NAIC" .naic
           , categoryColumn
           ]
       , customizations =
