@@ -663,27 +663,23 @@ variousViews model =
 
     Ready ->
       div [ ]
-        [ div [ class "row" ]
-          [ renderForm model SubmitForm "Submit" ]
-        ]
+        [ renderForm model SubmitForm "Submit" ]
+
 
     Loading ->
       div [ ]
-          [ div [ class "row" ]
-            [ renderForm model SubmitForm "Submit" ]
-          ]
+          [ renderForm model SubmitForm "Submit" ]
+
 
     Results ->
       div [ ]
-        [ div []
-          [ div [] [ renderResults model] ]
-        ]
+        [ renderResults model ]
+
 
     Output ->
       div [ ]
-          [ div []
-            [ renderOutput model ]--renderOutput model ]
-          ]
+          [ renderOutput model ]
+
 
 
 

@@ -6641,7 +6641,7 @@ var $elm$core$List$member = F2(
 	});
 var $author$project$Presets$naicCategory = {
 	nonPreferred: _List_fromArray(
-		[31119, 61859, 63967, 64211, 65641, 65870, 66214, 66281, 67059, 67326, 68462, 68845, 76112, 79987, 86231]),
+		[79413001, 79413002, 31119, 61859, 63967, 64211, 65641, 65870, 66214, 66281, 67059, 67326, 68462, 68845, 76112, 79987, 86231]),
 	outside: _List_fromArray(
 		[11121, 12358, 14933, 19178, 25178, 26581, 26921, 29076, 47027, 47051, 47058, 47350, 53139, 53872, 54704, 54771, 55891, 56014, 56383, 56499, 56693, 56820, 57053, 57347, 57991, 60016, 60128, 60176, 60183, 60836, 61115, 61239, 61700, 61751, 61999, 62065, 62146, 62553, 66141, 66583, 66828, 67539, 67628, 67679, 67784, 67814, 68420, 68543, 68802, 69132, 69663, 69698, 70122, 70408, 70769, 70939, 70998, 71390, 71773, 71919, 73504, 77216, 77828, 77950, 78743, 80578, 81043, 81200, 81701, 81779, 82538, 82880, 85189, 89005, 90212, 91472, 91785, 92916, 94587, 95561, 95683, 95725, 95796, 95839, 95844, 95923]),
 	preferred: _List_fromArray(
@@ -9878,16 +9878,7 @@ var $author$project$Main$variousViews = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[
-								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
-							]))
+						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
 					]));
 		case 'Loading':
 			return A2(
@@ -9895,16 +9886,7 @@ var $author$project$Main$variousViews = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('row')
-							]),
-						_List_fromArray(
-							[
-								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
-							]))
+						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
 					]));
 		case 'Results':
 			return A2(
@@ -9912,19 +9894,7 @@ var $author$project$Main$variousViews = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$author$project$Main$renderResults(model)
-									]))
-							]))
+						$author$project$Main$renderResults(model)
 					]));
 		default:
 			return A2(
@@ -9932,13 +9902,7 @@ var $author$project$Main$variousViews = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$author$project$Main$renderOutput(model)
-							]))
+						$author$project$Main$renderOutput(model)
 					]));
 	}
 };
