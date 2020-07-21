@@ -25,3 +25,8 @@ img {
   padding-top: 30px;
   padding-bottom: 10px;
 }
+
+table {
+  margin-right: auto;
+  margin-left: auto;
+}
