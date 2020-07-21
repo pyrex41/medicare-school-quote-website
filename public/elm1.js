@@ -8825,10 +8825,7 @@ var $author$project$Main$outputTable = F2(
 			var rateRow = A3(
 				$author$project$Main$toBodyRow,
 				$author$project$Main$pTextUtil(pt),
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('mytd')
-					]),
+				_List_Nil,
 				rates);
 			var pdpString = function () {
 				var _v3 = model.pdpSelect;
@@ -8842,10 +8839,7 @@ var $author$project$Main$outputTable = F2(
 			var pdpRow = A3(
 				$author$project$Main$toBodyRow,
 				'Drug Plan Monthly Premium',
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('mytd ')
-					]),
+				_List_Nil,
 				A2(
 					$elm$core$List$map,
 					function (a) {
@@ -8866,10 +8860,7 @@ var $author$project$Main$outputTable = F2(
 			var partBRow = A3(
 				$author$project$Main$toBodyRow,
 				'Part B Monthly Premium',
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('mytd')
-					]),
+				_List_Nil,
 				A2(
 					$elm$core$List$map,
 					function (a) {
@@ -8927,17 +8918,13 @@ var $author$project$Main$outputTable = F2(
 						$elm$html$Html$table,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width'),
-								$elm$html$Html$Attributes$class('mytable')
+								$elm$html$Html$Attributes$class('u-full-width')
 							]),
 						_List_fromArray(
 							[
 								A2(
 								$elm$html$Html$thead,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('myth')
-									]),
+								_List_Nil,
 								_List_fromArray(
 									[companyNames])),
 								A2(
