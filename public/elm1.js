@@ -9394,7 +9394,7 @@ var $author$project$Main$toRowAttrs = function (tablerow) {
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
-			tablerow.selected ? '#ede0d9' : 'white')
+			tablerow.selected ? '#36b2a1' : 'white')
 		]);
 };
 var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customConfig(
@@ -9485,7 +9485,8 @@ var $author$project$Main$pdpSelectBox = F3(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('six columns')
+						$elm$html$Html$Attributes$class('six columns'),
+						$elm$html$Html$Attributes$class('offset-by-one column')
 					]),
 				_List_fromArray(
 					[
@@ -9861,7 +9862,10 @@ var $author$project$Main$renderResults = function (model) {
 					[
 						A2(
 						$elm$html$Html$div,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('offset-by-one column')
+							]),
 						_List_fromArray(
 							[
 								A4(
@@ -9965,7 +9969,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('twelve columns')
+								$elm$html$Html$Attributes$class('ten columns'),
+								$elm$html$Html$Attributes$class('offset-by-one column')
 							]),
 						_List_fromArray(
 							[
