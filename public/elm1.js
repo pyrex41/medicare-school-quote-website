@@ -9040,8 +9040,8 @@ var $author$project$Main$personalInfo = function (model) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'padding-top', '2em'),
-				A2($elm$html$Html$Attributes$style, 'padding-bottom', '3em')
+				A2($elm$html$Html$Attributes$style, 'padding-top', '2.5em'),
+				A2($elm$html$Html$Attributes$style, 'padding-bottom', '2.5em')
 			]),
 		_List_fromArray(
 			[

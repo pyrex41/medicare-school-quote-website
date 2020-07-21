@@ -899,7 +899,7 @@ personalInfo model =
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender ++ "   |   " ++ "Discount Applied: " ++ dsc
   in
-    div [ style "padding-top" "2em", style "padding-bottom" "3em" ]
+    div [ style "padding-top" "2.5em", style "padding-bottom" "2.5em" ]
       [ div [ class "row" ]
           [ div [ class "seven columns" ]
             [ div [ class "row" ] [ strong [] [ text model.name ] ]
