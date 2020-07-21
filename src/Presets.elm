@@ -50,6 +50,7 @@ naicCategory =
   , nonPreferred =
         [ 79413001 -- custom workaround for level 1 UHC
         , 79413002 -- custom workaround for level 2 UHC
+        , 88366001 -- custom workaround for CIGNA Substandard
         , 31119
         , 61859
         , 63967
