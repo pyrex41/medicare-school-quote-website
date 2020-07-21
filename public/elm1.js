@@ -8412,8 +8412,8 @@ var $author$project$Main$renderForm = F3(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('two columns'),
-												$elm$html$Html$Attributes$class('offset-by-five columns')
+												$elm$html$Html$Attributes$class('four columns'),
+												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
 											[submitButton]))
