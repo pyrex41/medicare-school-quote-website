@@ -8337,14 +8337,24 @@ var $author$project$Main$renderForm = F3(
 								_List_fromArray(
 									['three columns', 'offset-by-four columns'])),
 								A2(
-								$elm$html$Html$h5,
+								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('u-full-width')
+										$elm$html$Html$Attributes$class('four columns'),
+										$elm$html$Html$Attributes$class('offset-by-four columns')
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Which Plans?')
+										A2(
+										$elm$html$Html$h5,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('u-full-width')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Which Plans?')
+											]))
 									])),
 								A4(
 								$author$project$Main$checkbox,
