@@ -9795,7 +9795,7 @@ var $author$project$Main$renderResults = function (model) {
 										$elm$html$Html$Events$onClick(
 										$author$project$Main$SelectAll(naicShow)),
 										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '100')
+										A2($elm$html$Html$Attributes$style, 'width', '100%')
 									]),
 								_List_fromArray(
 									[
