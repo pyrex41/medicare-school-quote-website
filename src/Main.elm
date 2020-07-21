@@ -1072,7 +1072,7 @@ toRowAttrs tablerow =
     [ onClick (ToggleSelect tablerow.naic)
     , style "background"
         (if tablerow.selected then
-            "#ffbf63"
+            "#ede0d9"
 
          else
             "white"
