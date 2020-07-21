@@ -8732,12 +8732,18 @@ var $author$project$Main$safeCurrencyFloat = function (ss) {
 };
 var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
-var $author$project$Main$simpleTotalRow = F2(
-	function (rowname, l) {
+var $author$project$Main$simpleTotalRow = F3(
+	function (rowname, las, l) {
 		var ls = _Utils_ap(
 			_List_fromArray(
 				[rowname]),
 			l);
+		var attrss = _Utils_ap(
+			las,
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'background', '#d3d3d3')
+				]));
 		return A2(
 			$elm$html$Html$tr,
 			_List_Nil,
@@ -8746,10 +8752,7 @@ var $author$project$Main$simpleTotalRow = F2(
 				function (a) {
 					return A2(
 						$elm$html$Html$td,
-						_List_fromArray(
-							[
-								A2($elm$html$Html$Attributes$style, 'background', '#d3d3d3')
-							]),
+						attrss,
 						_List_fromArray(
 							[
 								$elm$html$Html$text(a)
@@ -8791,7 +8794,8 @@ var $author$project$Main$toHeadRow = F2(
 				$elm$html$Html$th,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'font-size', '1.8rem')
+						$elm$html$Html$Attributes$class('out-th'),
+						A2($elm$html$Html$Attributes$style, 'font-size', '2.0rem')
 					]),
 				_List_fromArray(
 					[
@@ -8803,7 +8807,10 @@ var $author$project$Main$toHeadRow = F2(
 			function (a) {
 				return A2(
 					$elm$html$Html$th,
-					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('out-th')
+						]),
 					_List_fromArray(
 						[
 							$elm$html$Html$text(a)
@@ -8833,7 +8840,10 @@ var $author$project$Main$outputTable = F2(
 			var rateRow = A3(
 				$author$project$Main$toBodyRow,
 				$author$project$Main$pTextUtil(pt),
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('out-td')
+					]),
 				rates);
 			var pdpString = function () {
 				var _v3 = model.pdpSelect;
@@ -8847,7 +8857,10 @@ var $author$project$Main$outputTable = F2(
 			var pdpRow = A3(
 				$author$project$Main$toBodyRow,
 				'Drug Plan Monthly Premium',
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('out-td')
+					]),
 				A2(
 					$elm$core$List$map,
 					function (a) {
@@ -8868,7 +8881,10 @@ var $author$project$Main$outputTable = F2(
 			var partBRow = A3(
 				$author$project$Main$toBodyRow,
 				'Part B Monthly Premium',
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('out-td')
+					]),
 				A2(
 					$elm$core$List$map,
 					function (a) {
@@ -8895,7 +8911,14 @@ var $author$project$Main$outputTable = F2(
 							$elm$core$Maybe$Just(r)));
 				},
 				rates);
-			var insuranceTotalRow = A2($author$project$Main$simpleTotalRow, 'Insurance Monthly Total', insuranceTotal);
+			var insuranceTotalRow = A3(
+				$author$project$Main$simpleTotalRow,
+				'Insurance Monthly Total',
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('out-td')
+					]),
+				insuranceTotal);
 			var grandTotal = A2(
 				$elm$core$List$map,
 				function (t) {
@@ -8907,7 +8930,14 @@ var $author$project$Main$outputTable = F2(
 							$elm$core$Maybe$Just(t)));
 				},
 				rates);
-			var grandTotalRow = A2($author$project$Main$simpleTotalRow, 'Grand Monthly Total', grandTotal);
+			var grandTotalRow = A3(
+				$author$project$Main$simpleTotalRow,
+				'Grand Monthly Total',
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('out-td')
+					]),
+				grandTotal);
 			var companyNames = A2(
 				$author$project$Main$toHeadRow,
 				pText,
