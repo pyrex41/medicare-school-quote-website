@@ -8408,18 +8408,18 @@ var $author$project$Main$renderForm = F3(
 												_List_fromArray(
 													[
 														$elm$html$Html$text('Submit')
+													])),
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('one column'),
+														$elm$html$Html$Attributes$class('offset-by-four columns')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text(loadText)
 													]))
-											])),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('one column'),
-												$elm$html$Html$Attributes$class('offset-by-four columns')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text(loadText)
 											]))
 									]))
 							])))
