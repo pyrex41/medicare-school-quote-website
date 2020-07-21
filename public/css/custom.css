@@ -8,9 +8,13 @@
   margin: auto
 }
 
+th {
+  border-bottom: 1px solic #4a4542;
+}
+
 td {
   border-left: 1px solid #4a4542;
   border-right: 1px solid #4a4542;
   border-bottom: 1px solid #4a4542;
-  padding: 1em;
+  padding: 3em;
 }
