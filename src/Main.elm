@@ -837,7 +837,7 @@ renderResults model =
       [ div [ class "row" ]
         [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
-          [ div [ ]
+          [ div [ class "offset-by-one column" ]
               [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred ["u-full-width"]
               , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
               , checkbox "Outside Plans" model.viewOutside ToggleOutside ["u-full-width"]
@@ -859,7 +859,7 @@ renderResults model =
             ]
           ]
       , div [ class "row" ]
-          [ div [ class "twelve columns" ]
+          [ div [ class "ten columns", class "offset-by-one column" ]
             [ case showRows of
                 Just sr ->
                   Table.view config model.tableState sr
@@ -1072,7 +1072,7 @@ toRowAttrs tablerow =
     [ onClick (ToggleSelect tablerow.naic)
     , style "background"
         (if tablerow.selected then
-            "#ede0d9"
+            "#36b2a1"
 
          else
             "white"
@@ -1168,7 +1168,7 @@ pdpSelectBox : Maybe (List PdpRecord) -> Maybe PdpRecord -> (String -> Msg) -> H
 pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
-      div [class "six columns" ] [
+      div [class "six columns", class "offset-by-one column" ] [
         label
           [ ]
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
