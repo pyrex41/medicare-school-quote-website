@@ -9687,24 +9687,15 @@ var $author$project$Main$renderResults = function (model) {
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$div,
+								$elm$html$Html$button,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('u-full-width')
+										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+										$elm$html$Html$Attributes$class('button-primary')
 									]),
 								_List_fromArray(
 									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-												$elm$html$Html$Attributes$class('button-primary')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Show Output')
-											]))
+										$elm$html$Html$text('Show Output')
 									]))
 							])),
 						A2(
@@ -9716,25 +9707,16 @@ var $author$project$Main$renderResults = function (model) {
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$div,
+								$elm$html$Html$button,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('u-full-width')
+										$elm$html$Html$Events$onClick(
+										$author$project$Main$SelectAll(naicShow)),
+										$elm$html$Html$Attributes$class('button')
 									]),
 								_List_fromArray(
 									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Main$SelectAll(naicShow)),
-												$elm$html$Html$Attributes$class('button')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Select All')
-											]))
+										$elm$html$Html$text('Select All')
 									]))
 							])),
 						A2(
@@ -9746,24 +9728,15 @@ var $author$project$Main$renderResults = function (model) {
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$div,
+								$elm$html$Html$button,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('u-full-width')
+										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
+										$elm$html$Html$Attributes$class('button')
 									]),
 								_List_fromArray(
 									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
-												$elm$html$Html$Attributes$class('button')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Deselect All')
-											]))
+										$elm$html$Html$text('Deselect All')
 									]))
 							]))
 					])),

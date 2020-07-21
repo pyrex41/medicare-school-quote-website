@@ -808,25 +808,19 @@ renderResults model =
           ]
       , div [ class "row" ]
           [ div [ class "two columns" ]
-              [ div [ class "u-full-width" ]
-                    [ button
-                      [ onClick ShowOutput, class "button-primary" ]
-                      [ text "Show Output" ]
-                    ]
+              [ button
+                  [ onClick ShowOutput, class "button-primary" ]
+                  [ text "Show Output" ]
               ]
           , div [ class "two columns"]
-              [ div [ class "u-full-width" ]
-                    [ button
-                      [ onClick ( SelectAll naicShow ), class "button" ]
-                      [ text "Select All" ]
-                    ]
+              [ button
+                  [ onClick ( SelectAll naicShow ), class "button" ]
+                  [ text "Select All" ]
               ]
           , div [ class "two columns"]
-              [ div [ class "u-full-width" ]
-                    [ button
-                      [ onClick DeselectAll, class "button" ]
-                      [ text "Deselect All" ]
-                    ]
+              [ button
+                  [ onClick DeselectAll, class "button" ]
+                  [ text "Deselect All" ]
               ]
           ]
       , div [ class "row" ]
