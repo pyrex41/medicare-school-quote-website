@@ -15,13 +15,13 @@
 .myth {
   padding: 0.5rem;
   text-align: left;
-  border-right: solid 1px #f00;
-  border-left: solid 1px #f00;
+  border-right: solid 1px #fff;
+  border-left: solid 1px #fff;
 }
 
 .mytr {
-  border-right: solid 1px #f00;
-  border-left: solid 1px #f00;
+  border-right: solid 1px #fff;
+  border-left: solid 1px #fff;
   padding: 0.5rem;
   text-align: left;
 }
