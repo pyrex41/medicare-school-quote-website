@@ -8350,7 +8350,7 @@ var $author$project$Main$renderForm = F3(
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$class('u-full-width'),
-												A2($elm$html$Html$Attributes$style, 'margin-top', '4rem')
+												A2($elm$html$Html$Attributes$style, 'margin-top', '1rem')
 											]),
 										_List_fromArray(
 											[

@@ -776,7 +776,7 @@ renderForm model func buttonLabel =
               , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate [ "three columns", "offset-by-four columns"] 1
               , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  [ "three columns", "offset-by-four columns"]
               , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts [ "three columns", "offset-by-four columns"]
-              , div [ class "four columns", class "offset-by-four columns" ] [ h5 [ class "u-full-width", style "margin-top" "4rem" ] [ text "Which Plans?" ] ]
+              , div [ class "four columns", class "offset-by-four columns" ] [ h5 [ class "u-full-width", style "margin-top" "1rem" ] [ text "Which Plans?" ] ]
               , checkbox "Plan G" model.planG ToggleG [ "three columns", "offset-by-four columns"]
               , checkbox "Plan N" model.planN ToggleN [ "three columns", "offset-by-four columns"]
               , checkbox "Plan F" model.planF ToggleF [ "three columns", "offset-by-four columns"]
