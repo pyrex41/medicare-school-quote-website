@@ -970,8 +970,10 @@ makeEnrollButton : TableRow -> Html Msg
 makeEnrollButton tr =
   case (getEnrollLink tr) of
     Just l ->
-        a
-          [ class "button-primary", target "_blank", href l ]
+        button
+          [ class "button-primary"
+          , attribute "onclick" ("window.location.href='" ++ l ++ "'")
+          ]
           [ text "Enroll" ]
     Nothing ->
         button
