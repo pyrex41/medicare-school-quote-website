@@ -9098,59 +9098,6 @@ var $author$project$Main$personalInfo = function (model) {
 							[
 								$elm$html$Html$Attributes$class('seven columns')
 							]),
-						_List_Nil),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('five columns')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick(
-										$author$project$Main$LinkClicked(
-											$elm$browser$Browser$External(dentalLink))),
-										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Dental Quote')
-									])),
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick(
-										$author$project$Main$LinkClicked(
-											$elm$browser$Browser$External(docusignLink))),
-										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Docusign')
-									]))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('seven columns')
-							]),
 						_List_fromArray(
 							[
 								A2(
@@ -9199,28 +9146,74 @@ var $author$project$Main$personalInfo = function (model) {
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$button,
+								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
+										$elm$html$Html$Attributes$class('row')
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Edit Info')
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
+												$elm$html$Html$Attributes$class('button'),
+												A2($elm$html$Html$Attributes$style, 'width', '50%')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Edit Info')
+											])),
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
+												$elm$html$Html$Attributes$class('button'),
+												A2($elm$html$Html$Attributes$style, 'width', '50%')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Edit Plans')
+											]))
 									])),
 								A2(
-								$elm$html$Html$button,
+								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
+										$elm$html$Html$Attributes$class('row')
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Edit Plans')
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$LinkClicked(
+													$elm$browser$Browser$External(dentalLink))),
+												$elm$html$Html$Attributes$class('button'),
+												A2($elm$html$Html$Attributes$style, 'width', '50%')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Dental Quote')
+											])),
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$LinkClicked(
+													$elm$browser$Browser$External(docusignLink))),
+												$elm$html$Html$Attributes$class('button'),
+												A2($elm$html$Html$Attributes$style, 'width', '50%')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Docusign')
+											]))
 									]))
 							]))
 					]))
