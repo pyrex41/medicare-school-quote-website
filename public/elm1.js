@@ -9047,6 +9047,7 @@ var $author$project$Main$outputTable = F2(
 var $author$project$Main$ShowResults = {$: 30};
 var $author$project$Main$ShowSubmitForm = {$: 29};
 var $elm$html$Html$strong = _VirtualDom_node('strong');
+var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
 		var _v2 = model.z.ad;
@@ -9157,6 +9158,45 @@ var $author$project$Main$personalInfo = function (model) {
 										$elm$html$Html$button,
 										_List_fromArray(
 											[
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$LinkClicked(
+													$elm$browser$Browser$External(dentalLink))),
+												$elm$html$Html$Attributes$class('button'),
+												$elm$html$Html$Attributes$target('_blank'),
+												A2($elm$html$Html$Attributes$style, 'width', '50%')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Dental Quote')
+											])),
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
+												$elm$html$Html$Events$onClick(
+												$author$project$Main$LinkClicked(
+													$elm$browser$Browser$External(docusignLink))),
+												$elm$html$Html$Attributes$class('button'),
+												$elm$html$Html$Attributes$target('_blank'),
+												A2($elm$html$Html$Attributes$style, 'width', '50%')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Docusign')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$button,
+										_List_fromArray(
+											[
 												$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
 												$elm$html$Html$Attributes$class('button'),
 												A2($elm$html$Html$Attributes$style, 'width', '50%')
@@ -9176,43 +9216,6 @@ var $author$project$Main$personalInfo = function (model) {
 										_List_fromArray(
 											[
 												$elm$html$Html$text('Edit Plans')
-											]))
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Main$LinkClicked(
-													$elm$browser$Browser$External(dentalLink))),
-												$elm$html$Html$Attributes$class('button'),
-												A2($elm$html$Html$Attributes$style, 'width', '50%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Dental Quote')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Main$LinkClicked(
-													$elm$browser$Browser$External(docusignLink))),
-												$elm$html$Html$Attributes$class('button'),
-												A2($elm$html$Html$Attributes$style, 'width', '50%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Docusign')
 											]))
 									]))
 							]))
