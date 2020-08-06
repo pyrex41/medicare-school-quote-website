@@ -7965,7 +7965,6 @@ var $author$project$Main$navButton = F3(
 						[
 							$elm$html$Html$Events$onClick(msg),
 							$elm$html$Html$Attributes$class('button-primary'),
-							$elm$html$Html$Attributes$class('u-width-full'),
 							A2($elm$html$Html$Attributes$attribute, 'margin', '1em'),
 							$elm$html$Html$Attributes$disabled(!show)
 						]),

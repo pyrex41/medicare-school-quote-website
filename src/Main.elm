@@ -724,7 +724,7 @@ navButton : Msg -> Bool -> String -> Html Msg
 navButton msg show tx =
     div [ style "width" "33.33333%" ]
         [ button
-              [ onClick msg, class "button-primary", class "u-width-full", attribute "margin" "1em", disabled (not show) ]
+              [ onClick msg, class "button-primary", attribute "margin" "1em", disabled (not show) ]
               [ text tx ]
         ]
 
