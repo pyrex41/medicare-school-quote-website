@@ -8002,8 +8002,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('offset-by-three columns'),
-						$elm$html$Html$Attributes$class('two columns')
+						$elm$html$Html$Attributes$class('four columns')
 					]),
 				_List_fromArray(
 					[editInfoButton])),
@@ -8011,7 +8010,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('two columns')
+						$elm$html$Html$Attributes$class('four columns')
 					]),
 				_List_fromArray(
 					[editPlansButton])),
@@ -8019,7 +8018,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('two columns')
+						$elm$html$Html$Attributes$class('four columns')
 					]),
 				_List_fromArray(
 					[showOutputButton]))

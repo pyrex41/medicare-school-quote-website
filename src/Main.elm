@@ -743,11 +743,11 @@ navBar model =
             [ text "Show Output" ]    
   in
       div [ class "row" ]
-          [  div [ class "offset-by-three columns", class "two columns" ]
+          [  div [ class "four columns" ]
                  [ editInfoButton ]
-          , div [ class "two columns" ]
+          , div [ class "four columns" ]
                  [ editPlansButton ]
-          , div [ class "two columns" ]
+          , div [ class "four columns" ]
                  [ showOutputButton ]
           ]
 
