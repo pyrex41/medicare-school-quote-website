@@ -7968,7 +7968,7 @@ var $author$project$Main$navBar = function (model) {
 					]),
 				_List_fromArray(
 					[
-						$elm$html$Html$text('Show Output')
+						$elm$html$Html$text('Results')
 					]))
 			]));
 	var showEditPlans = function () {

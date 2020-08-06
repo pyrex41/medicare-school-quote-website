@@ -745,7 +745,7 @@ navBar model =
         div [ class "u-full-width" ]
             [ button
                   [ onClick ShowOutput, class "button-primary",  class "u-full-width", attribute "padding" "0 0", disabled (not model.outputAvailable ) ]
-                  [ text "Show Output" ]
+                  [ text "Results" ]
             ]
   in
       div [ class "row" ]
