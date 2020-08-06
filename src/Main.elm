@@ -722,7 +722,7 @@ variousViews model =
 
 navButton : Msg -> Bool -> String -> Html Msg
 navButton msg show tx =
-    div [ style "width" "33.33333%" ]
+    div [ class "u-full-width" ]
         [ button
               [ onClick msg, class "button-primary", attribute "margin" "1em", disabled (not show) ]
               [ text tx ]
@@ -744,11 +744,9 @@ navBar model =
     showOutputButton = navButton ShowOutput (not model.outputAvailable) "Results"
   in
       div [ class "row" ]
-          [  div [ class "six columns", class "offset-by-three columns" ]
-                 [ editInfoButton
-                 , editPlansButton
-                 , showOutputButton
-                 ]
+          [ editInfoButton
+          , editPlansButton
+          , showOutputButton
           ]
 
 -- Model Validations

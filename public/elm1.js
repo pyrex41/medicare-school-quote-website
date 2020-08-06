@@ -7945,8 +7945,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$navButton = F3(
@@ -7955,7 +7953,7 @@ var $author$project$Main$navButton = F3(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					A2($elm$html$Html$Attributes$style, 'width', '33.33333%')
+					$elm$html$Html$Attributes$class('u-full-width')
 				]),
 			_List_fromArray(
 				[
@@ -8000,17 +7998,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$Attributes$class('row')
 			]),
 		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('six columns'),
-						$elm$html$Html$Attributes$class('offset-by-three columns')
-					]),
-				_List_fromArray(
-					[editInfoButton, editPlansButton, showOutputButton]))
-			]));
+			[editInfoButton, editPlansButton, showOutputButton]));
 };
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -8018,6 +8006,8 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$Main$RequestPDP = {$: 2};
 var $author$project$Main$SubmitForm = {$: 1};
 var $author$project$Main$SelectCounty = function (a) {
