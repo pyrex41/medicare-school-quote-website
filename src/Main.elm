@@ -724,9 +724,11 @@ navBar : Model -> Html Msg
 navBar model =
   let
     editInfoButton =
-        button
-            [ onClick ShowSubmitForm, class "button" ]
-            [ text "Edit Info" ]
+        div [ class "u-full-width" ]
+            [ button
+                  [ onClick ShowSubmitForm, class "button" ]
+                  [ text "Edit Info" ]
+            ]
     showEditPlans = case model.state of
                         Failure _ -> False
                         Ready -> True
@@ -734,13 +736,17 @@ navBar model =
                         Results -> True
                         Output -> True 
     editPlansButton =
-        button
-            [ onClick ShowResults, class "button", disabled showEditPlans ]
-            [ text "Edit Plans" ]
+        div [ class "u-full-width" ]
+            [ button
+                  [ onClick ShowResults, class "button", class "u-full-width",  disabled showEditPlans ]
+                  [ text "Edit Plans" ]
+            ]
     showOutputButton =
-        button
-            [ onClick ShowOutput, class "button",  disabled (not model.outputAvailable ) ]
-            [ text "Show Output" ]    
+        div [ class "u-full-width" ]
+            [ button
+                  [ onClick ShowOutput, class "button",  class "u-full-width", disabled (not model.outputAvailable ) ]
+                  [ text "Show Output" ]
+            ]
   in
       div [ class "row" ]
           [  div [ class "two columns", class "offset-by-three columns" ]

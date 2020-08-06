@@ -7941,16 +7941,26 @@ var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$navBar = function (model) {
 	var showOutputButton = A2(
-		$elm$html$Html$button,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-				$elm$html$Html$Attributes$class('button'),
-				$elm$html$Html$Attributes$disabled(!model.aU)
+				$elm$html$Html$Attributes$class('u-full-width')
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text('Show Output')
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+						$elm$html$Html$Attributes$class('button'),
+						$elm$html$Html$Attributes$class('u-full-width'),
+						$elm$html$Html$Attributes$disabled(!model.aU)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Show Output')
+					]))
 			]));
 	var showEditPlans = function () {
 		var _v0 = model.j;
@@ -7968,27 +7978,46 @@ var $author$project$Main$navBar = function (model) {
 		}
 	}();
 	var editPlansButton = A2(
-		$elm$html$Html$button,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-				$elm$html$Html$Attributes$class('button'),
-				$elm$html$Html$Attributes$disabled(showEditPlans)
+				$elm$html$Html$Attributes$class('u-full-width')
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text('Edit Plans')
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
+						$elm$html$Html$Attributes$class('button'),
+						$elm$html$Html$Attributes$class('u-full-width'),
+						$elm$html$Html$Attributes$disabled(showEditPlans)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Edit Plans')
+					]))
 			]));
 	var editInfoButton = A2(
-		$elm$html$Html$button,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-				$elm$html$Html$Attributes$class('button')
+				$elm$html$Html$Attributes$class('u-full-width')
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text('Edit Info')
+				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
+						$elm$html$Html$Attributes$class('button')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Edit Info')
+					]))
 			]));
 	return A2(
 		$elm$html$Html$div,
