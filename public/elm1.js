@@ -9081,11 +9081,7 @@ var $author$project$Main$personalInfo = function (model) {
 	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + ($author$project$Main$genderString(model.aB) + ('   |   ' + ('Discount Applied: ' + dsc)))))));
 	return A2(
 		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'padding-top', '2.5em'),
-				A2($elm$html$Html$Attributes$style, 'padding-bottom', '2.5em')
-			]),
+		_List_Nil,
 		_List_fromArray(
 			[
 				A2(
@@ -9102,31 +9098,12 @@ var $author$project$Main$personalInfo = function (model) {
 							[
 								$elm$html$Html$Attributes$class('seven columns')
 							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$strong,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text(model.U)
-											]))
-									]))
-							])),
+						_List_Nil),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('five columns'),
-								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
+								$elm$html$Html$Attributes$class('five columns')
 							]),
 						_List_fromArray(
 							[
@@ -9184,6 +9161,22 @@ var $author$project$Main$personalInfo = function (model) {
 									]),
 								_List_fromArray(
 									[
+										A2(
+										$elm$html$Html$strong,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$elm$html$Html$text(model.U)
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
 										$elm$html$Html$text(row2)
 									])),
 								A2(
@@ -9201,8 +9194,7 @@ var $author$project$Main$personalInfo = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('five columns'),
-								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
+								$elm$html$Html$Attributes$class('five columns')
 							]),
 						_List_fromArray(
 							[
