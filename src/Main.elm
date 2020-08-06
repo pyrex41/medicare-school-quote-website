@@ -72,6 +72,7 @@ type alias Model =
   , dateSelectChoices : List (String, CustomDate)
   , outputTableState : Table.State
   , outputQuotes : Maybe (List OutputQuote)
+  , outputAvailable : Bool
   }
 
 
@@ -171,6 +172,7 @@ init flags url key =
       , dateSelectChoices = []
       , outputTableState = Table.initialSort "Title"
       , outputQuotes = Nothing
+      , outputAvailable = False
       }
     , Task.perform GotTime Time.now
     )
@@ -301,6 +303,7 @@ update msg model =
         if vModel.valid then
           ( { vModel | response = Nothing
                      , state = Loading
+                     , outputAvailable = False
             }
           , getPlans vModel
           )
@@ -530,6 +533,7 @@ update msg model =
                       , tableRows = Just newRows
                       , url = nurl
                       , state = Results
+                      , outputAvailable = True
               }
             , Nav.pushUrl model.key (Url.toString nurl)
             )
@@ -635,6 +639,7 @@ view model =
               , style "display" "block"
               ]
               [  ]
+        , navBar model
         , variousViews model
         ]
       ]
@@ -710,7 +715,41 @@ variousViews model =
 
 
 
+              
 
+
+-- Nav Buttons
+
+navBar : Model -> Html Msg
+navBar model =
+  let
+    editInfoButton =
+        button
+            [ onClick ShowSubmitForm, class "button", style "width" "70%" ]
+            [ text "Edit Info" ]
+    showEditPlans = case model.state of
+                        Failure _ -> False
+                        Ready -> True
+                        Loading -> True
+                        Results -> True
+                        Output -> True 
+    editPlansButton =
+        button
+            [ onClick ShowResults, class "button", style "width" "70%", disabled showEditPlans ]
+            [ text "Edit Plans" ]
+    showOutputButton =
+        button
+            [ onClick ShowOutput, class "button", style "width" "70%", disabled model.outputAvailable ]
+            [ text "Show Output" ]    
+  in
+      div [ class "row" ]
+          [  div [ class "offset-by-three columns", class "two columns" ]
+                 [ editInfoButton ]
+          , div [class "two columns" ]
+                 [ editPlansButton ]
+          , div [ class "two columns" ]
+                 [ showOutputButton ]
+          ]
 
 -- Model Validations
 
