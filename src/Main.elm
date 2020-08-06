@@ -979,7 +979,7 @@ makeEnrollButton tr =
 makeEnrollRow : (List TableRow) -> Html Msg
 makeEnrollRow ls =
   let
-      ll = List.filter .selected ls
+      ll = List.sortBy .displayName <| List.filter .selected ls
       eb = List.map
                (\a ->
                     td [] [ makeEnrollButton a ]
