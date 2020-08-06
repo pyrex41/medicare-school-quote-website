@@ -7945,31 +7945,24 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$navBar = function (model) {
 	var showOutputButton = A2(
-		$elm$html$Html$div,
+		$elm$html$Html$button,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('u-full-width')
+				$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+				$elm$html$Html$Attributes$class('button-primary'),
+				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
+				A2($elm$html$Html$Attributes$attribute, 'padding', '0 5px'),
+				$elm$html$Html$Attributes$disabled(!model.aU)
 			]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-						$elm$html$Html$Attributes$class('button-primary'),
-						$elm$html$Html$Attributes$class('u-full-width'),
-						A2($elm$html$Html$Attributes$attribute, 'padding', '0 0'),
-						$elm$html$Html$Attributes$disabled(!model.aU)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Results')
-					]))
+				$elm$html$Html$text('Results')
 			]));
 	var showEditPlans = function () {
 		var _v0 = model.j;
@@ -7987,48 +7980,31 @@ var $author$project$Main$navBar = function (model) {
 		}
 	}();
 	var editPlansButton = A2(
-		$elm$html$Html$div,
+		$elm$html$Html$button,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('u-full-width')
+				$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
+				$elm$html$Html$Attributes$class('button-primary'),
+				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
+				A2($elm$html$Html$Attributes$attribute, 'padding', '0 5px'),
+				$elm$html$Html$Attributes$disabled(showEditPlans)
 			]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-						$elm$html$Html$Attributes$class('button-primary'),
-						$elm$html$Html$Attributes$class('u-full-width'),
-						A2($elm$html$Html$Attributes$attribute, 'padding', '0 0'),
-						$elm$html$Html$Attributes$disabled(showEditPlans)
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Edit Plans')
-					]))
+				$elm$html$Html$text('Edit Plans')
 			]));
 	var editInfoButton = A2(
-		$elm$html$Html$div,
+		$elm$html$Html$button,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('u-full-width')
+				$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
+				$elm$html$Html$Attributes$class('button-primary'),
+				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
+				A2($elm$html$Html$Attributes$attribute, 'padding', '0 5px')
 			]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$button,
-				_List_fromArray(
-					[
-						$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-						$elm$html$Html$Attributes$class('button-primary'),
-						A2($elm$html$Html$Attributes$attribute, 'padding', '0 0')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('Edit Info')
-					]))
+				$elm$html$Html$text('Edit Info')
 			]));
 	return A2(
 		$elm$html$Html$div,
@@ -8042,27 +8018,11 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('two columns'),
+						$elm$html$Html$Attributes$class('six columns'),
 						$elm$html$Html$Attributes$class('offset-by-three columns')
 					]),
 				_List_fromArray(
-					[editInfoButton])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('two columns')
-					]),
-				_List_fromArray(
-					[editPlansButton])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('two columns')
-					]),
-				_List_fromArray(
-					[showOutputButton]))
+					[editInfoButton, editPlansButton, showOutputButton]))
 			]));
 };
 var $elm$html$Html$Attributes$src = function (url) {
@@ -8071,8 +8031,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$Main$RequestPDP = {$: 2};
 var $author$project$Main$SubmitForm = {$: 1};
 var $author$project$Main$SelectCounty = function (a) {

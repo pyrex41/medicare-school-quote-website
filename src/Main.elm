@@ -724,11 +724,10 @@ navBar : Model -> Html Msg
 navBar model =
   let
     editInfoButton =
-        div [ class "u-full-width" ]
-            [ button
-                  [ onClick ShowSubmitForm, class "button-primary", attribute "padding" "0 0" ]
-                  [ text "Edit Info" ]
-            ]
+        button
+            [ onClick ShowSubmitForm, class "button-primary", style "width" "33.33333%", attribute "padding" "0 5px" ]
+            [ text "Edit Info" ]
+            
     showEditPlans = case model.state of
                         Failure _ -> False
                         Ready -> True
@@ -736,25 +735,21 @@ navBar model =
                         Results -> True
                         Output -> True 
     editPlansButton =
-        div [ class "u-full-width" ]
-            [ button
-                  [ onClick ShowResults, class "button-primary", class "u-full-width",  attribute "padding" "0 0", disabled showEditPlans ]
-                  [ text "Edit Plans" ]
-            ]
+       button
+            [ onClick ShowResults, class "button-primary", style "width" "33.33333%",  attribute "padding" "0 5px", disabled showEditPlans ]
+            [ text "Edit Plans" ]
     showOutputButton =
-        div [ class "u-full-width" ]
-            [ button
-                  [ onClick ShowOutput, class "button-primary",  class "u-full-width", attribute "padding" "0 0", disabled (not model.outputAvailable ) ]
-                  [ text "Results" ]
-            ]
+       button
+            [ onClick ShowOutput, class "button-primary", style "width" "33.33333%", attribute "padding" "0 5px", disabled (not model.outputAvailable ) ]
+            [ text "Results" ]
+            
   in
       div [ class "row" ]
-          [  div [ class "two columns", class "offset-by-three columns" ]
-                 [ editInfoButton ]
-          , div [ class "two columns" ]
-                 [ editPlansButton ]
-          , div [ class "two columns" ]
-                 [ showOutputButton ]
+          [  div [ class "six columns", class "offset-by-three columns" ]
+                 [ editInfoButton
+                 , editPlansButton
+                 , showOutputButton
+                 ]
           ]
 
 -- Model Validations
