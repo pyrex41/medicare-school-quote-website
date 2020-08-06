@@ -929,6 +929,24 @@ personalInfo model =
           ]
       ]
 
+makeEnrollButton : Html Msg
+makeEnrollButton =
+    a
+     [ class "button", target "_blank", href "http://google.com", style "width" "80%" ]
+     [ text "Enroll" ]
+
+makeEnrollRow : (List String) -> Html Msg
+makeEnrollRow ls =
+  let
+      ll = [""] ++ ls
+  in
+     tr [] <|
+       List.map
+           (\a ->
+                td [] [ makeEnrollButton ]
+           )
+           ll
+                              
 
 outputTable : Model -> PlanType -> Html Msg
 outputTable model pt =
@@ -960,6 +978,7 @@ outputTable model pt =
         partBRow = toBodyRow "Part B Monthly Premium" [ class "out-td" ] <| List.map (\a -> safeString model.partB) vr
         grandTotal = List.map (\t -> currencyAddThree pdp partb (safeCurrencyFloat (Just t))) rates
         grandTotalRow = simpleTotalRow "Grand Monthly Total" [ class "out-td" ] grandTotal
+        enrollRow = makeEnrollRow <| List.map .company tr
       in
         div []
             [ table [ class "u-full-width"
@@ -972,6 +991,7 @@ outputTable model pt =
                   , insuranceTotalRow
                   , partBRow
                   , grandTotalRow
+                  , enrollRow
                   ]
                 ]
             , hr [] []
