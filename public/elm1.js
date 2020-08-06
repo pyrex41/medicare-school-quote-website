@@ -8812,12 +8812,12 @@ var $author$project$Main$makeEnrollButton = function (tr) {
 			$elm$html$Html$button,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('button'),
+					$elm$html$Html$Attributes$class('button-primary'),
 					$elm$html$Html$Attributes$disabled(true)
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('NA')
+					$elm$html$Html$text('Enroll')
 				]));
 	}
 };

@@ -977,8 +977,8 @@ makeEnrollButton tr =
           [ text "Enroll" ]
     Nothing ->
         button
-          [ class "button", disabled True ]
-          [ text "NA" ]
+          [ class "button-primary", disabled True ]
+          [ text "Enroll" ]
 
 makeEnrollRow : (List TableRow) -> Html Msg
 makeEnrollRow ls =
