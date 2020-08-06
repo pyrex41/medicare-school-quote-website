@@ -8793,36 +8793,34 @@ var $elm$html$Html$Attributes$href = function (url) {
 };
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$makeEnrollButton = function (tr) {
-	var link = $author$project$Main$getEnrollLink(tr);
-	var linkString = function () {
-		if (!link.$) {
-			var l = link.a;
-			return l;
-		} else {
-			return '';
-		}
-	}();
-	var disp = function () {
-		if (!link.$) {
-			var l = link.a;
-			return true;
-		} else {
-			return false;
-		}
-	}();
-	return A2(
-		$elm$html$Html$a,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('button'),
-				$elm$html$Html$Attributes$target('_blank'),
-				$elm$html$Html$Attributes$href(linkString),
-				$elm$html$Html$Attributes$disabled(disp)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Enroll')
-			]));
+	var _v0 = $author$project$Main$getEnrollLink(tr);
+	if (!_v0.$) {
+		var l = _v0.a;
+		return A2(
+			$elm$html$Html$a,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('button-primary'),
+					$elm$html$Html$Attributes$target('_blank'),
+					$elm$html$Html$Attributes$href(l)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Enroll')
+				]));
+	} else {
+		return A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('button-primary'),
+					$elm$html$Html$Attributes$disabled(true)
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Enroll')
+				]));
+	}
 };
 var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$html$Html$tr = _VirtualDom_node('tr');

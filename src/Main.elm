@@ -968,18 +968,15 @@ getEnrollLink tr =
 
 makeEnrollButton : TableRow -> Html Msg
 makeEnrollButton tr =
-  let
-    link = getEnrollLink tr
-    linkString = case link of
-                     Just l -> l
-                     Nothing -> ""
-    disp = case link of
-               Just l -> True
-               Nothing -> False
-  in
-    a
-     [ class "button", target "_blank", href linkString, disabled disp ]
-     [ text "Enroll" ]
+  case (getEnrollLink tr) of
+    Just l ->
+        a
+          [ class "button-primary", target "_blank", href l ]
+          [ text "Enroll" ]
+    Nothing ->
+        button
+          [ class "button-primary", disabled True ]
+          [ text "Enroll" ]
 
 makeEnrollRow : (List TableRow) -> Html Msg
 makeEnrollRow ls =
