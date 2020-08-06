@@ -9067,6 +9067,8 @@ var $author$project$Main$personalInfo = function (model) {
 		}
 	}();
 	var dsc = model.ag ? 'Yes' : 'No';
+	var docusignLink = 'https://account.docusign.com';
+	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=17221';
 	var ageText = function () {
 		var _v0 = model.H.ad;
 		if (!_v0.$) {
@@ -9117,7 +9119,63 @@ var $author$project$Main$personalInfo = function (model) {
 											[
 												$elm$html$Html$text(model.U)
 											]))
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('five columns'),
+								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(
+										$author$project$Main$LinkClicked(
+											$elm$browser$Browser$External(dentalLink))),
+										$elm$html$Html$Attributes$class('button'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Dental Quote')
 									])),
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Events$onClick(
+										$author$project$Main$LinkClicked(
+											$elm$browser$Browser$External(docusignLink))),
+										$elm$html$Html$Attributes$class('button'),
+										A2($elm$html$Html$Attributes$style, 'width', '50%')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Docusign')
+									]))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('seven columns')
+							]),
+						_List_fromArray(
+							[
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -9904,21 +9962,21 @@ var $author$project$Main$renderResults = function (model) {
 							[
 								A4(
 								$author$project$Main$checkbox,
-								'Preferred Plans',
+								'A',
 								model.aJ,
 								$author$project$Main$TogglePreferred,
 								_List_fromArray(
 									['u-full-width'])),
 								A4(
 								$author$project$Main$checkbox,
-								'Non-Preferred Plans',
+								'B',
 								model.aH,
 								$author$project$Main$ToggleNonPreferred,
 								_List_fromArray(
 									['u-full-width'])),
 								A4(
 								$author$project$Main$checkbox,
-								'Outside Plans',
+								'C',
 								model.aI,
 								$author$project$Main$ToggleOutside,
 								_List_fromArray(

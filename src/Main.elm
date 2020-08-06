@@ -846,9 +846,9 @@ renderResults model =
         [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
-              [ checkbox "Preferred Plans" model.viewPreferred TogglePreferred ["u-full-width"]
-              , checkbox "Non-Preferred Plans" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
-              , checkbox "Outside Plans" model.viewOutside ToggleOutside ["u-full-width"]
+              [ checkbox "A" model.viewPreferred TogglePreferred ["u-full-width"]
+              , checkbox "B" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
+              , checkbox "C" model.viewOutside ToggleOutside ["u-full-width"]
               ]
           ]
       , div [ class "row" ]
@@ -906,12 +906,22 @@ personalInfo model =
       Nothing -> ""
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ (genderString model.gender) ++ "   |   " ++ "Discount Applied: " ++ dsc
+    dentalLink = "https://www.securitylife.com/personal-plans?agnt=17221"
+    docusignLink = "https://account.docusign.com"
   in
     div [ style "padding-top" "2.5em", style "padding-bottom" "2.5em" ]
       [ div [ class "row" ]
           [ div [ class "seven columns" ]
-            [ div [ class "row" ] [ strong [] [ text model.name ] ]
-            , div [ class "row" ] [ text row2 ]
+            [ div [ class "row" ] [ strong [] [ text model.name] ]
+            ]
+          , div [ class "five columns",  style "padding-top" "1.2em" ]
+              [ button [ onClick <| LinkClicked (Browser.External dentalLink), class "button", style "width" "50%" ] [ text "Dental Quote" ]
+              , button [ onClick <| LinkClicked (Browser.External docusignLink), class "button", style "width" "50%" ] [ text "Docusign" ]
+              ]
+           ]
+      , div [ class "row" ]
+          [ div [ class "seven columns" ]
+            [ div [ class "row" ] [ text row2 ]
             , div [ class "row" ] [ text pdpText]
             ]
           , div [ class "five columns", style "padding-top" "1.2em" ]
