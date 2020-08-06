@@ -929,7 +929,7 @@ personalInfo model =
           ]
       ]
 
-getEnrollLink : TableRow -> String
+getEnrollLink : TableRow -> Maybe String
 getEnrollLink tr =
   let
     dd = Dict.fromList
@@ -961,19 +961,24 @@ getEnrollLink tr =
        , ( 65641 , "http://micapps.gomedico.com/" )
        , ( 79987 , "http://micapps.gomedico.com/" )
        ]
-    href = Dict.get tr.naic dd
+    
   in
-    case href of
-        Just str -> str
-        Nothing -> ""
+    Dict.get tr.naic dd
+ 
 
 makeEnrollButton : TableRow -> Html Msg
 makeEnrollButton tr =
   let
     link = getEnrollLink tr
+    linkString = case link of
+                     Just l -> l
+                     Nothing -> ""
+    disp = case link of
+               Just l -> True
+               Nothing -> False
   in
     a
-     [ class "button-primary", target "_blank", href link ]
+     [ class "button", target "_blank", href linkString, disabled disp ]
      [ text "Enroll" ]
 
 makeEnrollRow : (List TableRow) -> Html Msg

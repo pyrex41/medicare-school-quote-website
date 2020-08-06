@@ -8783,13 +8783,7 @@ var $author$project$Main$getEnrollLink = function (tr) {
 				_Utils_Tuple2(65641, 'http://micapps.gomedico.com/'),
 				_Utils_Tuple2(79987, 'http://micapps.gomedico.com/')
 			]));
-	var href = A2($elm$core$Dict$get, tr.B, dd);
-	if (!href.$) {
-		var str = href.a;
-		return str;
-	} else {
-		return '';
-	}
+	return A2($elm$core$Dict$get, tr.B, dd);
 };
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -8800,13 +8794,30 @@ var $elm$html$Html$Attributes$href = function (url) {
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$makeEnrollButton = function (tr) {
 	var link = $author$project$Main$getEnrollLink(tr);
+	var linkString = function () {
+		if (!link.$) {
+			var l = link.a;
+			return l;
+		} else {
+			return '';
+		}
+	}();
+	var disp = function () {
+		if (!link.$) {
+			var l = link.a;
+			return true;
+		} else {
+			return false;
+		}
+	}();
 	return A2(
 		$elm$html$Html$a,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('button-primary'),
+				$elm$html$Html$Attributes$class('button'),
 				$elm$html$Html$Attributes$target('_blank'),
-				$elm$html$Html$Attributes$href(link)
+				$elm$html$Html$Attributes$href(linkString),
+				$elm$html$Html$Attributes$disabled(disp)
 			]),
 		_List_fromArray(
 			[
