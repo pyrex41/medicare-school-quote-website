@@ -7957,7 +7957,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
 				$elm$html$Html$Attributes$class('button-primary'),
 				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
-				A2($elm$html$Html$Attributes$attribute, 'padding', '0 30px'),
+				A2($elm$html$Html$Attributes$attribute, 'margin', '1em'),
 				$elm$html$Html$Attributes$disabled(!model.aU)
 			]),
 		_List_fromArray(
@@ -7986,7 +7986,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
 				$elm$html$Html$Attributes$class('button-primary'),
 				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
-				A2($elm$html$Html$Attributes$attribute, 'padding', '0 30px'),
+				A2($elm$html$Html$Attributes$attribute, 'margin', '1em'),
 				$elm$html$Html$Attributes$disabled(!showEditPlans)
 			]),
 		_List_fromArray(
@@ -8000,7 +8000,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
 				$elm$html$Html$Attributes$class('button-primary'),
 				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
-				A2($elm$html$Html$Attributes$attribute, 'padding', '0 30px')
+				A2($elm$html$Html$Attributes$attribute, 'margin', '1em')
 			]),
 		_List_fromArray(
 			[

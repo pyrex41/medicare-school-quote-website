@@ -725,7 +725,7 @@ navBar model =
   let
     editInfoButton =
         button
-            [ onClick ShowSubmitForm, class "button-primary", style "width" "33.33333%", attribute "padding" "0 30px" ]
+            [ onClick ShowSubmitForm, class "button-primary", style "width" "33.33333%", attribute "margin" "1em" ]
             [ text "Edit Info" ]
             
     showEditPlans = case model.state of
@@ -736,11 +736,11 @@ navBar model =
                         Output -> True 
     editPlansButton =
        button
-            [ onClick ShowResults, class "button-primary", style "width" "33.33333%",  attribute "padding" "0 30px", disabled (not showEditPlans) ]
+            [ onClick ShowResults, class "button-primary", style "width" "33.33333%",  attribute  "margin" "1em", disabled (not showEditPlans) ]
             [ text "Edit Plans" ]
     showOutputButton =
        button
-            [ onClick ShowOutput, class "button-primary", style "width" "33.33333%", attribute "padding" "0 30px", disabled (not model.outputAvailable ) ]
+            [ onClick ShowOutput, class "button-primary", style "width" "33.33333%", attribute  "margin" "1em", disabled (not model.outputAvailable ) ]
             [ text "Results" ]
             
   in
