@@ -7949,21 +7949,34 @@ var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$navButton = F3(
+	function (msg, show, tx) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					A2($elm$html$Html$Attributes$style, 'width', '33.33333%')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$button,
+					_List_fromArray(
+						[
+							$elm$html$Html$Events$onClick(msg),
+							$elm$html$Html$Attributes$class('button-primary'),
+							$elm$html$Html$Attributes$class('u-width-full'),
+							A2($elm$html$Html$Attributes$attribute, 'margin', '1em'),
+							$elm$html$Html$Attributes$disabled(!show)
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(tx)
+						]))
+				]));
+	});
 var $author$project$Main$navBar = function (model) {
-	var showOutputButton = A2(
-		$elm$html$Html$button,
-		_List_fromArray(
-			[
-				$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-				$elm$html$Html$Attributes$class('button-primary'),
-				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
-				A2($elm$html$Html$Attributes$attribute, 'margin', '1em'),
-				$elm$html$Html$Attributes$disabled(!model.aU)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Results')
-			]));
+	var showOutputButton = A3($author$project$Main$navButton, $author$project$Main$ShowOutput, !model.aU, 'Results');
 	var showEditPlans = function () {
 		var _v0 = model.j;
 		switch (_v0.$) {
@@ -7979,33 +7992,8 @@ var $author$project$Main$navBar = function (model) {
 				return true;
 		}
 	}();
-	var editPlansButton = A2(
-		$elm$html$Html$button,
-		_List_fromArray(
-			[
-				$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-				$elm$html$Html$Attributes$class('button-primary'),
-				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
-				A2($elm$html$Html$Attributes$attribute, 'margin', '1em'),
-				$elm$html$Html$Attributes$disabled(!showEditPlans)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Edit Plans')
-			]));
-	var editInfoButton = A2(
-		$elm$html$Html$button,
-		_List_fromArray(
-			[
-				$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-				$elm$html$Html$Attributes$class('button-primary'),
-				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
-				A2($elm$html$Html$Attributes$attribute, 'margin', '1em')
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Edit Info')
-			]));
+	var editPlansButton = A3($author$project$Main$navButton, $author$project$Main$ShowResults, !showEditPlans, 'Edit Info');
+	var editInfoButton = A3($author$project$Main$navButton, $author$project$Main$ShowSubmitForm, true, 'Edit Info');
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(

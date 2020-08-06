@@ -720,29 +720,28 @@ variousViews model =
 
 -- Nav Buttons
 
+navButton : Msg -> Bool -> String -> Html Msg
+navButton msg show tx =
+    div [ style "width" "33.33333%" ]
+        [ button
+              [ onClick msg, class "button-primary", class "u-width-full", attribute "margin" "1em", disabled (not show) ]
+              [ text tx ]
+        ]
+
 navBar : Model -> Html Msg
 navBar model =
   let
-    editInfoButton =
-        button
-            [ onClick ShowSubmitForm, class "button-primary", style "width" "33.33333%", attribute "margin" "1em" ]
-            [ text "Edit Info" ]
-            
+    
+    editInfoButton = navButton ShowSubmitForm True "Edit Info"
+         
     showEditPlans = case model.state of
                         Failure _ -> False
                         Ready -> True
                         Loading -> True
                         Results -> True
                         Output -> True 
-    editPlansButton =
-       button
-            [ onClick ShowResults, class "button-primary", style "width" "33.33333%",  attribute  "margin" "1em", disabled (not showEditPlans) ]
-            [ text "Edit Plans" ]
-    showOutputButton =
-       button
-            [ onClick ShowOutput, class "button-primary", style "width" "33.33333%", attribute  "margin" "1em", disabled (not model.outputAvailable ) ]
-            [ text "Results" ]
-            
+    editPlansButton = navButton ShowResults (not showEditPlans) "Edit Info"
+    showOutputButton = navButton ShowOutput (not model.outputAvailable) "Results"
   in
       div [ class "row" ]
           [  div [ class "six columns", class "offset-by-three columns" ]
