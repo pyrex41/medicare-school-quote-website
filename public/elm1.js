@@ -9047,6 +9047,12 @@ var $author$project$Main$outputTable = F2(
 var $author$project$Main$ShowResults = {$: 30};
 var $author$project$Main$ShowSubmitForm = {$: 29};
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$personalInfo = function (model) {
@@ -9161,6 +9167,7 @@ var $author$project$Main$personalInfo = function (model) {
 											[
 												$elm$html$Html$Attributes$class('button'),
 												$elm$html$Html$Attributes$target('_blank'),
+												$elm$html$Html$Attributes$href(dentalLink),
 												A2($elm$html$Html$Attributes$style, 'width', '50%')
 											]),
 										_List_fromArray(
@@ -9173,6 +9180,7 @@ var $author$project$Main$personalInfo = function (model) {
 											[
 												$elm$html$Html$Attributes$class('button'),
 												$elm$html$Html$Attributes$target('_blank'),
+												$elm$html$Html$Attributes$href(docusignLink),
 												A2($elm$html$Html$Attributes$style, 'width', '50%')
 											]),
 										_List_fromArray(
