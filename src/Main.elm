@@ -725,7 +725,7 @@ navBar model =
   let
     editInfoButton =
         button
-            [ onClick ShowSubmitForm, class "button", style "width" "70%" ]
+            [ onClick ShowSubmitForm, class "button" ]
             [ text "Edit Info" ]
     showEditPlans = case model.state of
                         Failure _ -> False
@@ -735,17 +735,17 @@ navBar model =
                         Output -> True 
     editPlansButton =
         button
-            [ onClick ShowResults, class "button", style "width" "70%", disabled showEditPlans ]
+            [ onClick ShowResults, class "button", disabled showEditPlans ]
             [ text "Edit Plans" ]
     showOutputButton =
         button
-            [ onClick ShowOutput, class "button", style "width" "70%", disabled model.outputAvailable ]
+            [ onClick ShowOutput, class "button",  disabled (not model.outputAvailable ) ]
             [ text "Show Output" ]    
   in
       div [ class "row" ]
           [  div [ class "offset-by-three columns", class "two columns" ]
                  [ editInfoButton ]
-          , div [class "two columns" ]
+          , div [ class "two columns" ]
                  [ editPlansButton ]
           , div [ class "two columns" ]
                  [ showOutputButton ]

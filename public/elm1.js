@@ -7937,8 +7937,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$navBar = function (model) {
@@ -7948,8 +7946,7 @@ var $author$project$Main$navBar = function (model) {
 			[
 				$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
 				$elm$html$Html$Attributes$class('button'),
-				A2($elm$html$Html$Attributes$style, 'width', '70%'),
-				$elm$html$Html$Attributes$disabled(model.aU)
+				$elm$html$Html$Attributes$disabled(!model.aU)
 			]),
 		_List_fromArray(
 			[
@@ -7976,7 +7973,6 @@ var $author$project$Main$navBar = function (model) {
 			[
 				$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
 				$elm$html$Html$Attributes$class('button'),
-				A2($elm$html$Html$Attributes$style, 'width', '70%'),
 				$elm$html$Html$Attributes$disabled(showEditPlans)
 			]),
 		_List_fromArray(
@@ -7988,8 +7984,7 @@ var $author$project$Main$navBar = function (model) {
 		_List_fromArray(
 			[
 				$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-				$elm$html$Html$Attributes$class('button'),
-				A2($elm$html$Html$Attributes$style, 'width', '70%')
+				$elm$html$Html$Attributes$class('button')
 			]),
 		_List_fromArray(
 			[
@@ -8036,6 +8031,8 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$Main$RequestPDP = {$: 2};
 var $author$project$Main$SubmitForm = {$: 1};
 var $author$project$Main$SelectCounty = function (a) {
