@@ -48,7 +48,7 @@ type alias Model =
   , zip : ValidInt
   , counties : List String
   , county : Maybe String
-  , gender : String
+  , gender : Gender
   , tobacco : Bool
   , discounts : Bool
   , planN : Bool
@@ -119,6 +119,10 @@ type alias OutputQuote =
   , partBPremium : String
   }
 
+type Gender
+    = Male
+    | Female
+
 type ViewState
   = Failure Fail
   | Loading
@@ -143,7 +147,7 @@ init flags url key =
       , zip = ValidInt Nothing False "Please enter a 5-digit ZIP"
       , counties = [""]
       , county = Nothing
-      , gender = "M"
+      , gender = Male
       , tobacco = False
       , discounts = False
       , planN = False
@@ -358,12 +362,16 @@ update msg model =
           , Cmd.none
           )
 
-    SelectGender str ->
-      let
-        g = String.slice 0 1 str
-      in
-        ( validateModel { model | gender = g }
-        , Cmd.none )
+    SelectGender gender ->
+        let
+            lg = String.toLower gender
+            g = if lg == "female" then
+                    Female
+                else
+                    Male
+        in              
+            ( validateModel { model | gender = g }
+            , Cmd.none )
 
     SelectCounty str ->
       ( validateModel { model | county = Just str }
@@ -806,7 +814,7 @@ renderForm model func buttonLabel =
               , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) [ "two columns", "offset-by-four columns" ]
               , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
               , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns"] 0
-              , selectbox  "Gender" ["Male", "Female"] SelectGender [ "three columns", "offset-by-four columns"] 0
+              , genderselectbox  "Gender" model.gender SelectGender [ "three columns", "offset-by-four columns"] 0
               , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate [ "three columns", "offset-by-four columns"] 1
               , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  [ "four columns", "offset-by-four columns"]
               , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts [ "four columns", "offset-by-four columns"]
@@ -897,7 +905,7 @@ personalInfo model =
       Just v -> String.fromInt(v)
       Nothing -> ""
     dsc = if model.discounts then "Yes" else "No"
-    row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ model.gender ++ "   |   " ++ "Discount Applied: " ++ dsc
+    row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ (genderString model.gender) ++ "   |   " ++ "Discount Applied: " ++ dsc
   in
     div [ style "padding-top" "2.5em", style "padding-bottom" "2.5em" ]
       [ div [ class "row" ]
@@ -1092,6 +1100,44 @@ renderList lst =
     lst
        |> List.map (\l -> li [] [ text l ])
        |> ul []
+
+genderString : Gender -> String
+genderString gender =
+   case  gender of
+       Male -> "M"
+       Female -> "F"
+
+
+fullGenderString : Gender -> String
+fullGenderString gender =
+   case  gender of
+       Male -> "Male"
+       Female -> "Female"
+                 
+genderselectbox : String -> Gender -> (String -> Msg) -> List String -> Int -> Html Msg
+genderselectbox title_ selectedG handle class_ i =
+  let
+    cl = List.map (\a -> class a) class_
+    choices  = ["Male", "Female"]
+    nls = List.map
+            (\a -> option
+                    [ value a
+                    , selected <| a == (fullGenderString selectedG)
+                    ]
+                    [ text a ])
+            choices
+  in
+    div cl [
+      label
+        [ ]
+        [ text title_
+        , select
+          [ onInput handle
+          , class "u-full-width"
+          ]
+          nls
+        ]
+    ]
 
 
 selectbox : String -> List (String) -> (String -> Msg) -> List String -> Int -> Html Msg
@@ -1464,7 +1510,7 @@ getPlans model =
           ++ "zip=" ++ ( stringMaybeInt model.zip.value )
           ++ "&age=" ++ ( stringMaybeInt model.age.value )
           ++ "&county=" ++ ( strCounty model.county )
-          ++ "&gender=" ++ model.gender
+          ++ "&gender=" ++ (genderString model.gender)
           ++ "&tobacco=" ++ ( model.tobacco |> boolString )
           ++ "&discounts=" ++ ( model.discounts |> boolString )
           ++ "&date=" ++ ( strMaybeDate model.date )
