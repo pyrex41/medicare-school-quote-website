@@ -990,7 +990,7 @@ makeEnrollRow ls =
                     td [] [ makeEnrollButton a ]
                )
                ll
-      lb = [ td [] [ text "left" ] ]
+      lb = [ td [] [ text "" ] ]
   in
      tr [] <| lb ++ eb
        

@@ -8851,7 +8851,7 @@ var $author$project$Main$makeEnrollRow = function (ls) {
 			_List_Nil,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('left')
+					$elm$html$Html$text('')
 				]))
 		]);
 	var eb = A2(
