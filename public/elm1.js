@@ -8797,19 +8797,19 @@ var $author$project$Main$makeEnrollButton = function (tr) {
 	if (!_v0.$) {
 		var l = _v0.a;
 		return A2(
-			$elm$html$Html$button,
+			$elm$html$Html$a,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('button-primary')
+					$elm$html$Html$Attributes$href(l),
+					$elm$html$Html$Attributes$target('_blank')
 				]),
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$a,
+					$elm$html$Html$button,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$href(l),
-							$elm$html$Html$Attributes$target('_blank')
+							$elm$html$Html$Attributes$class('button-primary')
 						]),
 					_List_fromArray(
 						[

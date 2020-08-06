@@ -970,10 +970,10 @@ makeEnrollButton : TableRow -> Html Msg
 makeEnrollButton tr =
   case (getEnrollLink tr) of
     Just l ->
-        button
-          [ class "button-primary" ]
-          [ a
-             [ href l, target "_blank" ]
+        a
+          [ href l, target "_blank" ]
+          [ button
+             [ class "button-primary" ]
              [ text "Enroll" ]
           ]
     Nothing ->
