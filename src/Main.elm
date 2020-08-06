@@ -929,10 +929,51 @@ personalInfo model =
           ]
       ]
 
-makeEnrollButton : Html Msg
-makeEnrollButton =
+getEnrollLink : TableRow -> String
+getEnrollLink tr =
+  let
+    dd = Dict.fromList
+       [ ( 79413 , "https://www.uhcjarvis.com/content/jarvis/en/sign_in.html#/sign_in" )
+       , ( 12321 , "https://www.aetnaseniorproducts.com/" )
+       , ( 68500 , "https://www.aetnaseniorproducts.com/" )
+       , ( 72052 , "https://www.aetnaseniorproducts.com/" )
+       , ( 78700 , "https://www.aetnaseniorproducts.com/" )
+       , ( 47171 , "http://bluekc.com/" )
+       , ( 65722 , "http://agentviewcigna.com/" )
+       , ( 67369 , "http://agentviewcigna.com/" )
+       , ( 88366 , "http://agentviewcigna.com/" )
+       , ( 60219 , "https://www.humana.com/logon" )
+       , ( 70580 , "https://www.humana.com/logon" )
+       , ( 73288 , "https://www.humana.com/logon" )
+       , ( 13100 , "https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login" )
+       , ( 69868 , "https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login" )
+       , ( 71412 , "https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login" )
+       , ( 72850 , "https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login" )
+       , ( 66281 , "https://www.taagentnetinfo.com/login.aspx" )
+       , ( 86231 , "https://www.taagentnetinfo.com/login.aspx" )
+       , ( 10345 , "https://brokerportal.anthem.com/apps/ptb/login" )
+       , ( 28207 , "https://brokerportal.anthem.com/apps/ptb/login" )
+       , ( 62825 , "https://brokerportal.anthem.com/apps/ptb/login" )
+       , ( 95120 , "https://brokerportal.anthem.com/apps/ptb/login" )
+       , ( 52618 , "https://brokerportal.anthem.com/apps/ptb/login" )
+       , ( 71835 , "https://brokerportal.anthem.com/apps/ptb/login" )
+       , ( 31119 , "http://micapps.gomedico.com/" )
+       , ( 65641 , "http://micapps.gomedico.com/" )
+       , ( 79987 , "http://micapps.gomedico.com/" )
+       ]
+    href = Dict.get tr.naic dd
+  in
+    case href of
+        Just str -> str
+        Nothing -> ""
+
+makeEnrollButton : TableRow -> Html Msg
+makeEnrollButton tr =
+  let
+    link = getEnrollLink tr
+  in
     a
-     [ class "button", target "_blank", href "http://google.com", style "width" "80%" ]
+     [ class "button-primary", target "_blank", href link ]
      [ text "Enroll" ]
 
 makeEnrollRow : (List TableRow) -> Html Msg
@@ -941,7 +982,7 @@ makeEnrollRow ls =
       ll = List.filter .selected ls
       eb = List.map
                (\a ->
-                    td [] [ makeEnrollButton ]
+                    td [] [ makeEnrollButton a ]
                )
                ll
       lb = [ td [] [ text "left" ] ]

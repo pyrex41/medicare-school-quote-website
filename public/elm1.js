@@ -6475,7 +6475,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$PlanQuote = F5(
 	function (company, fRate, gRate, nRate, naic) {
-		return {au: company, aQ: fRate, aR: gRate, aT: nRate, D: naic};
+		return {au: company, aQ: fRate, aR: gRate, aT: nRate, B: naic};
 	});
 var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $elm$json$Json$Decode$map5 = _Json_map5;
@@ -6608,7 +6608,7 @@ var $author$project$Main$pdpFullString = function (pr) {
 };
 var $author$project$Main$TableRow = F9(
 	function (company, displayName, fRate, gRate, nRate, naic, selected, category, priority) {
-		return {a2: category, au: company, ax: displayName, aQ: fRate, aR: gRate, aT: nRate, D: naic, cM: priority, G: selected};
+		return {a2: category, au: company, ax: displayName, aQ: fRate, aR: gRate, aT: nRate, B: naic, cM: priority, G: selected};
 	});
 var $elm$core$List$any = F2(
 	function (isOkay, list) {
@@ -6856,11 +6856,11 @@ var $elm$core$Maybe$withDefault = F2(
 		}
 	});
 var $author$project$Main$planToRow = function (pq) {
-	var category = $author$project$Main$findCategory(pq.D);
+	var category = $author$project$Main$findCategory(pq.B);
 	var displayName = A2(
 		$elm$core$Maybe$withDefault,
 		pq.au,
-		A2($author$project$Main$findDisplayName, pq.D, category));
+		A2($author$project$Main$findDisplayName, pq.B, category));
 	var priority = function () {
 		switch (category) {
 			case 0:
@@ -6879,7 +6879,7 @@ var $author$project$Main$planToRow = function (pq) {
 		$author$project$Main$safeString(pq.aQ),
 		$author$project$Main$safeString(pq.aR),
 		$author$project$Main$safeString(pq.aT),
-		pq.D,
+		pq.B,
 		showRowInit,
 		category,
 		priority);
@@ -6887,7 +6887,7 @@ var $author$project$Main$planToRow = function (pq) {
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $author$project$Main$selectByNaic = F2(
 	function (ls, tablerow) {
-		return A2($elm$core$List$member, tablerow.D, ls) ? _Utils_update(
+		return A2($elm$core$List$member, tablerow.B, ls) ? _Utils_update(
 			tablerow,
 			{G: true}) : tablerow;
 	});
@@ -7087,7 +7087,7 @@ var $elm$time$Time$toYear = F2(
 	});
 var $author$project$Main$toggle = F2(
 	function (i, tablerow) {
-		return _Utils_eq(tablerow.D, i) ? _Utils_update(
+		return _Utils_eq(tablerow.B, i) ? _Utils_update(
 			tablerow,
 			{G: !tablerow.G}) : tablerow;
 	});
@@ -8739,6 +8739,58 @@ var $author$project$Main$currencyAddTwo = F2(
 	});
 var $elm$html$Html$hr = _VirtualDom_node('hr');
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $author$project$Main$getEnrollLink = function (tr) {
+	var dd = $elm$core$Dict$fromList(
+		_List_fromArray(
+			[
+				_Utils_Tuple2(79413, 'https://www.uhcjarvis.com/content/jarvis/en/sign_in.html#/sign_in'),
+				_Utils_Tuple2(12321, 'https://www.aetnaseniorproducts.com/'),
+				_Utils_Tuple2(68500, 'https://www.aetnaseniorproducts.com/'),
+				_Utils_Tuple2(72052, 'https://www.aetnaseniorproducts.com/'),
+				_Utils_Tuple2(78700, 'https://www.aetnaseniorproducts.com/'),
+				_Utils_Tuple2(47171, 'http://bluekc.com/'),
+				_Utils_Tuple2(65722, 'http://agentviewcigna.com/'),
+				_Utils_Tuple2(67369, 'http://agentviewcigna.com/'),
+				_Utils_Tuple2(88366, 'http://agentviewcigna.com/'),
+				_Utils_Tuple2(60219, 'https://www.humana.com/logon'),
+				_Utils_Tuple2(70580, 'https://www.humana.com/logon'),
+				_Utils_Tuple2(73288, 'https://www.humana.com/logon'),
+				_Utils_Tuple2(13100, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
+				_Utils_Tuple2(69868, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
+				_Utils_Tuple2(71412, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
+				_Utils_Tuple2(72850, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
+				_Utils_Tuple2(66281, 'https://www.taagentnetinfo.com/login.aspx'),
+				_Utils_Tuple2(86231, 'https://www.taagentnetinfo.com/login.aspx'),
+				_Utils_Tuple2(10345, 'https://brokerportal.anthem.com/apps/ptb/login'),
+				_Utils_Tuple2(28207, 'https://brokerportal.anthem.com/apps/ptb/login'),
+				_Utils_Tuple2(62825, 'https://brokerportal.anthem.com/apps/ptb/login'),
+				_Utils_Tuple2(95120, 'https://brokerportal.anthem.com/apps/ptb/login'),
+				_Utils_Tuple2(52618, 'https://brokerportal.anthem.com/apps/ptb/login'),
+				_Utils_Tuple2(71835, 'https://brokerportal.anthem.com/apps/ptb/login'),
+				_Utils_Tuple2(31119, 'http://micapps.gomedico.com/'),
+				_Utils_Tuple2(65641, 'http://micapps.gomedico.com/'),
+				_Utils_Tuple2(79987, 'http://micapps.gomedico.com/')
+			]));
+	var href = A2($elm$core$Dict$get, tr.B, dd);
+	if (!href.$) {
+		var str = href.a;
+		return str;
+	} else {
+		return '';
+	}
+};
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -8746,19 +8798,21 @@ var $elm$html$Html$Attributes$href = function (url) {
 		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $author$project$Main$makeEnrollButton = A2(
-	$elm$html$Html$a,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$class('button'),
-			$elm$html$Html$Attributes$target('_blank'),
-			$elm$html$Html$Attributes$href('http://google.com'),
-			A2($elm$html$Html$Attributes$style, 'width', '80%')
-		]),
-	_List_fromArray(
-		[
-			$elm$html$Html$text('Enroll')
-		]));
+var $author$project$Main$makeEnrollButton = function (tr) {
+	var link = $author$project$Main$getEnrollLink(tr);
+	return A2(
+		$elm$html$Html$a,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('button-primary'),
+				$elm$html$Html$Attributes$target('_blank'),
+				$elm$html$Html$Attributes$href(link)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Enroll')
+			]));
+};
 var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$html$Html$tr = _VirtualDom_node('tr');
 var $author$project$Main$makeEnrollRow = function (ls) {
@@ -8785,7 +8839,9 @@ var $author$project$Main$makeEnrollRow = function (ls) {
 				$elm$html$Html$td,
 				_List_Nil,
 				_List_fromArray(
-					[$author$project$Main$makeEnrollButton]));
+					[
+						$author$project$Main$makeEnrollButton(a)
+					]));
 		},
 		ll);
 	return A2(
@@ -9519,7 +9575,7 @@ var $author$project$Main$toRowAttrs = function (tablerow) {
 	return _List_fromArray(
 		[
 			$elm$html$Html$Events$onClick(
-			$author$project$Main$ToggleSelect(tablerow.D)),
+			$author$project$Main$ToggleSelect(tablerow.B)),
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
@@ -9953,7 +10009,7 @@ var $author$project$Main$renderResults = function (model) {
 				A2(
 					$elm$core$List$map,
 					function (a) {
-						return a.D;
+						return a.B;
 					},
 					sr));
 		} else {
