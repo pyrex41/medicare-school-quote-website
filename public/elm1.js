@@ -7910,6 +7910,14 @@ var $elm$html$Html$img = _VirtualDom_node('img');
 var $author$project$Main$ShowOutput = {$: 28};
 var $author$project$Main$ShowResults = {$: 30};
 var $author$project$Main$ShowSubmitForm = {$: 29};
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$html$Html$Attributes$boolProperty = F2(
@@ -7953,8 +7961,9 @@ var $author$project$Main$navBar = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-						$elm$html$Html$Attributes$class('button'),
+						$elm$html$Html$Attributes$class('button-primary'),
 						$elm$html$Html$Attributes$class('u-full-width'),
+						A2($elm$html$Html$Attributes$attribute, 'padding', '0 15px'),
 						$elm$html$Html$Attributes$disabled(!model.aU)
 					]),
 				_List_fromArray(
@@ -7990,8 +7999,9 @@ var $author$project$Main$navBar = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-						$elm$html$Html$Attributes$class('button'),
+						$elm$html$Html$Attributes$class('button-primary'),
 						$elm$html$Html$Attributes$class('u-full-width'),
+						A2($elm$html$Html$Attributes$attribute, 'padding', '0 15px'),
 						$elm$html$Html$Attributes$disabled(showEditPlans)
 					]),
 				_List_fromArray(
@@ -8012,7 +8022,8 @@ var $author$project$Main$navBar = function (model) {
 				_List_fromArray(
 					[
 						$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-						$elm$html$Html$Attributes$class('button')
+						$elm$html$Html$Attributes$class('button-primary'),
+						A2($elm$html$Html$Attributes$attribute, 'padding', '0 15px')
 					]),
 				_List_fromArray(
 					[

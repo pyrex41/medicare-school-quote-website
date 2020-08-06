@@ -726,7 +726,7 @@ navBar model =
     editInfoButton =
         div [ class "u-full-width" ]
             [ button
-                  [ onClick ShowSubmitForm, class "button" ]
+                  [ onClick ShowSubmitForm, class "button-primary", attribute "padding" "0 15px" ]
                   [ text "Edit Info" ]
             ]
     showEditPlans = case model.state of
@@ -738,13 +738,13 @@ navBar model =
     editPlansButton =
         div [ class "u-full-width" ]
             [ button
-                  [ onClick ShowResults, class "button", class "u-full-width",  disabled showEditPlans ]
+                  [ onClick ShowResults, class "button-primary", class "u-full-width",  attribute "padding" "0 15px", disabled showEditPlans ]
                   [ text "Edit Plans" ]
             ]
     showOutputButton =
         div [ class "u-full-width" ]
             [ button
-                  [ onClick ShowOutput, class "button",  class "u-full-width", disabled (not model.outputAvailable ) ]
+                  [ onClick ShowOutput, class "button-primary",  class "u-full-width", attribute "padding" "0 15px", disabled (not model.outputAvailable ) ]
                   [ text "Show Output" ]
             ]
   in
