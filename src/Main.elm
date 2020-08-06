@@ -971,10 +971,11 @@ makeEnrollButton tr =
   case (getEnrollLink tr) of
     Just l ->
         button
-          [ class "button-primary"
-          , attribute "onclick" ("window.location.href='" ++ l ++ "'")
+          [ class "button-primary" ]
+          [ a
+             [ href l, target "_blank" ]
+             [ text "Enroll" ]
           ]
-          [ text "Enroll" ]
     Nothing ->
         button
           [ class "button-primary", disabled True ]

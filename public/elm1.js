@@ -8738,14 +8738,7 @@ var $author$project$Main$currencyAddTwo = F2(
 		return (!b) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, a + b));
 	});
 var $elm$html$Html$hr = _VirtualDom_node('hr');
-var $elm$virtual_dom$VirtualDom$attribute = F2(
-	function (key, value) {
-		return A2(
-			_VirtualDom_attribute,
-			_VirtualDom_noOnOrFormAction(key),
-			_VirtualDom_noJavaScriptOrHtmlUri(value));
-	});
-var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$core$Dict$fromList = function (assocs) {
 	return A3(
 		$elm$core$List$foldl,
@@ -8792,6 +8785,13 @@ var $author$project$Main$getEnrollLink = function (tr) {
 			]));
 	return A2($elm$core$Dict$get, tr.B, dd);
 };
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$makeEnrollButton = function (tr) {
 	var _v0 = $author$project$Main$getEnrollLink(tr);
 	if (!_v0.$) {
@@ -8800,12 +8800,21 @@ var $author$project$Main$makeEnrollButton = function (tr) {
 			$elm$html$Html$button,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('button-primary'),
-					A2($elm$html$Html$Attributes$attribute, 'onclick', 'window.location.href=\'' + (l + '\''))
+					$elm$html$Html$Attributes$class('button-primary')
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('Enroll')
+					A2(
+					$elm$html$Html$a,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$href(l),
+							$elm$html$Html$Attributes$target('_blank')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Enroll')
+						]))
 				]));
 	} else {
 		return A2(
@@ -9169,15 +9178,7 @@ var $author$project$Main$outputTable = F2(
 	});
 var $author$project$Main$ShowResults = {$: 30};
 var $author$project$Main$ShowSubmitForm = {$: 29};
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
 var $elm$html$Html$strong = _VirtualDom_node('strong');
-var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
 		var _v2 = model.z.ad;
