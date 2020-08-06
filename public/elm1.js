@@ -7367,7 +7367,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aV: '/home'});
+					{aV: '/'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7987,7 +7987,7 @@ var $author$project$Main$navBar = function (model) {
 				$elm$html$Html$Attributes$class('button-primary'),
 				A2($elm$html$Html$Attributes$style, 'width', '33.33333%'),
 				A2($elm$html$Html$Attributes$attribute, 'padding', '0 5px'),
-				$elm$html$Html$Attributes$disabled(showEditPlans)
+				$elm$html$Html$Attributes$disabled(!showEditPlans)
 			]),
 		_List_fromArray(
 			[

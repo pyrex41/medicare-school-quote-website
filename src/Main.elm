@@ -253,7 +253,7 @@ update msg model =
     ShowSubmitForm ->
       let
         curl = model.url
-        nurl = { curl | path = "/home" }
+        nurl = { curl | path = "/" }
       in
         ( { model | url = nurl
                   , state = Ready }
@@ -736,7 +736,7 @@ navBar model =
                         Output -> True 
     editPlansButton =
        button
-            [ onClick ShowResults, class "button-primary", style "width" "33.33333%",  attribute "padding" "0 5px", disabled showEditPlans ]
+            [ onClick ShowResults, class "button-primary", style "width" "33.33333%",  attribute "padding" "0 5px", disabled (not showEditPlans) ]
             [ text "Edit Plans" ]
     showOutputButton =
        button
