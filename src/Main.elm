@@ -1073,20 +1073,20 @@ outputTable model pt =
         grandTotalRow = simpleTotalRow "Grand Monthly Total" [ class "out-td" ] grandTotal
         enrollRow = makeEnrollRow tr
       in
-        div []
-            [ table [ class "u-full-width"
-                    , id "output-table"
+        div [ class "twelve columns", attribute "overflow" "hidden", attribute "overflow-x" "scroll" ]
+            [ table [ id "output-table" ]
+                    
+                    [ thead [ ] [ companyNames ]
+                    , tbody [ ]
+                    
+                        [ rateRow
+                        , pdpRow
+                        , insuranceTotalRow
+                        , partBRow
+                        , grandTotalRow
+                        , enrollRow
+                        ]
                     ]
-                [ thead [ ] [ companyNames ]
-                , tbody [ ]
-                  [ rateRow
-                  , pdpRow
-                  , insuranceTotalRow
-                  , partBRow
-                  , grandTotalRow
-                  , enrollRow
-                  ]
-                ]
             , hr [] []
             ]
     Nothing -> text "No Output Available"

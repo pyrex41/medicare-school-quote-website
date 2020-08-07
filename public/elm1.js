@@ -9213,14 +9213,18 @@ var $author$project$Main$outputTable = F2(
 					vr));
 			return A2(
 				$elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('twelve columns'),
+						A2($elm$html$Html$Attributes$attribute, 'overflow', 'hidden'),
+						A2($elm$html$Html$Attributes$attribute, 'overflow-x', 'scroll')
+					]),
 				_List_fromArray(
 					[
 						A2(
 						$elm$html$Html$table,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width'),
 								$elm$html$Html$Attributes$id('output-table')
 							]),
 						_List_fromArray(
