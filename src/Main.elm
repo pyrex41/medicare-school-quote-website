@@ -902,7 +902,12 @@ renderResults model =
                 [ checkbox "Category C" model.viewPreferred ToggleOutside ["two columns"] ]
           ]
       , div [ class "row" ]
-          [ div [ class "four columns", class "offset-by-six columns", style "padding-top" "1.2em" ]
+          [ div [ class "six columns", class "offset-by-one column", style "padding-top" "1.2em" ]
+              [ button
+                  [ onClick ShowOutput, class "button-primary", style "display" "block" ]
+                  [ text "Show Output" ]
+              ]
+          , div [ class "four columns", class "offset-by-six columns", style "padding-top" "1.2em" ]
             [ button
               [ onClick (SelectAll naicShow), class "button", style "width" "50%" ]
               [ text "Select All" ]
@@ -920,11 +925,6 @@ renderResults model =
                   Table.view config model.tableState []
             ]
           ]
-      , div [ class "four columns", class "offset-by-four column", style "padding-top" "1.2em" ]
-              [ button
-                  [ onClick ShowOutput, class "button-primary", style "display" "block" ]
-                  [ text "Show Output" ]
-              ]
       ]
 
 renderOutput : Model -> Html Msg
