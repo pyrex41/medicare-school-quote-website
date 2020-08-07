@@ -58,16 +58,16 @@ input[type="button"] {
 button-nav:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
-input[type="button"]:hover,
-.button-nav:focus,
-button-nav:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus,
-input[type="button"]:focus {
+input[type="button"]:hover {
   color: #4a4542;
   border-color: #ffbf63;
   background-color: #ffbf63;
   outline: 0; }
+.button-nav:focus,
+button-nav:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus 
 .button-nav:disabled,
 button-nav:disabled,
 input[type="submit"]:disabled,
