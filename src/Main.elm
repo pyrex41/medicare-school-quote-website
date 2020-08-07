@@ -708,14 +708,23 @@ variousViews model =
 
 
     Results ->
-      div [ ]
-        [ renderResults model ]
+      if model.outputAvailable then
+        div [] [ renderResults model ]
+      else
+        div [ class "row" ]
+            [ div [ class "six columns", class "offset-by-three columns" ]
+                  [ text "Please Submit Data First" ]
+            ]
 
 
     Output ->
-      div [ ]
-          [ renderOutput model ]
-
+      if model.outputAvailable then
+        div [] [ renderOutput model ]
+      else
+        div [ class "row" ]
+            [ div [ class "six columns", class "offset-by-three columns" ]
+                  [ text "Please Submit Data First" ]
+            ]
 
 
               
