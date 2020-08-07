@@ -10181,30 +10181,8 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('six columns'),
-								$elm$html$Html$Attributes$class('offset-by-one column'),
-								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-										$elm$html$Html$Attributes$class('button-primary'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Show Output')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
 								$elm$html$Html$Attributes$class('four columns'),
+								$elm$html$Html$Attributes$class('offset-by-six columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(
@@ -10261,6 +10239,29 @@ var $author$project$Main$renderResults = function (model) {
 									return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.ab, _List_Nil);
 								}
 							}()
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('eleven columns'),
+						$elm$html$Html$Attributes$class('offset-by-one column'),
+						A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+								$elm$html$Html$Attributes$class('button-primary'),
+								A2($elm$html$Html$Attributes$style, 'display', 'block')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Show Output')
 							]))
 					]))
 			]));
