@@ -726,8 +726,7 @@ variousViews model =
 navButton : List String -> Msg -> String -> Html Msg
 navButton clist msg tx =
   let
-    clist_ = [ "two columns" ] ++ clist
-    classList = List.map (\a -> class a) clist_
+    classList = List.map (\a -> class a) <| [ "two columns" ] ++ clist
   in              
     div classList
         [ button

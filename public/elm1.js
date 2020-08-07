@@ -7947,16 +7947,15 @@ var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Main$navButton = F3(
 	function (clist, msg, tx) {
-		var clist_ = _Utils_ap(
-			_List_fromArray(
-				['two columns']),
-			clist);
 		var classList = A2(
 			$elm$core$List$map,
 			function (a) {
 				return $elm$html$Html$Attributes$class(a);
 			},
-			clist_);
+			_Utils_ap(
+				_List_fromArray(
+					['two columns']),
+				clist));
 		return A2(
 			$elm$html$Html$div,
 			classList,
