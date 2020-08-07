@@ -7953,9 +7953,7 @@ var $author$project$Main$navButton = F2(
 					_List_fromArray(
 						[
 							$elm$html$Html$Events$onClick(msg),
-							$elm$html$Html$Attributes$class('button-primary'),
-							A2($elm$html$Html$Attributes$attribute, 'display', 'block'),
-							A2($elm$html$Html$Attributes$attribute, 'width', '100%'),
+							$elm$html$Html$Attributes$class('button-nav'),
 							A2($elm$html$Html$Attributes$attribute, 'margin', '1em')
 						]),
 					_List_fromArray(
