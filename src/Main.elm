@@ -720,9 +720,13 @@ variousViews model =
 
 -- Nav Buttons
 
-navButton : Msg -> String -> Html Msg
-navButton msg tx =
-    div [ class "two columns" ]
+navButton : List String -> Msg -> String -> Html Msg
+navButton clist msg tx =
+  let
+    clist_ = [ "two columns" ] ++ clist
+    classList = List.map (\a -> class a) clist_
+  in              
+    div classList
         [ button
               [ onClick msg, class "button-nav", attribute "margin" "1em" ]
               [ text tx ]
@@ -731,9 +735,9 @@ navButton msg tx =
 navBar : Model -> Html Msg
 navBar model =
   div [ class "row" ]
-    [ navButton ShowSubmitForm "Edit Info"
-    , navButton ShowResults "Edit Plans"
-    , navButton ShowOutput "Results"
+    [ navButton [ "offset-by-three columns" ] ShowSubmitForm "Edit Info"
+    , navButton [] ShowResults "Edit Plans"
+    , navButton [] ShowOutput "Results"
     ]
 
 -- Model Validations

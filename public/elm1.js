@@ -7938,14 +7938,21 @@ var $elm$html$Html$Events$onClick = function (msg) {
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$navButton = F2(
-	function (msg, tx) {
+var $author$project$Main$navButton = F3(
+	function (clist, msg, tx) {
+		var clist_ = _Utils_ap(
+			_List_fromArray(
+				['two columns']),
+			clist);
+		var classList = A2(
+			$elm$core$List$map,
+			function (a) {
+				return $elm$html$Html$Attributes$class(a);
+			},
+			clist_);
 		return A2(
 			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('two columns')
-				]),
+			classList,
 			_List_fromArray(
 				[
 					A2(
@@ -7971,9 +7978,14 @@ var $author$project$Main$navBar = function (model) {
 			]),
 		_List_fromArray(
 			[
-				A2($author$project$Main$navButton, $author$project$Main$ShowSubmitForm, 'Edit Info'),
-				A2($author$project$Main$navButton, $author$project$Main$ShowResults, 'Edit Plans'),
-				A2($author$project$Main$navButton, $author$project$Main$ShowOutput, 'Results')
+				A3(
+				$author$project$Main$navButton,
+				_List_fromArray(
+					['offset-by-three columns']),
+				$author$project$Main$ShowSubmitForm,
+				'Edit Info'),
+				A3($author$project$Main$navButton, _List_Nil, $author$project$Main$ShowResults, 'Edit Plans'),
+				A3($author$project$Main$navButton, _List_Nil, $author$project$Main$ShowOutput, 'Results')
 			]));
 };
 var $elm$html$Html$Attributes$src = function (url) {
