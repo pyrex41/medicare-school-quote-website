@@ -9379,39 +9379,6 @@ var $author$project$Main$personalInfo = function (model) {
 											[
 												$elm$html$Html$text('Docusign')
 											]))
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick($author$project$Main$ShowSubmitForm),
-												$elm$html$Html$Attributes$class('button'),
-												A2($elm$html$Html$Attributes$style, 'width', '50%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Edit Info')
-											])),
-										A2(
-										$elm$html$Html$button,
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick($author$project$Main$ShowResults),
-												$elm$html$Html$Attributes$class('button'),
-												A2($elm$html$Html$Attributes$style, 'width', '50%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Edit Plans')
-											]))
 									]))
 							]))
 					]))
@@ -9760,7 +9727,7 @@ var $author$project$Main$pdpSelectBox = F3(
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('six columns'),
-						$elm$html$Html$Attributes$class('offset-by-one column')
+						$elm$html$Html$Attributes$class('offset-by-three column')
 					]),
 				_List_fromArray(
 					[
@@ -10149,21 +10116,21 @@ var $author$project$Main$renderResults = function (model) {
 								model.aK,
 								$author$project$Main$TogglePreferred,
 								_List_fromArray(
-									['u-full-width'])),
+									['one column'])),
 								A4(
 								$author$project$Main$checkbox,
 								'B',
 								model.aI,
 								$author$project$Main$ToggleNonPreferred,
 								_List_fromArray(
-									['u-full-width'])),
+									['one column'])),
 								A4(
 								$author$project$Main$checkbox,
 								'C',
 								model.aJ,
 								$author$project$Main$ToggleOutside,
 								_List_fromArray(
-									['u-full-width']))
+									['one column']))
 							]))
 					])),
 				A2(

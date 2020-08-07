@@ -891,9 +891,9 @@ renderResults model =
         [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
-              [ checkbox "A" model.viewPreferred TogglePreferred ["u-full-width"]
-              , checkbox "B" model.viewNonpreferred ToggleNonPreferred ["u-full-width"]
-              , checkbox "C" model.viewOutside ToggleOutside ["u-full-width"]
+              [ checkbox "A" model.viewPreferred TogglePreferred ["one column"]
+              , checkbox "B" model.viewNonpreferred ToggleNonPreferred ["one column"]
+              , checkbox "C" model.viewOutside ToggleOutside ["one column"]
               ]
           ]
       , div [ class "row" ]
@@ -965,10 +965,6 @@ personalInfo model =
               [ div [ class "row" ]
                 [ a [ class "button", target "_blank", href dentalLink, style "width" "50%" ] [ text "Dental Quote" ]
                 , a [ class "button", target "_blank", href docusignLink, style "width" "50%" ] [ text "Docusign" ]
-                ]
-              , div [ class "row" ] 
-                [ button [ onClick ShowSubmitForm, class "button", style "width" "50%" ] [ text "Edit Info" ]
-                , button [ onClick ShowResults, class "button", style "width" "50%" ] [ text "Edit Plans" ]
                 ]
               ]
           ]
@@ -1335,7 +1331,7 @@ pdpSelectBox : Maybe (List PdpRecord) -> Maybe PdpRecord -> (String -> Msg) -> H
 pdpSelectBox mplist selectedPdp handle =
   case mplist of
     Just plist ->
-      div [class "six columns", class "offset-by-one column" ] [
+      div [class "six columns", class "offset-by-three column" ] [
         label
           [ ]
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
