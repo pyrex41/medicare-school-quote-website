@@ -7954,6 +7954,7 @@ var $author$project$Main$navButton = F2(
 						[
 							$elm$html$Html$Events$onClick(msg),
 							$elm$html$Html$Attributes$class('button-primary'),
+							A2($elm$html$Html$Attributes$attribute, 'display', 'block'),
 							A2($elm$html$Html$Attributes$attribute, 'width', '100%'),
 							A2($elm$html$Html$Attributes$attribute, 'margin', '1em')
 						]),

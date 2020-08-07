@@ -724,7 +724,7 @@ navButton : Msg -> String -> Html Msg
 navButton msg tx =
     div [ class "two columns" ]
         [ button
-              [ onClick msg, class "button-primary", attribute "width" "100%", attribute "margin" "1em" ]
+              [ onClick msg, class "button-primary", attribute "display" "block", attribute "width" "100%", attribute "margin" "1em" ]
               [ text tx ]
         ]
 
