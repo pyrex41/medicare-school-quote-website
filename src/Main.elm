@@ -720,34 +720,21 @@ variousViews model =
 
 -- Nav Buttons
 
-navButton : Msg -> Bool -> String -> Html Msg
-navButton msg show tx =
+navButton : Msg -> String -> Html Msg
+navButton msg tx =
     div [ class "two columns" ]
         [ button
-              [ onClick msg, class "button-primary", attribute "margin" "1em", disabled (not show) ]
+              [ onClick msg, class "button-primary", attribute "width" "100%", attribute "margin" "1em" ]
               [ text tx ]
         ]
 
 navBar : Model -> Html Msg
 navBar model =
-  let
-    
-    editInfoButton = navButton ShowSubmitForm True "Edit Info"
-         
-    showEditPlans = case model.state of
-                        Failure _ -> False
-                        Ready -> False
-                        Loading -> True
-                        Results -> True
-                        Output -> True 
-    editPlansButton = navButton ShowResults (not showEditPlans) "Edit Plans"
-    showOutputButton = navButton ShowOutput (not model.outputAvailable) "Results"
-  in
-      div [ class "row" ]
-          [ editInfoButton
-          , editPlansButton
-          , showOutputButton
-          ]
+  div [ class "row" ]
+    [ navButton ShowSubmitForm "Edit Info"
+    , navButton ShowResults "Edit Plans"
+    , navButton ShowOutput "Results"
+    ]
 
 -- Model Validations
 
