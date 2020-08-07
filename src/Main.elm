@@ -1073,7 +1073,7 @@ outputTable model pt =
         grandTotalRow = simpleTotalRow "Grand Monthly Total" [ class "out-td" ] grandTotal
         enrollRow = makeEnrollRow tr
       in
-        div [ class "twelve columns", attribute "overflow" "hidden", attribute "overflow-x" "scroll" ]
+        div [ class "twelve columns", style "overflow" "hidden", style "overflow-x" "scroll" ]
             [ table [ id "output-table" ]
                     
                     [ thead [ ] [ companyNames ]

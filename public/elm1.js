@@ -9216,8 +9216,8 @@ var $author$project$Main$outputTable = F2(
 				_List_fromArray(
 					[
 						$elm$html$Html$Attributes$class('twelve columns'),
-						A2($elm$html$Html$Attributes$attribute, 'overflow', 'hidden'),
-						A2($elm$html$Html$Attributes$attribute, 'overflow-x', 'scroll')
+						A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
+						A2($elm$html$Html$Attributes$style, 'overflow-x', 'scroll')
 					]),
 				_List_fromArray(
 					[
