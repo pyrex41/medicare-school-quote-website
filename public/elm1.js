@@ -7953,7 +7953,7 @@ var $author$project$Main$navButton = F3(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('u-full-width')
+					$elm$html$Html$Attributes$class('two columns')
 				]),
 			_List_fromArray(
 				[

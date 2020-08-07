@@ -722,7 +722,7 @@ variousViews model =
 
 navButton : Msg -> Bool -> String -> Html Msg
 navButton msg show tx =
-    div [ class "u-full-width" ]
+    div [ class "two columns" ]
         [ button
               [ onClick msg, class "button-primary", attribute "margin" "1em", disabled (not show) ]
               [ text tx ]
