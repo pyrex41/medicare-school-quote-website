@@ -39,7 +39,7 @@ input[type="button"] {
   display: block;
   height: 38px;
   width: 100%;
-  padding: 0 30px;
+  padding: 0 10px;
   color: #d1bdb2;
   text-align: center;
   font-size: 11px;
@@ -65,8 +65,8 @@ input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
   color: #4a4542;
-  border-color: #36b2a1;
-  background-color: #36b2a1;
+  border-color: #ffbf63;
+  background-color: #ffbf63;
   outline: 0; }
 .button-nav:disabled,
 button-nav:disabled,
