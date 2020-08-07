@@ -8042,19 +8042,12 @@ var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$checkbox = F4(
 	function (title_, fvalue, handle, class_) {
-		var cl_ = A2(
+		var cl = A2(
 			$elm$core$List$map,
 			function (a) {
 				return $elm$html$Html$Attributes$class(a);
 			},
 			class_);
-		var cl = _Utils_ap(
-			cl_,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'display', 'flex'),
-					A2($elm$html$Html$Attributes$style, 'align-items', 'center')
-				]));
 		return A2(
 			$elm$html$Html$div,
 			cl,
@@ -10113,31 +10106,67 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-three column')
+								$elm$html$Html$Attributes$class('offset-by-one column')
 							]),
 						_List_fromArray(
 							[
 								A4(
 								$author$project$Main$checkbox,
-								'A',
+								'Category A',
 								model.ae,
 								$author$project$Main$TogglePreferred,
 								_List_fromArray(
-									['one columns'])),
+									['two columns']))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('offset-by-one column')
+							]),
+						_List_fromArray(
+							[
 								A4(
 								$author$project$Main$checkbox,
-								'B',
+								'Category B',
 								model.ae,
 								$author$project$Main$ToggleNonPreferred,
 								_List_fromArray(
-									['one columns'])),
+									['two columns']))
+							]))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('row')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('offset-by-one column')
+							]),
+						_List_fromArray(
+							[
 								A4(
 								$author$project$Main$checkbox,
-								'C',
+								'Category C',
 								model.ae,
 								$author$project$Main$ToggleOutside,
 								_List_fromArray(
-									['one columns']))
+									['two columns']))
 							]))
 					])),
 				A2(
