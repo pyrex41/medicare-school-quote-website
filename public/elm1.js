@@ -10205,7 +10205,6 @@ var $author$project$Main$renderResults = function (model) {
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('four columns'),
-								$elm$html$Html$Attributes$class('offset-by-six columns'),
 								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
 							]),
 						_List_fromArray(

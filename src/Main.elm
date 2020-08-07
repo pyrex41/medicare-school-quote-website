@@ -907,7 +907,7 @@ renderResults model =
                   [ onClick ShowOutput, class "button-primary", style "display" "block" ]
                   [ text "Show Output" ]
               ]
-          , div [ class "four columns", class "offset-by-six columns", style "padding-top" "1.2em" ]
+          , div [ class "four columns", style "padding-top" "1.2em" ]
             [ button
               [ onClick (SelectAll naicShow), class "button", style "width" "50%" ]
               [ text "Select All" ]
