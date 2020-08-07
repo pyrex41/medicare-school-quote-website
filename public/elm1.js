@@ -10113,7 +10113,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-five column')
+								$elm$html$Html$Attributes$class('offset-by-three column')
 							]),
 						_List_fromArray(
 							[
@@ -10123,57 +10123,21 @@ var $author$project$Main$renderResults = function (model) {
 								model.ae,
 								$author$project$Main$TogglePreferred,
 								_List_fromArray(
-									['two columns']))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-five column')
-							]),
-						_List_fromArray(
-							[
+									['one columns'])),
 								A4(
 								$author$project$Main$checkbox,
 								'B',
 								model.ae,
 								$author$project$Main$ToggleNonPreferred,
 								_List_fromArray(
-									['two columns']))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-five column')
-							]),
-						_List_fromArray(
-							[
+									['one columns'])),
 								A4(
 								$author$project$Main$checkbox,
 								'C',
 								model.ae,
 								$author$project$Main$ToggleOutside,
 								_List_fromArray(
-									['two columns']))
+									['one columns']))
 							]))
 					])),
 				A2(
