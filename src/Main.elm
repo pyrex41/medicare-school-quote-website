@@ -890,11 +890,16 @@ renderResults model =
       [ div [ class "row" ]
         [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
-          [ div [ class "offset-by-one column" ]
-              [ checkbox "A" model.viewPreferred TogglePreferred ["one column"]
-              , checkbox "B" model.viewNonpreferred ToggleNonPreferred ["one column"]
-              , checkbox "C" model.viewOutside ToggleOutside ["one column"]
-              ]
+          [ div [ class "offset-by-five column" ]
+                [ checkbox "A" model.viewPreferred TogglePreferred ["two columns"] ]
+          ]
+      , div [ class "row" ]
+          [ div [ class "offset-by-five column" ]
+                [ checkbox "B" model.viewPreferred ToggleNonPreferred ["two columns"] ]
+          ]
+      , div [ class "row" ]
+          [ div [ class "offset-by-five column" ]
+                [ checkbox "C" model.viewPreferred ToggleOutside ["two columns"] ]
           ]
       , div [ class "row" ]
           [ div [ class "six columns", class "offset-by-one column", style "padding-top" "1.2em" ]
@@ -1357,7 +1362,8 @@ pdpSelectBox mplist selectedPdp handle =
 checkbox : String -> Bool -> Msg -> List String -> Html Msg
 checkbox title_ fvalue handle class_=
   let
-    cl = List.map (\a -> class a) class_
+    cl_ = List.map (\a -> class a) class_
+    cl = cl_ ++ [ style "display" "flex", style "align-items" "center" ] 
   in
       div cl [
         label
