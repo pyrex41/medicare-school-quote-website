@@ -736,11 +736,11 @@ navBar model =
          
     showEditPlans = case model.state of
                         Failure _ -> False
-                        Ready -> True
+                        Ready -> False
                         Loading -> True
                         Results -> True
                         Output -> True 
-    editPlansButton = navButton ShowResults (not showEditPlans) "Edit Info"
+    editPlansButton = navButton ShowResults (not showEditPlans) "Edit Plans"
     showOutputButton = navButton ShowOutput (not model.outputAvailable) "Results"
   in
       div [ class "row" ]

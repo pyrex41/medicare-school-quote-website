@@ -7980,7 +7980,7 @@ var $author$project$Main$navBar = function (model) {
 			case 0:
 				return false;
 			case 2:
-				return true;
+				return false;
 			case 1:
 				return true;
 			case 3:
@@ -7989,7 +7989,7 @@ var $author$project$Main$navBar = function (model) {
 				return true;
 		}
 	}();
-	var editPlansButton = A3($author$project$Main$navButton, $author$project$Main$ShowResults, !showEditPlans, 'Edit Info');
+	var editPlansButton = A3($author$project$Main$navButton, $author$project$Main$ShowResults, !showEditPlans, 'Edit Plans');
 	var editInfoButton = A3($author$project$Main$navButton, $author$project$Main$ShowSubmitForm, true, 'Edit Info');
 	return A2(
 		$elm$html$Html$div,
