@@ -633,13 +633,15 @@ view model =
   , body =
       [ div [ class "container"
             ]
-        [ img [ src "images/logo.png"
-              , style "max-width" "500px"
-              , style "height" "auto"
-              , style "margin" "auto"
-              , style "display" "block"
-              ]
-              [  ]
+        [ a [ href "/" ]
+            [  img [ src "images/logo.png"
+                   , style "max-width" "400px"
+                   , style "height" "auto"
+                   , style "margin" "auto"
+                   , style "display" "block"
+                   ]
+                   [  ]
+            ]       
         , navBar model
         , variousViews model
         ]

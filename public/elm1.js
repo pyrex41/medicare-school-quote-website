@@ -7896,6 +7896,7 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 		}
 	});
+var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7906,6 +7907,12 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $author$project$Main$ShowOutput = {$: 28};
 var $author$project$Main$ShowResults = {$: 30};
@@ -8804,7 +8811,6 @@ var $author$project$Main$currencyAddTwo = F2(
 		return (!b) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, a + b));
 	});
 var $elm$html$Html$hr = _VirtualDom_node('hr');
-var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$core$Dict$fromList = function (assocs) {
 	return A3(
 		$elm$core$List$foldl,
@@ -8850,12 +8856,6 @@ var $author$project$Main$getEnrollLink = function (tr) {
 				_Utils_Tuple2(79987, 'http://micapps.gomedico.com/')
 			]));
 	return A2($elm$core$Dict$get, tr.B, dd);
-};
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
 };
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$makeEnrollButton = function (tr) {
@@ -10380,16 +10380,25 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$img,
+						$elm$html$Html$a,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$src('images/logo.png'),
-								A2($elm$html$Html$Attributes$style, 'max-width', '500px'),
-								A2($elm$html$Html$Attributes$style, 'height', 'auto'),
-								A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-								A2($elm$html$Html$Attributes$style, 'display', 'block')
+								$elm$html$Html$Attributes$href('/')
 							]),
-						_List_Nil),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$src('images/logo.png'),
+										A2($elm$html$Html$Attributes$style, 'max-width', '400px'),
+										A2($elm$html$Html$Attributes$style, 'height', 'auto'),
+										A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+										A2($elm$html$Html$Attributes$style, 'display', 'block')
+									]),
+								_List_Nil)
+							])),
 						$author$project$Main$navBar(model),
 						$author$project$Main$variousViews(model)
 					]))
