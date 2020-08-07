@@ -8264,6 +8264,7 @@ var $author$project$Main$selectbox = F5(
 						]))
 				]));
 	});
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $author$project$Main$textbox = F5(
 	function (title_, placeholder_, fvalue, handle, classLs) {
@@ -8290,6 +8291,8 @@ var $author$project$Main$textbox = F5(
 								[
 									$elm$html$Html$Attributes$type_('text'),
 									$elm$html$Html$Attributes$class('u-full-width'),
+									$elm$html$Html$Attributes$id(
+									$elm$core$String$toLower(title_)),
 									$elm$html$Html$Attributes$placeholder(placeholder_),
 									$elm$html$Html$Attributes$value(fvalue),
 									$elm$html$Html$Events$onInput(handle)
@@ -9218,7 +9221,8 @@ var $author$project$Main$outputTable = F2(
 						$elm$html$Html$table,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('u-full-width')
+								$elm$html$Html$Attributes$class('u-full-width'),
+								$elm$html$Html$Attributes$id('output-table')
 							]),
 						_List_fromArray(
 							[
@@ -9777,7 +9781,8 @@ var $author$project$Main$pdpSelectBox = F3(
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onInput(handle),
-										$elm$html$Html$Attributes$class('u-full-width')
+										$elm$html$Html$Attributes$class('u-full-width'),
+										$elm$html$Html$Attributes$id('pdp-select')
 									]),
 								A2(
 									$elm$core$List$map,

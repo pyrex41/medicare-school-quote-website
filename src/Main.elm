@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Browser
 import Browser.Navigation as Nav
+-- import Browser.Dom as Dom
 import Url
 import Url.Builder
 import Url.Parser exposing (Parser, (</>), oneOf)
@@ -1058,7 +1059,7 @@ outputTable model pt =
       in
         div []
             [ table [ class "u-full-width"
-
+                    , id "output-table"
                     ]
                 [ thead [ ] [ companyNames ]
                 , tbody [ ]
@@ -1323,7 +1324,7 @@ pdpSelectBox mplist selectedPdp handle =
           [ ]
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
           , select
-            [ onInput handle , class "u-full-width"]
+            [ onInput handle , class "u-full-width", id "pdp-select" ]
             ( List.map
                 (pdpOption selectedPdp)
                 plist
@@ -1363,7 +1364,7 @@ textbox title_ placeholder_ fvalue handle classLs =
       label
         [ ]
         [ text title_
-        , input [ type_ "text", class "u-full-width", placeholder placeholder_, value fvalue, onInput handle ] []
+        , input [ type_ "text", class "u-full-width", id (String.toLower title_), placeholder placeholder_, value fvalue, onInput handle ] []
         ]
     ]
 
