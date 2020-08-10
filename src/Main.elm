@@ -848,33 +848,34 @@ renderForm model func buttonLabel =
             ]
             [ text "Submit" ]
   in
-    div [
-        ]
-        [ Html.form
-          [ onSubmit func
-          ]
-          ( List.map
-              (\a -> (div [ class "row" ] [ a ] ) )
-              [ textbox  "Name" "John Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
-              , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) [ "two columns", "offset-by-four columns" ]
-              , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
-              , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns"] 0
-              , genderselectbox  "Gender" model.gender SelectGender [ "three columns", "offset-by-four columns"] 0
-              , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate [ "three columns", "offset-by-four columns"] 1
-              , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  [ "four columns", "offset-by-four columns"]
-              , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts [ "four columns", "offset-by-four columns"]
-              , div [ class "four columns", class "offset-by-four columns" ] [ h5 [ class "u-full-width", style "margin-top" "1rem" ] [ text "Which Plans?" ] ]
-              , checkbox "Plan G" model.planG ToggleG [ "four columns", "offset-by-four columns"]
-              , checkbox "Plan N" model.planN ToggleN [ "four columns", "offset-by-four columns"]
-              , checkbox "Plan F" model.planF ToggleF [ "four columns", "offset-by-four columns"]
-              , div [ class "row" ]
-                  [ div
-                    [ class "four columns", class "offset-by-four columns" ]
-                      [ submitButton ]
+    div [ ]
+        [ div [ ]
+              [ Html.form
+                  [ onSubmit func
                   ]
-              ]
-          )
-        ]
+                  ( List.map
+                      (\a -> (div [ class "row" ] [ a ] ) )
+                      [ textbox  "Name" "John Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
+                      , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) [ "two columns", "offset-by-four columns" ]
+                      , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
+                      , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns"] 0
+                      , genderselectbox  "Gender" model.gender SelectGender [ "three columns", "offset-by-four columns"] 0
+                      , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate [ "three columns", "offset-by-four columns"] 1
+                      , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  [ "four columns", "offset-by-four columns"]
+                      , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts [ "four columns", "offset-by-four columns"]
+                      , div [ class "four columns", class "offset-by-four columns" ] [ h5 [ class "u-full-width", style "margin-top" "1rem" ] [ text "Which Plans?" ] ]
+                      , checkbox "Plan G" model.planG ToggleG [ "four columns", "offset-by-four columns"]
+                      , checkbox "Plan N" model.planN ToggleN [ "four columns", "offset-by-four columns"]
+                      , checkbox "Plan F" model.planF ToggleF [ "four columns", "offset-by-four columns"]
+                      , div [ class "row" ]
+                          [ div
+                            [ class "four columns", class "offset-by-four columns" ]
+                              [ submitButton ]
+                          ]
+                      ]
+                  )
+                ]
+          ]
 
 renderResults : Model -> Html Msg
 renderResults model =

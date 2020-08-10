@@ -8428,139 +8428,94 @@ var $author$project$Main$renderForm = F3(
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$form,
+					$elm$html$Html$div,
+					_List_Nil,
 					_List_fromArray(
 						[
-							$elm$html$Html$Events$onSubmit(func)
-						]),
-					A2(
-						$elm$core$List$map,
-						function (a) {
-							return A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[a]));
-						},
-						_List_fromArray(
-							[
-								A5(
-								$author$project$Main$textbox,
-								'Name',
-								'John Smith',
-								model.U,
-								$author$project$Main$SetName,
-								_List_fromArray(
-									['four columns', 'offset-by-four columns'])),
-								A6(
-								$author$project$Main$textboxCheck,
-								'Age',
-								'65',
-								model.I,
-								$author$project$Main$SetAge,
-								$author$project$Main$validateVI(model.I),
-								_List_fromArray(
-									['two columns', 'offset-by-four columns'])),
-								A6(
-								$author$project$Main$textboxCheck,
-								'ZIP',
-								'12345',
-								model.z,
-								$author$project$Main$SetZip,
-								$author$project$Main$validateVI(model.z),
-								_List_fromArray(
-									['two columns', 'offset-by-four columns'])),
-								A5(
-								$author$project$Main$selectbox,
-								'County',
-								model.a9,
-								$author$project$Main$SelectCounty,
-								_List_fromArray(
-									['three columns', 'offset-by-four columns']),
-								0),
-								A5(
-								$author$project$Main$genderselectbox,
-								'Gender',
-								model.aC,
-								$author$project$Main$SelectGender,
-								_List_fromArray(
-									['three columns', 'offset-by-four columns']),
-								0),
-								A5(
-								$author$project$Main$selectbox,
-								'Effective Date',
-								A2($elm$core$List$map, $elm$core$Tuple$first, model.ay),
-								$author$project$Main$SelectDate,
-								_List_fromArray(
-									['three columns', 'offset-by-four columns']),
-								1),
-								A4(
-								$author$project$Main$checkbox,
-								'Tobacco User?',
-								model.aH,
-								$author$project$Main$ToggleTobacco,
-								_List_fromArray(
-									['four columns', 'offset-by-four columns'])),
-								A4(
-								$author$project$Main$checkbox,
-								'Apply Household Discount?',
-								model.ah,
-								$author$project$Main$ToggleDiscounts,
-								_List_fromArray(
-									['four columns', 'offset-by-four columns'])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('four columns'),
-										$elm$html$Html$Attributes$class('offset-by-four columns')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$h5,
+							A2(
+							$elm$html$Html$form,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onSubmit(func)
+								]),
+							A2(
+								$elm$core$List$map,
+								function (a) {
+									return A2(
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('u-full-width'),
-												A2($elm$html$Html$Attributes$style, 'margin-top', '1rem')
+												$elm$html$Html$Attributes$class('row')
 											]),
 										_List_fromArray(
-											[
-												$elm$html$Html$text('Which Plans?')
-											]))
-									])),
-								A4(
-								$author$project$Main$checkbox,
-								'Plan G',
-								model.X,
-								$author$project$Main$ToggleG,
-								_List_fromArray(
-									['four columns', 'offset-by-four columns'])),
-								A4(
-								$author$project$Main$checkbox,
-								'Plan N',
-								model.Y,
-								$author$project$Main$ToggleN,
-								_List_fromArray(
-									['four columns', 'offset-by-four columns'])),
-								A4(
-								$author$project$Main$checkbox,
-								'Plan F',
-								model.W,
-								$author$project$Main$ToggleF,
-								_List_fromArray(
-									['four columns', 'offset-by-four columns'])),
-								A2(
-								$elm$html$Html$div,
+											[a]));
+								},
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
+										A5(
+										$author$project$Main$textbox,
+										'Name',
+										'John Smith',
+										model.U,
+										$author$project$Main$SetName,
+										_List_fromArray(
+											['four columns', 'offset-by-four columns'])),
+										A6(
+										$author$project$Main$textboxCheck,
+										'Age',
+										'65',
+										model.I,
+										$author$project$Main$SetAge,
+										$author$project$Main$validateVI(model.I),
+										_List_fromArray(
+											['two columns', 'offset-by-four columns'])),
+										A6(
+										$author$project$Main$textboxCheck,
+										'ZIP',
+										'12345',
+										model.z,
+										$author$project$Main$SetZip,
+										$author$project$Main$validateVI(model.z),
+										_List_fromArray(
+											['two columns', 'offset-by-four columns'])),
+										A5(
+										$author$project$Main$selectbox,
+										'County',
+										model.a9,
+										$author$project$Main$SelectCounty,
+										_List_fromArray(
+											['three columns', 'offset-by-four columns']),
+										0),
+										A5(
+										$author$project$Main$genderselectbox,
+										'Gender',
+										model.aC,
+										$author$project$Main$SelectGender,
+										_List_fromArray(
+											['three columns', 'offset-by-four columns']),
+										0),
+										A5(
+										$author$project$Main$selectbox,
+										'Effective Date',
+										A2($elm$core$List$map, $elm$core$Tuple$first, model.ay),
+										$author$project$Main$SelectDate,
+										_List_fromArray(
+											['three columns', 'offset-by-four columns']),
+										1),
+										A4(
+										$author$project$Main$checkbox,
+										'Tobacco User?',
+										model.aH,
+										$author$project$Main$ToggleTobacco,
+										_List_fromArray(
+											['four columns', 'offset-by-four columns'])),
+										A4(
+										$author$project$Main$checkbox,
+										'Apply Household Discount?',
+										model.ah,
+										$author$project$Main$ToggleDiscounts,
+										_List_fromArray(
+											['four columns', 'offset-by-four columns'])),
 										A2(
 										$elm$html$Html$div,
 										_List_fromArray(
@@ -8569,9 +8524,60 @@ var $author$project$Main$renderForm = F3(
 												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
-											[submitButton]))
-									]))
-							])))
+											[
+												A2(
+												$elm$html$Html$h5,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('u-full-width'),
+														A2($elm$html$Html$Attributes$style, 'margin-top', '1rem')
+													]),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Which Plans?')
+													]))
+											])),
+										A4(
+										$author$project$Main$checkbox,
+										'Plan G',
+										model.X,
+										$author$project$Main$ToggleG,
+										_List_fromArray(
+											['four columns', 'offset-by-four columns'])),
+										A4(
+										$author$project$Main$checkbox,
+										'Plan N',
+										model.Y,
+										$author$project$Main$ToggleN,
+										_List_fromArray(
+											['four columns', 'offset-by-four columns'])),
+										A4(
+										$author$project$Main$checkbox,
+										'Plan F',
+										model.W,
+										$author$project$Main$ToggleF,
+										_List_fromArray(
+											['four columns', 'offset-by-four columns'])),
+										A2(
+										$elm$html$Html$div,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('row')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$div,
+												_List_fromArray(
+													[
+														$elm$html$Html$Attributes$class('four columns'),
+														$elm$html$Html$Attributes$class('offset-by-four columns')
+													]),
+												_List_fromArray(
+													[submitButton]))
+											]))
+									])))
+						]))
 				]));
 	});
 var $author$project$Main$F = 2;
