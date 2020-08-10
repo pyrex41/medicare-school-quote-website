@@ -10419,24 +10419,33 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$a,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$href('/')
+								$elm$html$Html$Attributes$class('row')
 							]),
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$img,
+								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$src('images/logo.png'),
-										A2($elm$html$Html$Attributes$style, 'max-width', '400px'),
-										A2($elm$html$Html$Attributes$style, 'height', 'auto'),
-										A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
+										$elm$html$Html$Attributes$href('/')
 									]),
-								_List_Nil)
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$img,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$src('images/logo.png'),
+												A2($elm$html$Html$Attributes$style, 'max-width', '400px'),
+												A2($elm$html$Html$Attributes$style, 'height', 'auto'),
+												A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
+												A2($elm$html$Html$Attributes$style, 'display', 'block')
+											]),
+										_List_Nil)
+									]))
 							])),
 						$author$project$Main$navBar(model),
 						$author$project$Main$variousViews(model)

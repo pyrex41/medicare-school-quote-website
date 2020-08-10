@@ -631,17 +631,19 @@ view : Model -> Browser.Document Msg
 view model =
   { title = "Medicare School Quote"
   , body =
-      [ div [ class "container"
-            ]
-        [ a [ href "/" ]
-            [  img [ src "images/logo.png"
-                   , style "max-width" "400px"
-                   , style "height" "auto"
-                   , style "margin" "auto"
-                   , style "display" "block"
-                   ]
-                   [  ]
-            ]       
+      [ div
+        [ class "container" ]
+        [ div [ class "row" ]
+              [ a [ href "/" ]
+                  [  img [ src "images/logo.png"
+                         , style "max-width" "400px"
+                         , style "height" "auto"
+                         , style "margin" "auto"
+                         , style "display" "block"
+                         ]
+                         [  ]
+                  ]
+              ]     
         , navBar model
         , variousViews model
         ]
