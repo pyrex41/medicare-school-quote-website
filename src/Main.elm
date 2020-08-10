@@ -108,6 +108,7 @@ type alias TableRow =
   , gRate : String
   , nRate : String
   , naic : Int
+  , uid : Int         
   , selected : Bool
   , category : RowCategory
   , priority : Int
@@ -500,7 +501,7 @@ update msg model =
           Just tr ->
             case ils of
               Just ii ->
-                Just <| List.map ( selectByNaic ii ) tr
+                Just <| List.map ( selectByUID ii ) tr
               Nothing ->
                 Nothing
           Nothing ->
@@ -526,7 +527,8 @@ update msg model =
       case rmsg of
         Ok response  ->
           let
-            newRows = List.map planToRow response
+            
+            newRows = List.indexedMap planToRow response
             curl = model.url
             nurl = { curl | path = "/results" }
           in
@@ -597,14 +599,14 @@ update msg model =
 -- UPDATE FUNCS
 toggle : Int -> TableRow -> TableRow
 toggle i tablerow =
-  if tablerow.naic == i then
+  if tablerow.uid == i then
     { tablerow | selected = not tablerow.selected }
   else
     tablerow
 
-selectByNaic : (List Int) -> TableRow -> TableRow
-selectByNaic  ls tablerow =
-  if (List.member tablerow.naic ls) then
+selectByUID : (List Int) -> TableRow -> TableRow
+selectByUID  ls tablerow =
+  if (List.member tablerow.uid ls) then
     { tablerow | selected = True }
   else
     tablerow
@@ -612,7 +614,7 @@ selectByNaic  ls tablerow =
 removeRow : Int -> List TableRow -> List TableRow
 removeRow i ls =
   List.filter
-    (\a -> a.naic /= i)
+    (\a -> a.uid /= i)
     ls
 
 -- SUBSCRIPTIONS
@@ -859,9 +861,9 @@ renderResults : Model -> Html Msg
 renderResults model =
   let
     showRows = viewRowsAll model
-    naicShow = case showRows of
+    filtShow = case showRows of
       Just sr ->
-        Just <| List.map (\a -> a.naic) sr
+        Just <| List.map (\a -> a.uid) sr
       Nothing ->
         Nothing
   in
@@ -888,7 +890,7 @@ renderResults model =
               ]
           , div [ class "four columns", style "padding-top" "1.2em" ]
             [ button
-              [ onClick (SelectAll naicShow), class "button", style "width" "50%" ]
+              [ onClick (SelectAll filtShow), class "button", style "width" "50%" ]
               [ text "Select All" ]
             , button
               [ onClick DeselectAll, class "button", style "width" "50%" ]
@@ -1488,9 +1490,9 @@ safeString ms =
       s
     Nothing ->
       ""
-
-planToRow : PlanQuote -> TableRow
-planToRow pq =
+          
+planToRow : Int -> PlanQuote -> TableRow
+planToRow ii pq =
   let
     category = findCategory pq.naic
     showRowInit = category == Preferred
@@ -1507,6 +1509,7 @@ planToRow pq =
       ( safeString pq.gRate )
       ( safeString pq.nRate )
       pq.naic
+      ii
       showRowInit
       category
       priority
