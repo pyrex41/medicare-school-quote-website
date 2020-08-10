@@ -649,31 +649,7 @@ view model =
   }
 
 
--- v---v FOR TESTING
-
-viewCustomDate : Model -> Html Msg
-viewCustomDate model =
-  case model.timeNow of
-    Just tn ->
-      let
-        options = List.map Tuple.first model.dateSelectChoices
-        md = case model.date of
-          Just d ->
-            MyDate.toString d
-          Nothing ->
-            "none"
-      in
-        div []
-          (List.map
-            (\a -> text (a ++ " === ") )
-            options
-          ++
-          [ text <| "Default: " ++ md ]
-          )
-    Nothing ->
-      div []
-        [ text "no time info" ]
-
+-- Main View Selector
 variousViews : Model -> Html Msg
 variousViews model =
   case model.state of
