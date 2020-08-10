@@ -10264,24 +10264,30 @@ var $author$project$Main$renderResults = function (model) {
 };
 var $author$project$Main$submitFirst = A2(
 	$elm$html$Html$div,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$class('row')
-		]),
+	_List_Nil,
 	_List_fromArray(
 		[
 			A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('six columns'),
-					$elm$html$Html$Attributes$class('offset-by-three columns'),
-					A2($elm$html$Html$Attributes$style, 'padding', '50px 0'),
-					A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+					$elm$html$Html$Attributes$class('row')
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('Please Submit Data First')
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('six columns'),
+							$elm$html$Html$Attributes$class('offset-by-three columns'),
+							A2($elm$html$Html$Attributes$style, 'padding', '50px 0'),
+							A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Please Submit Data First')
+						]))
 				]))
 		]));
 var $author$project$Main$variousViews = function (model) {
@@ -10381,7 +10387,11 @@ var $author$project$Main$variousViews = function (model) {
 				_List_fromArray(
 					[
 						$author$project$Main$renderResults(model)
-					])) : $author$project$Main$submitFirst;
+					])) : A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[$author$project$Main$submitFirst]));
 		default:
 			return model.aD ? A2(
 				$elm$html$Html$div,
@@ -10389,7 +10399,11 @@ var $author$project$Main$variousViews = function (model) {
 				_List_fromArray(
 					[
 						$author$project$Main$renderOutput(model)
-					])) : $author$project$Main$submitFirst;
+					])) : A2(
+				$elm$html$Html$div,
+				_List_Nil,
+				_List_fromArray(
+					[$author$project$Main$submitFirst]));
 	}
 };
 var $author$project$Main$view = function (model) {

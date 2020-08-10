@@ -687,26 +687,28 @@ variousViews model =
       if model.outputAvailable then
         div [] [ renderResults model ]
       else
-        submitFirst
+        div [] [ submitFirst ]
 
     Output ->
       if model.outputAvailable then
         div [] [ renderOutput model ]
       else
-        submitFirst
+        div [] [ submitFirst ]
 
             
 -- SubmitFirst View
 
 submitFirst : Html Msg
 submitFirst =
-  div [ class "row" ]
-      [ div [ class "six columns"
-            , class "offset-by-three columns"
-            , style "padding" "50px 0"
-            , style "text-align" "center"
+  div []
+      [ div [ class "row" ]
+            [ div [ class "six columns"
+                  , class "offset-by-three columns"
+                  , style "padding" "50px 0"
+                  , style "text-align" "center"
+                  ]
+                  [ text "Please Submit Data First" ]
             ]
-            [ text "Please Submit Data First" ]
       ]
 
               
