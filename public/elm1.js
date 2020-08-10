@@ -8562,20 +8562,11 @@ var $author$project$Main$renderForm = F3(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$Attributes$class('row')
+												$elm$html$Html$Attributes$class('four columns'),
+												$elm$html$Html$Attributes$class('offset-by-four columns')
 											]),
 										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$div,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('four columns'),
-														$elm$html$Html$Attributes$class('offset-by-four columns')
-													]),
-												_List_fromArray(
-													[submitButton]))
-											]))
+											[submitButton]))
 									])))
 						]))
 				]));

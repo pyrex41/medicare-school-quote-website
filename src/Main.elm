@@ -867,11 +867,9 @@ renderForm model func buttonLabel =
                       , checkbox "Plan G" model.planG ToggleG [ "four columns", "offset-by-four columns"]
                       , checkbox "Plan N" model.planN ToggleN [ "four columns", "offset-by-four columns"]
                       , checkbox "Plan F" model.planF ToggleF [ "four columns", "offset-by-four columns"]
-                      , div [ class "row" ]
-                          [ div
+                      ,  div
                             [ class "four columns", class "offset-by-four columns" ]
-                              [ submitButton ]
-                          ]
+                            [ submitButton ]
                       ]
                   )
                 ]
