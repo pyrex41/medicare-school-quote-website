@@ -1180,7 +1180,7 @@ config =
 
 toRowAttrs : TableRow -> List (Attribute Msg)
 toRowAttrs tablerow =
-    [ onClick (ToggleSelect tablerow.naic)
+    [ onClick (ToggleSelect tablerow.uid)
     , style "background"
         (if tablerow.selected then
             "#CEFAF8"

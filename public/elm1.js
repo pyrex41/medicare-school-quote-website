@@ -9673,7 +9673,7 @@ var $author$project$Main$toRowAttrs = function (tablerow) {
 	return _List_fromArray(
 		[
 			$elm$html$Html$Events$onClick(
-			$author$project$Main$ToggleSelect(tablerow.naic)),
+			$author$project$Main$ToggleSelect(tablerow.uid)),
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
