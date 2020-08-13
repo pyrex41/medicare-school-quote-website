@@ -937,7 +937,7 @@ personalInfo model =
       Nothing -> ""
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ (genderString model.gender) ++ "   |   " ++ "Discount Applied: " ++ dsc
-    dentalLink = "https://www.securitylife.com/personal-plans?agnt=17221"
+    dentalLink = "https://www.securitylife.com/personal-plans?agnt=010U3815"
     docusignLink = "https://account.docusign.com"
   in
     div [ ]

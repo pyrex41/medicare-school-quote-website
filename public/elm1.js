@@ -9303,7 +9303,7 @@ var $author$project$Main$personalInfo = function (model) {
 	}();
 	var dsc = model.discounts ? 'Yes' : 'No';
 	var docusignLink = 'https://account.docusign.com';
-	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=17221';
+	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=010U3815';
 	var ageText = function () {
 		var _v0 = model.age.value;
 		if (_v0.$ === 'Just') {
