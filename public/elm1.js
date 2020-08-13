@@ -10180,7 +10180,7 @@ var $author$project$Main$renderResults = function (model) {
 								A4(
 								$author$project$Main$checkbox,
 								'Category B',
-								model.viewPreferred,
+								model.viewNonpreferred,
 								$author$project$Main$ToggleNonPreferred,
 								_List_fromArray(
 									['two columns']))
@@ -10205,7 +10205,7 @@ var $author$project$Main$renderResults = function (model) {
 								A4(
 								$author$project$Main$checkbox,
 								'Category C',
-								model.viewPreferred,
+								model.viewOutside,
 								$author$project$Main$ToggleOutside,
 								_List_fromArray(
 									['two columns']))
