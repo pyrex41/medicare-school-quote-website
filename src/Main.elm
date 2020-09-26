@@ -78,7 +78,7 @@ type alias Model =
 
 
 type alias ValidInt =
-  { value : Maybe Int
+  { value : Maybe String
   , valid : Bool
   , comment : String
   }
@@ -108,7 +108,7 @@ type alias TableRow =
   , gRate : String
   , nRate : String
   , naic : Int
-  , uid : Int         
+  , uid : Int
   , selected : Bool
   , category : RowCategory
   , priority : Int
@@ -337,7 +337,7 @@ update msg model =
                 ""
             ageTest = (i >= minAge) && (i <= maxAge)
           in
-            ( validateModel { model | age = ValidInt (Just i) ageTest errorMessage }
+            ( validateModel { model | age = ValidInt (Just str) ageTest errorMessage }
             , Cmd.none )
 
         Nothing ->
@@ -350,7 +350,7 @@ update msg model =
           if String.length(str) == 5 then
             let
               newModel = validateModel
-                          { model | zip = ValidInt (Just i) True ""
+                          { model | zip = ValidInt (Just str) True ""
                                   , state = Ready
                           }
             in
@@ -358,7 +358,7 @@ update msg model =
               , getZip newModel
               )
           else
-            ( validateModel { model | zip = ValidInt (Just i) False "Zip must be 5 digits long"
+            ( validateModel { model | zip = ValidInt (Just str) False "Zip must be 5 digits long"
                             }
             , Cmd.none
             )
@@ -374,7 +374,7 @@ update msg model =
                     Female
                 else
                     Male
-        in              
+        in
             ( validateModel { model | gender = g }
             , Cmd.none )
 
@@ -527,7 +527,7 @@ update msg model =
       case rmsg of
         Ok response  ->
           let
-            
+
             newRows = List.indexedMap planToRow response
             curl = model.url
             nurl = { curl | path = "/results" }
@@ -645,7 +645,7 @@ view model =
                          ]
                          [  ]
                   ]
-              ]     
+              ]
         , navBar model
         , variousViews model
         ]
@@ -699,7 +699,7 @@ variousViews model =
       else
         div [] [ submitFirst ]
 
-            
+
 -- SubmitFirst View
 
 submitFirst : Html Msg
@@ -715,7 +715,7 @@ submitFirst =
             ]
       ]
 
-              
+
 
 
 -- Nav Buttons
@@ -724,7 +724,7 @@ navButton : List String -> Msg -> String -> Html Msg
 navButton clist msg tx =
   let
     classList = List.map (\a -> class a) <| [ "two columns" ] ++ clist
-  in              
+  in
     div classList
         [ button
               [ onClick msg, class "button-nav", attribute "margin" "1em" ]
@@ -930,10 +930,10 @@ personalInfo model =
       Nothing ->
         ""
     ageText = case model.age.value of
-      Just a -> String.fromInt(a)
+      Just a -> a
       Nothing -> ""
     zipText = case model.zip.value of
-      Just v -> String.fromInt(v)
+      Just v -> v
       Nothing -> ""
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ (genderString model.gender) ++ "   |   " ++ "Discount Applied: " ++ dsc
@@ -988,10 +988,10 @@ getEnrollLink tr =
        , ( 65641 , "http://micapps.gomedico.com/" )
        , ( 79987 , "http://micapps.gomedico.com/" )
        ]
-    
+
   in
     Dict.get tr.naic dd
- 
+
 
 makeEnrollButton : TableRow -> Html Msg
 makeEnrollButton tr =
@@ -1020,8 +1020,8 @@ makeEnrollRow ls =
       lb = [ td [] [ text "" ] ]
   in
      tr [] <| lb ++ eb
-       
-                              
+
+
 
 outputTable : Model -> PlanType -> Html Msg
 outputTable model pt =
@@ -1057,10 +1057,10 @@ outputTable model pt =
       in
         div [ class "twelve columns", style "overflow" "hidden", style "overflow-x" "scroll" ]
             [ table [ id "output-table" ]
-                    
+
                     [ thead [ ] [ companyNames ]
                     , tbody [ ]
-                    
+
                         [ rateRow
                         , pdpRow
                         , insuranceTotalRow
@@ -1216,7 +1216,7 @@ fullGenderString gender =
    case  gender of
        Male -> "Male"
        Female -> "Female"
-                 
+
 genderselectbox : String -> Gender -> (String -> Msg) -> List String -> Int -> Html Msg
 genderselectbox title_ selectedG handle class_ i =
   let
@@ -1377,7 +1377,7 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
           label
             [  ]
             [ text title_
-            , input [ type_ "text", class "u-full-width", placeholder placeholder_, value (String.fromInt i), onInput handle ] []
+            , input [ type_ "text", class "u-full-width", placeholder placeholder_, value i, onInput handle ] []
             , validator
             ]
         ]
@@ -1490,7 +1490,7 @@ safeString ms =
       s
     Nothing ->
       ""
-          
+
 planToRow : Int -> PlanQuote -> TableRow
 planToRow ii pq =
   let
@@ -1585,7 +1585,7 @@ getZip model =
     case zip of
       Just z ->
         Http.get
-          { url = "https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=" ++ String.fromInt(z)
+          { url = "https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=" ++ z
           , expect = Http.expectJson ZipResponse countyDecoder
           }
       Nothing ->
@@ -1611,8 +1611,8 @@ getPlans model =
     let
       url1 =  "https://medicare-school-quote-tool.herokuapp.com/api/plans?"
       url2 = url1
-          ++ "zip=" ++ ( stringMaybeInt model.zip.value )
-          ++ "&age=" ++ ( stringMaybeInt model.age.value )
+          ++ "zip=" ++ ( safeString model.zip.value )
+          ++ "&age=" ++ ( safeString model.age.value )
           ++ "&county=" ++ ( strCounty model.county )
           ++ "&gender=" ++ (genderString model.gender)
           ++ "&tobacco=" ++ ( model.tobacco |> boolString )
@@ -1651,7 +1651,7 @@ planXDecoder =
 getPDP : Model -> Cmd Msg
 getPDP model =
   Http.get
-    { url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?zip=" ++ ( stringMaybeInt model.zip.value )
+    { url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?zip=" ++ (safeString model.zip.value)
     , expect = Http.expectJson PDPResponse pdpDecoder
     }
 
