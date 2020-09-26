@@ -5428,7 +5428,6 @@ var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Main$GotTime = function (a) {
 	return {$: 'GotTime', a: a};
 };
-var $author$project$Main$Male = {$: 'Male'};
 var $author$project$Main$Ready = {$: 'Ready'};
 var $author$project$Main$ValidInt = F3(
 	function (value, valid, comment) {
@@ -5468,31 +5467,28 @@ var $author$project$Main$init = F3(
 				date: $elm$core$Maybe$Nothing,
 				dateSelectChoices: _List_Nil,
 				discounts: false,
-				gender: $author$project$Main$Male,
+				gender: 'M',
 				key: key,
 				name: '',
-				outputAvailable: false,
-				outputQuotes: $elm$core$Maybe$Nothing,
-				outputTableState: $billstclair$elm_sortable_table$Table$initialSort('Title'),
-				partB: $elm$core$Maybe$Just('$144.60'),
+				partB: $elm$core$Maybe$Just('$230.00'),
 				pdpList: $elm$core$Maybe$Nothing,
 				pdpSelect: $elm$core$Maybe$Nothing,
 				planF: false,
 				planG: false,
 				planN: false,
+				preset: 'all',
 				recentError: '',
 				response: $elm$core$Maybe$Nothing,
+				selectButton: true,
 				state: $author$project$Main$Ready,
 				tableRows: $elm$core$Maybe$Nothing,
-				tableState: $billstclair$elm_sortable_table$Table$initialSort('Category'),
+				tableState: $billstclair$elm_sortable_table$Table$initialSort('F'),
 				timeNow: $elm$core$Maybe$Nothing,
 				tobacco: false,
 				today: $elm$core$Maybe$Nothing,
 				url: url,
 				valid: false,
-				viewNonpreferred: false,
-				viewOutside: false,
-				viewPreferred: true,
+				visibleRows: $elm$core$Maybe$Nothing,
 				zip: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
 			},
 			A2($elm$core$Task$perform, $author$project$Main$GotTime, $elm$time$Time$now));
@@ -5510,14 +5506,10 @@ var $author$project$MyDate$CustomDate = F2(
 var $author$project$Main$Failure = function (a) {
 	return {$: 'Failure', a: a};
 };
-var $author$project$Main$Female = {$: 'Female'};
 var $author$project$Main$Loading = {$: 'Loading'};
-var $author$project$Main$NonPreferred = {$: 'NonPreferred'};
 var $author$project$Main$Output = {$: 'Output'};
-var $author$project$Main$Outside = {$: 'Outside'};
 var $author$project$Main$PDP = {$: 'PDP'};
 var $author$project$Main$Plan = {$: 'Plan'};
-var $author$project$Main$Preferred = {$: 'Preferred'};
 var $author$project$Main$Results = {$: 'Results'};
 var $elm$time$Time$Apr = {$: 'Apr'};
 var $elm$time$Time$Aug = {$: 'Aug'};
@@ -5642,6 +5634,38 @@ var $elm$core$List$filter = F2(
 			list);
 	});
 var $elm$core$Basics$ge = _Utils_ge;
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === 'RBEmpty_elm_builtin') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1.$) {
+					case 'LT':
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 'EQ':
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
 var $author$project$Main$PDPResponse = function (a) {
 	return {$: 'PDPResponse', a: a};
 };
@@ -5675,38 +5699,6 @@ var $elm$core$Maybe$isJust = function (maybe) {
 	}
 };
 var $elm$core$Platform$sendToSelf = _Platform_sendToSelf;
-var $elm$core$Basics$compare = _Utils_compare;
-var $elm$core$Dict$get = F2(
-	function (targetKey, dict) {
-		get:
-		while (true) {
-			if (dict.$ === 'RBEmpty_elm_builtin') {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var key = dict.b;
-				var value = dict.c;
-				var left = dict.d;
-				var right = dict.e;
-				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
-				switch (_v1.$) {
-					case 'LT':
-						var $temp$targetKey = targetKey,
-							$temp$dict = left;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-					case 'EQ':
-						return $elm$core$Maybe$Just(value);
-					default:
-						var $temp$targetKey = targetKey,
-							$temp$dict = right;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-				}
-			}
-		}
-	});
 var $elm$core$Dict$Black = {$: 'Black'};
 var $elm$core$Dict$RBNode_elm_builtin = F5(
 	function (a, b, c, d, e) {
@@ -6460,7 +6452,7 @@ var $author$project$Main$getPDP = function (model) {
 	return $elm$http$Http$get(
 		{
 			expect: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
-			url: 'https://medicare-school-quote-tool.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.zip.value)
+			url: 'https://enlightnu-quote-api.herokuapp.com/api/pdp?zip=' + $author$project$Main$stringMaybeInt(model.zip.value)
 		});
 };
 var $author$project$Main$PlanResponse = function (a) {
@@ -6473,13 +6465,6 @@ var $author$project$Main$checkAddPlan = F3(
 	function (b, plan, str) {
 		return b ? (str + ('&plan=' + plan)) : str;
 	});
-var $author$project$Main$genderString = function (gender) {
-	if (gender.$ === 'Male') {
-		return 'M';
-	} else {
-		return 'F';
-	}
-};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$PlanQuote = F5(
@@ -6539,8 +6524,8 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 };
 var $author$project$Main$getPlans = function (model) {
 	if (model.valid) {
-		var url1 = 'https://medicare-school-quote-tool.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + ($author$project$Main$genderString(model.gender) + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + $author$project$Main$strMaybeDate(model.date))))))))))))));
+		var url1 = 'https://enlightnu-quote-api.herokuapp.com/api/plans?';
+		var url2 = url1 + ('zip=' + ($author$project$Main$stringMaybeInt(model.zip.value) + ('&age=' + ($author$project$Main$stringMaybeInt(model.age.value) + ('&county=' + ($author$project$Main$strCounty(model.county) + ('&gender=' + (model.gender + ('&tobacco=' + ($author$project$Main$boolString(model.tobacco) + ('&discounts=' + ($author$project$Main$boolString(model.discounts) + ('&date=' + $author$project$Main$strMaybeDate(model.date))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.planN, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.planF, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.planG, 'G', url4);
@@ -6567,13 +6552,13 @@ var $author$project$Main$getZip = function (model) {
 		return $elm$http$Http$get(
 			{
 				expect: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
-				url: 'https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
+				url: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + $elm$core$String$fromInt(z)
 			});
 	} else {
 		return $elm$http$Http$get(
 			{
 				expect: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
-				url: 'https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=' + ''
+				url: 'https://enlightnu-quote-api.herokuapp.com/api/counties?zip=' + ''
 			});
 	}
 };
@@ -6597,45 +6582,6 @@ var $elm$core$Maybe$map = F2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
-var $elm$core$Basics$not = _Basics_not;
-var $elm$core$Tuple$pair = F2(
-	function (a, b) {
-		return _Utils_Tuple2(a, b);
-	});
-var $elm$core$String$endsWith = _String_endsWith;
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
-var $elm$core$String$trimRight = _String_trimRight;
-var $author$project$Main$pdpFullString = function (pr) {
-	var r_val = pr.rate;
-	var p_name = A2(
-		$elm$core$String$endsWith,
-		'(PDP)',
-		$elm$core$String$trimRight(pr.plan)) ? A3($elm$core$String$slice, 0, -6, pr.plan) : pr.plan;
-	return p_name + ('   |   ' + r_val);
-};
-var $author$project$Main$TableRow = function (company) {
-	return function (displayName) {
-		return function (fRate) {
-			return function (gRate) {
-				return function (nRate) {
-					return function (naic) {
-						return function (uid) {
-							return function (selected) {
-								return function (category) {
-									return function (priority) {
-										return {category: category, company: company, displayName: displayName, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic, priority: priority, selected: selected, uid: uid};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
 var $elm$core$List$any = F2(
 	function (isOkay, list) {
 		any:
@@ -6666,203 +6612,14 @@ var $elm$core$List$member = F2(
 			},
 			xs);
 	});
-var $author$project$Presets$naicCategory = {
-	nonPreferred: _List_fromArray(
-		[79413001, 79413002, 88366001, 31119, 61859, 63967, 64211, 65641, 65870, 66214, 66281, 67059, 67326, 68462, 68845, 76112, 79987, 86231]),
-	outside: _List_fromArray(
-		[11121, 12358, 14933, 19178, 25178, 26581, 26921, 29076, 47027, 47051, 47058, 47350, 53139, 53872, 54704, 54771, 55891, 56014, 56383, 56499, 56693, 56820, 57053, 57347, 57991, 60016, 60128, 60176, 60183, 60836, 61115, 61239, 61700, 61751, 61999, 62065, 62146, 62553, 66141, 66583, 66828, 67539, 67628, 67679, 67784, 67814, 68420, 68543, 68802, 69132, 69663, 69698, 70122, 70408, 70769, 70939, 70998, 71390, 71773, 71919, 73504, 77216, 77828, 77950, 78743, 80578, 81043, 81200, 81701, 81779, 82538, 82880, 85189, 89005, 90212, 91472, 91785, 92916, 94587, 95561, 95683, 95725, 95796, 95839, 95844, 95923]),
-	preferred: _List_fromArray(
-		[10345, 12321, 13100, 28207, 38520, 47171, 47570, 52618, 53228, 53287, 53473, 53589, 53902, 54631, 54720, 54828, 54933, 55026, 60093, 60131, 60219, 61557, 62825, 63444, 65722, 67369, 68500, 69868, 70580, 70670, 71412, 71835, 72052, 72850, 73288, 77780, 78700, 79413, 88366, 95120, 95610, 96016, 96202, 98167])
-};
-var $author$project$Main$findCategory = function (i) {
-	return A2($elm$core$List$member, i, $author$project$Presets$naicCategory.preferred) ? $author$project$Main$Preferred : (A2($elm$core$List$member, i, $author$project$Presets$naicCategory.nonPreferred) ? $author$project$Main$NonPreferred : $author$project$Main$Outside);
-};
-var $author$project$Presets$displayNames = {
-	nonPreferred: _List_fromArray(
-		[
-			_Utils_Tuple2(31119, 'Medico'),
-			_Utils_Tuple2(61859, 'Christian Fidelity'),
-			_Utils_Tuple2(63967, 'GPM'),
-			_Utils_Tuple2(64211, 'GTL'),
-			_Utils_Tuple2(65641, 'Medico'),
-			_Utils_Tuple2(65870, 'Manhattan Life'),
-			_Utils_Tuple2(66214, 'Heartland'),
-			_Utils_Tuple2(66281, 'Transamerica'),
-			_Utils_Tuple2(67059, 'GPM'),
-			_Utils_Tuple2(67326, 'Old Surety'),
-			_Utils_Tuple2(68462, 'Reserve National'),
-			_Utils_Tuple2(68845, 'Shenandoah'),
-			_Utils_Tuple2(76112, 'Oxford'),
-			_Utils_Tuple2(79987, 'Medico'),
-			_Utils_Tuple2(86231, 'Transamerica')
-		]),
-	outside: _List_fromArray(
-		[
-			_Utils_Tuple2(11121, 'UNIFIED LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(12358, 'Avalon Insurance Company'),
-			_Utils_Tuple2(14933, 'Montana Health Cooperative'),
-			_Utils_Tuple2(19178, 'Southern Guaranty Insurance Company'),
-			_Utils_Tuple2(25178, 'State Farm Mutual Automobile Insurance Company'),
-			_Utils_Tuple2(26581, 'INDEPENDENCE AMERICAN INSURANCE COMPANY'),
-			_Utils_Tuple2(26921, 'EVEREST REINSURANCE COMPANY'),
-			_Utils_Tuple2(29076, 'Medical Mutual of Ohio'),
-			_Utils_Tuple2(47027, 'CDPHP Universal Benefits, Inc.'),
-			_Utils_Tuple2(47051, 'FirstCommunity Health Plan Inc.'),
-			_Utils_Tuple2(47058, 'CAREFIRST OF MARYLAND, INC.'),
-			_Utils_Tuple2(47350, 'ASURIS NORTHWEST HEALTH'),
-			_Utils_Tuple2(53139, 'Wisconsin Physicians Service Insurance Corporation'),
-			_Utils_Tuple2(53872, 'KPS Health Plans'),
-			_Utils_Tuple2(54704, 'Independence Hospital Indemnity Plan, Inc.'),
-			_Utils_Tuple2(54771, 'Highmark Inc.'),
-			_Utils_Tuple2(55891, 'Noridian Mutual Insurance Company'),
-			_Utils_Tuple2(56014, 'Thrivent Financial for Lutherans'),
-			_Utils_Tuple2(56383, 'The Order Of United Commercial Travelers Of America'),
-			_Utils_Tuple2(56499, 'Assured Life Association'),
-			_Utils_Tuple2(56693, 'Greek Catholic Union Of The USA'),
-			_Utils_Tuple2(56820, 'Polish Falcons of America'),
-			_Utils_Tuple2(57053, 'Catholic United Financial'),
-			_Utils_Tuple2(57347, 'Catholic Life Insurance'),
-			_Utils_Tuple2(57991, 'Everence Association Inc'),
-			_Utils_Tuple2(60016, 'THP Insurance Company'),
-			_Utils_Tuple2(60128, 'Wellmark of South Dakota, Inc.'),
-			_Utils_Tuple2(60176, 'Prosperity Life Group'),
-			_Utils_Tuple2(60183, 'Prosperity Life Group'),
-			_Utils_Tuple2(60836, 'AMERICAN REPUBLIC INSURANCE COMPANY'),
-			_Utils_Tuple2(61115, 'ATLANTIC COAST LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(61239, 'BANKERS FIDELITY LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(61700, 'Renaissance Life & Health Insurance Company of America'),
-			_Utils_Tuple2(61751, 'Central States Health and Life Co. of Omaha'),
-			_Utils_Tuple2(61999, 'Great Southern Life Insurance Company'),
-			_Utils_Tuple2(62065, 'COLONIAL PENN LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(62146, 'Combined Insurance Company of America'),
-			_Utils_Tuple2(62553, 'COUNTRY Life Insurance Company'),
-			_Utils_Tuple2(66141, 'HEALTH NET LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(66583, 'National Guardian Life Insurance Company'),
-			_Utils_Tuple2(66828, 'FALLON HEALTH AND LIFE ASSURANCE CO. INC.'),
-			_Utils_Tuple2(67539, 'Pan American Life Insurance Company'),
-			_Utils_Tuple2(67628, 'PEKIN LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(67679, 'AMERICAN REPUBLIC CORP INSURANCE COMPANY'),
-			_Utils_Tuple2(67784, 'Philadelphia American Life Insurance Company'),
-			_Utils_Tuple2(67814, 'Nassau Life Insurance Company'),
-			_Utils_Tuple2(68420, 'WMI MUTUAL INSURANCE COMPANY'),
-			_Utils_Tuple2(68543, 'Liberty Bankers Life Insurance Company'),
-			_Utils_Tuple2(68802, 'Sentinel Security Life Insurance Company'),
-			_Utils_Tuple2(69132, 'STATE MUTUAL INSURANCE COMPANY'),
-			_Utils_Tuple2(69663, 'USAA LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(69698, 'New Era Life Insurance Company of the Midwest'),
-			_Utils_Tuple2(70122, 'UNIVERSAL FIDELITY LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(70408, 'UNION SECURITY INSURANCE COMPANY'),
-			_Utils_Tuple2(70769, 'Erie Family Life Insurance Company'),
-			_Utils_Tuple2(70939, 'GERBER LIFE INSURANCE COMPANY'),
-			_Utils_Tuple2(70998, 'QualChoice Life and Health Insurance Company, Inc.'),
-			_Utils_Tuple2(71390, 'Puritan Life Insurance Company of America'),
-			_Utils_Tuple2(71773, 'American National Life Insurance Company of Texas'),
-			_Utils_Tuple2(71919, 'Bankers Fidelity Assurance Company'),
-			_Utils_Tuple2(73504, 'Lumico Life Insurance Company'),
-			_Utils_Tuple2(77216, 'Aultcare Insurance Company'),
-			_Utils_Tuple2(77828, 'Companion Life Insurance Company'),
-			_Utils_Tuple2(77950, 'HEALTH ALLIANCE MEDICAL PLANS, INC.'),
-			_Utils_Tuple2(78743, 'New Era Life Insurance Company'),
-			_Utils_Tuple2(80578, 'PHYSICIANS MUTUAL INSURANCE COMPANY'),
-			_Utils_Tuple2(81043, 'Bankers Life Insurance Company'),
-			_Utils_Tuple2(81200, 'Louisiana Health Service and Indemnity Company'),
-			_Utils_Tuple2(81701, 'Educators Mutual Insurance Association'),
-			_Utils_Tuple2(81779, 'INDIVIDUAL ASSURANCE COMPANY, LIFE, HEALTH & ACCIDENT'),
-			_Utils_Tuple2(82538, 'National Health Insurance Company'),
-			_Utils_Tuple2(82880, 'CSI Life Insurance Company'),
-			_Utils_Tuple2(85189, 'Western United Life Assurance Company'),
-			_Utils_Tuple2(89005, 'Farm Bureau Health Plans'),
-			_Utils_Tuple2(90212, 'Great Southern Life Insurance Company (Americo)'),
-			_Utils_Tuple2(91472, 'GLOBE LIFE AND ACCIDENT INSURANCE COMPANY'),
-			_Utils_Tuple2(91785, 'Equitable National Life Insurance Company'),
-			_Utils_Tuple2(92916, 'UNITED AMERICAN INSURANCE COMPANY'),
-			_Utils_Tuple2(94587, 'Members Health Insurance Company'),
-			_Utils_Tuple2(95561, 'Priority Health'),
-			_Utils_Tuple2(95683, 'Sanford Health Plan'),
-			_Utils_Tuple2(95725, 'SANFORD HEALTH PLAN OF MINNESOTA'),
-			_Utils_Tuple2(95796, 'Unity Health Plans Insurance Corporation'),
-			_Utils_Tuple2(95839, 'AVERA HEALTH PLANS, INC.'),
-			_Utils_Tuple2(95844, 'Health Alliance Plan of Michigan'),
-			_Utils_Tuple2(95923, 'Geisinger Health Plan')
-		]),
-	preferred: _List_fromArray(
-		[
-			_Utils_Tuple2(10345, 'Anthem'),
-			_Utils_Tuple2(12321, 'AETNA'),
-			_Utils_Tuple2(13100, 'Mutual of Omaha'),
-			_Utils_Tuple2(28207, 'Anthem'),
-			_Utils_Tuple2(38520, 'BCBS of SC'),
-			_Utils_Tuple2(47171, 'BCBS of KC'),
-			_Utils_Tuple2(47570, 'BCBS Premera'),
-			_Utils_Tuple2(52618, 'Anthem of ME'),
-			_Utils_Tuple2(53228, 'BCBS of MA'),
-			_Utils_Tuple2(53287, 'BCBS Highmark'),
-			_Utils_Tuple2(53473, 'BCBS of RI'),
-			_Utils_Tuple2(53589, 'BCBS of AZ'),
-			_Utils_Tuple2(53902, 'BCBS Regence'),
-			_Utils_Tuple2(54631, 'BCBS of NC'),
-			_Utils_Tuple2(54720, 'BCBS of PA'),
-			_Utils_Tuple2(54828, 'BCBS of WV'),
-			_Utils_Tuple2(54933, 'BCBS of OR'),
-			_Utils_Tuple2(55026, 'BCBS of MN'),
-			_Utils_Tuple2(60093, 'AARP of NY'),
-			_Utils_Tuple2(60131, 'BCBS of ID'),
-			_Utils_Tuple2(60219, 'Humana'),
-			_Utils_Tuple2(61557, 'BCBS of CA'),
-			_Utils_Tuple2(62825, 'Anthem BCBS'),
-			_Utils_Tuple2(63444, 'Accendo'),
-			_Utils_Tuple2(65722, 'CIGNA'),
-			_Utils_Tuple2(67369, 'CIGNA'),
-			_Utils_Tuple2(68500, 'AETNA'),
-			_Utils_Tuple2(69868, 'Mutual of Omaha'),
-			_Utils_Tuple2(70580, 'Humana'),
-			_Utils_Tuple2(70670, 'BCBS IL/TX/NM/OK'),
-			_Utils_Tuple2(71412, 'Mutual of Omaha'),
-			_Utils_Tuple2(71835, 'Anthem VA/NV'),
-			_Utils_Tuple2(72052, 'AETNA'),
-			_Utils_Tuple2(72850, 'Mutual of Omaha'),
-			_Utils_Tuple2(73288, 'Humana'),
-			_Utils_Tuple2(77780, 'BCBS of NE'),
-			_Utils_Tuple2(78700, 'AETNA'),
-			_Utils_Tuple2(79413, 'AARP / UHC'),
-			_Utils_Tuple2(88366, 'CIGNA'),
-			_Utils_Tuple2(95120, 'Anthem of KY'),
-			_Utils_Tuple2(95610, 'BCBS of MI'),
-			_Utils_Tuple2(96016, 'AARP of AZ'),
-			_Utils_Tuple2(96202, 'BCBS CareFirst'),
-			_Utils_Tuple2(98167, 'BCBS of FL')
-		])
-};
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
-};
-var $author$project$Main$findDisplayNameUtil = F2(
-	function (i, tpls) {
-		var ls = A2(
-			$elm$core$List$filter,
-			function (a) {
-				return _Utils_eq(a.a, i);
-			},
-			tpls);
-		var _v0 = $elm$core$List$head(ls);
-		if (_v0.$ === 'Just') {
-			var tup = _v0.a;
-			return $elm$core$Maybe$Just(tup.b);
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
+var $elm$core$Basics$not = _Basics_not;
+var $elm$core$Tuple$pair = F2(
+	function (a, b) {
+		return _Utils_Tuple2(a, b);
 	});
-var $author$project$Main$findDisplayName = F2(
-	function (i, cat) {
-		switch (cat.$) {
-			case 'Preferred':
-				return A2($author$project$Main$findDisplayNameUtil, i, $author$project$Presets$displayNames.preferred);
-			case 'NonPreferred':
-				return A2($author$project$Main$findDisplayNameUtil, i, $author$project$Presets$displayNames.nonPreferred);
-			default:
-				return $elm$core$Maybe$Nothing;
-		}
+var $author$project$Main$TableRow = F6(
+	function (company, fRate, gRate, nRate, naic, selected) {
+		return {company: company, fRate: fRate, gRate: gRate, nRate: nRate, naic: naic, selected: selected};
 	});
 var $author$project$Main$safeString = function (ms) {
 	if (ms.$ === 'Just') {
@@ -6872,57 +6629,49 @@ var $author$project$Main$safeString = function (ms) {
 		return '';
 	}
 };
-var $elm$core$Maybe$withDefault = F2(
-	function (_default, maybe) {
-		if (maybe.$ === 'Just') {
-			var value = maybe.a;
-			return value;
-		} else {
-			return _default;
-		}
-	});
-var $author$project$Main$planToRow = F2(
-	function (ii, pq) {
-		var category = $author$project$Main$findCategory(pq.naic);
-		var displayName = A2(
-			$elm$core$Maybe$withDefault,
-			pq.company,
-			A2($author$project$Main$findDisplayName, pq.naic, category));
-		var priority = function () {
-			switch (category.$) {
-				case 'Preferred':
-					return 1;
-				case 'NonPreferred':
-					return 2;
-				default:
-					return 3;
-			}
-		}();
-		var showRowInit = _Utils_eq(category, $author$project$Main$Preferred);
-		return $author$project$Main$TableRow(pq.company)(displayName)(
-			$author$project$Main$safeString(pq.fRate))(
-			$author$project$Main$safeString(pq.gRate))(
-			$author$project$Main$safeString(pq.nRate))(pq.naic)(ii)(showRowInit)(category)(priority);
-	});
+var $author$project$Main$planToRow = function (pq) {
+	return A6(
+		$author$project$Main$TableRow,
+		pq.company,
+		$author$project$Main$safeString(pq.fRate),
+		$author$project$Main$safeString(pq.gRate),
+		$author$project$Main$safeString(pq.nRate),
+		pq.naic,
+		false);
+};
+var $elm$core$Dict$fromList = function (assocs) {
+	return A3(
+		$elm$core$List$foldl,
+		F2(
+			function (_v0, dict) {
+				var key = _v0.a;
+				var value = _v0.b;
+				return A3($elm$core$Dict$insert, key, value, dict);
+			}),
+		$elm$core$Dict$empty,
+		assocs);
+};
+var $author$project$Main$presets = $elm$core$Dict$fromList(
+	_List_fromArray(
+		[
+			_Utils_Tuple2(
+			'kansas_city',
+			_List_fromArray(
+				[66281, 60054, 67369, 47171, 79143, 71412, 75052])),
+			_Utils_Tuple2(
+			'st_louis_mo',
+			_List_fromArray(
+				[79413, 66281, 78700, 78972, 67369, 13100])),
+			_Utils_Tuple2(
+			'st_louis_il',
+			_List_fromArray(
+				[72052, 72850, 67369, 79413, 70580]))
+		]));
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
-var $author$project$Main$selectByUID = F2(
-	function (ls, tablerow) {
-		return A2($elm$core$List$member, tablerow.uid, ls) ? _Utils_update(
-			tablerow,
-			{selected: true}) : tablerow;
-	});
-var $author$project$Main$setRows = F3(
-	function (cat, b, trls) {
-		return A2(
-			$elm$core$List$map,
-			function (a) {
-				return _Utils_eq(a.category, cat) ? _Utils_update(
-					a,
-					{selected: b}) : a;
-			},
-			trls);
-	});
-var $elm$core$List$sortBy = _List_sortBy;
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
 var $elm$core$List$tail = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -6932,7 +6681,12 @@ var $elm$core$List$tail = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $elm$core$String$toLower = _String_toLower;
+var $author$project$Main$tfselect = F2(
+	function (tf, tablerow) {
+		return _Utils_update(
+			tablerow,
+			{selected: tf});
+	});
 var $elm$time$Time$flooredDiv = F2(
 	function (numerator, denominator) {
 		return $elm$core$Basics$floor(numerator / denominator);
@@ -6977,6 +6731,9 @@ var $elm$time$Time$toAdjustedMinutes = F2(
 				60000),
 			eras);
 	});
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var $elm$time$Time$toCivil = function (minutes) {
 	var rawDay = A2($elm$time$Time$flooredDiv, minutes, 60 * 24) + 719468;
 	var era = (((rawDay >= 0) ? rawDay : (rawDay - 146096)) / 146097) | 0;
@@ -7107,7 +6864,7 @@ var $elm$time$Time$toYear = F2(
 	});
 var $author$project$Main$toggle = F2(
 	function (i, tablerow) {
-		return _Utils_eq(tablerow.uid, i) ? _Utils_update(
+		return _Utils_eq(tablerow.naic, i) ? _Utils_update(
 			tablerow,
 			{selected: !tablerow.selected}) : tablerow;
 	});
@@ -7335,6 +7092,15 @@ var $author$project$Main$routeParser = $elm$url$Url$Parser$oneOf(
 			$author$project$Main$Output,
 			$elm$url$Url$Parser$s('output'))
 		]));
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
 var $author$project$Main$urlToRoute = function (url) {
 	return A2(
 		$elm$core$Maybe$withDefault,
@@ -7383,32 +7149,6 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{state: $author$project$Main$Output, url: nurl}),
-					A2(
-						$elm$browser$Browser$Navigation$pushUrl,
-						model.key,
-						$elm$url$Url$toString(nurl)));
-			case 'ShowSubmitForm':
-				var curl = model.url;
-				var nurl = _Utils_update(
-					curl,
-					{path: '/'});
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{state: $author$project$Main$Ready, url: nurl}),
-					A2(
-						$elm$browser$Browser$Navigation$pushUrl,
-						model.key,
-						$elm$url$Url$toString(nurl)));
-			case 'ShowResults':
-				var curl = model.url;
-				var nurl = _Utils_update(
-					curl,
-					{path: '/results'});
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{state: $author$project$Main$Results, url: nurl}),
 					A2(
 						$elm$browser$Browser$Navigation$pushUrl,
 						model.key,
@@ -7462,7 +7202,7 @@ var $author$project$Main$update = F2(
 				return vModel.valid ? _Utils_Tuple2(
 					_Utils_update(
 						vModel,
-						{outputAvailable: false, response: $elm$core$Maybe$Nothing, state: $author$project$Main$Loading}),
+						{response: $elm$core$Maybe$Nothing, state: $author$project$Main$Loading}),
 					$author$project$Main$getPlans(vModel)) : _Utils_Tuple2(
 					_Utils_update(
 						vModel,
@@ -7558,9 +7298,8 @@ var $author$project$Main$update = F2(
 						$elm$core$Platform$Cmd$none);
 				}
 			case 'SelectGender':
-				var gender = msg.a;
-				var lg = $elm$core$String$toLower(gender);
-				var g = (lg === 'female') ? $author$project$Main$Female : $author$project$Main$Male;
+				var str = msg.a;
+				var g = A3($elm$core$String$slice, 0, 1, str);
 				return _Utils_Tuple2(
 					$author$project$Main$validateModel(
 						_Utils_update(
@@ -7594,37 +7333,80 @@ var $author$project$Main$update = F2(
 							model,
 							{date: choice})),
 					$elm$core$Platform$Cmd$none);
-			case 'SelectPDP':
-				var prstr = msg.a;
-				var prf = function () {
-					var _v5 = model.pdpList;
-					if (_v5.$ === 'Just') {
-						var pl = _v5.a;
-						return $elm$core$Maybe$Just(
-							A2(
-								$elm$core$List$filter,
-								function (a) {
-									return _Utils_eq(
-										$author$project$Main$pdpFullString(a),
-										prstr);
-								},
-								pl));
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
-				var pr = function () {
-					if (prf.$ === 'Just') {
-						var l = prf.a;
-						return $elm$core$List$head(l);
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
+			case 'SelectPreset':
+				var str = msg.a;
+				var _v4 = model.tableRows;
+				if (_v4.$ === 'Just') {
+					var tr = _v4.a;
+					var newTableRows = function () {
+						var _v5 = A2($elm$core$Dict$get, str, $author$project$Main$presets);
+						if (_v5.$ === 'Just') {
+							var ls = _v5.a;
+							return $elm$core$Maybe$Just(
+								A2(
+									$elm$core$List$map,
+									$author$project$Main$tfselect(true),
+									A2(
+										$elm$core$List$filter,
+										function (a) {
+											return A2($elm$core$List$member, a.naic, ls);
+										},
+										tr)));
+						} else {
+							return $elm$core$Maybe$Just(tr);
+						}
+					}();
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{preset: str, selectButton: str === 'all', visibleRows: newTableRows}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{preset: str, selectButton: str === 'all'}),
+						$elm$core$Platform$Cmd$none);
+				}
+			case 'HideSelected':
+				var unselectRows = A2(
+					$elm$core$Maybe$map,
+					$elm$core$List$map(
+						$author$project$Main$tfselect(false)),
+					model.tableRows);
+				var rowsToKeep = A2(
+					$elm$core$Maybe$map,
+					$elm$core$List$filter(
+						function (a) {
+							return !a.selected;
+						}),
+					model.visibleRows);
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{pdpSelect: pr}),
+						{tableRows: unselectRows, visibleRows: rowsToKeep}),
+					$elm$core$Platform$Cmd$none);
+			case 'SelectAllTF':
+				var bool = msg.a;
+				var buttonValue = model.selectButton;
+				var newVisibleRows = A2(
+					$elm$core$Maybe$map,
+					$elm$core$List$map(
+						$author$project$Main$tfselect(buttonValue)),
+					model.visibleRows);
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{selectButton: !buttonValue, visibleRows: newVisibleRows}),
+					$elm$core$Platform$Cmd$none);
+			case 'SelectPDP':
+				var pr = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							pdpSelect: $elm$core$Maybe$Just(pr)
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 'ToggleTobacco':
 				return _Utils_Tuple2(
@@ -7659,130 +7441,6 @@ var $author$project$Main$update = F2(
 							model,
 							{planG: !model.planG})),
 					$elm$core$Platform$Cmd$none);
-			case 'TogglePreferred':
-				var newBool = !model.viewPreferred;
-				var newRows = function () {
-					var _v6 = model.tableRows;
-					if (_v6.$ === 'Just') {
-						var tr = _v6.a;
-						return $elm$core$Maybe$Just(
-							A3($author$project$Main$setRows, $author$project$Main$Preferred, newBool, tr));
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							tableRows: newRows,
-							tableState: $billstclair$elm_sortable_table$Table$initialSort('category'),
-							viewPreferred: newBool
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'ToggleNonPreferred':
-				var newRows = function () {
-					var _v7 = model.tableRows;
-					if (_v7.$ === 'Just') {
-						var tr = _v7.a;
-						return $elm$core$Maybe$Just(
-							A3($author$project$Main$setRows, $author$project$Main$NonPreferred, false, tr));
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
-				var newBool = !model.viewNonpreferred;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							tableRows: newRows,
-							tableState: $billstclair$elm_sortable_table$Table$initialSort('category'),
-							viewNonpreferred: newBool
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'ToggleOutside':
-				var newRows = function () {
-					var _v8 = model.tableRows;
-					if (_v8.$ === 'Just') {
-						var tr = _v8.a;
-						return $elm$core$Maybe$Just(
-							A3($author$project$Main$setRows, $author$project$Main$Outside, false, tr));
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
-				var newBool = !model.viewOutside;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							tableRows: newRows,
-							tableState: $billstclair$elm_sortable_table$Table$initialSort('category'),
-							viewOutside: newBool
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'ToggleSelect':
-				var i = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							tableRows: A2(
-								$elm$core$Maybe$map,
-								$elm$core$List$map(
-									$author$project$Main$toggle(i)),
-								model.tableRows)
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'DeselectAll':
-				var newRows = function () {
-					var _v9 = model.tableRows;
-					if (_v9.$ === 'Just') {
-						var tr = _v9.a;
-						return $elm$core$Maybe$Just(
-							A2(
-								$elm$core$List$map,
-								function (a) {
-									return _Utils_update(
-										a,
-										{selected: false});
-								},
-								tr));
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{tableRows: newRows}),
-					$elm$core$Platform$Cmd$none);
-			case 'SelectAll':
-				var ils = msg.a;
-				var newRows = function () {
-					var _v10 = model.tableRows;
-					if (_v10.$ === 'Just') {
-						var tr = _v10.a;
-						if (ils.$ === 'Just') {
-							var ii = ils.a;
-							return $elm$core$Maybe$Just(
-								A2(
-									$elm$core$List$map,
-									$author$project$Main$selectByUID(ii),
-									tr));
-						} else {
-							return $elm$core$Maybe$Nothing;
-						}
-					} else {
-						return $elm$core$Maybe$Nothing;
-					}
-				}();
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{tableRows: newRows}),
-					$elm$core$Platform$Cmd$none);
 			case 'ZipResponse':
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
@@ -7811,7 +7469,7 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
-					var newRows = A2($elm$core$List$indexedMap, $author$project$Main$planToRow, response);
+					var newRows = A2($elm$core$List$map, $author$project$Main$planToRow, response);
 					var curl = model.url;
 					var nurl = _Utils_update(
 						curl,
@@ -7820,11 +7478,11 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								outputAvailable: true,
 								response: $elm$core$Maybe$Just(response),
 								state: $author$project$Main$Results,
 								tableRows: $elm$core$Maybe$Just(newRows),
-								url: nurl
+								url: nurl,
+								visibleRows: $elm$core$Maybe$Just(newRows)
 							}),
 						A2(
 							$elm$browser$Browser$Navigation$pushUrl,
@@ -7853,17 +7511,11 @@ var $author$project$Main$update = F2(
 				var rmsg = msg.a;
 				if (rmsg.$ === 'Ok') {
 					var response = rmsg.a;
-					var pr_sort = A2(
-						$elm$core$List$sortBy,
-						function ($) {
-							return $.plan;
-						},
-						response);
 					var prs = function () {
-						var _v15 = $elm$core$List$head(pr_sort);
-						if (_v15.$ === 'Just') {
-							var pr = _v15.a;
-							return $elm$core$Maybe$Just(pr);
+						var _v9 = $elm$core$List$head(response);
+						if (_v9.$ === 'Just') {
+							var pr = _v9.a;
+							return $elm$core$Maybe$Just(pr.rate);
 						} else {
 							return $elm$core$Maybe$Nothing;
 						}
@@ -7872,7 +7524,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								pdpList: $elm$core$Maybe$Just(pr_sort),
+								pdpList: $elm$core$Maybe$Just(response),
 								pdpSelect: prs
 							}),
 						$elm$core$Platform$Cmd$none);
@@ -7887,6 +7539,18 @@ var $author$project$Main$update = F2(
 							}),
 						$elm$core$Platform$Cmd$none);
 				}
+			case 'ToggleSelected':
+				var naic = msg.a;
+				var newTableRows = A2(
+					$elm$core$Maybe$map,
+					$elm$core$List$map(
+						$author$project$Main$toggle(naic)),
+					model.visibleRows);
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{visibleRows: newTableRows}),
+					$elm$core$Platform$Cmd$none);
 			default:
 				var timenow = msg.a;
 				var td = A2(
@@ -7920,7 +7584,6 @@ var $author$project$Main$update = F2(
 					$elm$core$Platform$Cmd$none);
 		}
 	});
-var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -7931,24 +7594,21 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$Attributes$href = function (url) {
+var $elm$html$Html$Attributes$height = function (n) {
 	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
+		_VirtualDom_attribute,
+		'height',
+		$elm$core$String$fromInt(n));
 };
 var $elm$html$Html$img = _VirtualDom_node('img');
-var $author$project$Main$ShowOutput = {$: 'ShowOutput'};
-var $author$project$Main$ShowResults = {$: 'ShowResults'};
-var $author$project$Main$ShowSubmitForm = {$: 'ShowSubmitForm'};
-var $elm$virtual_dom$VirtualDom$attribute = F2(
-	function (key, value) {
-		return A2(
-			_VirtualDom_attribute,
-			_VirtualDom_noOnOrFormAction(key),
-			_VirtualDom_noJavaScriptOrHtmlUri(value));
-	});
-var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
+var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -7967,67 +7627,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$navButton = F3(
-	function (clist, msg, tx) {
-		var classList = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			_Utils_ap(
-				_List_fromArray(
-					['two columns']),
-				clist));
-		return A2(
-			$elm$html$Html$div,
-			classList,
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$button,
-					_List_fromArray(
-						[
-							$elm$html$Html$Events$onClick(msg),
-							$elm$html$Html$Attributes$class('button-nav'),
-							A2($elm$html$Html$Attributes$attribute, 'margin', '1em')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(tx)
-						]))
-				]));
-	});
-var $author$project$Main$navBar = function (model) {
-	return A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('row')
-			]),
-		_List_fromArray(
-			[
-				A3(
-				$author$project$Main$navButton,
-				_List_fromArray(
-					['offset-by-three columns']),
-				$author$project$Main$ShowSubmitForm,
-				'Edit Info'),
-				A3($author$project$Main$navButton, _List_Nil, $author$project$Main$ShowResults, 'Edit Plans'),
-				A3($author$project$Main$navButton, _List_Nil, $author$project$Main$ShowOutput, 'Results')
-			]));
-};
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $author$project$Main$RequestPDP = {$: 'RequestPDP'};
-var $author$project$Main$SubmitForm = {$: 'SubmitForm'};
 var $author$project$Main$SelectCounty = function (a) {
 	return {$: 'SelectCounty', a: a};
 };
@@ -8063,18 +7662,17 @@ var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $author$project$Main$checkbox = F4(
 	function (title_, fvalue, handle, class_) {
-		var cl = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			class_);
 		return A2(
 			$elm$html$Html$div,
-			cl,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
 			_List_fromArray(
 				[
 					A2(
@@ -8106,99 +7704,6 @@ var $author$project$Main$checkbox = F4(
 	});
 var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
 var $elm$html$Html$form = _VirtualDom_node('form');
-var $author$project$Main$fullGenderString = function (gender) {
-	if (gender.$ === 'Male') {
-		return 'Male';
-	} else {
-		return 'Female';
-	}
-};
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
-	});
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
-};
-var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$select = _VirtualDom_node('select');
-var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
-var $author$project$Main$genderselectbox = F5(
-	function (title_, selectedG, handle, class_, i) {
-		var cl = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			class_);
-		var choices = _List_fromArray(
-			['Male', 'Female']);
-		var nls = A2(
-			$elm$core$List$map,
-			function (a) {
-				return A2(
-					$elm$html$Html$option,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$value(a),
-							$elm$html$Html$Attributes$selected(
-							_Utils_eq(
-								a,
-								$author$project$Main$fullGenderString(selectedG)))
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(a)
-						]));
-			},
-			choices);
-		return A2(
-			$elm$html$Html$div,
-			cl,
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$label,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text(title_),
-							A2(
-							$elm$html$Html$select,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onInput(handle),
-									$elm$html$Html$Attributes$class('u-full-width')
-								]),
-							nls)
-						]))
-				]));
-	});
 var $elm$html$Html$h5 = _VirtualDom_node('h5');
 var $elm$html$Html$Events$alwaysPreventDefault = function (msg) {
 	return _Utils_Tuple2(msg, true);
@@ -8243,6 +7748,41 @@ var $elm$core$List$drop = F2(
 			}
 		}
 	});
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$html$Html$option = _VirtualDom_node('option');
+var $elm$html$Html$select = _VirtualDom_node('select');
+var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$selectbox = F5(
 	function (title_, choices, handle, class_, i) {
 		var def = $elm$core$List$head(
@@ -8266,15 +7806,12 @@ var $author$project$Main$selectbox = F5(
 						]));
 			},
 			choices);
-		var cl = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			class_);
 		return A2(
 			$elm$html$Html$div,
-			cl,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
 			_List_fromArray(
 				[
 					A2(
@@ -8294,19 +7831,17 @@ var $author$project$Main$selectbox = F5(
 						]))
 				]));
 	});
-var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $author$project$Main$textbox = F5(
-	function (title_, placeholder_, fvalue, handle, classLs) {
-		var cl = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			classLs);
+	function (title_, placeholder_, fvalue, handle, class_) {
 		return A2(
 			$elm$html$Html$div,
-			cl,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
 			_List_fromArray(
 				[
 					A2(
@@ -8321,8 +7856,6 @@ var $author$project$Main$textbox = F5(
 								[
 									$elm$html$Html$Attributes$type_('text'),
 									$elm$html$Html$Attributes$class('u-full-width'),
-									$elm$html$Html$Attributes$id(
-									$elm$core$String$toLower(title_)),
 									$elm$html$Html$Attributes$placeholder(placeholder_),
 									$elm$html$Html$Attributes$value(fvalue),
 									$elm$html$Html$Events$onInput(handle)
@@ -8333,18 +7866,15 @@ var $author$project$Main$textbox = F5(
 	});
 var $author$project$Main$textboxCheck = F6(
 	function (title_, placeholder_, fvalue, handle, validator, class_) {
-		var cl = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			class_);
 		var _v0 = fvalue.value;
 		if (_v0.$ === 'Just') {
 			var i = _v0.a;
 			return A2(
 				$elm$html$Html$div,
-				cl,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(class_)
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -8371,7 +7901,10 @@ var $author$project$Main$textboxCheck = F6(
 		} else {
 			return A2(
 				$elm$html$Html$div,
-				cl,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class(class_)
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -8423,181 +7956,88 @@ var $author$project$Main$validateVI = function (field) {
 };
 var $author$project$Main$renderForm = F3(
 	function (model, func, buttonLabel) {
-		var submitButton = _Utils_eq(model.state, $author$project$Main$Loading) ? A2(
-			$elm$html$Html$button,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('button'),
-					A2($elm$html$Html$Attributes$style, 'width', '100%'),
-					$elm$html$Html$Attributes$disabled(true)
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Loading')
-				])) : A2(
-			$elm$html$Html$button,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('button-primary'),
-					A2($elm$html$Html$Attributes$style, 'width', '100%'),
-					$elm$html$Html$Attributes$disabled(!model.valid)
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Submit')
-				]));
 		return A2(
-			$elm$html$Html$div,
-			_List_Nil,
+			$elm$html$Html$form,
 			_List_fromArray(
 				[
-					A2(
-					$elm$html$Html$div,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$elm$html$Html$form,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onSubmit(func)
-								]),
-							A2(
-								$elm$core$List$map,
-								function (a) {
-									return A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('row')
-											]),
-										_List_fromArray(
-											[a]));
-								},
-								_List_fromArray(
-									[
-										A5(
-										$author$project$Main$textbox,
-										'Name',
-										'John Smith',
-										model.name,
-										$author$project$Main$SetName,
-										_List_fromArray(
-											['four columns', 'offset-by-four columns'])),
-										A6(
-										$author$project$Main$textboxCheck,
-										'Age',
-										'65',
-										model.age,
-										$author$project$Main$SetAge,
-										$author$project$Main$validateVI(model.age),
-										_List_fromArray(
-											['two columns', 'offset-by-four columns'])),
-										A6(
-										$author$project$Main$textboxCheck,
-										'ZIP',
-										'12345',
-										model.zip,
-										$author$project$Main$SetZip,
-										$author$project$Main$validateVI(model.zip),
-										_List_fromArray(
-											['two columns', 'offset-by-four columns'])),
-										A5(
-										$author$project$Main$selectbox,
-										'County',
-										model.counties,
-										$author$project$Main$SelectCounty,
-										_List_fromArray(
-											['three columns', 'offset-by-four columns']),
-										0),
-										A5(
-										$author$project$Main$genderselectbox,
-										'Gender',
-										model.gender,
-										$author$project$Main$SelectGender,
-										_List_fromArray(
-											['three columns', 'offset-by-four columns']),
-										0),
-										A5(
-										$author$project$Main$selectbox,
-										'Effective Date',
-										A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
-										$author$project$Main$SelectDate,
-										_List_fromArray(
-											['three columns', 'offset-by-four columns']),
-										1),
-										A4(
-										$author$project$Main$checkbox,
-										'Tobacco User?',
-										model.tobacco,
-										$author$project$Main$ToggleTobacco,
-										_List_fromArray(
-											['four columns', 'offset-by-four columns'])),
-										A4(
-										$author$project$Main$checkbox,
-										'Apply Household Discount?',
-										model.discounts,
-										$author$project$Main$ToggleDiscounts,
-										_List_fromArray(
-											['four columns', 'offset-by-four columns'])),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('four columns'),
-												$elm$html$Html$Attributes$class('offset-by-four columns')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$elm$html$Html$h5,
-												_List_fromArray(
-													[
-														$elm$html$Html$Attributes$class('u-full-width'),
-														A2($elm$html$Html$Attributes$style, 'margin-top', '1rem')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text('Which Plans?')
-													]))
-											])),
-										A4(
-										$author$project$Main$checkbox,
-										'Plan G',
-										model.planG,
-										$author$project$Main$ToggleG,
-										_List_fromArray(
-											['four columns', 'offset-by-four columns'])),
-										A4(
-										$author$project$Main$checkbox,
-										'Plan N',
-										model.planN,
-										$author$project$Main$ToggleN,
-										_List_fromArray(
-											['four columns', 'offset-by-four columns'])),
-										A4(
-										$author$project$Main$checkbox,
-										'Plan F',
-										model.planF,
-										$author$project$Main$ToggleF,
-										_List_fromArray(
-											['four columns', 'offset-by-four columns'])),
-										A2(
-										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('four columns'),
-												$elm$html$Html$Attributes$class('offset-by-four columns')
-											]),
-										_List_fromArray(
-											[submitButton]))
-									])))
-						]))
-				]));
+					$elm$html$Html$Events$onSubmit(func)
+				]),
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('row')
+							]),
+						_List_fromArray(
+							[a]));
+				},
+				_List_fromArray(
+					[
+						A5($author$project$Main$textbox, 'Name', 'John Smith', model.name, $author$project$Main$SetName, 'four columns'),
+						A6(
+						$author$project$Main$textboxCheck,
+						'Age',
+						'65',
+						model.age,
+						$author$project$Main$SetAge,
+						$author$project$Main$validateVI(model.age),
+						'two columns'),
+						A6(
+						$author$project$Main$textboxCheck,
+						'ZIP',
+						'12345',
+						model.zip,
+						$author$project$Main$SetZip,
+						$author$project$Main$validateVI(model.zip),
+						'two columns'),
+						A5($author$project$Main$selectbox, 'County', model.counties, $author$project$Main$SelectCounty, 'three columns', 0),
+						A5(
+						$author$project$Main$selectbox,
+						'Gender',
+						_List_fromArray(
+							['Male', 'Female']),
+						$author$project$Main$SelectGender,
+						'three columns',
+						0),
+						A5(
+						$author$project$Main$selectbox,
+						'Effective Date',
+						A2($elm$core$List$map, $elm$core$Tuple$first, model.dateSelectChoices),
+						$author$project$Main$SelectDate,
+						'three columns',
+						1),
+						A4($author$project$Main$checkbox, 'Tobacco User?', model.tobacco, $author$project$Main$ToggleTobacco, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Apply Discounts?', model.discounts, $author$project$Main$ToggleDiscounts, 'u-full-width'),
+						A2(
+						$elm$html$Html$h5,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('u-full-width')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Which Plans?')
+							])),
+						A4($author$project$Main$checkbox, 'Plan N', model.planN, $author$project$Main$ToggleN, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Plan F', model.planF, $author$project$Main$ToggleF, 'u-full-width'),
+						A4($author$project$Main$checkbox, 'Plan G', model.planG, $author$project$Main$ToggleG, 'u-full-width'),
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								A2($elm$html$Html$Attributes$style, 'block', 'display'),
+								$elm$html$Html$Attributes$class('button-primary'),
+								$elm$html$Html$Attributes$disabled(!model.valid)
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Submit')
+							]))
+					])));
 	});
-var $author$project$Main$F = {$: 'F'};
-var $author$project$Main$G = {$: 'G'};
-var $author$project$Main$N = {$: 'N'};
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
@@ -8840,173 +8280,6 @@ var $author$project$Main$currencyAddThree = F3(
 	function (a, b, c) {
 		return (!c) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, (a + b) + c));
 	});
-var $author$project$Main$currencyAddTwo = F2(
-	function (a, b) {
-		return (!b) ? '$ ---.--' : ('$' + A2($myrho$elm_round$Round$round, 2, a + b));
-	});
-var $elm$html$Html$hr = _VirtualDom_node('hr');
-var $elm$core$Dict$fromList = function (assocs) {
-	return A3(
-		$elm$core$List$foldl,
-		F2(
-			function (_v0, dict) {
-				var key = _v0.a;
-				var value = _v0.b;
-				return A3($elm$core$Dict$insert, key, value, dict);
-			}),
-		$elm$core$Dict$empty,
-		assocs);
-};
-var $author$project$Main$getEnrollLink = function (tr) {
-	var dd = $elm$core$Dict$fromList(
-		_List_fromArray(
-			[
-				_Utils_Tuple2(79413, 'https://www.uhcjarvis.com/content/jarvis/en/sign_in.html#/sign_in'),
-				_Utils_Tuple2(12321, 'https://www.aetnaseniorproducts.com/'),
-				_Utils_Tuple2(68500, 'https://www.aetnaseniorproducts.com/'),
-				_Utils_Tuple2(72052, 'https://www.aetnaseniorproducts.com/'),
-				_Utils_Tuple2(78700, 'https://www.aetnaseniorproducts.com/'),
-				_Utils_Tuple2(47171, 'http://bluekc.com/'),
-				_Utils_Tuple2(65722, 'http://agentviewcigna.com/'),
-				_Utils_Tuple2(67369, 'http://agentviewcigna.com/'),
-				_Utils_Tuple2(88366, 'http://agentviewcigna.com/'),
-				_Utils_Tuple2(60219, 'https://www.humana.com/logon'),
-				_Utils_Tuple2(70580, 'https://www.humana.com/logon'),
-				_Utils_Tuple2(73288, 'https://www.humana.com/logon'),
-				_Utils_Tuple2(13100, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
-				_Utils_Tuple2(69868, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
-				_Utils_Tuple2(71412, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
-				_Utils_Tuple2(72850, 'https://accounts.mutualofomaha.com/?r=https%3A%2F%2Fproducer.mutualofomaha.com%2Fenterprise%2Fmyportal%2Fhome%2F#login'),
-				_Utils_Tuple2(66281, 'https://www.taagentnetinfo.com/login.aspx'),
-				_Utils_Tuple2(86231, 'https://www.taagentnetinfo.com/login.aspx'),
-				_Utils_Tuple2(10345, 'https://brokerportal.anthem.com/apps/ptb/login'),
-				_Utils_Tuple2(28207, 'https://brokerportal.anthem.com/apps/ptb/login'),
-				_Utils_Tuple2(62825, 'https://brokerportal.anthem.com/apps/ptb/login'),
-				_Utils_Tuple2(95120, 'https://brokerportal.anthem.com/apps/ptb/login'),
-				_Utils_Tuple2(52618, 'https://brokerportal.anthem.com/apps/ptb/login'),
-				_Utils_Tuple2(71835, 'https://brokerportal.anthem.com/apps/ptb/login'),
-				_Utils_Tuple2(31119, 'http://micapps.gomedico.com/'),
-				_Utils_Tuple2(65641, 'http://micapps.gomedico.com/'),
-				_Utils_Tuple2(79987, 'http://micapps.gomedico.com/')
-			]));
-	return A2($elm$core$Dict$get, tr.naic, dd);
-};
-var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
-var $author$project$Main$makeEnrollButton = function (tr) {
-	var _v0 = $author$project$Main$getEnrollLink(tr);
-	if (_v0.$ === 'Just') {
-		var l = _v0.a;
-		return A2(
-			$elm$html$Html$a,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$href(l),
-					$elm$html$Html$Attributes$target('_blank')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$button,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('button-primary')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Enroll')
-						]))
-				]));
-	} else {
-		return A2(
-			$elm$html$Html$button,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('button-primary'),
-					$elm$html$Html$Attributes$disabled(true)
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Enroll')
-				]));
-	}
-};
-var $elm$html$Html$td = _VirtualDom_node('td');
-var $elm$html$Html$tr = _VirtualDom_node('tr');
-var $author$project$Main$makeEnrollRow = function (ls) {
-	var ll = A2(
-		$elm$core$List$sortBy,
-		function ($) {
-			return $.displayName;
-		},
-		A2(
-			$elm$core$List$filter,
-			function ($) {
-				return $.selected;
-			},
-			ls));
-	var lb = _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$td,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('')
-				]))
-		]);
-	var eb = A2(
-		$elm$core$List$map,
-		function (a) {
-			return A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$Main$makeEnrollButton(a)
-					]));
-		},
-		ll);
-	return A2(
-		$elm$html$Html$tr,
-		_List_Nil,
-		_Utils_ap(lb, eb));
-};
-var $author$project$Main$pTextUtil = function (pt) {
-	switch (pt.$) {
-		case 'G':
-			return 'Plan G Monthly Premium';
-		case 'N':
-			return 'Plan N Monthly Premium';
-		default:
-			return 'Plan F Monthly Premium';
-	}
-};
-var $author$project$Main$rateUtil = F2(
-	function (pt, ls) {
-		switch (pt.$) {
-			case 'G':
-				return A2(
-					$elm$core$List$map,
-					function ($) {
-						return $.gRate;
-					},
-					ls);
-			case 'N':
-				return A2(
-					$elm$core$List$map,
-					function ($) {
-						return $.nRate;
-					},
-					ls);
-			default:
-				return A2(
-					$elm$core$List$map,
-					function ($) {
-						return $.fRate;
-					},
-					ls);
-		}
-	});
 var $elm$core$String$replace = F3(
 	function (before, after, string) {
 		return A2(
@@ -9030,37 +8303,11 @@ var $author$project$Main$safeCurrencyFloat = function (ss) {
 		return 0.0;
 	}
 };
-var $author$project$Main$simpleTotalRow = F3(
-	function (rowname, las, l) {
-		var ls = _Utils_ap(
-			_List_fromArray(
-				[rowname]),
-			l);
-		var attrss = _Utils_ap(
-			las,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'background', '#d3d3d3')
-				]));
-		return A2(
-			$elm$html$Html$tr,
-			_List_Nil,
-			A2(
-				$elm$core$List$map,
-				function (a) {
-					return A2(
-						$elm$html$Html$td,
-						attrss,
-						_List_fromArray(
-							[
-								$elm$html$Html$text(a)
-							]));
-				},
-				ls));
-	});
 var $elm$html$Html$table = _VirtualDom_node('table');
 var $elm$html$Html$tbody = _VirtualDom_node('tbody');
 var $elm$html$Html$thead = _VirtualDom_node('thead');
+var $elm$html$Html$td = _VirtualDom_node('td');
+var $elm$html$Html$tr = _VirtualDom_node('tr');
 var $author$project$Main$toBodyRow = F3(
 	function (rowname, attrs, l) {
 		var ls = _Utils_ap(
@@ -9086,451 +8333,246 @@ var $author$project$Main$toBodyRow = F3(
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $author$project$Main$toHeadRow = F2(
 	function (rowname, l) {
-		var lsh = _List_fromArray(
+		var ls = _Utils_ap(
+			_List_fromArray(
+				[rowname]),
+			l);
+		return A2(
+			$elm$html$Html$tr,
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$th,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text(a)
+							]));
+				},
+				ls));
+	});
+var $author$project$Main$customBackground = F4(
+	function (col1, col2, tv, v) {
+		var c = _Utils_eq(tv, v) ? col2 : col1;
+		return _List_fromArray(
 			[
-				A2(
-				$elm$html$Html$th,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('out-th'),
-						A2($elm$html$Html$Attributes$style, 'font-size', '2.0rem')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text(rowname)
-					]))
+				A2($elm$html$Html$Attributes$style, 'background', c)
 			]);
-		var ls = A2(
-			$elm$core$List$map,
+	});
+var $elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
+	});
+var $elm$core$List$minimum = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(
+			A3($elm$core$List$foldl, $elm$core$Basics$min, x, xs));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $author$project$Main$totalRow = F4(
+	function (rowname, col1, col2, l) {
+		var mm = $elm$core$List$minimum(
+			A2(
+				$elm$core$List$filter,
+				function (a) {
+					return a !== '$ ---.--';
+				},
+				l));
+		var m = function () {
+			if (mm.$ === 'Just') {
+				var n = mm.a;
+				return n;
+			} else {
+				return '';
+			}
+		}();
+		var ls = _Utils_ap(
+			_List_fromArray(
+				[rowname]),
+			l);
+		return A2(
+			$elm$html$Html$tr,
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$elm$html$Html$td,
+						A4($author$project$Main$customBackground, col1, col2, m, a),
+						_List_fromArray(
+							[
+								$elm$html$Html$text(a)
+							]));
+				},
+				ls));
+	});
+var $author$project$Main$renderOutput = function (model) {
+	var pdp = $author$project$Main$safeCurrencyFloat(model.pdpSelect);
+	var partb = $author$project$Main$safeCurrencyFloat(model.partB);
+	var mycalc = A2($author$project$Main$currencyAddThree, pdp, partb);
+	var _v0 = model.visibleRows;
+	if (_v0.$ === 'Just') {
+		var v = _v0.a;
+		var vr = A2(
+			$elm$core$List$filter,
 			function (a) {
-				return A2(
-					$elm$html$Html$th,
+				return a.selected;
+			},
+			v);
+		var pdpRow = A3(
+			$author$project$Main$toBodyRow,
+			'PDP Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return $author$project$Main$safeString(model.pdpSelect);
+				},
+				vr));
+		var partBRow = A3(
+			$author$project$Main$toBodyRow,
+			'Part B Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return $author$project$Main$safeString(model.partB);
+				},
+				vr));
+		var nTotals = A4(
+			$author$project$Main$totalRow,
+			'N Plan Total',
+			'#e6770f',
+			'#e60f0f',
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return mycalc(
+						$author$project$Main$safeCurrencyFloat(
+							$elm$core$Maybe$Just(a.nRate)));
+				},
+				vr));
+		var nRates = A3(
+			$author$project$Main$toBodyRow,
+			'Plan N Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return a.nRate;
+				},
+				vr));
+		var gTotals = A4(
+			$author$project$Main$totalRow,
+			'G Plan Total',
+			'#6ccbfe',
+			'#e60f0f',
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return mycalc(
+						$author$project$Main$safeCurrencyFloat(
+							$elm$core$Maybe$Just(a.gRate)));
+				},
+				vr));
+		var gRates = A3(
+			$author$project$Main$toBodyRow,
+			'Plan G Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return a.gRate;
+				},
+				vr));
+		var fTotals = A4(
+			$author$project$Main$totalRow,
+			'F Plan Total',
+			'#d9ffcc',
+			'#e60f0f',
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return mycalc(
+						$author$project$Main$safeCurrencyFloat(
+							$elm$core$Maybe$Just(a.fRate)));
+				},
+				vr));
+		var fRates = A3(
+			$author$project$Main$toBodyRow,
+			'Plan F Rate',
+			_List_Nil,
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return a.fRate;
+				},
+				vr));
+		var companyNames = A2(
+			$author$project$Main$toHeadRow,
+			'',
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return a.company;
+				},
+				vr));
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$table,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$class('out-th')
+							$elm$html$Html$Attributes$class('u-full-width')
 						]),
 					_List_fromArray(
 						[
-							$elm$html$Html$text(a)
-						]));
-			},
-			l);
-		var lcomb = _Utils_ap(lsh, ls);
-		return A2($elm$html$Html$tr, _List_Nil, lcomb);
-	});
-var $author$project$Main$outputTable = F2(
-	function (model, pt) {
-		var _v0 = model.tableRows;
-		if (_v0.$ === 'Just') {
-			var tr = _v0.a;
-			var vr = A2(
-				$elm$core$List$sortBy,
-				function (a) {
-					return a.displayName;
-				},
-				A2(
-					$elm$core$List$filter,
-					function (a) {
-						return a.selected;
-					},
-					tr));
-			var rates = A2($author$project$Main$rateUtil, pt, vr);
-			var rateRow = A3(
-				$author$project$Main$toBodyRow,
-				$author$project$Main$pTextUtil(pt),
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('out-td')
-					]),
-				rates);
-			var pdpString = function () {
-				var _v3 = model.pdpSelect;
-				if (_v3.$ === 'Just') {
-					var pr = _v3.a;
-					return $elm$core$Maybe$Just(pr.rate);
-				} else {
-					return $elm$core$Maybe$Nothing;
-				}
-			}();
-			var pdpRow = A3(
-				$author$project$Main$toBodyRow,
-				'Drug Plan Monthly Premium',
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('out-td')
-					]),
-				A2(
-					$elm$core$List$map,
-					function (a) {
-						return $author$project$Main$safeString(pdpString);
-					},
-					vr));
-			var pdp = function () {
-				var _v2 = model.pdpSelect;
-				if (_v2.$ === 'Just') {
-					var pr = _v2.a;
-					return $author$project$Main$safeCurrencyFloat(
-						$elm$core$Maybe$Just(pr.rate));
-				} else {
-					return 0.0;
-				}
-			}();
-			var partb = $author$project$Main$safeCurrencyFloat(model.partB);
-			var partBRow = A3(
-				$author$project$Main$toBodyRow,
-				'Part B Monthly Premium',
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('out-td')
-					]),
-				A2(
-					$elm$core$List$map,
-					function (a) {
-						return $author$project$Main$safeString(model.partB);
-					},
-					vr));
-			var pText = function () {
-				switch (pt.$) {
-					case 'G':
-						return 'PLAN G';
-					case 'N':
-						return 'PLAN N';
-					default:
-						return 'PLAN F';
-				}
-			}();
-			var insuranceTotal = A2(
-				$elm$core$List$map,
-				function (r) {
-					return A2(
-						$author$project$Main$currencyAddTwo,
-						pdp,
-						$author$project$Main$safeCurrencyFloat(
-							$elm$core$Maybe$Just(r)));
-				},
-				rates);
-			var insuranceTotalRow = A3(
-				$author$project$Main$simpleTotalRow,
-				'Insurance Monthly Total',
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('out-td')
-					]),
-				insuranceTotal);
-			var grandTotal = A2(
-				$elm$core$List$map,
-				function (t) {
-					return A3(
-						$author$project$Main$currencyAddThree,
-						pdp,
-						partb,
-						$author$project$Main$safeCurrencyFloat(
-							$elm$core$Maybe$Just(t)));
-				},
-				rates);
-			var grandTotalRow = A3(
-				$author$project$Main$simpleTotalRow,
-				'Grand Monthly Total',
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('out-td')
-					]),
-				grandTotal);
-			var enrollRow = $author$project$Main$makeEnrollRow(tr);
-			var companyNames = A2(
-				$author$project$Main$toHeadRow,
-				pText,
-				A2(
-					$elm$core$List$map,
-					function ($) {
-						return $.displayName;
-					},
-					vr));
-			return A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('twelve columns'),
-						A2($elm$html$Html$Attributes$style, 'overflow', 'hidden'),
-						A2($elm$html$Html$Attributes$style, 'overflow-x', 'scroll')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$table,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$id('output-table')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$thead,
-								_List_Nil,
-								_List_fromArray(
-									[companyNames])),
-								A2(
-								$elm$html$Html$tbody,
-								_List_Nil,
-								_List_fromArray(
-									[rateRow, pdpRow, insuranceTotalRow, partBRow, grandTotalRow, enrollRow]))
-							])),
-						A2($elm$html$Html$hr, _List_Nil, _List_Nil)
-					]));
-		} else {
-			return $elm$html$Html$text('No Output Available');
-		}
-	});
-var $elm$html$Html$strong = _VirtualDom_node('strong');
-var $author$project$Main$personalInfo = function (model) {
-	var zipText = function () {
-		var _v2 = model.zip.value;
-		if (_v2.$ === 'Just') {
-			var v = _v2.a;
-			return $elm$core$String$fromInt(v);
-		} else {
-			return '';
-		}
-	}();
-	var pdpText = function () {
-		var _v1 = model.pdpSelect;
-		if (_v1.$ === 'Just') {
-			var pr = _v1.a;
-			return $author$project$Main$pdpFullString(pr);
-		} else {
-			return '';
-		}
-	}();
-	var dsc = model.discounts ? 'Yes' : 'No';
-	var docusignLink = 'https://account.docusign.com';
-	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=010U3815';
-	var ageText = function () {
-		var _v0 = model.age.value;
-		if (_v0.$ === 'Just') {
-			var a = _v0.a;
-			return $elm$core$String$fromInt(a);
-		} else {
-			return '';
-		}
-	}();
-	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + ($author$project$Main$genderString(model.gender) + ('   |   ' + ('Discount Applied: ' + dsc)))))));
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('seven columns')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$strong,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text(model.name)
-											]))
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(row2)
-									])),
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text(pdpText)
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('five columns')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('row')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$a,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('button'),
-												$elm$html$Html$Attributes$target('_blank'),
-												$elm$html$Html$Attributes$href(dentalLink),
-												A2($elm$html$Html$Attributes$style, 'width', '50%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Dental Quote')
-											])),
-										A2(
-										$elm$html$Html$a,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$class('button'),
-												$elm$html$Html$Attributes$target('_blank'),
-												$elm$html$Html$Attributes$href(docusignLink),
-												A2($elm$html$Html$Attributes$style, 'width', '50%')
-											]),
-										_List_fromArray(
-											[
-												$elm$html$Html$text('Docusign')
-											]))
-									]))
-							]))
-					]))
-			]));
+							A2(
+							$elm$html$Html$thead,
+							_List_Nil,
+							_List_fromArray(
+								[companyNames])),
+							A2(
+							$elm$html$Html$tbody,
+							_List_Nil,
+							_List_fromArray(
+								[pdpRow, partBRow, fRates, fTotals, gRates, gTotals, nRates, nTotals]))
+						]))
+				]));
+	} else {
+		return $elm$html$Html$text('No Output Selected');
+	}
 };
-var $author$project$Main$renderOutput = function (model) {
-	var tl = A3(
-		$elm$core$List$map2,
-		$elm$core$Tuple$pair,
-		_List_fromArray(
-			[model.planG, model.planN, model.planF]),
-		_List_fromArray(
-			[$author$project$Main$G, $author$project$Main$N, $author$project$Main$F]));
-	var tlf = A2(
-		$elm$core$List$filter,
-		function (a) {
-			return a.a;
-		},
-		tl);
-	var pl = A2($elm$core$List$map, $elm$core$Tuple$second, tlf);
-	var tables = A2(
-		$elm$core$List$map,
-		$author$project$Main$outputTable(model),
-		pl);
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_Utils_ap(
-			_List_fromArray(
-				[
-					$author$project$Main$personalInfo(model)
-				]),
-			tables));
-};
-var $author$project$Main$DeselectAll = {$: 'DeselectAll'};
-var $author$project$Main$SelectAll = function (a) {
-	return {$: 'SelectAll', a: a};
-};
+var $author$project$Main$HideSelected = {$: 'HideSelected'};
 var $author$project$Main$SelectPDP = function (a) {
 	return {$: 'SelectPDP', a: a};
 };
-var $author$project$Main$ToggleNonPreferred = {$: 'ToggleNonPreferred'};
-var $author$project$Main$ToggleOutside = {$: 'ToggleOutside'};
-var $author$project$Main$TogglePreferred = {$: 'TogglePreferred'};
+var $author$project$Main$SelectPreset = function (a) {
+	return {$: 'SelectPreset', a: a};
+};
+var $author$project$Main$ShowOutput = {$: 'ShowOutput'};
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 'SetTableState', a: a};
 };
-var $author$project$Main$categoryLabel = function (r) {
-	switch (r.$) {
-		case 'Preferred':
-			return 'Preferred';
-		case 'NonPreferred':
-			return 'Non-Preferred';
-		default:
-			return 'Outside';
-	}
-};
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
-	});
+var $billstclair$elm_sortable_table$Table$None = {$: 'None'};
+var $billstclair$elm_sortable_table$Table$unsortable = $billstclair$elm_sortable_table$Table$None;
 var $billstclair$elm_sortable_table$Table$Column = function (a) {
 	return {$: 'Column', a: a};
 };
-var $billstclair$elm_sortable_table$Table$ColumnData = F3(
-	function (name, viewData, sorter) {
-		return {name: name, sorter: sorter, viewData: viewData};
-	});
+var $billstclair$elm_sortable_table$Table$veryCustomColumn = $billstclair$elm_sortable_table$Table$Column;
 var $billstclair$elm_sortable_table$Table$HtmlDetails = F2(
 	function (attributes, children) {
 		return {attributes: attributes, children: children};
 	});
-var $billstclair$elm_sortable_table$Table$textDetails = function (str) {
-	return A2(
-		$billstclair$elm_sortable_table$Table$HtmlDetails,
-		_List_Nil,
-		_List_fromArray(
-			[
-				$elm$html$Html$text(str)
-			]));
-};
-var $billstclair$elm_sortable_table$Table$customColumn = function (_v0) {
-	var name = _v0.name;
-	var viewData = _v0.viewData;
-	var sorter = _v0.sorter;
-	return $billstclair$elm_sortable_table$Table$Column(
-		A3(
-			$billstclair$elm_sortable_table$Table$ColumnData,
-			name,
-			A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, viewData),
-			sorter));
-};
-var $billstclair$elm_sortable_table$Table$IncOrDec = function (a) {
-	return {$: 'IncOrDec', a: a};
-};
-var $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy = function (toComparable) {
-	return $billstclair$elm_sortable_table$Table$IncOrDec(
-		$elm$core$List$sortBy(toComparable));
-};
-var $author$project$Main$categoryColumn = $billstclair$elm_sortable_table$Table$customColumn(
-	{
-		name: 'Category',
-		sorter: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(
-			function ($) {
-				return $.priority;
-			}),
-		viewData: A2(
-			$elm$core$Basics$composeL,
-			$author$project$Main$categoryLabel,
-			function ($) {
-				return $.category;
-			})
-	});
-var $billstclair$elm_sortable_table$Table$None = {$: 'None'};
-var $billstclair$elm_sortable_table$Table$unsortable = $billstclair$elm_sortable_table$Table$None;
-var $billstclair$elm_sortable_table$Table$veryCustomColumn = $billstclair$elm_sortable_table$Table$Column;
 var $author$project$Main$viewCheckbox = function (_v0) {
 	var selected = _v0.selected;
 	return A2(
@@ -9657,6 +8699,40 @@ var $billstclair$elm_sortable_table$Table$simpleThead = function (headers) {
 		A2($elm$core$List$map, $billstclair$elm_sortable_table$Table$simpleTheadHelp, headers));
 };
 var $billstclair$elm_sortable_table$Table$defaultCustomizations = {caption: $elm$core$Maybe$Nothing, rowAttrs: $billstclair$elm_sortable_table$Table$simpleRowAttrs, tableAttrs: _List_Nil, tbodyAttrs: _List_Nil, tfoot: $elm$core$Maybe$Nothing, thead: $billstclair$elm_sortable_table$Table$simpleThead};
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $billstclair$elm_sortable_table$Table$IncOrDec = function (a) {
+	return {$: 'IncOrDec', a: a};
+};
+var $elm$core$List$sortBy = _List_sortBy;
+var $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy = function (toComparable) {
+	return $billstclair$elm_sortable_table$Table$IncOrDec(
+		$elm$core$List$sortBy(toComparable));
+};
+var $billstclair$elm_sortable_table$Table$textDetails = function (str) {
+	return A2(
+		$billstclair$elm_sortable_table$Table$HtmlDetails,
+		_List_Nil,
+		_List_fromArray(
+			[
+				$elm$html$Html$text(str)
+			]));
+};
+var $billstclair$elm_sortable_table$Table$intColumn = F2(
+	function (name, toInt) {
+		return $billstclair$elm_sortable_table$Table$Column(
+			{
+				name: name,
+				sorter: $billstclair$elm_sortable_table$Table$increasingOrDecreasingBy(toInt),
+				viewData: A2(
+					$elm$core$Basics$composeL,
+					A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, $elm$core$String$fromInt),
+					toInt)
+			});
+	});
 var $billstclair$elm_sortable_table$Table$stringColumn = F2(
 	function (name, toStr) {
 		return $billstclair$elm_sortable_table$Table$Column(
@@ -9666,14 +8742,14 @@ var $billstclair$elm_sortable_table$Table$stringColumn = F2(
 				viewData: A2($elm$core$Basics$composeL, $billstclair$elm_sortable_table$Table$textDetails, toStr)
 			});
 	});
-var $author$project$Main$ToggleSelect = function (a) {
-	return {$: 'ToggleSelect', a: a};
+var $author$project$Main$ToggleSelected = function (a) {
+	return {$: 'ToggleSelected', a: a};
 };
 var $author$project$Main$toRowAttrs = function (tablerow) {
 	return _List_fromArray(
 		[
 			$elm$html$Html$Events$onClick(
-			$author$project$Main$ToggleSelect(tablerow.uid)),
+			$author$project$Main$ToggleSelected(tablerow.naic)),
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
@@ -9689,13 +8765,13 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'Company',
 				function ($) {
-					return $.displayName;
+					return $.company;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
-				'Full Name',
+				'F Rate',
 				function ($) {
-					return $.company;
+					return $.fRate;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
@@ -9710,54 +8786,81 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 					return $.nRate;
 				}),
 				A2(
-				$billstclair$elm_sortable_table$Table$stringColumn,
-				'F Rate',
+				$billstclair$elm_sortable_table$Table$intColumn,
+				'naic',
 				function ($) {
-					return $.fRate;
-				}),
-				$author$project$Main$categoryColumn
+					return $.naic;
+				})
 			]),
 		customizations: _Utils_update(
 			$billstclair$elm_sortable_table$Table$defaultCustomizations,
-			{
-				rowAttrs: $author$project$Main$toRowAttrs,
-				tableAttrs: _List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'margin-left', 'auto'),
-						A2($elm$html$Html$Attributes$style, 'margin-right', 'auto')
-					])
-			}),
+			{rowAttrs: $author$project$Main$toRowAttrs}),
 		toId: function ($) {
 			return $.company;
 		},
 		toMsg: $author$project$Main$SetTableState
 	});
+var $author$project$Main$defselectbox = F6(
+	function (title_, def, choices, handle, class_, i) {
+		var nls = A2(
+			$elm$core$List$map,
+			function (a) {
+				return A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value(a),
+							$elm$html$Html$Attributes$selected(
+							_Utils_eq(a, def))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(a)
+						]));
+			},
+			choices);
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class(class_)
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(title_),
+							A2(
+							$elm$html$Html$select,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onInput(handle),
+									$elm$html$Html$Attributes$class('u-full-width')
+								]),
+							nls)
+						]))
+				]));
+	});
+var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = F2(
 	function (def, pr) {
-		var p_text = $author$project$Main$pdpFullString(pr);
-		var def_text = function () {
-			if (def.$ === 'Just') {
-				var d = def.a;
-				return $elm$core$Maybe$Just(
-					$author$project$Main$pdpFullString(d));
-			} else {
-				return $elm$core$Maybe$Nothing;
-			}
-		}();
 		return A2(
 			$elm$html$Html$option,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$value(p_text),
+					$elm$html$Html$Attributes$value(pr.rate),
 					$elm$html$Html$Attributes$selected(
 					_Utils_eq(
-						$elm$core$Maybe$Just(p_text),
-						def_text))
+						$elm$core$Maybe$Just(pr.rate),
+						def))
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(p_text)
+					$elm$html$Html$text(pr.plan)
 				]));
 	});
 var $author$project$Main$pdpSelectBox = F3(
@@ -9768,8 +8871,7 @@ var $author$project$Main$pdpSelectBox = F3(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$class('six columns'),
-						$elm$html$Html$Attributes$class('offset-by-three column')
+						$elm$html$Html$Attributes$class('six columns')
 					]),
 				_List_fromArray(
 					[
@@ -9786,15 +8888,14 @@ var $author$project$Main$pdpSelectBox = F3(
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Prescription Dug Plan:')
+										$elm$html$Html$text('Select PDP:')
 									])),
 								A2(
 								$elm$html$Html$select,
 								_List_fromArray(
 									[
 										$elm$html$Html$Events$onInput(handle),
-										$elm$html$Html$Attributes$class('u-full-width'),
-										$elm$html$Html$Attributes$id('pdp-select')
+										$elm$html$Html$Attributes$class('u-full-width')
 									]),
 								A2(
 									$elm$core$List$map,
@@ -9827,6 +8928,34 @@ var $author$project$Main$pdpSelectBox = F3(
 					]));
 		}
 	});
+var $author$project$Main$SelectAllTF = function (a) {
+	return {$: 'SelectAllTF', a: a};
+};
+var $author$project$Main$selectTFButton = function (bool) {
+	return bool ? A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Events$onClick(
+				$author$project$Main$SelectAllTF(false)),
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Select All')
+			])) : A2(
+		$elm$html$Html$button,
+		_List_fromArray(
+			[
+				$elm$html$Html$Events$onClick(
+				$author$project$Main$SelectAllTF(true)),
+				A2($elm$html$Html$Attributes$style, 'display', 'block')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Unselect All')
+			]));
+};
 var $elm$html$Html$caption = _VirtualDom_node('caption');
 var $billstclair$elm_sortable_table$Table$applySorter = F3(
 	function (isReversed, sorter, data) {
@@ -10044,297 +9173,164 @@ var $billstclair$elm_sortable_table$Table$view = F3(
 				}
 			}());
 	});
-var $author$project$Main$safeAppend = F2(
-	function (a, b) {
-		if (a.$ === 'Just') {
-			var aa = a.a;
-			if (b.$ === 'Just') {
-				var bb = b.a;
-				return $elm$core$Maybe$Just(
-					A2($elm$core$List$append, aa, bb));
-			} else {
-				return a;
-			}
-		} else {
-			if (b.$ === 'Just') {
-				var bb = b.a;
-				return b;
-			} else {
-				return $elm$core$Maybe$Nothing;
-			}
-		}
-	});
-var $author$project$Main$safeConcat = function (l) {
-	return A3($elm$core$List$foldr, $author$project$Main$safeAppend, $elm$core$Maybe$Nothing, l);
-};
-var $author$project$Main$viewRows = F3(
-	function (b, c, l) {
-		if (b) {
-			if (l.$ === 'Just') {
-				var ll = l.a;
-				return $elm$core$Maybe$Just(
-					A2(
-						$elm$core$List$sortBy,
-						function ($) {
-							return $.displayName;
-						},
-						A2(
-							$elm$core$List$filter,
-							function (a) {
-								return _Utils_eq(a.category, c);
-							},
-							ll)));
-			} else {
-				return $elm$core$Maybe$Nothing;
-			}
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	});
-var $author$project$Main$viewRowsAll = function (model) {
-	var showPreferred = A3($author$project$Main$viewRows, model.viewPreferred, $author$project$Main$Preferred, model.tableRows);
-	var showOutside = A3($author$project$Main$viewRows, model.viewOutside, $author$project$Main$Outside, model.tableRows);
-	var showNonPreferred = A3($author$project$Main$viewRows, model.viewNonpreferred, $author$project$Main$NonPreferred, model.tableRows);
-	return $author$project$Main$safeConcat(
-		_List_fromArray(
-			[showPreferred, showNonPreferred, showOutside]));
-};
 var $author$project$Main$renderResults = function (model) {
-	var showRows = $author$project$Main$viewRowsAll(model);
-	var filtShow = function () {
-		if (showRows.$ === 'Just') {
-			var sr = showRows.a;
-			return $elm$core$Maybe$Just(
-				A2(
-					$elm$core$List$map,
-					function (a) {
-						return a.uid;
-					},
-					sr));
-		} else {
-			return $elm$core$Maybe$Nothing;
-		}
-	}();
-	return A2(
-		$elm$html$Html$div,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A3(
-						$author$project$Main$pdpSelectBox,
-						model.pdpList,
-						model.pdpSelect,
-						function (a) {
-							return $author$project$Main$SelectPDP(a);
-						})
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
-							]),
-						_List_fromArray(
-							[
-								A4(
-								$author$project$Main$checkbox,
-								'Category A',
-								model.viewPreferred,
-								$author$project$Main$TogglePreferred,
-								_List_fromArray(
-									['two columns']))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
-							]),
-						_List_fromArray(
-							[
-								A4(
-								$author$project$Main$checkbox,
-								'Category B',
-								model.viewNonpreferred,
-								$author$project$Main$ToggleNonPreferred,
-								_List_fromArray(
-									['two columns']))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
-							]),
-						_List_fromArray(
-							[
-								A4(
-								$author$project$Main$checkbox,
-								'Category C',
-								model.viewOutside,
-								$author$project$Main$ToggleOutside,
-								_List_fromArray(
-									['two columns']))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('six columns'),
-								$elm$html$Html$Attributes$class('offset-by-one column'),
-								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
-										$elm$html$Html$Attributes$class('button-primary'),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Show Output')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('four columns'),
-								A2($elm$html$Html$Attributes$style, 'padding-top', '1.2em')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick(
-										$author$project$Main$SelectAll(filtShow)),
-										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Select All')
-									])),
-								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$DeselectAll),
-										$elm$html$Html$Attributes$class('button'),
-										A2($elm$html$Html$Attributes$style, 'width', '50%')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Clear All')
-									]))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('ten columns'),
-								$elm$html$Html$Attributes$class('offset-by-one column')
-							]),
-						_List_fromArray(
-							[
-								function () {
-								if (showRows.$ === 'Just') {
-									var sr = showRows.a;
-									return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, sr);
-								} else {
-									return A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, _List_Nil);
-								}
-							}()
-							]))
-					]))
-			]));
-};
-var $author$project$Main$submitFirst = A2(
-	$elm$html$Html$div,
-	_List_Nil,
-	_List_fromArray(
-		[
-			A2(
+	var _v0 = model.visibleRows;
+	if (_v0.$ === 'Just') {
+		var tr = _v0.a;
+		return A2(
 			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('row')
-				]),
+			_List_Nil,
 			_List_fromArray(
 				[
 					A2(
 					$elm$html$Html$div,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$class('six columns'),
-							$elm$html$Html$Attributes$class('offset-by-three columns'),
-							A2($elm$html$Html$Attributes$style, 'padding', '50px 0'),
-							A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+							$elm$html$Html$Attributes$class('row')
 						]),
 					_List_fromArray(
 						[
-							$elm$html$Html$text('Please Submit Data First')
+							A3(
+							$author$project$Main$pdpSelectBox,
+							model.pdpList,
+							model.pdpSelect,
+							function (a) {
+								return $author$project$Main$SelectPDP(a);
+							})
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$h4,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text(
+									$author$project$Main$safeString(model.pdpSelect))
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A6(
+							$author$project$Main$defselectbox,
+							'Preset',
+							model.preset,
+							_List_fromArray(
+								['all', 'kansas_city', 'st_louis_il', 'st_louis_mo']),
+							$author$project$Main$SelectPreset,
+							'three columns',
+							0)
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('three columns')
+								]),
+							_List_fromArray(
+								[
+									$author$project$Main$selectTFButton(model.selectButton)
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('three columns')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$button,
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick($author$project$Main$HideSelected),
+											A2($elm$html$Html$Attributes$style, 'display', 'block')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Remove Selected')
+										]))
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('three columns')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$button,
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick($author$project$Main$ShowOutput),
+											A2($elm$html$Html$Attributes$style, 'block', 'display'),
+											$elm$html$Html$Attributes$class('button-primary')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Show Output')
+										]))
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_Nil,
+					_List_fromArray(
+						[
+							A3($billstclair$elm_sortable_table$Table$view, $author$project$Main$config, model.tableState, tr)
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('row')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
+									A2($elm$html$Html$Attributes$style, 'display', 'block')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Resubmit')
+								]))
 						]))
-				]))
-		]));
+				]));
+	} else {
+		return A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('')
+				]));
+	}
+};
 var $author$project$Main$variousViews = function (model) {
 	var _v0 = model.state;
 	switch (_v0.$) {
@@ -10415,7 +9411,13 @@ var $author$project$Main$variousViews = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+							]))
 					]));
 		case 'Loading':
 			return A2(
@@ -10423,33 +9425,50 @@ var $author$project$Main$variousViews = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
+							])),
+						$elm$html$Html$text('Loading....')
 					]));
 		case 'Results':
-			return model.outputAvailable ? A2(
+			return A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$author$project$Main$renderResults(model)
-					])) : A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[$author$project$Main$submitFirst]));
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$author$project$Main$renderResults(model)
+							]))
+					]));
 		default:
-			return model.outputAvailable ? A2(
+			return A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$author$project$Main$renderOutput(model)
-					])) : A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[$author$project$Main$submitFirst]));
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$author$project$Main$renderOutput(model)
+							]))
+					]));
 	}
+};
+var $elm$html$Html$Attributes$width = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'width',
+		$elm$core$String$fromInt(n));
 };
 var $author$project$Main$view = function (model) {
 	return {
@@ -10464,39 +9483,18 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$div,
+						$elm$html$Html$img,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('row')
+								$elm$html$Html$Attributes$src('images/logo.png'),
+								$elm$html$Html$Attributes$height(100),
+								$elm$html$Html$Attributes$width(360)
 							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$a,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$href('/')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$img,
-										_List_fromArray(
-											[
-												$elm$html$Html$Attributes$src('images/logo.png'),
-												A2($elm$html$Html$Attributes$style, 'max-width', '400px'),
-												A2($elm$html$Html$Attributes$style, 'height', 'auto'),
-												A2($elm$html$Html$Attributes$style, 'margin', 'auto'),
-												A2($elm$html$Html$Attributes$style, 'display', 'block')
-											]),
-										_List_Nil)
-									]))
-							])),
-						$author$project$Main$navBar(model),
+						_List_Nil),
 						$author$project$Main$variousViews(model)
 					]))
 			]),
-		title: 'Medicare School Quote'
+		title: 'Enlightnu Quoting App'
 	};
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
