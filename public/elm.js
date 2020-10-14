@@ -5476,7 +5476,7 @@ var $author$project$Main$init = F3(
 				X: false,
 				am: '',
 				bl: $elm$core$Maybe$Nothing,
-				bU: false,
+				bU: true,
 				bV: true,
 				l: $author$project$Main$Ready,
 				h: $elm$core$Maybe$Nothing,
