@@ -182,7 +182,7 @@ init flags url key =
       , outputAvailable = False
       , pdpYear1 = 2020
       , pdpYear2 = 2021
-      , showY1 = True
+      , showY1 = False
       , showY2 = True
       }
     , Task.perform GotTime Time.now
@@ -897,12 +897,11 @@ renderResults model =
       [ div [ class "row" ]
         [ pdpSelectBox pdpShow model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
-          [ div [ class "offset-by-three column"]
-                [ checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"] ]
-          ]
-      , div [ class "row" ]
-          [ div [ class "offset-by-three column"]
-                [ checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"] ]
+          [ div [ class "offset-by-one column"]
+                [ div [ class "four columns"] [ text "Effective Date for RX plan:" ]
+                , checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"]
+                , checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"]
+                ]
           ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
