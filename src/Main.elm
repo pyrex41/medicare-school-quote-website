@@ -74,6 +74,7 @@ type alias Model =
   , outputTableState : Table.State
   , outputQuotes : Maybe (List OutputQuote)
   , outputAvailable : Bool
+  , pdpYear : Int
   }
 
 
@@ -175,6 +176,7 @@ init flags url key =
       , outputTableState = Table.initialSort "Title"
       , outputQuotes = Nothing
       , outputAvailable = False
+      , pdpYear = 2021
       }
     , Task.perform GotTime Time.now
     )
@@ -1650,10 +1652,15 @@ planXDecoder =
 
 getPDP : Model -> Cmd Msg
 getPDP model =
-  Http.get
-    { url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?zip=" ++ (safeString model.zip.value)
-    , expect = Http.expectJson PDPResponse pdpDecoder
-    }
+  let
+      zip5 = safeString model.zip.value
+      expected_date = safeString model.pdpYear
+      base_url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?"
+  in
+      Http.get
+          { url = base_url ++ "zip=" ++ zip5 ++ "&expected_date=" ++ expected_date
+          , expect = Http.expectJson PDPResponse pdpDecoder
+          }
 
 pdpPlanDecoder : Decoder PdpRecord
 pdpPlanDecoder =
