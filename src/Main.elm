@@ -1363,8 +1363,8 @@ pdpSelectBox model mplist selectedPdp handle =
         label
           [ ]
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
-          ,  checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"]
-          ,  checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"]
+          , checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"]
+          , checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"]
           , select
             [ onInput handle , class "u-full-width", id "pdp-select" ]
             ( List.map
