@@ -6451,12 +6451,12 @@ var $author$project$Main$safeString = function (ms) {
 };
 var $author$project$Main$getPDP = function (model) {
 	var zip5 = $author$project$Main$safeString(model.z.ac);
-	var expected_date = $elm$core$String$fromInt(model.bO);
+	var effective_date = $elm$core$String$fromInt(model.bO);
 	var base_url = 'https://medicare-school-quote-tool.herokuapp.com/api/pdp?';
 	return $elm$http$Http$get(
 		{
 			bb: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
-			n: base_url + ('zip=' + (zip5 + ('&expected_date=' + expected_date)))
+			n: base_url + ('zip=' + (zip5 + ('&effective_date=' + effective_date)))
 		});
 };
 var $author$project$Main$PlanResponse = function (a) {

@@ -1654,11 +1654,11 @@ getPDP : Model -> Cmd Msg
 getPDP model =
   let
       zip5 = safeString model.zip.value
-      expected_date = String.fromInt model.pdpYear
+      effective_date = String.fromInt model.pdpYear
       base_url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?"
   in
       Http.get
-          { url = base_url ++ "zip=" ++ zip5 ++ "&expected_date=" ++ expected_date
+          { url = base_url ++ "zip=" ++ zip5 ++ "&effective_date=" ++ effective_date
           , expect = Http.expectJson PDPResponse pdpDecoder
           }
 
