@@ -895,8 +895,8 @@ renderResults model =
   in
     div [ ]
       [ div  [ class "row" ]
-             [ div [ class "offset-by-four column" ]
-                   [ text "Prescription Drug Plan:" ]
+             [ div [ class "offset-by-three column" ]
+                   [ h5 [] [ text "Prescription Drug Plan:" ] ]
              ]
       , div [ class "row" ]
         [ pdpSelectBox model pdpShow model.pdpSelect (\a -> SelectPDP a) ]
