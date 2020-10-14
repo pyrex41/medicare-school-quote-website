@@ -10179,7 +10179,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
+								$elm$html$Html$Attributes$class('offset-by-three column')
 							]),
 						_List_fromArray(
 							[
@@ -10204,7 +10204,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
+								$elm$html$Html$Attributes$class('offset-by-three column')
 							]),
 						_List_fromArray(
 							[
@@ -10229,7 +10229,7 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
+								$elm$html$Html$Attributes$class('offset-by-three column')
 							]),
 						_List_fromArray(
 							[
