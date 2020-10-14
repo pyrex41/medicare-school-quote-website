@@ -76,6 +76,8 @@ type alias Model =
   , outputAvailable : Bool
   , pdpYear1 : Int
   , pdpYear2 : Int
+  , showY1 : Bool
+  , showY2 : Bool
   }
 
 
@@ -180,6 +182,8 @@ init flags url key =
       , outputAvailable = False
       , pdpYear1 = 2020
       , pdpYear2 = 2021
+      , showY1 = True
+      , showY2 = True
       }
     , Task.perform GotTime Time.now
     )
@@ -871,10 +875,15 @@ renderResults model =
         Just <| List.map (\a -> a.uid) sr
       Nothing ->
         Nothing
+    pdpShow = case model.pdpList of
+                  Just pl ->
+                      Just <| List.filter (pdpYearFilter model) pl
+                  Nothing ->
+                      Nothing
   in
     div [ ]
       [ div [ class "row" ]
-        [ pdpSelectBox model.pdpList model.pdpSelect (\a -> SelectPDP a) ]
+        [ pdpSelectBox pdpShow model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
                 [ checkbox "Category A" model.viewPreferred TogglePreferred ["two columns"] ]
@@ -1295,6 +1304,16 @@ defselectbox title_ def choices handle class_ i =
           nls
         ]
     ]
+
+pdpYearFilter : Model -> PdpRecord -> Bool
+pdpYearFilter model pr =
+    if pr.year == model.pdpYear1 then
+        model.showY1
+    else if pr.year == model.pdpYear2 then
+        model.showY2
+    else
+        False
+
 
 pdpFullString : PdpRecord -> String
 pdpFullString pr =
