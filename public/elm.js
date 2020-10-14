@@ -9445,6 +9445,7 @@ var $author$project$Main$SelectPDP = function (a) {
 var $author$project$Main$ToggleNonPreferred = {$: 23};
 var $author$project$Main$ToggleOutside = {$: 24};
 var $author$project$Main$TogglePreferred = {$: 22};
+var $elm$html$Html$br = _VirtualDom_node('br');
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 21, a: a};
 };
@@ -10123,6 +10124,7 @@ var $author$project$Main$renderResults = function (model) {
 		_List_Nil,
 		_List_fromArray(
 			[
+				A2($elm$html$Html$br, _List_Nil, _List_Nil),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(

@@ -894,7 +894,8 @@ renderResults model =
                       Nothing
   in
     div [ ]
-      [ div  [ class "row" ]
+      [ br [] []
+      , div  [ class "row" ]
              [ div [ class "offset-by-three column" ]
                    [ h5 [] [ text "Prescription Drug Plan:" ] ]
              ]
