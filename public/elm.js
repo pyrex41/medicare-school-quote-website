@@ -10147,34 +10147,24 @@ var $author$project$Main$renderResults = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('offset-by-one column')
+								$elm$html$Html$Attributes$class('offset-by-three column')
 							]),
 						_List_fromArray(
 							[
-								A2(
-								$elm$html$Html$div,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('four columns')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Effective Date for RX plan:')
-									])),
 								A4(
 								$author$project$Main$checkbox,
 								$elm$core$String$fromInt(model.a_),
 								model.aE,
 								$author$project$Main$ToggleY1,
 								_List_fromArray(
-									['two columns'])),
+									['one columns'])),
 								A4(
 								$author$project$Main$checkbox,
 								$elm$core$String$fromInt(model.a$),
 								model.aF,
 								$author$project$Main$ToggleY2,
 								_List_fromArray(
-									['two columns']))
+									['one columns']))
 							]))
 					])),
 				A2(
