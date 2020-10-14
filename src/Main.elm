@@ -225,6 +225,8 @@ type Msg
   | ToggleN
   | ToggleF
   | ToggleG
+  | ToggleY1
+  | ToggleY2
   | ZipResponse (Result Http.Error (List String))
   | PlanResponse (Result Http.Error (List PlanQuote))
   | PDPResponse (Result Http.Error (List PdpRecord))
@@ -439,6 +441,16 @@ update msg model =
     ToggleG ->
       ( validateModel { model | planG = not model.planG }
       , Cmd.none )
+
+    ToggleY1 ->
+      ( { model | showY1 = not model.showY1 }
+      , Cmd.none
+      )
+
+    ToggleY2 ->
+      ( { model | showY2 = not model.showY2 }
+      , Cmd.none
+      )
 
     TogglePreferred ->
       let
@@ -884,6 +896,14 @@ renderResults model =
     div [ ]
       [ div [ class "row" ]
         [ pdpSelectBox pdpShow model.pdpSelect (\a -> SelectPDP a) ]
+      , div [ class "row" ]
+          [ div [ class "offset-by-three column"]
+                [ checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"] ]
+          ]
+      , div [ class "row" ]
+          [ div [ class "offset-by-three column"]
+                [ checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"] ]
+          ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
                 [ checkbox "Category A" model.viewPreferred TogglePreferred ["two columns"] ]
