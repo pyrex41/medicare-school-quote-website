@@ -9445,8 +9445,6 @@ var $author$project$Main$SelectPDP = function (a) {
 var $author$project$Main$ToggleNonPreferred = {$: 23};
 var $author$project$Main$ToggleOutside = {$: 24};
 var $author$project$Main$TogglePreferred = {$: 22};
-var $author$project$Main$ToggleY1 = {$: 15};
-var $author$project$Main$ToggleY2 = {$: 16};
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 21, a: a};
 };
@@ -9714,6 +9712,8 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 		},
 		fe: $author$project$Main$SetTableState
 	});
+var $author$project$Main$ToggleY1 = {$: 15};
+var $author$project$Main$ToggleY2 = {$: 16};
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = F2(
 	function (def, pr) {
@@ -9760,6 +9760,20 @@ var $author$project$Main$pdpSelectBox = F4(
 						_List_Nil,
 						_List_fromArray(
 							[
+								A4(
+								$author$project$Main$checkbox,
+								$elm$core$String$fromInt(model.a_),
+								model.aE,
+								$author$project$Main$ToggleY1,
+								_List_fromArray(
+									['two columns'])),
+								A4(
+								$author$project$Main$checkbox,
+								$elm$core$String$fromInt(model.a$),
+								model.aF,
+								$author$project$Main$ToggleY2,
+								_List_fromArray(
+									['two columns'])),
 								A2(
 								$elm$html$Html$select,
 								_List_fromArray(
@@ -10109,46 +10123,6 @@ var $author$project$Main$renderResults = function (model) {
 		_List_Nil,
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-three column')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$span,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('label-body')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Prescription Dug Plan:')
-									])),
-								A4(
-								$author$project$Main$checkbox,
-								$elm$core$String$fromInt(model.a_),
-								model.aE,
-								$author$project$Main$ToggleY1,
-								_List_Nil),
-								A4(
-								$author$project$Main$checkbox,
-								$elm$core$String$fromInt(model.a$),
-								model.aF,
-								$author$project$Main$ToggleY2,
-								_List_Nil)
-							]))
-					])),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(

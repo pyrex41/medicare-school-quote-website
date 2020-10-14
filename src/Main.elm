@@ -895,13 +895,6 @@ renderResults model =
   in
     div [ ]
       [ div [ class "row" ]
-            [ div [ class "offset-by-three column" ]
-                  [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
-                  , checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 []
-                  , checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 []
-                  ]
-            ]
-      , div [ class "row" ]
         [ pdpSelectBox model pdpShow model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
@@ -1364,7 +1357,9 @@ pdpSelectBox model mplist selectedPdp handle =
       div [class "six columns", class "offset-by-three column" ] [
         label
           [ ]
-          [ select
+          [ checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"]
+          , checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"]
+          , select
             [ onInput handle , class "u-full-width", id "pdp-select" ]
             ( List.map
                 (pdpOption selectedPdp)
