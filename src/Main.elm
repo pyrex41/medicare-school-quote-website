@@ -894,7 +894,11 @@ renderResults model =
                       Nothing
   in
     div [ ]
-      [ div [ class "row" ]
+      [ div  [ class "row" ]
+             [ div [ class "offset-by-four column" ]
+                   [ text "Prescription Drug Plan:" ]
+             ]
+      , div [ class "row" ]
         [ pdpSelectBox model pdpShow model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ div [ class "offset-by-one column" ]
