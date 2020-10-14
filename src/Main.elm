@@ -895,12 +895,7 @@ renderResults model =
   in
     div [ ]
       [ div [ class "row" ]
-        [ pdpSelectBox pdpShow model.pdpSelect (\a -> SelectPDP a) ]
-      , div [ class "row" ]
-          [ div [ class "offset-by-five column"]
-                [  checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"]
-                ]
-          ]
+        [ pdpSelectBox model pdpShow model.pdpSelect (\a -> SelectPDP a) ]
       , div [ class "row" ]
           [ div [ class "offset-by-five column"]
                 [  checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"]
@@ -1360,14 +1355,16 @@ pdpOption def pr =
   in
     option [ value p_text,  selected <| (Just p_text) == def_text ] [ text p_text ]
 
-pdpSelectBox : Maybe (List PdpRecord) -> Maybe PdpRecord -> (String -> Msg) -> Html Msg
-pdpSelectBox mplist selectedPdp handle =
+pdpSelectBox : Model -> Maybe (List PdpRecord) -> Maybe PdpRecord -> (String -> Msg) -> Html Msg
+pdpSelectBox model mplist selectedPdp handle =
   case mplist of
     Just plist ->
       div [class "six columns", class "offset-by-three column" ] [
         label
           [ ]
           [ span [ class "label-body"] [ text "Prescription Dug Plan:"]
+          ,  checkbox (String.fromInt model.pdpYear1) model.showY1 ToggleY1 ["two columns"]
+          ,  checkbox (String.fromInt model.pdpYear2) model.showY2 ToggleY2 ["two columns"]
           , select
             [ onInput handle , class "u-full-width", id "pdp-select" ]
             ( List.map

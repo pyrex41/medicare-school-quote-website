@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.bW.aW === region.cj.aW)
+	if (region.bW.aX === region.cj.aX)
 	{
-		return 'on line ' + region.bW.aW;
+		return 'on line ' + region.bW.aX;
 	}
-	return 'on lines ' + region.bW.aW + ' through ' + region.cj.aW;
+	return 'on lines ' + region.bW.aX + ' through ' + region.cj.aX;
 }
 
 
@@ -5140,7 +5140,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {cp: fragment, cw: host, aY: path, cQ: port_, cW: protocol, cX: query};
+		return {cp: fragment, cw: host, aZ: path, cQ: port_, cW: protocol, cX: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5456,39 +5456,39 @@ var $author$project$Main$init = F3(
 				H: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
 				be: _List_fromArray(
 					['']),
-				au: $elm$core$Maybe$Nothing,
 				av: $elm$core$Maybe$Nothing,
-				aT: _List_Nil,
+				aw: $elm$core$Maybe$Nothing,
+				aU: _List_Nil,
 				ae: false,
-				az: 0,
+				aA: 0,
 				R: key,
 				T: '',
-				aC: false,
+				aD: false,
 				cK: $elm$core$Maybe$Nothing,
 				cL: $billstclair$elm_sortable_table$Table$initialSort('Title'),
 				bm: $elm$core$Maybe$Just('$144.60'),
-				aZ: $elm$core$Maybe$Nothing,
+				a_: $elm$core$Maybe$Nothing,
 				U: $elm$core$Maybe$Nothing,
-				a_: 2020,
-				a$: 2021,
+				a$: 2020,
+				aE: 2021,
 				V: false,
 				W: false,
 				X: false,
 				am: '',
 				bn: $elm$core$Maybe$Nothing,
-				aE: false,
-				aF: true,
+				aG: false,
+				an: true,
 				l: $author$project$Main$Ready,
 				h: $elm$core$Maybe$Nothing,
 				aa: $billstclair$elm_sortable_table$Table$initialSort('Category'),
 				b$: $elm$core$Maybe$Nothing,
-				aH: false,
+				aI: false,
 				b0: $elm$core$Maybe$Nothing,
 				n: url,
 				y: false,
-				aK: false,
 				aL: false,
-				aM: true,
+				aM: false,
+				aN: true,
 				z: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter a 5-digit ZIP')
 			},
 			A2($elm$core$Task$perform, $author$project$Main$GotTime, $elm$time$Time$now));
@@ -6432,7 +6432,7 @@ var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Main$PdpRecord = F3(
 	function (plan, rate, year) {
-		return {a0: plan, aD: rate, bq: year};
+		return {a0: plan, aF: rate, bq: year};
 	});
 var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $elm$json$Json$Decode$map3 = _Json_map3;
@@ -6457,8 +6457,8 @@ var $author$project$Main$safeString = function (ms) {
 };
 var $author$project$Main$getPDP = function (model) {
 	var zip5 = $author$project$Main$safeString(model.z.ac);
-	var year2 = $elm$core$String$fromInt(model.a$);
-	var year1 = $elm$core$String$fromInt(model.a_);
+	var year2 = $elm$core$String$fromInt(model.aE);
+	var year1 = $elm$core$String$fromInt(model.a$);
 	var base_url = 'https://medicare-school-quote-tool.herokuapp.com/api/pdp?';
 	return $elm$http$Http$get(
 		{
@@ -6487,7 +6487,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$PlanQuote = F5(
 	function (company, fRate, gRate, nRate, naic) {
-		return {at: company, aU: fRate, aV: gRate, aX: nRate, aA: naic};
+		return {au: company, aV: fRate, aW: gRate, aY: nRate, aB: naic};
 	});
 var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$oneOf = _Json_oneOf;
@@ -6542,7 +6542,7 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 var $author$project$Main$getPlans = function (model) {
 	if (model.y) {
 		var url1 = 'https://medicare-school-quote-tool.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$safeString(model.z.ac) + ('&age=' + ($author$project$Main$safeString(model.H.ac) + ('&county=' + ($author$project$Main$strCounty(model.au) + ('&gender=' + ($author$project$Main$genderString(model.az) + ('&tobacco=' + ($author$project$Main$boolString(model.aH) + ('&discounts=' + ($author$project$Main$boolString(model.ae) + ('&date=' + $author$project$Main$strMaybeDate(model.av))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$safeString(model.z.ac) + ('&age=' + ($author$project$Main$safeString(model.H.ac) + ('&county=' + ($author$project$Main$strCounty(model.av) + ('&gender=' + ($author$project$Main$genderString(model.aA) + ('&tobacco=' + ($author$project$Main$boolString(model.aI) + ('&discounts=' + ($author$project$Main$boolString(model.ae) + ('&date=' + $author$project$Main$strMaybeDate(model.aw))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.X, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.V, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.W, 'G', url4);
@@ -6611,7 +6611,7 @@ var $elm$core$Basics$negate = function (n) {
 var $elm$core$String$trimRight = _String_trimRight;
 var $author$project$Main$pdpFullString = function (pr) {
 	var y_val = $elm$core$String$fromInt(pr.bq);
-	var r_val = pr.aD;
+	var r_val = pr.aF;
 	var p_name = A2(
 		$elm$core$String$endsWith,
 		'(PDP)',
@@ -6628,7 +6628,7 @@ var $author$project$Main$TableRow = function (company) {
 							return function (selected) {
 								return function (category) {
 									return function (priority) {
-										return {a8: category, at: company, af: displayName, aU: fRate, aV: gRate, aX: nRate, aA: naic, cS: priority, F: selected, aI: uid};
+										return {a8: category, au: company, af: displayName, aV: fRate, aW: gRate, aY: nRate, aB: naic, cS: priority, F: selected, aJ: uid};
 									};
 								};
 							};
@@ -6878,11 +6878,11 @@ var $elm$core$Maybe$withDefault = F2(
 	});
 var $author$project$Main$planToRow = F2(
 	function (ii, pq) {
-		var category = $author$project$Main$findCategory(pq.aA);
+		var category = $author$project$Main$findCategory(pq.aB);
 		var displayName = A2(
 			$elm$core$Maybe$withDefault,
-			pq.at,
-			A2($author$project$Main$findDisplayName, pq.aA, category));
+			pq.au,
+			A2($author$project$Main$findDisplayName, pq.aB, category));
 		var priority = function () {
 			switch (category) {
 				case 0:
@@ -6894,15 +6894,15 @@ var $author$project$Main$planToRow = F2(
 			}
 		}();
 		var showRowInit = !category;
-		return $author$project$Main$TableRow(pq.at)(displayName)(
-			$author$project$Main$safeString(pq.aU))(
+		return $author$project$Main$TableRow(pq.au)(displayName)(
 			$author$project$Main$safeString(pq.aV))(
-			$author$project$Main$safeString(pq.aX))(pq.aA)(ii)(showRowInit)(category)(priority);
+			$author$project$Main$safeString(pq.aW))(
+			$author$project$Main$safeString(pq.aY))(pq.aB)(ii)(showRowInit)(category)(priority);
 	});
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $author$project$Main$selectByUID = F2(
 	function (ls, tablerow) {
-		return A2($elm$core$List$member, tablerow.aI, ls) ? _Utils_update(
+		return A2($elm$core$List$member, tablerow.aJ, ls) ? _Utils_update(
 			tablerow,
 			{F: true}) : tablerow;
 	});
@@ -7093,7 +7093,7 @@ var $elm$url$Url$toString = function (url) {
 					$elm$url$Url$addPort,
 					url.cQ,
 					_Utils_ap(http, url.cw)),
-				url.aY)));
+				url.aZ)));
 };
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
@@ -7102,13 +7102,13 @@ var $elm$time$Time$toYear = F2(
 	});
 var $author$project$Main$toggle = F2(
 	function (i, tablerow) {
-		return _Utils_eq(tablerow.aI, i) ? _Utils_update(
+		return _Utils_eq(tablerow.aJ, i) ? _Utils_update(
 			tablerow,
 			{F: !tablerow.F}) : tablerow;
 	});
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {ag: frag, ak: params, ab: unvisited, ac: value, ao: visited};
+		return {ag: frag, ak: params, ab: unvisited, ac: value, ap: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -7220,7 +7220,7 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.aY),
+					$elm$url$Url$Parser$preparePath(url.aZ),
 					$elm$url$Url$Parser$prepareQuery(url.cX),
 					url.cp,
 					$elm$core$Basics$identity)));
@@ -7228,7 +7228,7 @@ var $elm$url$Url$Parser$parse = F2(
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
-		var visited = _v0.ao;
+		var visited = _v0.ap;
 		var unvisited = _v0.ab;
 		var params = _v0.ak;
 		var frag = _v0.ag;
@@ -7245,7 +7245,7 @@ var $elm$url$Url$Parser$map = F2(
 	function (subValue, _v0) {
 		var parseArg = _v0;
 		return function (_v1) {
-			var visited = _v1.ao;
+			var visited = _v1.ap;
 			var unvisited = _v1.ab;
 			var params = _v1.ak;
 			var frag = _v1.ag;
@@ -7286,7 +7286,7 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 };
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
-		var visited = _v0.ao;
+		var visited = _v0.ap;
 		var unvisited = _v0.ab;
 		var params = _v0.ak;
 		var frag = _v0.ag;
@@ -7334,7 +7334,7 @@ var $author$project$Main$urlToRoute = function (url) {
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Main$isValid = function (model) {
-	var _v0 = model.av;
+	var _v0 = model.aw;
 	if (!_v0.$) {
 		var validList = _List_fromArray(
 			[
@@ -7342,7 +7342,7 @@ var $author$project$Main$isValid = function (model) {
 				model.H.y,
 				model.z.y,
 				model.X || (model.V || model.W),
-				!_Utils_eq(model.au, $elm$core$Maybe$Nothing)
+				!_Utils_eq(model.av, $elm$core$Maybe$Nothing)
 			]);
 		var newModel = _Utils_update(
 			model,
@@ -7368,7 +7368,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aY: '/output'});
+					{aZ: '/output'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7381,7 +7381,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aY: '/'});
+					{aZ: '/'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7394,7 +7394,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aY: '/results'});
+					{aZ: '/results'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7452,7 +7452,7 @@ var $author$project$Main$update = F2(
 				return vModel.y ? _Utils_Tuple2(
 					_Utils_update(
 						vModel,
-						{aC: false, bn: $elm$core$Maybe$Nothing, l: $author$project$Main$Loading}),
+						{aD: false, bn: $elm$core$Maybe$Nothing, l: $author$project$Main$Loading}),
 					$author$project$Main$getPlans(vModel)) : _Utils_Tuple2(
 					_Utils_update(
 						vModel,
@@ -7555,7 +7555,7 @@ var $author$project$Main$update = F2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{az: g})),
+							{aA: g})),
 					$elm$core$Platform$Cmd$none);
 			case 7:
 				var str = msg.a;
@@ -7564,12 +7564,12 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								au: $elm$core$Maybe$Just(str)
+								av: $elm$core$Maybe$Just(str)
 							})),
 					$elm$core$Platform$Cmd$none);
 			case 8:
 				var cds = msg.a;
-				var choices_ = model.aT;
+				var choices_ = model.aU;
 				var choiceTuple = $elm$core$List$head(
 					A2(
 						$elm$core$List$filter,
@@ -7582,12 +7582,12 @@ var $author$project$Main$update = F2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{av: choice})),
+							{aw: choice})),
 					$elm$core$Platform$Cmd$none);
 			case 9:
 				var prstr = msg.a;
 				var prf = function () {
-					var _v5 = model.aZ;
+					var _v5 = model.a_;
 					if (!_v5.$) {
 						var pl = _v5.a;
 						return $elm$core$Maybe$Just(
@@ -7620,7 +7620,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aH: !model.aH}),
+						{aI: !model.aI}),
 					$elm$core$Platform$Cmd$none);
 			case 11:
 				return _Utils_Tuple2(
@@ -7653,16 +7653,16 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aE: !model.aE}),
+						{aG: !model.aG}),
 					$elm$core$Platform$Cmd$none);
 			case 16:
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{aF: !model.aF}),
+						{an: !model.an}),
 					$elm$core$Platform$Cmd$none);
 			case 22:
-				var newBool = !model.aM;
+				var newBool = !model.aN;
 				var newRows = function () {
 					var _v6 = model.h;
 					if (!_v6.$) {
@@ -7679,7 +7679,7 @@ var $author$project$Main$update = F2(
 						{
 							h: newRows,
 							aa: $billstclair$elm_sortable_table$Table$initialSort('category'),
-							aM: newBool
+							aN: newBool
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 23:
@@ -7693,14 +7693,14 @@ var $author$project$Main$update = F2(
 						return $elm$core$Maybe$Nothing;
 					}
 				}();
-				var newBool = !model.aK;
+				var newBool = !model.aL;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
 							h: newRows,
 							aa: $billstclair$elm_sortable_table$Table$initialSort('category'),
-							aK: newBool
+							aL: newBool
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 24:
@@ -7714,14 +7714,14 @@ var $author$project$Main$update = F2(
 						return $elm$core$Maybe$Nothing;
 					}
 				}();
-				var newBool = !model.aL;
+				var newBool = !model.aM;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
 							h: newRows,
 							aa: $billstclair$elm_sortable_table$Table$initialSort('category'),
-							aL: newBool
+							aM: newBool
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 33:
@@ -7795,7 +7795,7 @@ var $author$project$Main$update = F2(
 								model,
 								{
 									be: response,
-									au: $elm$core$List$head(response),
+									av: $elm$core$List$head(response),
 									l: $author$project$Main$Ready
 								})),
 						$author$project$Main$getPDP(model));
@@ -7817,12 +7817,12 @@ var $author$project$Main$update = F2(
 					var curl = model.n;
 					var nurl = _Utils_update(
 						curl,
-						{aY: '/results'});
+						{aZ: '/results'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{
-								aC: true,
+								aD: true,
 								bn: $elm$core$Maybe$Just(response),
 								l: $author$project$Main$Results,
 								h: $elm$core$Maybe$Just(newRows),
@@ -7837,7 +7837,7 @@ var $author$project$Main$update = F2(
 					var curl = model.n;
 					var eurl = _Utils_update(
 						curl,
-						{aY: '/error'});
+						{aZ: '/error'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7874,7 +7874,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								aZ: $elm$core$Maybe$Just(pr_sort),
+								a_: $elm$core$Maybe$Just(pr_sort),
 								U: prs
 							}),
 						$elm$core$Platform$Cmd$none);
@@ -7915,8 +7915,8 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							av: firstChoice,
-							aT: choices_,
+							aw: firstChoice,
+							aU: choices_,
 							b$: $elm$core$Maybe$Just(td)
 						}),
 					$elm$core$Platform$Cmd$none);
@@ -8514,7 +8514,7 @@ var $author$project$Main$renderForm = F3(
 										A5(
 										$author$project$Main$genderselectbox,
 										'Gender',
-										model.az,
+										model.aA,
 										$author$project$Main$SelectGender,
 										_List_fromArray(
 											['three columns', 'offset-by-four columns']),
@@ -8522,7 +8522,7 @@ var $author$project$Main$renderForm = F3(
 										A5(
 										$author$project$Main$selectbox,
 										'Effective Date',
-										A2($elm$core$List$map, $elm$core$Tuple$first, model.aT),
+										A2($elm$core$List$map, $elm$core$Tuple$first, model.aU),
 										$author$project$Main$SelectDate,
 										_List_fromArray(
 											['three columns', 'offset-by-four columns']),
@@ -8530,7 +8530,7 @@ var $author$project$Main$renderForm = F3(
 										A4(
 										$author$project$Main$checkbox,
 										'Tobacco User?',
-										model.aH,
+										model.aI,
 										$author$project$Main$ToggleTobacco,
 										_List_fromArray(
 											['four columns', 'offset-by-four columns'])),
@@ -8876,7 +8876,7 @@ var $author$project$Main$getEnrollLink = function (tr) {
 				_Utils_Tuple2(65641, 'http://micapps.gomedico.com/'),
 				_Utils_Tuple2(79987, 'http://micapps.gomedico.com/')
 			]));
-	return A2($elm$core$Dict$get, tr.aA, dd);
+	return A2($elm$core$Dict$get, tr.aB, dd);
 };
 var $elm$html$Html$Attributes$target = $elm$html$Html$Attributes$stringProperty('target');
 var $author$project$Main$makeEnrollButton = function (tr) {
@@ -8975,21 +8975,21 @@ var $author$project$Main$rateUtil = F2(
 				return A2(
 					$elm$core$List$map,
 					function ($) {
-						return $.aV;
+						return $.aW;
 					},
 					ls);
 			case 1:
 				return A2(
 					$elm$core$List$map,
 					function ($) {
-						return $.aX;
+						return $.aY;
 					},
 					ls);
 			default:
 				return A2(
 					$elm$core$List$map,
 					function ($) {
-						return $.aU;
+						return $.aV;
 					},
 					ls);
 		}
@@ -9134,7 +9134,7 @@ var $author$project$Main$outputTable = F2(
 				var _v3 = model.U;
 				if (!_v3.$) {
 					var pr = _v3.a;
-					return $elm$core$Maybe$Just(pr.aD);
+					return $elm$core$Maybe$Just(pr.aF);
 				} else {
 					return $elm$core$Maybe$Nothing;
 				}
@@ -9157,7 +9157,7 @@ var $author$project$Main$outputTable = F2(
 				if (!_v2.$) {
 					var pr = _v2.a;
 					return $author$project$Main$safeCurrencyFloat(
-						$elm$core$Maybe$Just(pr.aD));
+						$elm$core$Maybe$Just(pr.aF));
 				} else {
 					return 0.0;
 				}
@@ -9300,7 +9300,7 @@ var $author$project$Main$personalInfo = function (model) {
 			return '';
 		}
 	}();
-	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + ($author$project$Main$genderString(model.az) + ('   |   ' + ('Discount Applied: ' + dsc)))))));
+	var row2 = ageText + (' yrs' + ('   |   ' + (zipText + ('   |   ' + ($author$project$Main$genderString(model.aA) + ('   |   ' + ('Discount Applied: ' + dsc)))))));
 	return A2(
 		$elm$html$Html$div,
 		_List_Nil,
@@ -9445,7 +9445,6 @@ var $author$project$Main$SelectPDP = function (a) {
 var $author$project$Main$ToggleNonPreferred = {$: 23};
 var $author$project$Main$ToggleOutside = {$: 24};
 var $author$project$Main$TogglePreferred = {$: 22};
-var $author$project$Main$ToggleY1 = {$: 15};
 var $author$project$Main$ToggleY2 = {$: 16};
 var $author$project$Main$SetTableState = function (a) {
 	return {$: 21, a: a};
@@ -9472,7 +9471,7 @@ var $billstclair$elm_sortable_table$Table$ColumnData = F3(
 	});
 var $billstclair$elm_sortable_table$Table$HtmlDetails = F2(
 	function (attributes, children) {
-		return {aP: attributes, aR: children};
+		return {aQ: attributes, aS: children};
 	});
 var $billstclair$elm_sortable_table$Table$textDetails = function (str) {
 	return A2(
@@ -9655,7 +9654,7 @@ var $author$project$Main$toRowAttrs = function (tablerow) {
 	return _List_fromArray(
 		[
 			$elm$html$Html$Events$onClick(
-			$author$project$Main$ToggleSelect(tablerow.aI)),
+			$author$project$Main$ToggleSelect(tablerow.aJ)),
 			A2(
 			$elm$html$Html$Attributes$style,
 			'background',
@@ -9677,25 +9676,25 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'Full Name',
 				function ($) {
-					return $.at;
+					return $.au;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'G Rate',
 				function ($) {
-					return $.aV;
+					return $.aW;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'N Rate',
 				function ($) {
-					return $.aX;
+					return $.aY;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'F Rate',
 				function ($) {
-					return $.aU;
+					return $.aV;
 				}),
 				$author$project$Main$categoryColumn
 			]),
@@ -9710,10 +9709,11 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 					])
 			}),
 		fd: function ($) {
-			return $.at;
+			return $.au;
 		},
 		fe: $author$project$Main$SetTableState
 	});
+var $author$project$Main$ToggleY1 = {$: 15};
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $author$project$Main$pdpOption = F2(
 	function (def, pr) {
@@ -9742,8 +9742,8 @@ var $author$project$Main$pdpOption = F2(
 					$elm$html$Html$text(p_text)
 				]));
 	});
-var $author$project$Main$pdpSelectBox = F3(
-	function (mplist, selectedPdp, handle) {
+var $author$project$Main$pdpSelectBox = F4(
+	function (model, mplist, selectedPdp, handle) {
 		if (!mplist.$) {
 			var plist = mplist.a;
 			return A2(
@@ -9770,6 +9770,20 @@ var $author$project$Main$pdpSelectBox = F3(
 									[
 										$elm$html$Html$text('Prescription Dug Plan:')
 									])),
+								A4(
+								$author$project$Main$checkbox,
+								$elm$core$String$fromInt(model.a$),
+								model.aG,
+								$author$project$Main$ToggleY1,
+								_List_fromArray(
+									['two columns'])),
+								A4(
+								$author$project$Main$checkbox,
+								$elm$core$String$fromInt(model.aE),
+								model.an,
+								$author$project$Main$ToggleY2,
+								_List_fromArray(
+									['two columns'])),
 								A2(
 								$elm$html$Html$select,
 								_List_fromArray(
@@ -9811,7 +9825,7 @@ var $author$project$Main$pdpSelectBox = F3(
 	});
 var $author$project$Main$pdpYearFilter = F2(
 	function (model, pr) {
-		return _Utils_eq(pr.bq, model.a_) ? model.aE : (_Utils_eq(pr.bq, model.a$) ? model.aF : false);
+		return _Utils_eq(pr.bq, model.a$) ? model.aG : (_Utils_eq(pr.bq, model.aE) ? model.an : false);
 	});
 var $elm$html$Html$caption = _VirtualDom_node('caption');
 var $billstclair$elm_sortable_table$Table$applySorter = F3(
@@ -9955,7 +9969,7 @@ var $billstclair$elm_sortable_table$Table$viewCell = F2(
 	function (data, _v0) {
 		var viewData = _v0.dj;
 		var details = viewData(data);
-		return A2($elm$html$Html$td, details.aP, details.aR);
+		return A2($elm$html$Html$td, details.aQ, details.aS);
 	});
 var $billstclair$elm_sortable_table$Table$viewRowHelp = F3(
 	function (columns, toRowAttrs, data) {
@@ -9986,10 +10000,10 @@ var $billstclair$elm_sortable_table$Table$view = F3(
 				columns));
 		var thead = A2(
 			$elm$html$Html$thead,
-			theadDetails.aP,
+			theadDetails.aQ,
 			_List_fromArray(
 				[
-					A2($elm$html$Html$tr, _List_Nil, theadDetails.aR)
+					A2($elm$html$Html$tr, _List_Nil, theadDetails.aS)
 				]));
 		var sortedData = A3($billstclair$elm_sortable_table$Table$getSortedData, conf, state, data);
 		var tbody = A3(
@@ -10005,8 +10019,8 @@ var $billstclair$elm_sortable_table$Table$view = F3(
 			if (_v1.$ === 1) {
 				return A2($elm$core$List$cons, tbody, _List_Nil);
 			} else {
-				var attributes = _v1.a.aP;
-				var children = _v1.a.aR;
+				var attributes = _v1.a.aQ;
+				var children = _v1.a.aS;
 				return A2(
 					$elm$core$List$cons,
 					A2($elm$html$Html$tfoot, attributes, children),
@@ -10021,8 +10035,8 @@ var $billstclair$elm_sortable_table$Table$view = F3(
 				if (_v0.$ === 1) {
 					return A2($elm$core$List$cons, thead, withFoot);
 				} else {
-					var attributes = _v0.a.aP;
-					var children = _v0.a.aR;
+					var attributes = _v0.a.aQ;
+					var children = _v0.a.aS;
 					return A2(
 						$elm$core$List$cons,
 						A2($elm$html$Html$caption, attributes, children),
@@ -10078,9 +10092,9 @@ var $author$project$Main$viewRows = F3(
 		}
 	});
 var $author$project$Main$viewRowsAll = function (model) {
-	var showPreferred = A3($author$project$Main$viewRows, model.aM, 0, model.h);
-	var showOutside = A3($author$project$Main$viewRows, model.aL, 2, model.h);
-	var showNonPreferred = A3($author$project$Main$viewRows, model.aK, 1, model.h);
+	var showPreferred = A3($author$project$Main$viewRows, model.aN, 0, model.h);
+	var showOutside = A3($author$project$Main$viewRows, model.aM, 2, model.h);
+	var showNonPreferred = A3($author$project$Main$viewRows, model.aL, 1, model.h);
 	return $author$project$Main$safeConcat(
 		_List_fromArray(
 			[showPreferred, showNonPreferred, showOutside]));
@@ -10088,7 +10102,7 @@ var $author$project$Main$viewRowsAll = function (model) {
 var $author$project$Main$renderResults = function (model) {
 	var showRows = $author$project$Main$viewRowsAll(model);
 	var pdpShow = function () {
-		var _v2 = model.aZ;
+		var _v2 = model.a_;
 		if (!_v2.$) {
 			var pl = _v2.a;
 			return $elm$core$Maybe$Just(
@@ -10107,7 +10121,7 @@ var $author$project$Main$renderResults = function (model) {
 				A2(
 					$elm$core$List$map,
 					function (a) {
-						return a.aI;
+						return a.aJ;
 					},
 					sr));
 		} else {
@@ -10127,8 +10141,9 @@ var $author$project$Main$renderResults = function (model) {
 					]),
 				_List_fromArray(
 					[
-						A3(
+						A4(
 						$author$project$Main$pdpSelectBox,
+						model,
 						pdpShow,
 						model.U,
 						function (a) {
@@ -10153,33 +10168,8 @@ var $author$project$Main$renderResults = function (model) {
 							[
 								A4(
 								$author$project$Main$checkbox,
-								$elm$core$String$fromInt(model.a_),
-								model.aE,
-								$author$project$Main$ToggleY1,
-								_List_fromArray(
-									['two columns']))
-							]))
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$class('row')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('offset-by-five column')
-							]),
-						_List_fromArray(
-							[
-								A4(
-								$author$project$Main$checkbox,
-								$elm$core$String$fromInt(model.a$),
-								model.aF,
+								$elm$core$String$fromInt(model.aE),
+								model.an,
 								$author$project$Main$ToggleY2,
 								_List_fromArray(
 									['two columns']))
@@ -10204,7 +10194,7 @@ var $author$project$Main$renderResults = function (model) {
 								A4(
 								$author$project$Main$checkbox,
 								'Category A',
-								model.aM,
+								model.aN,
 								$author$project$Main$TogglePreferred,
 								_List_fromArray(
 									['two columns']))
@@ -10229,7 +10219,7 @@ var $author$project$Main$renderResults = function (model) {
 								A4(
 								$author$project$Main$checkbox,
 								'Category B',
-								model.aK,
+								model.aL,
 								$author$project$Main$ToggleNonPreferred,
 								_List_fromArray(
 									['two columns']))
@@ -10254,7 +10244,7 @@ var $author$project$Main$renderResults = function (model) {
 								A4(
 								$author$project$Main$checkbox,
 								'Category C',
-								model.aL,
+								model.aM,
 								$author$project$Main$ToggleOutside,
 								_List_fromArray(
 									['two columns']))
@@ -10475,7 +10465,7 @@ var $author$project$Main$variousViews = function (model) {
 						A3($author$project$Main$renderForm, model, $author$project$Main$SubmitForm, 'Submit')
 					]));
 		case 3:
-			return model.aC ? A2(
+			return model.aD ? A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
@@ -10487,7 +10477,7 @@ var $author$project$Main$variousViews = function (model) {
 				_List_fromArray(
 					[$author$project$Main$submitFirst]));
 		default:
-			return model.aC ? A2(
+			return model.aD ? A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
