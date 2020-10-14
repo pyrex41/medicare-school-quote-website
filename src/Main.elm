@@ -74,7 +74,8 @@ type alias Model =
   , outputTableState : Table.State
   , outputQuotes : Maybe (List OutputQuote)
   , outputAvailable : Bool
-  , pdpYear : Int
+  , pdpYear1 : Int
+  , pdpYear2 : Int
   }
 
 
@@ -87,6 +88,7 @@ type alias ValidInt =
 type alias PdpRecord =
   { plan : String
   , rate : String
+  , year : Int
   }
 
 type RowCategory
@@ -176,7 +178,8 @@ init flags url key =
       , outputTableState = Table.initialSort "Title"
       , outputQuotes = Nothing
       , outputAvailable = False
-      , pdpYear = 2021
+      , pdpYear1 = 2020
+      , pdpYear2 = 2021
       }
     , Task.perform GotTime Time.now
     )
@@ -1302,8 +1305,9 @@ pdpFullString pr =
       else
         pr.plan
     r_val = pr.rate
+    y_val = String.fromInt pr.year
   in
-    p_name ++ "   |   " ++ r_val
+    y_val ++ "   |   " ++ p_name ++ "   |   " ++ r_val
 
 pdpOption : Maybe PdpRecord ->  PdpRecord -> Html Msg
 pdpOption def pr =
@@ -1654,20 +1658,22 @@ getPDP : Model -> Cmd Msg
 getPDP model =
   let
       zip5 = safeString model.zip.value
-      effective_date = String.fromInt model.pdpYear
+      year1 = String.fromInt model.pdpYear1
+      year2 = String.fromInt model.pdpYear2
       base_url = "https://medicare-school-quote-tool.herokuapp.com/api/pdp?"
   in
       Http.get
-          { url = base_url ++ "zip=" ++ zip5 ++ "&effective_date=" ++ effective_date
+          { url = base_url ++ "zip=" ++ zip5 ++ "&year1=" ++ year1 ++ "&year2=" ++ year2
           , expect = Http.expectJson PDPResponse pdpDecoder
           }
 
 pdpPlanDecoder : Decoder PdpRecord
 pdpPlanDecoder =
-    map2
+    map3
       PdpRecord
       ( field "Plan Name" string )
       ( field "rate" string )
+      ( field "year" int )
 
 
 
