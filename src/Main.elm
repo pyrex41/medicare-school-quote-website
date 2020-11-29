@@ -1277,8 +1277,9 @@ dateselectbox : String -> Maybe CustomDate -> List (String, CustomDate) -> Html 
 dateselectbox title_ dtt dts =
     let
         i = safedateloc dtt dts
+        nm = String.fromInt(i) ++ title_
     in
-        selectbox title_ (List.map Tuple.first dts) SelectDate [ "three columns", "offset-by-four columns"] i
+        selectbox nm (List.map Tuple.first dts) SelectDate [ "three columns", "offset-by-four columns"] i
 
 selectbox : String -> List (String) -> (String -> Msg) -> List String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
@@ -1640,7 +1641,7 @@ safedateloc dtt dts =
                     Just tph ->
                         Tuple.first tph
                     Nothing ->
-                        0
+                        1
         Nothing -> 1
 
 

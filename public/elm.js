@@ -8124,7 +8124,7 @@ var $author$project$Main$safedateloc = F2(
 				var tph = tp.a;
 				return tph.a;
 			} else {
-				return 0;
+				return 1;
 			}
 		} else {
 			return 1;
@@ -8240,9 +8240,12 @@ var $author$project$Main$selectbox = F5(
 var $author$project$Main$dateselectbox = F3(
 	function (title_, dtt, dts) {
 		var i = A2($author$project$Main$safedateloc, dtt, dts);
+		var nm = _Utils_ap(
+			$elm$core$String$fromInt(i),
+			title_);
 		return A5(
 			$author$project$Main$selectbox,
-			title_,
+			nm,
 			A2($elm$core$List$map, $elm$core$Tuple$first, dts),
 			$author$project$Main$SelectDate,
 			_List_fromArray(
