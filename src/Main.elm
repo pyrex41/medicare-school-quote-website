@@ -607,7 +607,7 @@ update msg model =
                     [0,1,2,3]
 
         choiceVals = List.map Tuple.second choices_
-        firstChoice = Maybe.andThen List.head (List.tail choiceVals)
+        firstChoice = List.drop 1 choiceVals |> List.head
       in
         ( { model | timeNow = Just td
                   , date = firstChoice

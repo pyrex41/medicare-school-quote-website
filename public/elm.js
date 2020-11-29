@@ -5594,13 +5594,25 @@ var $author$project$MyDate$addMonth = F2(
 		var newYear = cd.bq + (((di - 1) / 12) | 0);
 		return A2($author$project$MyDate$CustomDate, newMonth, newYear);
 	});
-var $elm$core$Maybe$andThen = F2(
-	function (callback, maybeValue) {
-		if (!maybeValue.$) {
-			var value = maybeValue.a;
-			return callback(value);
-		} else {
-			return $elm$core$Maybe$Nothing;
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
 		}
 	});
 var $author$project$Main$errorToString = function (error) {
@@ -6918,15 +6930,6 @@ var $author$project$Main$setRows = F3(
 			trls);
 	});
 var $elm$core$List$sortBy = _List_sortBy;
-var $elm$core$List$tail = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(xs);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
 var $elm$core$String$toLower = _String_toLower;
 var $elm$time$Time$flooredDiv = F2(
 	function (numerator, denominator) {
@@ -7907,10 +7910,8 @@ var $author$project$Main$update = F2(
 					_List_fromArray(
 						[0, 1, 2, 3]));
 				var choiceVals = A2($elm$core$List$map, $elm$core$Tuple$second, choices_);
-				var firstChoice = A2(
-					$elm$core$Maybe$andThen,
-					$elm$core$List$head,
-					$elm$core$List$tail(choiceVals));
+				var firstChoice = $elm$core$List$head(
+					A2($elm$core$List$drop, 1, choiceVals));
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -8128,27 +8129,6 @@ var $author$project$Main$safedateloc = F2(
 			}
 		} else {
 			return 0;
-		}
-	});
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
 		}
 	});
 var $elm$html$Html$Events$alwaysStop = function (x) {
