@@ -8222,7 +8222,7 @@ var $author$project$Main$dateselectbox = F3(
 		var fn = function () {
 			if (!fnm.$) {
 				var s = fnm.a;
-				return $author$project$MyDate$toString(s);
+				return $author$project$MyDate$formatRequest(s);
 			} else {
 				return 'blank';
 			}

@@ -1278,7 +1278,7 @@ dateselectbox title_ dtt dts =
         i = safedateloc dtt dts
         fnm = List.drop i dts |> List.head
         fn = case fnm of
-                 Just s -> s |> MyDate.toString
+                 Just s -> s |> MyDate.formatRequest
                  Nothing -> "blank"
         nm = fn ++ " " ++ title_
     in
