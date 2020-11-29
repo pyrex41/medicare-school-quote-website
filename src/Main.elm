@@ -605,7 +605,7 @@ update msg model =
                     (\a -> (addMonth a td))
                     [0,1,2,3]
 
-        firstChoice = choices_ |> List.head
+        firstChoice = List.drop 1 choices_ |> List.head
       in
         ( validateModel { model | timeNow = Just td
                   , date = firstChoice
@@ -1276,13 +1276,8 @@ dateselectbox : String -> Maybe CustomDate -> List CustomDate -> Html Msg
 dateselectbox title_ dtt dts =
     let
         i = safedateloc dtt dts
-        fnm = List.drop i dts |> List.head
-        fn = case fnm of
-                 Just s -> s |> MyDate.formatRequest
-                 Nothing -> "blank"
-        nm = fn ++ " " ++ title_
     in
-        selectbox nm (List.map MyDate.toString dts) SelectDate [ "three columns", "offset-by-four columns"] i
+        selectbox title_ (List.map MyDate.toString dts) SelectDate [ "three columns", "offset-by-four columns"] i
 
 selectbox : String -> List (String) -> (String -> Msg) -> List String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
