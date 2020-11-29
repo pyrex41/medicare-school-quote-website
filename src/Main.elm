@@ -605,7 +605,7 @@ update msg model =
                     (\a -> (addMonth a td))
                     [0,1,2,3]
 
-        firstChoice = List.drop 1 choices_ |> List.head
+        firstChoice = choices_ |> List.head
       in
         ( validateModel { model | timeNow = Just td
                   , date = firstChoice
