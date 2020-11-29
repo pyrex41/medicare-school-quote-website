@@ -8079,6 +8079,27 @@ var $author$project$Main$checkbox = F4(
 var $author$project$Main$SelectDate = function (a) {
 	return {$: 8, a: a};
 };
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
 var $elm$core$Tuple$pair = F2(
 	function (a, b) {
 		return _Utils_Tuple2(a, b);
@@ -8105,27 +8126,6 @@ var $author$project$Main$safedateloc = F2(
 			}
 		} else {
 			return 0;
-		}
-	});
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
 		}
 	});
 var $elm$html$Html$Events$alwaysStop = function (x) {
@@ -8217,9 +8217,17 @@ var $author$project$Main$selectbox = F5(
 var $author$project$Main$dateselectbox = F3(
 	function (title_, dtt, dts) {
 		var i = A2($author$project$Main$safedateloc, dtt, dts);
-		var nm = _Utils_ap(
-			$elm$core$String$fromInt(i),
-			title_);
+		var fnm = $elm$core$List$head(
+			A2($elm$core$List$drop, 1, dts));
+		var fn = function () {
+			if (!fnm.$) {
+				var s = fnm.a;
+				return $author$project$MyDate$toString(s);
+			} else {
+				return 'blank';
+			}
+		}();
+		var nm = fn + (' ' + title_);
 		return A5(
 			$author$project$Main$selectbox,
 			nm,

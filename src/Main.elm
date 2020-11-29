@@ -397,7 +397,7 @@ update msg model =
     SelectDate cds ->
       let
         choices_ = model.dateSelectChoices
-        choice= List.head <| List.filter
+        choice = List.head <| List.filter
                                     (\a -> MyDate.toString a == cds)
                                     choices_
       in
@@ -1276,7 +1276,11 @@ dateselectbox : String -> Maybe CustomDate -> List CustomDate -> Html Msg
 dateselectbox title_ dtt dts =
     let
         i = safedateloc dtt dts
-        nm = String.fromInt(i) ++ title_
+        fnm = List.drop 1 dts |> List.head
+        fn = case fnm of
+                 Just s -> s |> MyDate.toString
+                 Nothing -> "blank"
+        nm = fn ++ " " ++ title_
     in
         selectbox nm (List.map MyDate.toString dts) SelectDate [ "three columns", "offset-by-four columns"] i
 
