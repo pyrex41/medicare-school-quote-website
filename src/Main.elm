@@ -771,6 +771,7 @@ isValid model =
           , model.zip.valid == True
           , model.planN || model.planF || model.planG
           , model.county /= Nothing
+          , model.date /= Nothing
           ]
         newModel = { model | valid = List.foldl (&&) True validList }
       in
