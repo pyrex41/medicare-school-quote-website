@@ -863,7 +863,7 @@ renderForm model func buttonLabel =
                       , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
                       , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns"] 0
                       , genderselectbox  "Gender" model.gender SelectGender [ "three columns", "offset-by-four columns"] 0
-                      , selectbox "Effective Date" (List.map Tuple.first model.dateSelectChoices) SelectDate [ "three columns", "offset-by-four columns"] 1
+                      , dateselectbox "Effective Date" model.date model.dateSelectChoices
                       , checkbox  "Tobacco User?" model.tobacco ToggleTobacco  [ "four columns", "offset-by-four columns"]
                       , checkbox  "Apply Household Discount?" model.discounts ToggleDiscounts [ "four columns", "offset-by-four columns"]
                       , div [ class "four columns", class "offset-by-four columns" ] [ h5 [ class "u-full-width", style "margin-top" "1rem" ] [ text "Which Plans?" ] ]
@@ -1273,6 +1273,12 @@ genderselectbox title_ selectedG handle class_ i =
         ]
     ]
 
+dateselectbox : String -> Maybe CustomDate -> List (String, CustomDate) -> Html Msg
+dateselectbox title_ dtt dts =
+    let
+        i = safedateloc dtt dts
+    in
+        selectbox title_ (List.map Tuple.first dts) SelectDate [ "three columns", "offset-by-four columns"] i
 
 selectbox : String -> List (String) -> (String -> Msg) -> List String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
@@ -1616,6 +1622,27 @@ safeCurrencyFloat ss =
           0.0
     Nothing ->
       0.0
+
+sdlhelp : CustomDate -> ( a , ( a1 , CustomDate )) -> Bool
+sdlhelp dt dtp =
+    ( Tuple.second <| Tuple.second dtp ) == dt
+
+safedateloc : Maybe CustomDate -> List (String, CustomDate) -> Int
+safedateloc dtt dts =
+    case dtt of
+        Just dt ->
+            let
+                pds = List.indexedMap Tuple.pair dts
+                flt = List.filter (sdlhelp dt) pds
+                tp = List.head flt
+            in
+                case tp of
+                    Just tph ->
+                        Tuple.first tph
+                    Nothing ->
+                        1
+        Nothing -> 1
+
 
 
 -- HTTP Requests & JSON

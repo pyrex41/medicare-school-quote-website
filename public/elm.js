@@ -5456,10 +5456,10 @@ var $author$project$Main$init = F3(
 				H: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
 				be: _List_fromArray(
 					['']),
-				au: $elm$core$Maybe$Nothing,
 				av: $elm$core$Maybe$Nothing,
+				ae: $elm$core$Maybe$Nothing,
 				aT: _List_Nil,
-				ae: false,
+				af: false,
 				az: 0,
 				R: key,
 				T: '',
@@ -5474,7 +5474,7 @@ var $author$project$Main$init = F3(
 				V: false,
 				W: false,
 				X: false,
-				am: '',
+				an: '',
 				bn: $elm$core$Maybe$Nothing,
 				aE: false,
 				aF: true,
@@ -6487,7 +6487,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$PlanQuote = F5(
 	function (company, fRate, gRate, nRate, naic) {
-		return {at: company, aU: fRate, aV: gRate, aX: nRate, aA: naic};
+		return {au: company, aU: fRate, aV: gRate, aX: nRate, aA: naic};
 	});
 var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$oneOf = _Json_oneOf;
@@ -6542,7 +6542,7 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 var $author$project$Main$getPlans = function (model) {
 	if (model.y) {
 		var url1 = 'https://medicare-school-quote-tool.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$safeString(model.z.ac) + ('&age=' + ($author$project$Main$safeString(model.H.ac) + ('&county=' + ($author$project$Main$strCounty(model.au) + ('&gender=' + ($author$project$Main$genderString(model.az) + ('&tobacco=' + ($author$project$Main$boolString(model.aH) + ('&discounts=' + ($author$project$Main$boolString(model.ae) + ('&date=' + $author$project$Main$strMaybeDate(model.av))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$safeString(model.z.ac) + ('&age=' + ($author$project$Main$safeString(model.H.ac) + ('&county=' + ($author$project$Main$strCounty(model.av) + ('&gender=' + ($author$project$Main$genderString(model.az) + ('&tobacco=' + ($author$project$Main$boolString(model.aH) + ('&discounts=' + ($author$project$Main$boolString(model.af) + ('&date=' + $author$project$Main$strMaybeDate(model.ae))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.X, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.V, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.W, 'G', url4);
@@ -6628,7 +6628,7 @@ var $author$project$Main$TableRow = function (company) {
 							return function (selected) {
 								return function (category) {
 									return function (priority) {
-										return {a8: category, at: company, af: displayName, aU: fRate, aV: gRate, aX: nRate, aA: naic, cS: priority, F: selected, aI: uid};
+										return {a8: category, au: company, ag: displayName, aU: fRate, aV: gRate, aX: nRate, aA: naic, cS: priority, F: selected, aI: uid};
 									};
 								};
 							};
@@ -6881,7 +6881,7 @@ var $author$project$Main$planToRow = F2(
 		var category = $author$project$Main$findCategory(pq.aA);
 		var displayName = A2(
 			$elm$core$Maybe$withDefault,
-			pq.at,
+			pq.au,
 			A2($author$project$Main$findDisplayName, pq.aA, category));
 		var priority = function () {
 			switch (category) {
@@ -6894,7 +6894,7 @@ var $author$project$Main$planToRow = F2(
 			}
 		}();
 		var showRowInit = !category;
-		return $author$project$Main$TableRow(pq.at)(displayName)(
+		return $author$project$Main$TableRow(pq.au)(displayName)(
 			$author$project$Main$safeString(pq.aU))(
 			$author$project$Main$safeString(pq.aV))(
 			$author$project$Main$safeString(pq.aX))(pq.aA)(ii)(showRowInit)(category)(priority);
@@ -7108,7 +7108,7 @@ var $author$project$Main$toggle = F2(
 	});
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {ag: frag, ak: params, ab: unvisited, ac: value, ao: visited};
+		return {ah: frag, al: params, ab: unvisited, ac: value, ap: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -7228,10 +7228,10 @@ var $elm$url$Url$Parser$parse = F2(
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
-		var visited = _v0.ao;
+		var visited = _v0.ap;
 		var unvisited = _v0.ab;
-		var params = _v0.ak;
-		var frag = _v0.ag;
+		var params = _v0.al;
+		var frag = _v0.ah;
 		var value = _v0.ac;
 		return A5(
 			$elm$url$Url$Parser$State,
@@ -7245,10 +7245,10 @@ var $elm$url$Url$Parser$map = F2(
 	function (subValue, _v0) {
 		var parseArg = _v0;
 		return function (_v1) {
-			var visited = _v1.ao;
+			var visited = _v1.ap;
 			var unvisited = _v1.ab;
-			var params = _v1.ak;
-			var frag = _v1.ag;
+			var params = _v1.al;
+			var frag = _v1.ah;
 			var value = _v1.ac;
 			return A2(
 				$elm$core$List$map,
@@ -7286,10 +7286,10 @@ var $elm$url$Url$Parser$oneOf = function (parsers) {
 };
 var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
-		var visited = _v0.ao;
+		var visited = _v0.ap;
 		var unvisited = _v0.ab;
-		var params = _v0.ak;
-		var frag = _v0.ag;
+		var params = _v0.al;
+		var frag = _v0.ah;
 		var value = _v0.ac;
 		if (!unvisited.b) {
 			return _List_Nil;
@@ -7334,7 +7334,7 @@ var $author$project$Main$urlToRoute = function (url) {
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Main$isValid = function (model) {
-	var _v0 = model.av;
+	var _v0 = model.ae;
 	if (!_v0.$) {
 		var validList = _List_fromArray(
 			[
@@ -7342,7 +7342,7 @@ var $author$project$Main$isValid = function (model) {
 				model.H.y,
 				model.z.y,
 				model.X || (model.V || model.W),
-				!_Utils_eq(model.au, $elm$core$Maybe$Nothing)
+				!_Utils_eq(model.av, $elm$core$Maybe$Nothing)
 			]);
 		var newModel = _Utils_update(
 			model,
@@ -7564,7 +7564,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								au: $elm$core$Maybe$Just(str)
+								av: $elm$core$Maybe$Just(str)
 							})),
 					$elm$core$Platform$Cmd$none);
 			case 8:
@@ -7582,7 +7582,7 @@ var $author$project$Main$update = F2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{av: choice})),
+							{ae: choice})),
 					$elm$core$Platform$Cmd$none);
 			case 9:
 				var prstr = msg.a;
@@ -7626,7 +7626,7 @@ var $author$project$Main$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{ae: !model.ae}),
+						{af: !model.af}),
 					$elm$core$Platform$Cmd$none);
 			case 12:
 				return _Utils_Tuple2(
@@ -7795,7 +7795,7 @@ var $author$project$Main$update = F2(
 								model,
 								{
 									be: response,
-									au: $elm$core$List$head(response),
+									av: $elm$core$List$head(response),
 									l: $author$project$Main$Ready
 								})),
 						$author$project$Main$getPDP(model));
@@ -7842,7 +7842,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								am: $author$project$Main$errorToString(error),
+								an: $author$project$Main$errorToString(error),
 								l: $author$project$Main$Failure(2),
 								n: eurl
 							}),
@@ -7884,7 +7884,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								am: $author$project$Main$errorToString(error),
+								an: $author$project$Main$errorToString(error),
 								l: $author$project$Main$Failure(1)
 							}),
 						$elm$core$Platform$Cmd$none);
@@ -7915,7 +7915,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							av: firstChoice,
+							ae: firstChoice,
 							aT: choices_,
 							b$: $elm$core$Maybe$Just(td)
 						}),
@@ -8033,9 +8033,6 @@ var $author$project$Main$SubmitForm = {$: 1};
 var $author$project$Main$SelectCounty = function (a) {
 	return {$: 7, a: a};
 };
-var $author$project$Main$SelectDate = function (a) {
-	return {$: 8, a: a};
-};
 var $author$project$Main$SelectGender = function (a) {
 	return {$: 6, a: a};
 };
@@ -8106,15 +8103,54 @@ var $author$project$Main$checkbox = F4(
 						]))
 				]));
 	});
-var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
-var $elm$html$Html$form = _VirtualDom_node('form');
-var $author$project$Main$fullGenderString = function (gender) {
-	if (!gender) {
-		return 'Male';
-	} else {
-		return 'Female';
-	}
+var $author$project$Main$SelectDate = function (a) {
+	return {$: 8, a: a};
 };
+var $author$project$Main$sdlhelp = F2(
+	function (dt, dtp) {
+		return _Utils_eq(dtp.b.b, dt);
+	});
+var $author$project$Main$safedateloc = F2(
+	function (dtt, dts) {
+		if (!dtt.$) {
+			var dt = dtt.a;
+			var pds = A2($elm$core$List$indexedMap, $elm$core$Tuple$pair, dts);
+			var flt = A2(
+				$elm$core$List$filter,
+				$author$project$Main$sdlhelp(dt),
+				pds);
+			var tp = $elm$core$List$head(flt);
+			if (!tp.$) {
+				var tph = tp.a;
+				return tph.a;
+			} else {
+				return 1;
+			}
+		} else {
+			return 1;
+		}
+	});
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -8150,6 +8186,78 @@ var $elm$html$Html$option = _VirtualDom_node('option');
 var $elm$html$Html$select = _VirtualDom_node('select');
 var $elm$html$Html$Attributes$selected = $elm$html$Html$Attributes$boolProperty('selected');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$Main$selectbox = F5(
+	function (title_, choices, handle, class_, i) {
+		var def = $elm$core$List$head(
+			A2($elm$core$List$drop, i, choices));
+		var nls = A2(
+			$elm$core$List$map,
+			function (a) {
+				return A2(
+					$elm$html$Html$option,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$value(a),
+							$elm$html$Html$Attributes$selected(
+							_Utils_eq(
+								$elm$core$Maybe$Just(a),
+								def))
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(a)
+						]));
+			},
+			choices);
+		var cl = A2(
+			$elm$core$List$map,
+			function (a) {
+				return $elm$html$Html$Attributes$class(a);
+			},
+			class_);
+		return A2(
+			$elm$html$Html$div,
+			cl,
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$label,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text(title_),
+							A2(
+							$elm$html$Html$select,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onInput(handle),
+									$elm$html$Html$Attributes$class('u-full-width')
+								]),
+							nls)
+						]))
+				]));
+	});
+var $author$project$Main$dateselectbox = F3(
+	function (title_, dtt, dts) {
+		var i = A2($author$project$Main$safedateloc, dtt, dts);
+		return A5(
+			$author$project$Main$selectbox,
+			title_,
+			A2($elm$core$List$map, $elm$core$Tuple$first, dts),
+			$author$project$Main$SelectDate,
+			_List_fromArray(
+				['three columns', 'offset-by-four columns']),
+			i);
+	});
+var $elm$html$Html$Attributes$disabled = $elm$html$Html$Attributes$boolProperty('disabled');
+var $elm$html$Html$form = _VirtualDom_node('form');
+var $author$project$Main$fullGenderString = function (gender) {
+	if (!gender) {
+		return 'Male';
+	} else {
+		return 'Female';
+	}
+};
 var $author$project$Main$genderselectbox = F5(
 	function (title_, selectedG, handle, class_, i) {
 		var cl = A2(
@@ -8224,78 +8332,6 @@ var $elm$html$Html$Events$onSubmit = function (msg) {
 			$elm$html$Html$Events$alwaysPreventDefault,
 			$elm$json$Json$Decode$succeed(msg)));
 };
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
-		}
-	});
-var $author$project$Main$selectbox = F5(
-	function (title_, choices, handle, class_, i) {
-		var def = $elm$core$List$head(
-			A2($elm$core$List$drop, i, choices));
-		var nls = A2(
-			$elm$core$List$map,
-			function (a) {
-				return A2(
-					$elm$html$Html$option,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$value(a),
-							$elm$html$Html$Attributes$selected(
-							_Utils_eq(
-								$elm$core$Maybe$Just(a),
-								def))
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(a)
-						]));
-			},
-			choices);
-		var cl = A2(
-			$elm$core$List$map,
-			function (a) {
-				return $elm$html$Html$Attributes$class(a);
-			},
-			class_);
-		return A2(
-			$elm$html$Html$div,
-			cl,
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$label,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text(title_),
-							A2(
-							$elm$html$Html$select,
-							_List_fromArray(
-								[
-									$elm$html$Html$Events$onInput(handle),
-									$elm$html$Html$Attributes$class('u-full-width')
-								]),
-							nls)
-						]))
-				]));
-	});
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
 var $author$project$Main$textbox = F5(
@@ -8519,14 +8555,7 @@ var $author$project$Main$renderForm = F3(
 										_List_fromArray(
 											['three columns', 'offset-by-four columns']),
 										0),
-										A5(
-										$author$project$Main$selectbox,
-										'Effective Date',
-										A2($elm$core$List$map, $elm$core$Tuple$first, model.aT),
-										$author$project$Main$SelectDate,
-										_List_fromArray(
-											['three columns', 'offset-by-four columns']),
-										1),
+										A3($author$project$Main$dateselectbox, 'Effective Date', model.ae, model.aT),
 										A4(
 										$author$project$Main$checkbox,
 										'Tobacco User?',
@@ -8537,7 +8566,7 @@ var $author$project$Main$renderForm = F3(
 										A4(
 										$author$project$Main$checkbox,
 										'Apply Household Discount?',
-										model.ae,
+										model.af,
 										$author$project$Main$ToggleDiscounts,
 										_List_fromArray(
 											['four columns', 'offset-by-four columns'])),
@@ -8923,7 +8952,7 @@ var $author$project$Main$makeEnrollRow = function (ls) {
 	var ll = A2(
 		$elm$core$List$sortBy,
 		function ($) {
-			return $.af;
+			return $.ag;
 		},
 		A2(
 			$elm$core$List$filter,
@@ -9113,7 +9142,7 @@ var $author$project$Main$outputTable = F2(
 			var vr = A2(
 				$elm$core$List$sortBy,
 				function (a) {
-					return a.af;
+					return a.ag;
 				},
 				A2(
 					$elm$core$List$filter,
@@ -9230,7 +9259,7 @@ var $author$project$Main$outputTable = F2(
 				A2(
 					$elm$core$List$map,
 					function ($) {
-						return $.af;
+						return $.ag;
 					},
 					vr));
 			return A2(
@@ -9288,7 +9317,7 @@ var $author$project$Main$personalInfo = function (model) {
 			return '';
 		}
 	}();
-	var dsc = model.ae ? 'Yes' : 'No';
+	var dsc = model.af ? 'Yes' : 'No';
 	var docusignLink = 'https://account.docusign.com';
 	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=010U3815';
 	var ageText = function () {
@@ -9670,13 +9699,13 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'Company',
 				function ($) {
-					return $.af;
+					return $.ag;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'Full Name',
 				function ($) {
-					return $.at;
+					return $.au;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
@@ -9709,7 +9738,7 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 					])
 			}),
 		fd: function ($) {
-			return $.at;
+			return $.au;
 		},
 		fe: $author$project$Main$SetTableState
 	});
@@ -10067,7 +10096,7 @@ var $author$project$Main$viewRows = F3(
 					A2(
 						$elm$core$List$sortBy,
 						function ($) {
-							return $.af;
+							return $.ag;
 						},
 						A2(
 							$elm$core$List$filter,
@@ -10384,7 +10413,7 @@ var $author$project$Main$variousViews = function (model) {
 								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.am)
+										$elm$html$Html$text(model.an)
 									]))
 							]));
 				case 1:
@@ -10410,7 +10439,7 @@ var $author$project$Main$variousViews = function (model) {
 								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.am)
+										$elm$html$Html$text(model.an)
 									]))
 							]));
 				default:
@@ -10436,7 +10465,7 @@ var $author$project$Main$variousViews = function (model) {
 								_List_Nil,
 								_List_fromArray(
 									[
-										$elm$html$Html$text(model.am)
+										$elm$html$Html$text(model.an)
 									]))
 							]));
 			}
