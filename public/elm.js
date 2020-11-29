@@ -8218,7 +8218,7 @@ var $author$project$Main$dateselectbox = F3(
 	function (title_, dtt, dts) {
 		var i = A2($author$project$Main$safedateloc, dtt, dts);
 		var fnm = $elm$core$List$head(
-			A2($elm$core$List$drop, 1, dts));
+			A2($elm$core$List$drop, i, dts));
 		var fn = function () {
 			if (!fnm.$) {
 				var s = fnm.a;

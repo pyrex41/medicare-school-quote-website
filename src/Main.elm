@@ -1276,7 +1276,7 @@ dateselectbox : String -> Maybe CustomDate -> List CustomDate -> Html Msg
 dateselectbox title_ dtt dts =
     let
         i = safedateloc dtt dts
-        fnm = List.drop 1 dts |> List.head
+        fnm = List.drop i dts |> List.head
         fn = case fnm of
                  Just s -> s |> MyDate.toString
                  Nothing -> "blank"
