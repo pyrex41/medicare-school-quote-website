@@ -10430,12 +10430,8 @@ var $author$project$Main$variousViews = function (model) {
 							[
 								$elm$html$Html$text('I could not load Plan(s) for some reason. '),
 								A2(
-								$elm$html$Html$button,
-								_List_fromArray(
-									[
-										$elm$html$Html$Events$onClick($author$project$Main$SubmitForm),
-										A2($elm$html$Html$Attributes$style, 'display', 'block')
-									]),
+								$elm$html$Html$div,
+								_List_Nil,
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Resubmit Plan Form')

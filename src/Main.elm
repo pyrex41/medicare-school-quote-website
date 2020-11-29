@@ -692,7 +692,7 @@ variousViews model =
         Plan ->
           div []
             [ text "I could not load Plan(s) for some reason. "
-            , button [ onClick SubmitForm, style "display" "block" ] [ text "Resubmit Plan Form"]
+            , div [] [ text "Resubmit Plan Form"]
             , div [] [ text model.recentError]
             ]
 
