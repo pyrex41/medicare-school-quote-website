@@ -22,7 +22,10 @@ formatRequest cd =
   let
     mi = monthInt cd.month
     ms =  if mi < 10 then
-            "0" ++ String.fromInt mi
+             if mi == 0 then
+                 "12"
+             else
+                 "0" ++ String.fromInt mi
           else
             String.fromInt mi
     ys = String.fromInt cd.year

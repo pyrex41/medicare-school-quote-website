@@ -6519,7 +6519,7 @@ var $author$project$Main$strCounty = function (c) {
 var $author$project$MyDate$formatRequest = function (cd) {
 	var ys = $elm$core$String$fromInt(cd.bq);
 	var mi = $author$project$MyDate$monthInt(cd.bk);
-	var ms = (mi < 10) ? ('0' + $elm$core$String$fromInt(mi)) : $elm$core$String$fromInt(mi);
+	var ms = (mi < 10) ? ((!mi) ? '12' : ('0' + $elm$core$String$fromInt(mi))) : $elm$core$String$fromInt(mi);
 	return ys + ('-' + (ms + '-01'));
 };
 var $author$project$Main$strMaybeDate = function (ccd) {
