@@ -609,7 +609,7 @@ update msg model =
         choiceVals = List.map Tuple.second choices_
         firstChoice = List.drop 1 choiceVals |> List.head
       in
-        ( { model | timeNow = Just td
+        ( validateModel { model | timeNow = Just td
                   , date = firstChoice
                   , dateSelectChoices = choices_
           }

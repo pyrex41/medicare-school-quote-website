@@ -7913,13 +7913,14 @@ var $author$project$Main$update = F2(
 				var firstChoice = $elm$core$List$head(
 					A2($elm$core$List$drop, 1, choiceVals));
 				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							ae: firstChoice,
-							aT: choices_,
-							b$: $elm$core$Maybe$Just(td)
-						}),
+					$author$project$Main$validateModel(
+						_Utils_update(
+							model,
+							{
+								ae: firstChoice,
+								aT: choices_,
+								b$: $elm$core$Maybe$Just(td)
+							})),
 					$elm$core$Platform$Cmd$none);
 		}
 	});
