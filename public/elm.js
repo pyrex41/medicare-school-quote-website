@@ -6612,10 +6612,6 @@ var $elm$core$Maybe$map = F2(
 		}
 	});
 var $elm$core$Basics$not = _Basics_not;
-var $elm$core$Tuple$pair = F2(
-	function (a, b) {
-		return _Utils_Tuple2(a, b);
-	});
 var $elm$core$String$endsWith = _String_endsWith;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
@@ -7573,14 +7569,15 @@ var $author$project$Main$update = F2(
 			case 8:
 				var cds = msg.a;
 				var choices_ = model.aT;
-				var choiceTuple = $elm$core$List$head(
+				var choice = $elm$core$List$head(
 					A2(
 						$elm$core$List$filter,
 						function (a) {
-							return _Utils_eq(a.a, cds);
+							return _Utils_eq(
+								$author$project$MyDate$toString(a),
+								cds);
 						},
 						choices_));
-				var choice = A2($elm$core$Maybe$map, $elm$core$Tuple$second, choiceTuple);
 				return _Utils_Tuple2(
 					$author$project$Main$validateModel(
 						_Utils_update(
@@ -7901,17 +7898,12 @@ var $author$project$Main$update = F2(
 				var choices_ = A2(
 					$elm$core$List$map,
 					function (a) {
-						return A2(
-							$elm$core$Tuple$pair,
-							$author$project$MyDate$toString(
-								A2($author$project$MyDate$addMonth, a, td)),
-							A2($author$project$MyDate$addMonth, a, td));
+						return A2($author$project$MyDate$addMonth, a, td);
 					},
 					_List_fromArray(
 						[0, 1, 2, 3]));
-				var choiceVals = A2($elm$core$List$map, $elm$core$Tuple$second, choices_);
 				var firstChoice = $elm$core$List$head(
-					A2($elm$core$List$drop, 1, choiceVals));
+					A2($elm$core$List$drop, 1, choices_));
 				return _Utils_Tuple2(
 					$author$project$Main$validateModel(
 						_Utils_update(
@@ -8108,9 +8100,13 @@ var $author$project$Main$checkbox = F4(
 var $author$project$Main$SelectDate = function (a) {
 	return {$: 8, a: a};
 };
+var $elm$core$Tuple$pair = F2(
+	function (a, b) {
+		return _Utils_Tuple2(a, b);
+	});
 var $author$project$Main$sdlhelp = F2(
 	function (dt, dtp) {
-		return _Utils_eq(dtp.b.b, dt);
+		return _Utils_eq(dtp.b, dt);
 	});
 var $author$project$Main$safedateloc = F2(
 	function (dtt, dts) {
@@ -8227,7 +8223,7 @@ var $author$project$Main$dateselectbox = F3(
 		return A5(
 			$author$project$Main$selectbox,
 			nm,
-			A2($elm$core$List$map, $elm$core$Tuple$first, dts),
+			A2($elm$core$List$map, $author$project$MyDate$toString, dts),
 			$author$project$Main$SelectDate,
 			_List_fromArray(
 				['three columns', 'offset-by-four columns']),

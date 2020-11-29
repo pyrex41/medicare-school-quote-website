@@ -70,7 +70,7 @@ type alias Model =
   , viewNonpreferred : Bool
   , viewOutside : Bool
   , timeNow : Maybe CustomDate
-  , dateSelectChoices : List (String, CustomDate)
+  , dateSelectChoices : List CustomDate
   , outputTableState : Table.State
   , outputQuotes : Maybe (List OutputQuote)
   , outputAvailable : Bool
@@ -397,10 +397,9 @@ update msg model =
     SelectDate cds ->
       let
         choices_ = model.dateSelectChoices
-        choiceTuple = List.head <| List.filter
-                                    (\a -> Tuple.first a == cds)
+        choice= List.head <| List.filter
+                                    (\a -> MyDate.toString a == cds)
                                     choices_
-        choice = Maybe.map Tuple.second choiceTuple
       in
         ( validateModel { model | date = choice }
         , Cmd.none
@@ -603,11 +602,10 @@ update msg model =
                     (Time.toYear utc timenow)
 
         choices_ = List.map
-                    (\a -> Tuple.pair (MyDate.toString (addMonth a td) ) (addMonth a td))
+                    (\a -> (addMonth a td))
                     [0,1,2,3]
 
-        choiceVals = List.map Tuple.second choices_
-        firstChoice = List.drop 1 choiceVals |> List.head
+        firstChoice = List.drop 1 choices_ |> List.head
       in
         ( validateModel { model | timeNow = Just td
                   , date = firstChoice
@@ -1273,13 +1271,13 @@ genderselectbox title_ selectedG handle class_ i =
         ]
     ]
 
-dateselectbox : String -> Maybe CustomDate -> List (String, CustomDate) -> Html Msg
+dateselectbox : String -> Maybe CustomDate -> List CustomDate -> Html Msg
 dateselectbox title_ dtt dts =
     let
         i = safedateloc dtt dts
         nm = String.fromInt(i) ++ title_
     in
-        selectbox nm (List.map Tuple.first dts) SelectDate [ "three columns", "offset-by-four columns"] i
+        selectbox nm (List.map MyDate.toString dts) SelectDate [ "three columns", "offset-by-four columns"] i
 
 selectbox : String -> List (String) -> (String -> Msg) -> List String -> Int -> Html Msg
 selectbox title_ choices handle class_ i =
@@ -1624,11 +1622,11 @@ safeCurrencyFloat ss =
     Nothing ->
       0.0
 
-sdlhelp : CustomDate -> ( a , ( a1 , CustomDate )) -> Bool
+sdlhelp : CustomDate -> ( a , CustomDate ) -> Bool
 sdlhelp dt dtp =
-    ( Tuple.second <| Tuple.second dtp ) == dt
+    Tuple.second dtp == dt
 
-safedateloc : Maybe CustomDate -> List (String, CustomDate) -> Int
+safedateloc : Maybe CustomDate -> List CustomDate -> Int
 safedateloc dtt dts =
     case dtt of
         Just dt ->
