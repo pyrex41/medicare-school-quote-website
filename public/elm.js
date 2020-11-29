@@ -8124,10 +8124,10 @@ var $author$project$Main$safedateloc = F2(
 				var tph = tp.a;
 				return tph.a;
 			} else {
-				return 1;
+				return 0;
 			}
 		} else {
-			return 1;
+			return 0;
 		}
 	});
 var $elm$core$List$drop = F2(

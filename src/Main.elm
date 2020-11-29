@@ -1641,8 +1641,8 @@ safedateloc dtt dts =
                     Just tph ->
                         Tuple.first tph
                     Nothing ->
-                        1
-        Nothing -> 1
+                        0
+        Nothing -> 0
 
 
 
