@@ -14,7 +14,10 @@ addMonth i cd =
     di = (monthInt cd.month) + i
     newMonth = intMonth <| modBy 12 di
     newYear = if cd.month ==  Dec then
-                  cd.year + 1
+                  if i > 0 then
+                      cd.year + 1
+                  else
+                      cd.year
               else
                   cd.year + ( (di - 1) // 12 )
   in

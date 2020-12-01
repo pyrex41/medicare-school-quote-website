@@ -5591,7 +5591,7 @@ var $author$project$MyDate$addMonth = F2(
 		var di = $author$project$MyDate$monthInt(cd.aX) + i;
 		var newMonth = $author$project$MyDate$intMonth(
 			A2($elm$core$Basics$modBy, 12, di));
-		var newYear = (cd.aX === 11) ? (cd.bq + 1) : (cd.bq + (((di - 1) / 12) | 0));
+		var newYear = (cd.aX === 11) ? ((i > 0) ? (cd.bq + 1) : cd.bq) : (cd.bq + (((di - 1) / 12) | 0));
 		return A2($author$project$MyDate$CustomDate, newMonth, newYear);
 	});
 var $elm$core$List$drop = F2(
