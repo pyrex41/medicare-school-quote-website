@@ -4411,13 +4411,13 @@ var _Http_toTask = F3(function(router, toTask, request)
 	return _Scheduler_binding(function(callback)
 	{
 		function done(response) {
-			callback(toTask(request.bf.a(response)));
+			callback(toTask(request.bg.a(response)));
 		}
 
 		var xhr = new XMLHttpRequest();
 		xhr.addEventListener('error', function() { done($elm$http$Http$NetworkError_); });
 		xhr.addEventListener('timeout', function() { done($elm$http$Http$Timeout_); });
-		xhr.addEventListener('load', function() { done(_Http_toResponse(request.bf.b, xhr)); });
+		xhr.addEventListener('load', function() { done(_Http_toResponse(request.bg.b, xhr)); });
 		$elm$core$Maybe$isJust(request.de) && _Http_track(router, xhr, request.de.a);
 
 		try {
@@ -4445,7 +4445,7 @@ function _Http_configureRequest(xhr, request)
 		xhr.setRequestHeader(headers.a.a, headers.a.b);
 	}
 	xhr.timeout = request.fb.a || 0;
-	xhr.responseType = request.bf.d;
+	xhr.responseType = request.bg.d;
 	xhr.withCredentials = request.dC;
 }
 
@@ -5140,7 +5140,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {cp: fragment, cw: host, aY: path, cQ: port_, cW: protocol, cX: query};
+		return {cp: fragment, cw: host, aZ: path, cQ: port_, cW: protocol, cX: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5454,7 +5454,7 @@ var $author$project$Main$init = F3(
 		return _Utils_Tuple2(
 			{
 				H: A3($author$project$Main$ValidInt, $elm$core$Maybe$Nothing, false, 'Please enter an age'),
-				be: _List_fromArray(
+				bf: _List_fromArray(
 					['']),
 				av: $elm$core$Maybe$Nothing,
 				P: $elm$core$Maybe$Nothing,
@@ -5467,10 +5467,10 @@ var $author$project$Main$init = F3(
 				cK: $elm$core$Maybe$Nothing,
 				cL: $billstclair$elm_sortable_table$Table$initialSort('Title'),
 				bm: $elm$core$Maybe$Just('$144.60'),
-				aZ: $elm$core$Maybe$Nothing,
+				a_: $elm$core$Maybe$Nothing,
 				V: $elm$core$Maybe$Nothing,
-				a_: 2020,
-				a$: 2021,
+				a$: 2020,
+				a0: 2021,
 				W: false,
 				X: false,
 				Y: false,
@@ -5501,7 +5501,7 @@ var $author$project$Main$subscriptions = function (model) {
 var $author$project$Main$Counties = 0;
 var $author$project$MyDate$CustomDate = F2(
 	function (month, year) {
-		return {bk: month, bq: year};
+		return {aX: month, bq: year};
 	});
 var $author$project$Main$Failure = function (a) {
 	return {$: 0, a: a};
@@ -5515,9 +5515,9 @@ var $author$project$Main$PDP = 1;
 var $author$project$Main$Plan = 2;
 var $author$project$Main$Preferred = 0;
 var $author$project$Main$Results = {$: 3};
+var $elm$time$Time$Dec = 11;
 var $elm$time$Time$Apr = 3;
 var $elm$time$Time$Aug = 7;
-var $elm$time$Time$Dec = 11;
 var $elm$time$Time$Feb = 1;
 var $elm$time$Time$Jan = 0;
 var $elm$time$Time$Jul = 6;
@@ -5588,10 +5588,10 @@ var $author$project$MyDate$monthInt = function (m) {
 };
 var $author$project$MyDate$addMonth = F2(
 	function (i, cd) {
-		var di = $author$project$MyDate$monthInt(cd.bk) + i;
+		var di = $author$project$MyDate$monthInt(cd.aX) + i;
 		var newMonth = $author$project$MyDate$intMonth(
 			A2($elm$core$Basics$modBy, 12, di));
-		var newYear = cd.bq + (((di - 1) / 12) | 0);
+		var newYear = (cd.aX === 11) ? (cd.bq + 1) : (cd.bq + (((di - 1) / 12) | 0));
 		return A2($author$project$MyDate$CustomDate, newMonth, newYear);
 	});
 var $elm$core$List$drop = F2(
@@ -6406,7 +6406,7 @@ var $elm$http$Http$cmdMap = F2(
 				{
 					dC: r.dC,
 					dK: r.dK,
-					bf: A2(_Http_mapExpect, func, r.bf),
+					bg: A2(_Http_mapExpect, func, r.bg),
 					cr: r.cr,
 					ep: r.ep,
 					fb: r.fb,
@@ -6434,17 +6434,17 @@ var $elm$http$Http$subscription = _Platform_leaf('Http');
 var $elm$http$Http$request = function (r) {
 	return $elm$http$Http$command(
 		$elm$http$Http$Request(
-			{dC: false, dK: r.dK, bf: r.bf, cr: r.cr, ep: r.ep, fb: r.fb, de: r.de, n: r.n}));
+			{dC: false, dK: r.dK, bg: r.bg, cr: r.cr, ep: r.ep, fb: r.fb, de: r.de, n: r.n}));
 };
 var $elm$http$Http$get = function (r) {
 	return $elm$http$Http$request(
-		{dK: $elm$http$Http$emptyBody, bf: r.bf, cr: _List_Nil, ep: 'GET', fb: $elm$core$Maybe$Nothing, de: $elm$core$Maybe$Nothing, n: r.n});
+		{dK: $elm$http$Http$emptyBody, bg: r.bg, cr: _List_Nil, ep: 'GET', fb: $elm$core$Maybe$Nothing, de: $elm$core$Maybe$Nothing, n: r.n});
 };
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Main$PdpRecord = F3(
 	function (plan, rate, year) {
-		return {a0: plan, aD: rate, bq: year};
+		return {a1: plan, aD: rate, bq: year};
 	});
 var $elm$json$Json$Decode$int = _Json_decodeInt;
 var $elm$json$Json$Decode$map3 = _Json_map3;
@@ -6469,12 +6469,12 @@ var $author$project$Main$safeString = function (ms) {
 };
 var $author$project$Main$getPDP = function (model) {
 	var zip5 = $author$project$Main$safeString(model.z.ad);
-	var year2 = $elm$core$String$fromInt(model.a$);
-	var year1 = $elm$core$String$fromInt(model.a_);
+	var year2 = $elm$core$String$fromInt(model.a0);
+	var year1 = $elm$core$String$fromInt(model.a$);
 	var base_url = 'https://medicare-school-quote-tool.herokuapp.com/api/pdp?';
 	return $elm$http$Http$get(
 		{
-			bf: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
+			bg: A2($elm$http$Http$expectJson, $author$project$Main$PDPResponse, $author$project$Main$pdpDecoder),
 			n: base_url + ('zip=' + (zip5 + ('&year1=' + (year1 + ('&year2=' + year2)))))
 		});
 };
@@ -6499,7 +6499,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$PlanQuote = F5(
 	function (company, fRate, gRate, nRate, naic) {
-		return {au: company, aU: fRate, aV: gRate, aX: nRate, aA: naic};
+		return {au: company, aU: fRate, aV: gRate, aY: nRate, aA: naic};
 	});
 var $elm$json$Json$Decode$map5 = _Json_map5;
 var $elm$json$Json$Decode$oneOf = _Json_oneOf;
@@ -6539,7 +6539,7 @@ var $author$project$Main$strCounty = function (c) {
 };
 var $author$project$MyDate$formatRequest = function (cd) {
 	var ys = $elm$core$String$fromInt(cd.bq);
-	var mi = $author$project$MyDate$monthInt(cd.bk);
+	var mi = $author$project$MyDate$monthInt(cd.aX);
 	var ms = (mi < 10) ? ((!mi) ? '12' : ('0' + $elm$core$String$fromInt(mi))) : $elm$core$String$fromInt(mi);
 	return ys + ('-' + (ms + '-01'));
 };
@@ -6560,7 +6560,7 @@ var $author$project$Main$getPlans = function (model) {
 		var url5 = A3($author$project$Main$checkAddPlan, model.X, 'G', url4);
 		return $elm$http$Http$get(
 			{
-				bf: A2($elm$http$Http$expectJson, $author$project$Main$PlanResponse, $author$project$Main$planXDecoder),
+				bg: A2($elm$http$Http$expectJson, $author$project$Main$PlanResponse, $author$project$Main$planXDecoder),
 				n: url5
 			});
 	} else {
@@ -6580,13 +6580,13 @@ var $author$project$Main$getZip = function (model) {
 		var z = zip.a;
 		return $elm$http$Http$get(
 			{
-				bf: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
+				bg: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
 				n: 'https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=' + z
 			});
 	} else {
 		return $elm$http$Http$get(
 			{
-				bf: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
+				bg: A2($elm$http$Http$expectJson, $author$project$Main$ZipResponse, $author$project$Main$countyDecoder),
 				n: 'https://medicare-school-quote-tool.herokuapp.com/api/counties?zip=' + ''
 			});
 	}
@@ -6623,7 +6623,7 @@ var $author$project$Main$pdpFullString = function (pr) {
 	var p_name = A2(
 		$elm$core$String$endsWith,
 		'(PDP)',
-		$elm$core$String$trimRight(pr.a0)) ? A3($elm$core$String$slice, 0, -6, pr.a0) : pr.a0;
+		$elm$core$String$trimRight(pr.a1)) ? A3($elm$core$String$slice, 0, -6, pr.a1) : pr.a1;
 	return y_val + ('   |   ' + (p_name + ('   |   ' + r_val)));
 };
 var $author$project$Main$TableRow = function (company) {
@@ -6636,7 +6636,7 @@ var $author$project$Main$TableRow = function (company) {
 							return function (selected) {
 								return function (category) {
 									return function (priority) {
-										return {a8: category, au: company, ag: displayName, aU: fRate, aV: gRate, aX: nRate, aA: naic, cS: priority, F: selected, aI: uid};
+										return {a9: category, au: company, ag: displayName, aU: fRate, aV: gRate, aY: nRate, aA: naic, cS: priority, F: selected, aI: uid};
 									};
 								};
 							};
@@ -6905,7 +6905,7 @@ var $author$project$Main$planToRow = F2(
 		return $author$project$Main$TableRow(pq.au)(displayName)(
 			$author$project$Main$safeString(pq.aU))(
 			$author$project$Main$safeString(pq.aV))(
-			$author$project$Main$safeString(pq.aX))(pq.aA)(ii)(showRowInit)(category)(priority);
+			$author$project$Main$safeString(pq.aY))(pq.aA)(ii)(showRowInit)(category)(priority);
 	});
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $author$project$Main$selectByUID = F2(
@@ -6919,7 +6919,7 @@ var $author$project$Main$setRows = F3(
 		return A2(
 			$elm$core$List$map,
 			function (a) {
-				return _Utils_eq(a.a8, cat) ? _Utils_update(
+				return _Utils_eq(a.a9, cat) ? _Utils_update(
 					a,
 					{F: b}) : a;
 			},
@@ -6982,14 +6982,14 @@ var $elm$time$Time$toCivil = function (minutes) {
 	var year = yearOfEra + (era * 400);
 	return {
 		ch: (dayOfYear - ((((153 * mp) + 2) / 5) | 0)) + 1,
-		bk: month,
+		aX: month,
 		bq: year + ((month <= 2) ? 1 : 0)
 	};
 };
 var $elm$time$Time$toMonth = F2(
 	function (zone, time) {
 		var _v0 = $elm$time$Time$toCivil(
-			A2($elm$time$Time$toAdjustedMinutes, zone, time)).bk;
+			A2($elm$time$Time$toAdjustedMinutes, zone, time)).aX;
 		switch (_v0) {
 			case 1:
 				return 0;
@@ -7020,7 +7020,7 @@ var $elm$time$Time$toMonth = F2(
 var $author$project$MyDate$toString = function (cd) {
 	var yearString = $elm$core$String$fromInt(cd.bq);
 	var monthString = function () {
-		var _v0 = cd.bk;
+		var _v0 = cd.aX;
 		switch (_v0) {
 			case 0:
 				return 'January';
@@ -7092,7 +7092,7 @@ var $elm$url$Url$toString = function (url) {
 					$elm$url$Url$addPort,
 					url.cQ,
 					_Utils_ap(http, url.cw)),
-				url.aY)));
+				url.aZ)));
 };
 var $elm$time$Time$toYear = F2(
 	function (zone, time) {
@@ -7219,7 +7219,7 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.aY),
+					$elm$url$Url$Parser$preparePath(url.aZ),
 					$elm$url$Url$Parser$prepareQuery(url.cX),
 					url.cp,
 					$elm$core$Basics$identity)));
@@ -7368,7 +7368,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aY: '/output'});
+					{aZ: '/output'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7381,7 +7381,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aY: '/'});
+					{aZ: '/'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7394,7 +7394,7 @@ var $author$project$Main$update = F2(
 				var curl = model.n;
 				var nurl = _Utils_update(
 					curl,
-					{aY: '/results'});
+					{aZ: '/results'});
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7588,7 +7588,7 @@ var $author$project$Main$update = F2(
 			case 9:
 				var prstr = msg.a;
 				var prf = function () {
-					var _v5 = model.aZ;
+					var _v5 = model.a_;
 					if (!_v5.$) {
 						var pl = _v5.a;
 						return $elm$core$Maybe$Just(
@@ -7795,7 +7795,7 @@ var $author$project$Main$update = F2(
 							_Utils_update(
 								model,
 								{
-									be: response,
+									bf: response,
 									av: $elm$core$List$head(response),
 									l: $author$project$Main$Ready
 								})),
@@ -7818,7 +7818,7 @@ var $author$project$Main$update = F2(
 					var curl = model.n;
 					var nurl = _Utils_update(
 						curl,
-						{aY: '/results'});
+						{aZ: '/results'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7838,7 +7838,7 @@ var $author$project$Main$update = F2(
 					var curl = model.n;
 					var eurl = _Utils_update(
 						curl,
-						{aY: '/error'});
+						{aZ: '/error'});
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7859,7 +7859,7 @@ var $author$project$Main$update = F2(
 					var pr_sort = A2(
 						$elm$core$List$sortBy,
 						function ($) {
-							return $.a0;
+							return $.a1;
 						},
 						response);
 					var prs = function () {
@@ -7875,7 +7875,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								aZ: $elm$core$Maybe$Just(pr_sort),
+								a_: $elm$core$Maybe$Just(pr_sort),
 								V: prs
 							}),
 						$elm$core$Platform$Cmd$none);
@@ -8520,7 +8520,7 @@ var $author$project$Main$renderForm = F3(
 										A5(
 										$author$project$Main$selectbox,
 										'County',
-										model.be,
+										model.bf,
 										$author$project$Main$SelectCounty,
 										_List_fromArray(
 											['three columns', 'offset-by-four columns']),
@@ -8989,7 +8989,7 @@ var $author$project$Main$rateUtil = F2(
 				return A2(
 					$elm$core$List$map,
 					function ($) {
-						return $.aX;
+						return $.aY;
 					},
 					ls);
 			default:
@@ -9517,7 +9517,7 @@ var $author$project$Main$categoryColumn = $billstclair$elm_sortable_table$Table$
 			$elm$core$Basics$composeL,
 			$author$project$Main$categoryLabel,
 			function ($) {
-				return $.a8;
+				return $.a9;
 			})
 	});
 var $billstclair$elm_sortable_table$Table$None = {$: 0};
@@ -9695,7 +9695,7 @@ var $author$project$Main$config = $billstclair$elm_sortable_table$Table$customCo
 				$billstclair$elm_sortable_table$Table$stringColumn,
 				'N Rate',
 				function ($) {
-					return $.aX;
+					return $.aY;
 				}),
 				A2(
 				$billstclair$elm_sortable_table$Table$stringColumn,
@@ -9770,14 +9770,14 @@ var $author$project$Main$pdpSelectBox = F4(
 							[
 								A4(
 								$author$project$Main$checkbox,
-								$elm$core$String$fromInt(model.a_),
+								$elm$core$String$fromInt(model.a$),
 								model.aE,
 								$author$project$Main$ToggleY1,
 								_List_fromArray(
 									['two columns'])),
 								A4(
 								$author$project$Main$checkbox,
-								$elm$core$String$fromInt(model.a$),
+								$elm$core$String$fromInt(model.a0),
 								model.aF,
 								$author$project$Main$ToggleY2,
 								_List_fromArray(
@@ -9823,7 +9823,7 @@ var $author$project$Main$pdpSelectBox = F4(
 	});
 var $author$project$Main$pdpYearFilter = F2(
 	function (model, pr) {
-		return _Utils_eq(pr.bq, model.a_) ? model.aE : (_Utils_eq(pr.bq, model.a$) ? model.aF : false);
+		return _Utils_eq(pr.bq, model.a$) ? model.aE : (_Utils_eq(pr.bq, model.a0) ? model.aF : false);
 	});
 var $elm$html$Html$caption = _VirtualDom_node('caption');
 var $billstclair$elm_sortable_table$Table$applySorter = F3(
@@ -10079,7 +10079,7 @@ var $author$project$Main$viewRows = F3(
 						A2(
 							$elm$core$List$filter,
 							function (a) {
-								return _Utils_eq(a.a8, c);
+								return _Utils_eq(a.a9, c);
 							},
 							ll)));
 			} else {
@@ -10100,7 +10100,7 @@ var $author$project$Main$viewRowsAll = function (model) {
 var $author$project$Main$renderResults = function (model) {
 	var showRows = $author$project$Main$viewRowsAll(model);
 	var pdpShow = function () {
-		var _v2 = model.aZ;
+		var _v2 = model.a_;
 		if (!_v2.$) {
 			var pl = _v2.a;
 			return $elm$core$Maybe$Just(

@@ -13,7 +13,10 @@ addMonth i cd =
   let
     di = (monthInt cd.month) + i
     newMonth = intMonth <| modBy 12 di
-    newYear = cd.year + ( (di - 1) // 12 )
+    newYear = if cd.month ==  Dec then
+                  cd.year + 1
+              else
+                  cd.year + ( (di - 1) // 12 )
   in
     CustomDate newMonth newYear
 
