@@ -167,7 +167,7 @@ init flags url key =
       , response = Nothing
       , pdpList = Nothing
       , pdpSelect = Nothing
-      , partB = Just "$144.60"
+      , partB = Just "$148.50"
       , recentError = ""
       , today = Nothing
       , tableState = Table.initialSort "Category"
@@ -1093,7 +1093,6 @@ outputTable model pt =
 
                         [ rateRow
                         , pdpRow
-                        , insuranceTotalRow
                         , partBRow
                         , grandTotalRow
                         , enrollRow

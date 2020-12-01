@@ -5466,7 +5466,7 @@ var $author$project$Main$init = F3(
 				aC: false,
 				cK: $elm$core$Maybe$Nothing,
 				cL: $billstclair$elm_sortable_table$Table$initialSort('Title'),
-				bm: $elm$core$Maybe$Just('$144.60'),
+				bm: $elm$core$Maybe$Just('$148.50'),
 				a_: $elm$core$Maybe$Nothing,
 				V: $elm$core$Maybe$Nothing,
 				a$: 2020,
@@ -9267,7 +9267,7 @@ var $author$project$Main$outputTable = F2(
 								$elm$html$Html$tbody,
 								_List_Nil,
 								_List_fromArray(
-									[rateRow, pdpRow, insuranceTotalRow, partBRow, grandTotalRow, enrollRow]))
+									[rateRow, pdpRow, partBRow, grandTotalRow, enrollRow]))
 							])),
 						A2($elm$html$Html$hr, _List_Nil, _List_Nil)
 					]));
