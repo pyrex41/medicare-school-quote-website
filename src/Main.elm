@@ -577,11 +577,7 @@ update msg model =
         Ok response ->
           let
             pr_sort = List.sortBy .plan response
-            prs = case (List.head pr_sort) of
-              Just pr ->
-                Just pr
-              Nothing ->
-                Nothing
+            prs = List.head <| List.filter (pdpYearFilter model) pr_sort
 
           in
             (   { model | pdpList = Just pr_sort

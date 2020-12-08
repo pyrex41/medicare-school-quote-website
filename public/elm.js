@@ -6626,6 +6626,10 @@ var $author$project$Main$pdpFullString = function (pr) {
 		$elm$core$String$trimRight(pr.a1)) ? A3($elm$core$String$slice, 0, -6, pr.a1) : pr.a1;
 	return y_val + ('   |   ' + (p_name + ('   |   ' + r_val)));
 };
+var $author$project$Main$pdpYearFilter = F2(
+	function (model, pr) {
+		return _Utils_eq(pr.bq, model.a$) ? model.aE : (_Utils_eq(pr.bq, model.a0) ? model.aF : false);
+	});
 var $author$project$Main$TableRow = function (company) {
 	return function (displayName) {
 		return function (fRate) {
@@ -7862,15 +7866,11 @@ var $author$project$Main$update = F2(
 							return $.a1;
 						},
 						response);
-					var prs = function () {
-						var _v15 = $elm$core$List$head(pr_sort);
-						if (!_v15.$) {
-							var pr = _v15.a;
-							return $elm$core$Maybe$Just(pr);
-						} else {
-							return $elm$core$Maybe$Nothing;
-						}
-					}();
+					var prs = $elm$core$List$head(
+						A2(
+							$elm$core$List$filter,
+							$author$project$Main$pdpYearFilter(model),
+							pr_sort));
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -9820,10 +9820,6 @@ var $author$project$Main$pdpSelectBox = F4(
 							]))
 					]));
 		}
-	});
-var $author$project$Main$pdpYearFilter = F2(
-	function (model, pr) {
-		return _Utils_eq(pr.bq, model.a$) ? model.aE : (_Utils_eq(pr.bq, model.a0) ? model.aF : false);
 	});
 var $elm$html$Html$caption = _VirtualDom_node('caption');
 var $billstclair$elm_sortable_table$Table$applySorter = F3(
