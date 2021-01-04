@@ -608,6 +608,7 @@ update msg model =
                     Oct -> False
                     Nov -> False
                     Dec -> False
+                    Jan -> False
                     _ -> True
         y2def = y1def == False
       in
