@@ -180,8 +180,8 @@ init flags url key =
       , outputTableState = Table.initialSort "Title"
       , outputQuotes = Nothing
       , outputAvailable = False
-      , pdpYear1 = 2020
-      , pdpYear2 = 2021
+      , pdpYear1 = 2021
+      , pdpYear2 = 2022
       , showY1 = False
       , showY2 = True
       }
