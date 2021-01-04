@@ -182,8 +182,8 @@ init flags url key =
       , outputAvailable = False
       , pdpYear1 = 2021
       , pdpYear2 = 2022
-      , showY1 = False
-      , showY2 = True
+      , showY1 = True
+      , showY2 = False
       }
     , Task.perform GotTime Time.now
     )
