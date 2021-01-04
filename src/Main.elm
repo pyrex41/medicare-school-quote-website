@@ -18,7 +18,7 @@ import Element.Border as Border
 import Element.Font as Font
 import Table exposing (defaultCustomizations)
 import Dict exposing (Dict)
-import Time exposing (Month, utc)
+import Time exposing (Month, toYear, now, utc)
 import MyDate exposing (CustomDate, addMonth)
 import Round
 import Presets exposing (naicCategory, displayNames)
@@ -180,8 +180,8 @@ init flags url key =
       , outputTableState = Table.initialSort "Title"
       , outputQuotes = Nothing
       , outputAvailable = False
-      , pdpYear1 = 2021
-      , pdpYear2 = 2022
+      , pdpYear1 = 1990
+      , pdpYear2 = 1991
       , showY1 = True
       , showY2 = False
       }
@@ -602,10 +602,14 @@ update msg model =
                     [0,1,2,3]
 
         firstChoice = List.drop 1 choices_ |> List.head
+        year1 = Time.toYear utc timenow
+        year2 = year1 + 1
       in
         ( validateModel { model | timeNow = Just td
                   , date = firstChoice
                   , dateSelectChoices = choices_
+                  , pdpYear1 = year1
+                  , pdpYear2 = year2
           }
         , Cmd.none
         )
