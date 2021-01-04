@@ -19,9 +19,12 @@ import Element.Font as Font
 import Table exposing (defaultCustomizations)
 import Dict exposing (Dict)
 import Time exposing (Month(..), toYear, now, utc)
-import MyDate exposing (CustomDate, addMonth)
 import Round
-import Presets exposing (naicCategory, displayNames)
+
+-- Custom extensions / functions / constructions
+import Presets exposing (naicCategory, displayNames)  -- Presets.elm
+import MyDate exposing (CustomDate, addMonth)  -- MyDate.elm
+
 
 
 -- MAIN
@@ -44,6 +47,7 @@ main =
 type alias Model =
   { key : Nav.Key
   , url : Url.Url
+  -- First Page Fields, Model Valus:
   , name : String
   , age :  ValidInt
   , zip : ValidInt
@@ -57,23 +61,28 @@ type alias Model =
   , planG: Bool
   , state : ViewState
   , date  : Maybe CustomDate
-  , valid : Bool
-  , response : Maybe (List PlanQuote)
-  , pdpList : Maybe (List PdpRecord)
-  , pdpSelect : Maybe PdpRecord
-  , partB : Maybe String
-  , recentError : String
+  -- initernal model state vals:
+  , valid : Bool -- Won't allow submitting request unless true
+  , response : Maybe (List PlanQuote) -- response from python api w/ plan info
+  , pdpList : Maybe (List PdpRecord) -- response from python api w/ pdp info
+  , pdpSelect : Maybe PdpRecord -- stores selected pdp plan from dropdown menu
+                                -- for display on page 3
+  , partB : Maybe String  -- hardcoded partB value; updates once per year
+  , recentError : String  -- not used?
   , today : Maybe CustomDate
+  -- see Table package for more detail on table
   , tableState : Table.State
   , tableRows : Maybe (List TableRow)
+  -- Display state options to toggle categories on table on page 2
   , viewPreferred : Bool
   , viewNonpreferred : Bool
   , viewOutside : Bool
-  , timeNow : Maybe CustomDate
+  , timeNow : Maybe CustomDate -- redunant?
   , dateSelectChoices : List CustomDate
   , outputTableState : Table.State
   , outputQuotes : Maybe (List OutputQuote)
   , outputAvailable : Bool
+  -- model state to determine what years and which default year for pdp on page 2
   , pdpYear1 : Int
   , pdpYear2 : Int
   , showY1 : Bool
@@ -81,6 +90,7 @@ type alias Model =
   }
 
 
+-- custom type to track whether int is valid per arbirary test
 type alias ValidInt =
   { value : Maybe String
   , valid : Bool
@@ -98,6 +108,7 @@ type RowCategory
   | NonPreferred
   | Outside
 
+-- type to hold results parsed from python api
 type alias PlanQuote =
   { company : String
   , fRate : Maybe String
@@ -106,6 +117,7 @@ type alias PlanQuote =
   , naic : Int
   }
 
+-- table row type for page 2
 type alias TableRow =
   { company : String
   , displayName : String
@@ -119,6 +131,7 @@ type alias TableRow =
   , priority : Int
   }
 
+-- type for output on page 3
 type alias OutputQuote =
   { planName : String
   , displayName : String
@@ -132,11 +145,11 @@ type Gender
     | Female
 
 type ViewState
-  = Failure Fail
-  | Loading
-  | Ready
-  | Results
-  | Output
+  = Failure Fail -- only happens when error
+  | Loading -- rarely seen
+  | Ready -- page 1
+  | Results -- page 2
+  | Output -- page 3
 
 type PlanType
   = G
@@ -145,7 +158,7 @@ type PlanType
 
 
 
-
+-- default vals
 init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg)
 init flags url key =
     ( { key = key
@@ -167,7 +180,7 @@ init flags url key =
       , response = Nothing
       , pdpList = Nothing
       , pdpSelect = Nothing
-      , partB = Just "$148.50"
+      , partB = Just "$148.50" -- hardcoded; MUST MANUALLY UPDATE
       , recentError = ""
       , today = Nothing
       , tableState = Table.initialSort "Category"
@@ -180,12 +193,13 @@ init flags url key =
       , outputTableState = Table.initialSort "Title"
       , outputQuotes = Nothing
       , outputAvailable = False
-      , pdpYear1 = 1990
-      , pdpYear2 = 1991
+      , pdpYear1 = 1990 -- these values should never appear; GotTime task
+                        -- dynamically updatees on load w/ current year
+      , pdpYear2 = 1991 -- ^
       , showY1 = True
       , showY2 = False
       }
-    , Task.perform GotTime Time.now
+    , Task.perform GotTime Time.now -- Update fields that depend on currrent time
     )
 
 
@@ -194,9 +208,9 @@ init flags url key =
 routeParser : Parser (ViewState -> a) a
 routeParser =
   Url.Parser.oneOf
-    [ Url.Parser.map Ready    (Url.Parser.s "home")
-    , Url.Parser.map Results  (Url.Parser.s "results")
-    , Url.Parser.map Output   (Url.Parser.s "output")
+    [ Url.Parser.map Ready    (Url.Parser.s "home") -- page 1
+    , Url.Parser.map Results  (Url.Parser.s "results") -- page 2
+    , Url.Parser.map Output   (Url.Parser.s "output") -- page 3
     ]
 
 urlToRoute : Url.Url -> ViewState
@@ -207,7 +221,8 @@ urlToRoute url =
 
 
 -- UPDATE
-
+-- these are the actions that change state. Most require user input of some sort
+-- to trigger.
 
 type Msg
   = NoOp
@@ -245,6 +260,7 @@ type Msg
   | ShowResults
   | ToggleSelect Int
 
+-- trying to capture failure mode for debugging. Somewhat useful?
 type Fail
   = Counties
   | PDP
@@ -254,7 +270,7 @@ type Fail
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    ShowOutput ->
+    ShowOutput -> -- goto page 3
       let
         curl = model.url
         nurl = { curl | path = "/output" }
@@ -263,7 +279,7 @@ update msg model =
                   , state = Output }
         , Nav.pushUrl model.key (Url.toString nurl))
 
-    ShowSubmitForm ->
+    ShowSubmitForm -> -- go back to page 1
       let
         curl = model.url
         nurl = { curl | path = "/" }
@@ -272,7 +288,7 @@ update msg model =
                   , state = Ready }
         , Nav.pushUrl model.key (Url.toString nurl))
 
-    ShowResults ->
+    ShowResults -> -- go to page 2
       let
         curl = model.url
         nurl = { curl | path = "/results" }
@@ -308,7 +324,7 @@ update msg model =
       ( model , Cmd.none )
 
 
-    SubmitForm ->
+    SubmitForm -> -- Go from page 1 to page 2
       let
         vModel = validateModel model
 
@@ -325,9 +341,10 @@ update msg model =
           , Cmd.none
           )
 
-    RequestPDP ->
+    RequestPDP -> -- runs when you submit, go to page 2
       ( { model | state = Loading }, getPDP model )
 
+    -- Field actions update dynamical as user types or clicks
     SetName str ->
         ( validateModel { model | name = str }
         ,  Cmd.none
@@ -504,6 +521,8 @@ update msg model =
         }
       , Cmd.none)
 
+    -- actions to bulk select / deselect rows for viewing (select on page2, view
+    -- on page 3)
     DeselectAll ->
       let
         newRows = case model.tableRows of
@@ -530,6 +549,7 @@ update msg model =
         ( { model | tableRows = newRows }
         , Cmd.none )
 
+    -- Response Actions: receive input from python api
     ZipResponse rmsg ->
       case rmsg of
         Ok response ->
@@ -591,6 +611,8 @@ update msg model =
             }
           , Cmd.none )
 
+
+    -- Set default values that depend on current date. Runs automatically on load.
     GotTime timenow ->
       let
         td = CustomDate
@@ -604,7 +626,7 @@ update msg model =
         firstChoice = List.drop 1 choices_ |> List.head
         year1 = td.year
         year2 = year1 + 1
-        y1def = case td.month of
+        y1def = case td.month of -- defaults to next year in last 3 months
                     Oct -> False
                     Nov -> False
                     Dec -> False
@@ -623,29 +645,7 @@ update msg model =
         )
 
 
--- UPDATE FUNCS
-toggle : Int -> TableRow -> TableRow
-toggle i tablerow =
-  if tablerow.uid == i then
-    { tablerow | selected = not tablerow.selected }
-  else
-    tablerow
-
-selectByUID : (List Int) -> TableRow -> TableRow
-selectByUID  ls tablerow =
-  if (List.member tablerow.uid ls) then
-    { tablerow | selected = True }
-  else
-    tablerow
-
-removeRow : Int -> List TableRow -> List TableRow
-removeRow i ls =
-  List.filter
-    (\a -> a.uid /= i)
-    ls
-
--- SUBSCRIPTIONS
-
+-- SUBSCRIPTIONS - necessary boilerplate
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -655,7 +655,7 @@ subscriptions model =
 
 -- VIEW
 
-
+-- vieiw container on all pages
 view : Model -> Browser.Document Msg
 view model =
   { title = "Medicare School Quote"
@@ -743,6 +743,27 @@ submitFirst =
       ]
 
 
+-- UPDATE FUNCS -- basic utility functions for table
+toggle : Int -> TableRow -> TableRow
+toggle i tablerow =
+    if tablerow.uid == i then
+        { tablerow | selected = not tablerow.selected }
+    else
+        tablerow
+
+selectByUID : (List Int) -> TableRow -> TableRow
+selectByUID  ls tablerow =
+    if (List.member tablerow.uid ls) then
+        { tablerow | selected = True }
+    else
+        tablerow
+
+removeRow : Int -> List TableRow -> List TableRow
+removeRow i ls =
+  List.filter
+    (\a -> a.uid /= i)
+    ls
+
 
 
 -- Nav Buttons
@@ -767,6 +788,8 @@ navBar model =
     ]
 
 -- Model Validations
+-- used to make sure input conforms to requirements before submitting request to
+-- python api
 
 isValid : Model -> Bool
 isValid model =
@@ -781,9 +804,8 @@ isValid model =
           , model.county /= Nothing
           , model.date /= Nothing
           ]
-        newModel = { model | valid = List.foldl (&&) True validList }
       in
-        newModel.valid
+        List.foldl (&&) True validList
     Nothing ->
       False
 
@@ -809,7 +831,7 @@ validateString field func errorMessage=
   else
     div [ style "color" "red" ] [ text errorMessage ]
 
-
+-- debugging
 errorToString : Http.Error -> String
 errorToString error =
     case error of
@@ -838,7 +860,7 @@ viewCheckbox { selected } =
         [ input [ type_ "checkbox", checked selected ] []
         ]
 
-
+-- page 1 guts:
 renderForm : Model -> Msg -> String -> Html Msg
 renderForm model func buttonLabel =
   let
@@ -885,6 +907,10 @@ renderForm model func buttonLabel =
                 ]
           ]
 
+
+
+
+-- page 2 guts
 renderResults : Model -> Html Msg
 renderResults model =
   let
@@ -946,6 +972,8 @@ renderResults model =
           ]
       ]
 
+
+-- page 3 output
 renderOutput : Model -> Html Msg
 renderOutput model =
   let
@@ -958,7 +986,7 @@ renderOutput model =
 
 
 
--- Output Page Utils
+-- page 3 Output Page Utils
 personalInfo : Model -> Html Msg
 personalInfo model =
   let
@@ -1125,7 +1153,7 @@ rateUtil pt ls =
     N -> List.map .nRate ls
     F -> List.map .fRate ls
 
--- TABLE CONFIGURATION
+-- TABLE CONFIGURATION -- page 2
 
 categoryColumn : Table.Column TableRow Msg
 categoryColumn =
@@ -1174,26 +1202,6 @@ viewRowsAll model =
   in
     safeConcat [showPreferred, showNonPreferred, showOutside]
 
-safeAppend : Maybe (List a) -> Maybe (List a) -> Maybe (List a)
-safeAppend a b =
-  case a of
-    Just aa ->
-      case b of
-        Just bb ->
-          Just <| List.append aa bb
-        Nothing ->
-          a
-    Nothing ->
-      case b of
-        Just bb ->
-          b
-        Nothing ->
-          Nothing
-
-safeConcat : List (Maybe (List a)) -> Maybe (List a)
-safeConcat l =
-  List.foldr safeAppend Nothing l
-
 
 config : Table.Config TableRow Msg
 config =
@@ -1214,6 +1222,32 @@ config =
                                   , tableAttrs = [ style "margin-left" "auto", style "margin-right" "auto" ]
           }
       }
+
+
+
+planToRow : Int -> PlanQuote -> TableRow
+planToRow ii pq =
+  let
+     category = findCategory pq.naic
+     showRowInit = category == Preferred
+     priority = case category of
+        Preferred -> 1
+        NonPreferred -> 2
+        Outside -> 3
+     displayName = Maybe.withDefault pq.company (findDisplayName pq.naic category)
+  in
+    TableRow
+      pq.company
+      displayName
+      ( safeString pq.fRate )
+      ( safeString pq.gRate )
+      ( safeString pq.nRate )
+      pq.naic
+      ii
+      showRowInit
+      category
+      priority
+
 
 toRowAttrs : TableRow -> List (Attribute Msg)
 toRowAttrs tablerow =
@@ -1334,6 +1368,46 @@ defselectbox title_ def choices handle class_ i =
         ]
     ]
 
+
+-- convenience utils
+safeAppend : Maybe (List a) -> Maybe (List a) -> Maybe (List a)
+safeAppend a b =
+    case a of
+        Just aa ->
+            case b of
+                Just bb ->
+                    Just <| List.append aa bb
+                Nothing ->
+                    a
+        Nothing ->
+            case b of
+                Just bb ->
+                    b
+                Nothing ->
+                    Nothing
+
+safeConcat : List (Maybe (List a)) -> Maybe (List a)
+safeConcat l =
+  List.foldr safeAppend Nothing l
+
+
+safeShowPDP : Maybe PdpRecord -> String
+safeShowPDP pr =
+      case pr of
+          Just p ->
+              p.rate
+          Nothing ->
+              ""
+
+safeString : Maybe String -> String
+safeString ms =
+  case ms of
+    Just s ->
+      s
+    Nothing ->
+      ""
+
+-- content display filters for page 2 table
 pdpYearFilter : Model -> PdpRecord -> Bool
 pdpYearFilter model pr =
     if pr.year == model.pdpYear1 then
@@ -1394,7 +1468,7 @@ pdpSelectBox model mplist selectedPdp handle =
           ]
       ]
 
-
+-- genaric display funcs
 checkbox : String -> Bool -> Msg -> List String -> Html Msg
 checkbox title_ fvalue handle class_=
   let
@@ -1445,9 +1519,7 @@ textboxCheck title_ placeholder_ fvalue handle validator class_ =
               ]
           ]
 
--- Output Table View funcs
-
-
+-- page 3 - Output Table View funcs
 
 toHeadRow : String -> (List String) -> Html msg
 toHeadRow rowname l =
@@ -1512,7 +1584,7 @@ toBodyRow rowname attrs l =
           )
           ls
 
-
+-- currency utils - used page 3
 currencyAddTwo : Float -> Float -> String
 currencyAddTwo a b =
   if b == 0 then
@@ -1528,47 +1600,7 @@ currencyAddThree a b c =
     "$" ++ (Round.round 2 (a+b+c))
 
 
--- MISC type conversions
-
-safeShowPDP : Maybe PdpRecord -> String
-safeShowPDP pr =
-  case pr of
-    Just p ->
-      p.rate
-    Nothing ->
-      ""
-
-safeString : Maybe String -> String
-safeString ms =
-  case ms of
-    Just s ->
-      s
-    Nothing ->
-      ""
-
-planToRow : Int -> PlanQuote -> TableRow
-planToRow ii pq =
-  let
-    category = findCategory pq.naic
-    showRowInit = category == Preferred
-    priority = case category of
-      Preferred -> 1
-      NonPreferred -> 2
-      Outside -> 3
-    displayName = Maybe.withDefault pq.company (findDisplayName pq.naic category)
-  in
-    TableRow
-      pq.company
-      displayName
-      ( safeString pq.fRate )
-      ( safeString pq.gRate )
-      ( safeString pq.nRate )
-      pq.naic
-      ii
-      showRowInit
-      category
-      priority
-
+-- More genearic display utils
 boolString : Bool -> String
 boolString b =
   if b then
@@ -1752,7 +1784,7 @@ pdpDecoder =
   field "body" ( Json.Decode.list pdpPlanDecoder )
 
 
--- PRESETS
+-- PRESETS for table 2 display
 
 findCategory : Int -> RowCategory
 findCategory i =
