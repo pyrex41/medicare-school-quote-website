@@ -7905,8 +7905,6 @@ var $author$project$Main$update = F2(
 							return false;
 						case 11:
 							return false;
-						case 0:
-							return false;
 						default:
 							return true;
 					}
