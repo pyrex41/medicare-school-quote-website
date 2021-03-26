@@ -887,7 +887,7 @@ renderForm model func buttonLabel =
                   ]
                   ( List.map
                       (\a -> (div [ class "row" ] [ a ] ) )
-                      [ textbox  "Name" "John Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
+                      [ textbox  "Name" "Joe Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
                       , textboxCheck  "Age" "65" model.age SetAge (validateVI model.age) [ "two columns", "offset-by-four columns" ]
                       , textboxCheck  "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
                       , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns"] 0
