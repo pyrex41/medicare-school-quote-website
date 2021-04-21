@@ -621,7 +621,7 @@ update msg model =
 
         choices_ = List.map
                     (\a -> (addMonth a td))
-                    [0,1,2,3]
+                    [0,1,2,3,4,5,6,7,8,9]
 
         firstChoice = List.drop 1 choices_ |> List.head
         year1 = td.year
