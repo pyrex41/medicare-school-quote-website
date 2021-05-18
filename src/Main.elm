@@ -621,7 +621,7 @@ update msg model =
 
         choices_ = List.map
                     (\a -> (addMonth a td))
-                    [0,1,2,3,4,5,6,7,8,9]
+                    [0,1,2,3,4,5,6,7,8,9,10,11,12]
 
         firstChoice = List.drop 1 choices_ |> List.head
         year1 = td.year
@@ -1003,6 +1003,12 @@ personalInfo model =
       Nothing -> ""
     dsc = if model.discounts then "Yes" else "No"
     row2 = ageText ++ " yrs" ++ "   |   " ++ zipText ++ "   |   " ++ (genderString model.gender) ++ "   |   " ++ "Discount Applied: " ++ dsc
+    dateText = case model.date of
+      Just d ->
+        MyDate.toString d
+      Nothing ->
+        ""
+    row3 = "Effective Date:  " ++  dateText
     dentalLink = "https://www.securitylife.com/personal-plans?agnt=010U3815"
     docusignLink = "https://account.docusign.com"
   in
@@ -1011,6 +1017,7 @@ personalInfo model =
           [ div [ class "seven columns" ]
             [ div [ class "row" ] [ strong [] [ text model.name] ]
             , div [ class "row" ] [ text row2 ]
+            , div [ class "row" ] [ text row3 ]
             , div [ class "row" ] [ text pdpText]
             ]
           , div [ class "five columns" ]

@@ -5457,7 +5457,7 @@ var $author$project$Main$init = F3(
 				bf: _List_fromArray(
 					['']),
 				ax: $elm$core$Maybe$Nothing,
-				P: $elm$core$Maybe$Nothing,
+				I: $elm$core$Maybe$Nothing,
 				aV: _List_Nil,
 				af: false,
 				aB: 0,
@@ -6554,7 +6554,7 @@ var $author$project$Main$strMaybeDate = function (ccd) {
 var $author$project$Main$getPlans = function (model) {
 	if (model.G) {
 		var url1 = 'https://medicare-school-quote-tool.herokuapp.com/api/plans?';
-		var url2 = url1 + ('zip=' + ($author$project$Main$safeString(model.y.ad) + ('&age=' + ($author$project$Main$safeString(model.H.ad) + ('&county=' + ($author$project$Main$strCounty(model.ax) + ('&gender=' + ($author$project$Main$genderString(model.aB) + ('&tobacco=' + ($author$project$Main$boolString(model.aJ) + ('&discounts=' + ($author$project$Main$boolString(model.af) + ('&date=' + $author$project$Main$strMaybeDate(model.P))))))))))))));
+		var url2 = url1 + ('zip=' + ($author$project$Main$safeString(model.y.ad) + ('&age=' + ($author$project$Main$safeString(model.H.ad) + ('&county=' + ($author$project$Main$strCounty(model.ax) + ('&gender=' + ($author$project$Main$genderString(model.aB) + ('&tobacco=' + ($author$project$Main$boolString(model.aJ) + ('&discounts=' + ($author$project$Main$boolString(model.af) + ('&date=' + $author$project$Main$strMaybeDate(model.I))))))))))))));
 		var url3 = A3($author$project$Main$checkAddPlan, model.Y, 'N', url2);
 		var url4 = A3($author$project$Main$checkAddPlan, model.W, 'F', url3);
 		var url5 = A3($author$project$Main$checkAddPlan, model.X, 'G', url4);
@@ -7337,7 +7337,7 @@ var $author$project$Main$urlToRoute = function (url) {
 var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$Main$isValid = function (model) {
-	var _v0 = model.P;
+	var _v0 = model.I;
 	if (!_v0.$) {
 		var validList = _List_fromArray(
 			[
@@ -7346,7 +7346,7 @@ var $author$project$Main$isValid = function (model) {
 				model.y.G,
 				model.Y || (model.W || model.X),
 				!_Utils_eq(model.ax, $elm$core$Maybe$Nothing),
-				!_Utils_eq(model.P, $elm$core$Maybe$Nothing)
+				!_Utils_eq(model.I, $elm$core$Maybe$Nothing)
 			]);
 		return A3($elm$core$List$foldl, $elm$core$Basics$and, true, validList);
 	} else {
@@ -7582,7 +7582,7 @@ var $author$project$Main$update = F2(
 					$author$project$Main$validateModel(
 						_Utils_update(
 							model,
-							{P: choice})),
+							{I: choice})),
 					$elm$core$Platform$Cmd$none);
 			case 9:
 				var prstr = msg.a;
@@ -7913,7 +7913,7 @@ var $author$project$Main$update = F2(
 						return A2($author$project$MyDate$addMonth, a, td);
 					},
 					_List_fromArray(
-						[0, 1, 2, 3]));
+						[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
 				var firstChoice = $elm$core$List$head(
 					A2($elm$core$List$drop, 1, choices_));
 				return _Utils_Tuple2(
@@ -7921,7 +7921,7 @@ var $author$project$Main$update = F2(
 						_Utils_update(
 							model,
 							{
-								P: firstChoice,
+								I: firstChoice,
 								aV: choices_,
 								aF: year1,
 								aG: year2,
@@ -8548,7 +8548,7 @@ var $author$project$Main$renderForm = F3(
 										_List_fromArray(
 											['three columns', 'offset-by-four columns']),
 										0),
-										A3($author$project$Main$dateselectbox, 'Effective Date', model.P, model.aV),
+										A3($author$project$Main$dateselectbox, 'Effective Date', model.I, model.aV),
 										A4(
 										$author$project$Main$checkbox,
 										'Tobacco User?',
@@ -9293,18 +9293,18 @@ var $author$project$Main$outputTable = F2(
 var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
-		var _v2 = model.y.ad;
-		if (!_v2.$) {
-			var v = _v2.a;
+		var _v3 = model.y.ad;
+		if (!_v3.$) {
+			var v = _v3.a;
 			return v;
 		} else {
 			return '';
 		}
 	}();
 	var pdpText = function () {
-		var _v1 = model.V;
-		if (!_v1.$) {
-			var pr = _v1.a;
+		var _v2 = model.V;
+		if (!_v2.$) {
+			var pr = _v2.a;
 			return $author$project$Main$pdpFullString(pr);
 		} else {
 			return '';
@@ -9313,6 +9313,16 @@ var $author$project$Main$personalInfo = function (model) {
 	var dsc = model.af ? 'Yes' : 'No';
 	var docusignLink = 'https://account.docusign.com';
 	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=010U3815';
+	var dateText = function () {
+		var _v1 = model.I;
+		if (!_v1.$) {
+			var d = _v1.a;
+			return $author$project$MyDate$toString(d);
+		} else {
+			return '';
+		}
+	}();
+	var row3 = 'Effective Date:  ' + dateText;
 	var ageText = function () {
 		var _v0 = model.H.ad;
 		if (!_v0.$) {
@@ -9369,6 +9379,16 @@ var $author$project$Main$personalInfo = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$text(row2)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(row3)
 									])),
 								A2(
 								$elm$html$Html$div,

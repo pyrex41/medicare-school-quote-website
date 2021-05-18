@@ -24,7 +24,7 @@ addMonth i cd =
     CustomDate newMonth newYear
 
 formatRequest : CustomDate -> String
-formatRequest cd =
+formatRequest cd =  
   let
     mi = monthInt cd.month
     ms =  if mi < 10 then
