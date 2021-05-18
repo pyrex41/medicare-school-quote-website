@@ -1299,7 +1299,11 @@ personalInfo model =
             ]
         ]
 
--- custom enroll links for specific drug plans. Update as needed. 
+
+
+-- custom enroll links for specific drug plans. Update as needed.
+
+
 getEnrollLink : TableRow -> Maybe String
 getEnrollLink tr =
     let
@@ -1336,7 +1340,11 @@ getEnrollLink tr =
     in
     Dict.get tr.naic dd
 
+
+
 -- adds link if link is available from getEnrollLink function, else none
+
+
 makeEnrollButton : TableRow -> Html Msg
 makeEnrollButton tr =
     case getEnrollLink tr of
@@ -1353,7 +1361,11 @@ makeEnrollButton tr =
                 [ class "button-primary", disabled True ]
                 [ text "Enroll" ]
 
+
+
 -- creates row of potential enroll link buttons
+
+
 makeEnrollRow : List TableRow -> Html Msg
 makeEnrollRow ls =
     let
@@ -1372,7 +1384,11 @@ makeEnrollRow ls =
     in
     tr [] <| lb ++ eb
 
+
+
 -- full output table for page 3
+
+
 outputTable : Model -> PlanType -> Html Msg
 outputTable model pt =
     case model.tableRows of
@@ -1458,7 +1474,11 @@ outputTable model pt =
         Nothing ->
             text "No Output Available"
 
+
+
 -- html formating utility functions
+
+
 pTextUtil : PlanType -> String
 pTextUtil pt =
     case pt of
@@ -1487,7 +1507,7 @@ rateUtil pt ls =
 
 
 -- TABLE CONFIGURATION -- page 2
--- this table is sortable, so we use a different library not used on page that makes this sorting easier. 
+-- this table is sortable, so we use a different library not used on page that makes this sorting easier.
 -- several helper functions used
 
 
@@ -1539,7 +1559,11 @@ viewRows b c l =
     else
         Nothing
 
+
+
 -- uses model boolean values to show / not show different categetories
+
+
 viewRowsAll : Model -> Maybe (List TableRow)
 viewRowsAll model =
     let
@@ -1554,7 +1578,11 @@ viewRowsAll model =
     in
     safeConcat [ showPreferred, showNonPreferred, showOutside ]
 
+
+
 -- actual table configuration
+
+
 config : Table.Config TableRow Msg
 config =
     Table.customConfig
@@ -1612,7 +1640,11 @@ planToRow ii pq =
         category
         priority
 
+
+
 -- CSS formatting function
+
+
 toRowAttrs : TableRow -> List (Attribute Msg)
 toRowAttrs tablerow =
     [ onClick (ToggleSelect tablerow.uid)
@@ -1641,7 +1673,11 @@ renderList lst =
         |> List.map (\l -> li [] [ text l ])
         |> ul []
 
+
+
 -- helper formatter functions
+
+
 genderString : Gender -> String
 genderString gender =
     case gender of
@@ -1816,6 +1852,7 @@ safeString ms =
 
 -- content display filters for page 2 table
 -- these functions are triggered by user click / input and update model, which --> view changes
+
 
 pdpYearFilter : Model -> PdpRecord -> Bool
 pdpYearFilter model pr =
