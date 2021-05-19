@@ -8508,7 +8508,7 @@ var $author$project$Main$renderForm = F3(
 									[
 										A5(
 										$author$project$Main$textbox,
-										'Name SIRR',
+										'Name',
 										'Joe Smith',
 										model.U,
 										$author$project$Main$SetName,
