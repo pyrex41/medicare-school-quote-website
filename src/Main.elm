@@ -1107,7 +1107,7 @@ renderForm model func buttonLabel =
                 ]
                 (List.map
                     (\a -> div [ class "row" ] [ a ])
-                    [ textbox "Name" "Joe Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
+                    [ textbox "Name SIRR" "Joe Smith" model.name SetName [ "four columns", "offset-by-four columns" ]
                     , textboxCheck "Age" "65" model.age SetAge (validateVI model.age) [ "two columns", "offset-by-four columns" ]
                     , textboxCheck "ZIP" "12345" model.zip SetZip (validateVI model.zip) [ "two columns", "offset-by-four columns" ]
                     , selectbox "County" model.counties SelectCounty [ "three columns", "offset-by-four columns" ] 0
@@ -1537,13 +1537,13 @@ categoryLabel : RowCategory -> String
 categoryLabel r =
     case r of
         Preferred ->
-            "Preferred"
+            "A"
 
         NonPreferred ->
-            "Non-Preferred"
+            "B"
 
         Outside ->
-            "Outside"
+            "C"
 
 
 viewRows : Bool -> RowCategory -> Maybe (List TableRow) -> Maybe (List TableRow)

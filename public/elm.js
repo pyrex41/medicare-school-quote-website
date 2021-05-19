@@ -8508,7 +8508,7 @@ var $author$project$Main$renderForm = F3(
 									[
 										A5(
 										$author$project$Main$textbox,
-										'Name',
+										'Name SIRR',
 										'Joe Smith',
 										model.U,
 										$author$project$Main$SetName,
@@ -9494,11 +9494,11 @@ var $author$project$Main$SetTableState = function (a) {
 var $author$project$Main$categoryLabel = function (r) {
 	switch (r) {
 		case 0:
-			return 'Preferred';
+			return 'A';
 		case 1:
-			return 'Non-Preferred';
+			return 'B';
 		default:
-			return 'Outside';
+			return 'C';
 	}
 };
 var $elm$core$Basics$composeL = F3(
