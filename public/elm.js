@@ -7926,7 +7926,7 @@ var $author$project$Main$update = F2(
 						return A2($author$project$MyDate$addMonth, a, td);
 					},
 					_List_fromArray(
-						[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]));
+						[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]));
 				var firstChoice = $elm$core$List$head(
 					A2($elm$core$List$drop, 1, choices_));
 				return _Utils_Tuple2(
@@ -9320,18 +9320,18 @@ var $author$project$Main$outputTable = F2(
 var $elm$html$Html$strong = _VirtualDom_node('strong');
 var $author$project$Main$personalInfo = function (model) {
 	var zipText = function () {
-		var _v2 = model.zip.value;
-		if (_v2.$ === 'Just') {
-			var v = _v2.a;
+		var _v3 = model.zip.value;
+		if (_v3.$ === 'Just') {
+			var v = _v3.a;
 			return v;
 		} else {
 			return '';
 		}
 	}();
 	var pdpText = function () {
-		var _v1 = model.pdpSelect;
-		if (_v1.$ === 'Just') {
-			var pr = _v1.a;
+		var _v2 = model.pdpSelect;
+		if (_v2.$ === 'Just') {
+			var pr = _v2.a;
 			return $author$project$Main$pdpFullString(pr);
 		} else {
 			return '';
@@ -9340,6 +9340,16 @@ var $author$project$Main$personalInfo = function (model) {
 	var dsc = model.discounts ? 'Yes' : 'No';
 	var docusignLink = 'https://account.docusign.com';
 	var dentalLink = 'https://www.securitylife.com/personal-plans?agnt=010U3815';
+	var dateText = function () {
+		var _v1 = model.date;
+		if (_v1.$ === 'Just') {
+			var d = _v1.a;
+			return $author$project$MyDate$toString(d);
+		} else {
+			return '';
+		}
+	}();
+	var row3 = 'Effective Date:  ' + dateText;
 	var ageText = function () {
 		var _v0 = model.age.value;
 		if (_v0.$ === 'Just') {
@@ -9396,6 +9406,16 @@ var $author$project$Main$personalInfo = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$text(row2)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('row')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(row3)
 									])),
 								A2(
 								$elm$html$Html$div,
@@ -9501,11 +9521,11 @@ var $author$project$Main$SetTableState = function (a) {
 var $author$project$Main$categoryLabel = function (r) {
 	switch (r.$) {
 		case 'Preferred':
-			return 'Preferred';
+			return 'A';
 		case 'NonPreferred':
-			return 'Non-Preferred';
+			return 'B';
 		default:
-			return 'Outside';
+			return 'C';
 	}
 };
 var $elm$core$Basics$composeL = F3(
