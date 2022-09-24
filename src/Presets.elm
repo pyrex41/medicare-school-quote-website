@@ -184,7 +184,7 @@ displayNames =
         , ( 60131, "BCBS of ID" )
         , ( 60219, "Humana" )
         , ( 61557, "BCBS of CA" )
-        , ( 61727, "CIGNNA" )
+        , ( 61727, "CIGNA" )
         , ( 62825, "Anthem BCBS" )
         , ( 63444, "Accendo" )
         , ( 65722, "CIGNA" )
