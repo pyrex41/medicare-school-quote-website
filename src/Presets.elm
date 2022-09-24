@@ -25,6 +25,7 @@ naicCategory =
         , 60131
         , 60219
         , 61557
+        , 61727
         , 62825
         , 63444
         , 65722
@@ -183,6 +184,7 @@ displayNames =
         , ( 60131, "BCBS of ID" )
         , ( 60219, "Humana" )
         , ( 61557, "BCBS of CA" )
+        , ( 61727, "CIGNNA" )
         , ( 62825, "Anthem BCBS" )
         , ( 63444, "Accendo" )
         , ( 65722, "CIGNA" )
