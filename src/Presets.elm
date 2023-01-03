@@ -1,6 +1,6 @@
 module Presets exposing (..)
 
-
+-- Use https://content.naic.org/cis_consumer_information.htm to look up NAIC codes
 naicCategory =
     { preferred =
         [ 10345
@@ -159,7 +159,6 @@ naicCategory =
         , 95923
         ]
     }
-
 
 displayNames =
     { preferred =
