@@ -48,6 +48,12 @@ naicCategory =
         , 96016
         , 96202
         , 98167
+        , 22667
+        , 50028
+        , 20702
+        , 26417
+        , 60348
+        , 20699
         ]
     , nonPreferred =
         [ 79413001 -- custom workaround for level 1 UHC
@@ -207,6 +213,12 @@ displayNames =
         , ( 96016, "AARP of AZ" )
         , ( 96202, "BCBS CareFirst" )
         , ( 98167, "BCBS of FL" )
+        , ( 22667, "ACE / CHUBB" )
+        , ( 50028, "ACE / CHUBB" )
+        , ( 20702, "ACE / CHUBB" )
+        , ( 26417, "ACE / CHUBB" )
+        , ( 60348, "ACE / CHUBB" )
+        , ( 20699, "ACE / CHUBB" )
         ]
     , nonPreferred =
         [ ( 31119, "Medico" )
