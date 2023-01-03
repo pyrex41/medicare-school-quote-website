@@ -20,5 +20,7 @@ https://content.naic.org/cis_consumer_information.htm
 After making any changes to the *.elm files, you have to recompile and push to github for it to take effect. The public/index.html file is looking for `elm.min.js` in the same folder. To do generate this, compile then minifiy as described here:
 https://guide.elm-lang.org/optimization/asset_size.html
 
+Video walkthrough: https://www.loom.com/share/ce8e081a28d445d2b1e64ef806a16e6b
+
 
 
