@@ -1595,7 +1595,7 @@ config =
             , Table.stringColumn "G Rate" .gRate
             , Table.stringColumn "N Rate" .nRate
             , Table.stringColumn "F Rate" .fRate
-            , Table.intColumn "NAIC Code" .naic
+            -- , Table.intColumn "NAIC Code" .naic -- this is for troubleshooting / adding new codes
             , categoryColumn
             ]
         , customizations =
