@@ -55,6 +55,7 @@ naicCategory =
         , 60348
         , 20699
         , 60380
+        , 82538
         ]
     , nonPreferred =
         [ 79413001 -- custom workaround for level 1 UHC
@@ -221,6 +222,7 @@ displayNames =
         , ( 60348, "ACE / CHUBB" )
         , ( 20699, "ACE / CHUBB" )
         , ( 60380, "AFLAC" )
+        , ( 82538, "Allstate" )
         ]
     , nonPreferred =
         [ ( 31119, "Medico" )
