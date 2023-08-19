@@ -54,6 +54,18 @@ naicCategory =
         , 26417
         , 60348
         , 20699
+        , 60380
+        , 29335
+        , 29688
+        , 19240
+        , 19232
+        , 11110
+        , 10852
+        , 14940
+        , 36455
+        , 17230
+        , 26530
+        , 37907
         ]
     , nonPreferred =
         [ 79413001 -- custom workaround for level 1 UHC
@@ -219,6 +231,18 @@ displayNames =
         , ( 26417, "ACE / CHUBB" )
         , ( 60348, "ACE / CHUBB" )
         , ( 20699, "ACE / CHUBB" )
+        , ( 60380, "AFLAC" )
+        , ( 29335, "Allstate" )
+        , ( 29688, "Allstate" )
+        , ( 19240, "Allstate" )
+        , ( 19232, "Allstate" )
+        , ( 11110, "Allstate" )
+        , ( 10852, "Allstate" )
+        , ( 14940, "Allstate" )
+        , ( 36455, "Allstate" )
+        , ( 17230, "Allstate" )
+        , ( 26530, "Allstate" )
+        , ( 37907, "Allstate" )
         ]
     , nonPreferred =
         [ ( 31119, "Medico" )
