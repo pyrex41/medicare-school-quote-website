@@ -66,6 +66,10 @@ naicCategory =
         , 17230
         , 26530
         , 37907
+        , 70866
+        , 60186
+        , 70874
+        , 60534
         ]
     , nonPreferred =
         [ 79413001 -- custom workaround for level 1 UHC
@@ -243,6 +247,10 @@ displayNames =
         , ( 17230, "Allstate" )
         , ( 26530, "Allstate" )
         , ( 37907, "Allstate" )
+        , ( 70866, "Allstate" )
+        , ( 60186, "Allstate" )
+        , ( 70874, "Allstate" )
+        , ( 60534, "Allstate" )
         ]
     , nonPreferred =
         [ ( 31119, "Medico" )
