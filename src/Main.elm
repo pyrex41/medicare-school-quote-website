@@ -15,9 +15,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
-import Json.Decode exposing (Decoder, at, field, int, map2, map3, map4, map5, maybe, null, oneOf, string)
+import Json.Decode exposing (Decoder, at, field, int, map2, map3, map4, map5, map7, maybe, null, oneOf, string)
 import MyDate exposing (CustomDate, addMonth)
-import Presets exposing (displayNames, naicCategory)
 import Round
 import Table exposing (defaultCustomizations)
 import Task exposing (Task)
@@ -97,6 +96,7 @@ type alias Model =
     , pdpYear2 : Int
     , showY1 : Bool
     , showY2 : Bool
+    , showNaic : Bool
     }
 
 
@@ -134,6 +134,8 @@ type alias PlanQuote =
     , gRate : Maybe String
     , nRate : Maybe String
     , naic : Int
+    , category : Int
+    , display : Maybe String
     }
 
 
@@ -231,6 +233,7 @@ init flags url key =
       , pdpYear2 = 1991 -- ^
       , showY1 = True
       , showY2 = False
+      , showNaic = False
       }
     , Task.perform GotTime Time.now
       -- Update fields that depend on currrent time
@@ -298,6 +301,7 @@ type Msg
     | ShowSubmitForm
     | ShowResults
     | ToggleSelect Int
+    | ToggleNaic
 
 
 
@@ -698,6 +702,9 @@ update msg model =
 
                 Err error ->
                     ( { model | state = Failure Counties }, Cmd.none )
+
+        ToggleNaic -> 
+            ( { model | showNaic = not model.showNaic }, Cmd.none )
 
         PlanResponse rmsg ->
             case rmsg of
@@ -1193,12 +1200,14 @@ renderResults model =
             [ div [ class "ten columns", class "offset-by-one column" ]
                 [ case showRows of
                     Just sr ->
-                        Table.view config model.tableState sr
+                        Table.view (config model.showNaic) model.tableState sr
 
                     Nothing ->
-                        Table.view config model.tableState []
+                        Table.view (config model.showNaic) model.tableState []
                 ]
             ]
+        , div [ class "row" ]
+            [ checkbox "Show NAIC" model.showNaic ToggleNaic [ "two columns" ] ]
         ]
 
 
@@ -1583,21 +1592,26 @@ viewRowsAll model =
 -- actual table configuration
 
 
-config : Table.Config TableRow Msg
-config =
-    Table.customConfig
-        { toId = .company
-        , toMsg = SetTableState
-        , columns =
+config : Bool -> Table.Config TableRow Msg
+config showNaic =
+    let
+        baseColumns =
             [ checkboxColumn
             , Table.stringColumn "Company" .displayName
             , Table.stringColumn "Full Name" .company
             , Table.stringColumn "G Rate" .gRate
             , Table.stringColumn "N Rate" .nRate
             , Table.stringColumn "F Rate" .fRate
-            -- , Table.intColumn "NAIC Code" .naic -- this is for troubleshooting / adding new codes
             , categoryColumn
             ]
+
+        columnsWithNaic =
+            baseColumns ++ [ Table.intColumn "NAIC Code" .naic ]
+    in
+    Table.customConfig
+        { toId = .company
+        , toMsg = SetTableState
+        , columns = if showNaic then columnsWithNaic else baseColumns
         , customizations =
             { defaultCustomizations
                 | rowAttrs = toRowAttrs
@@ -1610,7 +1624,7 @@ planToRow : Int -> PlanQuote -> TableRow
 planToRow ii pq =
     let
         category =
-            findCategory pq.naic
+            findCategory pq.category
 
         showRowInit =
             category == Preferred
@@ -1626,8 +1640,7 @@ planToRow ii pq =
                 Outside ->
                     3
 
-        displayName =
-            Maybe.withDefault pq.company (findDisplayName pq.naic category)
+        displayName = Maybe.withDefault "NA" pq.display
     in
     TableRow
         pq.company
@@ -2257,7 +2270,7 @@ getPlans model =
     if model.valid then
         let
             url1 =
-                "https://medicare-school-quote-tool.herokuapp.com/api/plans?"
+                 "https://medicare-school-quote-tool.herokuapp.com/api/plans?"
 
             url2 =
                 url1
@@ -2296,13 +2309,15 @@ getPlans model =
 
 planRateDecoder : Decoder PlanQuote
 planRateDecoder =
-    map5
+    map7
         PlanQuote
         (field "company" string)
         (field "F Rate" (maybe string))
         (field "G Rate" (maybe string))
         (field "N Rate" (maybe string))
         (field "naic" int)
+        (field "category" int)
+        (field "display" (maybe string))
 
 
 planXDecoder : Decoder (List PlanQuote)
@@ -2351,27 +2366,14 @@ pdpDecoder =
 
 findCategory : Int -> RowCategory
 findCategory i =
-    if List.member i naicCategory.preferred then
+    if i == 0 then
         Preferred
-
-    else if List.member i naicCategory.nonPreferred then
+    else if i == 1 then
         NonPreferred
-
     else
         Outside
 
 
-findDisplayName : Int -> RowCategory -> Maybe String
-findDisplayName i cat =
-    case cat of
-        Preferred ->
-            findDisplayNameUtil i displayNames.preferred
-
-        NonPreferred ->
-            findDisplayNameUtil i displayNames.nonPreferred
-
-        Outside ->
-            Nothing
 
 
 findDisplayNameUtil : Int -> List ( Int, String ) -> Maybe String
