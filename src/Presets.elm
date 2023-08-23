@@ -77,6 +77,7 @@ naicCategory =
         , 76112
         , 79987
         , 86231
+        , 82538001 -- custom workaround for Allstate discounts
         ]
     , outside =
         [ 11121
