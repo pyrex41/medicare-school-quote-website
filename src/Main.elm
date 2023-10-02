@@ -793,22 +793,22 @@ update msg model =
                     year1 + 1
 
                 y1def =
+                    True
+
+                y2def =
                     case td.month of
                         -- defaults to next year in last 3 months
                         Oct ->
-                            False
-
-                        Nov ->
-                            False
-
-                        Dec ->
-                            False
-
-                        _ ->
                             True
 
-                y2def =
-                    y1def == False
+                        Nov ->
+                            True
+
+                        Dec ->
+                            True
+
+                        _ ->
+                            False
             in
             ( validateModel
                 { model
