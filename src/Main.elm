@@ -2253,7 +2253,7 @@ getZip model =
 
 countyDecoder : Decoder (List String)
 countyDecoder =
-    field "zip" (Json.Decode.list string)
+    field "counties" (Json.Decode.list string)
 
 
 checkAddPlan : Bool -> String -> String -> String
