@@ -881,8 +881,13 @@ variousViews model =
                 PDP ->
                     div []
                         [ text "I could not load PDP for some reason. "
-                        , button [ onClick RequestPDP, style "display" "block" ] [ text "Resubmit PDP" ]
+                         --, button [ onClick RequestPDP, style "display" "block" ] [ text "Resubmit PDP" ]
                         , div [] [ text model.recentError ]
+                        , if model.outputAvailable then
+                            renderResults model
+
+                        else
+                            div [] [ submitFirst ]
                         ]
 
                 Plan ->
